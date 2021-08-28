@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: RMColors.mainBackgroundColor,
       appBar: AppBar(
         title: Text('首页'),
+        elevation: 0, // 去掉Appbar底部阴影
         actions: [
           IconButton(
             tooltip: '添加账号',
@@ -36,24 +37,23 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              child: GridView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 1,
-                ),
-                itemCount: Mock.categroyItems.length,
-                itemBuilder: (context, index) {
-                  return HomeItemWidget(
-                      categoryModel: Mock.categroyItems[index]);
-                },
-              ),
-            ),
+            child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                child: GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 1,
+                  ),
+                  itemCount: Mock.categroyItems.length,
+                  itemBuilder: (context, index) {
+                    return HomeItemWidget(
+                        categoryModel: Mock.categroyItems[index]);
+                  },
+                )),
           )
         ],
       ),

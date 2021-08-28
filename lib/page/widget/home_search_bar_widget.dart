@@ -9,26 +9,37 @@ class HomeSearchBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: this.onPressed,
-      child: Container(
-        width: double.infinity,
-        height: 50,
-        color: RMColors.primaryColor,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: MediaQuery.of(context).size.height,
+            child: Container(color: RMColors.primaryColor)),
+        InkWell(
+          onTap: this.onPressed,
           child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(5),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [Icon(Icons.search), Text('请输入账号或标题')],
+            width: double.infinity,
+            height: 45,
+            color: RMColors.primaryColor,
+            child: Padding(
+              padding: EdgeInsets.only(left: 15, right: 15, bottom: 5, top: 0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Icon(Icons.search), Text('请输入账号或标题')],
+                ),
+              ),
             ),
           ),
         ),
-      ),
+      ],
     );
   }
 }
