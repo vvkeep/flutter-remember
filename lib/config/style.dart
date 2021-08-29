@@ -3,28 +3,8 @@ import 'package:flutter/material.dart';
 ///颜色
 class RMColors {
   static const Color primaryColor = Color(0XFF337DF9);
-
-  static const String primaryValueString = "#24292E";
-  static const String primaryLightValueString = "#42464b";
-  static const String primaryDarkValueString = "#121917";
-  static const String miWhiteString = "#ececec";
-  static const String actionBlueString = "#267aff";
-  static const String webDraculaBackgroundColorString = "#282a36";
-
-  static const Color primaryValue = Color(0xFF24292E);
-  static const Color primaryLightValue = Color(0xFF42464b);
-  static const Color primaryDarkValue = Color(0xFF121917);
-
-  static const Color cardWhite = Color(0xFFFFFFFF);
-  static const Color textWhite = Color(0xFFFFFFFF);
-  static const Color miWhite = Color(0xffececec);
   static const Color white = Color(0xFFFFFFFF);
-  static const Color actionBlue = Color(0xff267aff);
-  static const Color subTextColor = Color(0xff959595);
-  static const Color subLightTextColor = Color(0xffc4c4c4);
-
-  static const Color mainTextColor = primaryDarkValue;
-  static const Color textColorWhite = white;
+  static const Color darkTextColor = Color(0xFF111111);
 
   static const Color mainBackgroundColor = Color(0xFFF4F6F8);
   static const Color itemBackgroundColor = Color(0xFFFFFFFF);
@@ -34,14 +14,24 @@ class RMColors {
 class RMConstant {
   static const lagerTextSize = 30.0;
   static const bigTextSize = 23.0;
-  static const normalTextSize = 18.0;
-  static const middleTextWhiteSize = 16.0;
-  static const smallTextSize = 14.0;
+  static const normalTextSize = 15.0;
   static const minTextSize = 12.0;
+
+  static const normalTextDark = TextStyle(
+    color: RMColors.darkTextColor,
+    fontSize: normalTextSize,
+    fontWeight: FontWeight.normal,
+  );
 
   static const normalTextWhiteBold = TextStyle(
     color: RMColors.white,
     fontSize: normalTextSize,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const bigTextPrimaryBold = TextStyle(
+    color: RMColors.primaryColor,
+    fontSize: bigTextSize,
     fontWeight: FontWeight.bold,
   );
 

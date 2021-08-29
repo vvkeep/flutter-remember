@@ -3,54 +3,60 @@ import 'package:remember/config/style.dart';
 import 'package:remember/model/item_model.dart';
 
 class HomeItemWidget extends StatelessWidget {
-  final RMCategoryModel categoryModel;
-
-  const HomeItemWidget({Key? key, required this.categoryModel})
-      : super(key: key);
+  final RMItemModel itemModel;
+  const HomeItemWidget({Key? key, required this.itemModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      height: 100,
+      width: double.infinity,
       decoration: BoxDecoration(
-        color: RMColors.itemBackgroundColor,
-        borderRadius: BorderRadius.circular(8),
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(5)),
         boxShadow: [
           BoxShadow(
-              color: RMColors.primaryColor.withOpacity(0.3),
-              offset: Offset(5.0, 5.0),
-              blurRadius: 3.0)
+            color: RMColors.primaryColor.withOpacity(0.3),
+            offset: Offset(1, 1),
+            blurRadius: 0.5,
+          )
         ],
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+      margin: EdgeInsets.only(left: 10, right: 10, top: 0, bottom: 10),
+      child: Row(
         children: [
           Container(
             alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: RMColors.primaryColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(8),
-                topRight: Radius.circular(8),
-              ),
-            ),
-            height: 45,
-            width: double.infinity,
-            child: Text(
-              categoryModel.title,
-              style: RMConstant.normalTextWhiteBold,
-            ),
+            color: Colors.red,
+            width: 40,
+            child:
+                Text('${itemModel.id}', style: RMConstant.bigTextPrimaryBold),
+          ),
+          Container(
+            color: Colors.green,
+            width: 5,
           ),
           Expanded(
-            child: Container(
-              width: double.infinity,
-              alignment: Alignment.center,
-              child: Text(
-                '${categoryModel.count}',
-                style: RMConstant.largeTextPrimaryBold,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(itemModel.title, style: RMConstant.normalTextDark),
+                  Text('账号: ' + itemModel.account,
+                      style: RMConstant.normalTextDark),
+                  Text('密码: ' + itemModel.account,
+                      style: RMConstant.normalTextDark)
+                ],
               ),
             ),
           ),
+          Image.asset(
+            'assets/imgs/arrow.png',
+            width: 9,
+            height: 16,
+          )
         ],
       ),
     );
