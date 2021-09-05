@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/instance_manager.dart';
 import 'package:remember/config/style.dart';
 import 'package:remember/mock/mock.dart';
+import 'package:remember/model/item_model.dart';
 import 'package:remember/page/widget/home_item_widget.dart';
+import 'package:get/get.dart';
 
 class HomeItemListPage extends StatefulWidget {
-  final String categoryTitle;
-  final int categoryId;
-  HomeItemListPage(
-      {Key? key, required this.categoryTitle, required this.categoryId})
-      : super(key: key);
-
   @override
   _HomeItemListPageState createState() => _HomeItemListPageState();
 }
@@ -17,10 +14,12 @@ class HomeItemListPage extends StatefulWidget {
 class _HomeItemListPageState extends State<HomeItemListPage> {
   @override
   Widget build(BuildContext context) {
+    var category = Get.arguments as RMCategoryModel;
+
     return Scaffold(
       backgroundColor: RMColors.mainBackgroundColor,
       appBar: AppBar(
-        title: Text('${this.widget.categoryTitle}'),
+        title: Text(category.title),
         actions: [
           IconButton(
             tooltip: '添加账号',

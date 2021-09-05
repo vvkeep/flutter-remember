@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:remember/config/style.dart';
-import 'package:remember/router/application.dart';
-import 'package:remember/router/route_handles.dart';
+import 'package:remember/page/home_category_page.dart';
+import 'package:remember/router/routers.dart';
 
 void main() {
-  Routes.configureRoutes(Application.router);
   runApp(MyApp());
 }
 
@@ -12,11 +12,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      initialRoute: Routes.homePage,
       theme: ThemeData(primaryColor: RMColors.primaryColor),
-      onGenerateRoute: (routeSettings) =>
-          Application.router.generator(routeSettings),
+      defaultTransition: Transition.fade,
+      getPages: AppPages.pages,
+      home: HomeCategoryListPage(),
     );
   }
 }

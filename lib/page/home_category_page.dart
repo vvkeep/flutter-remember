@@ -3,12 +3,10 @@ import 'package:remember/config/style.dart';
 import 'package:remember/mock/mock.dart';
 import 'package:remember/page/widget/home_category_item_widget.dart';
 import 'package:remember/page/widget/home_search_bar_widget.dart';
-import 'package:remember/router/application.dart';
-import 'package:remember/router/route_handles.dart';
+import 'package:remember/router/routers.dart';
+import 'package:get/get.dart';
 
 class HomeCategoryListPage extends StatefulWidget {
-  static const String routeName = '/home';
-
   @override
   _HomeCategoryListPageState createState() => _HomeCategoryListPageState();
 }
@@ -54,10 +52,7 @@ class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
                   return GestureDetector(
                     child: HomeCategoryItemWidget(categoryModel: category),
                     onTap: () {
-                      Application.push(context, Routes.itemListPage, {
-                        'categroyTitle': category.title,
-                        'categoryId': category.id
-                      });
+                      Get.toNamed(Routes.itemListPage, arguments: category);
                     },
                   );
                 },

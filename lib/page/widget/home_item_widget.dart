@@ -1,10 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/instance_manager.dart';
 import 'package:remember/config/style.dart';
 import 'package:remember/model/item_model.dart';
 
 class HomeItemWidget extends StatelessWidget {
   final RMItemModel itemModel;
   const HomeItemWidget({Key? key, required this.itemModel}) : super(key: key);
+
+  Widget itemView(String key, String value, VoidCallback? onPressed) {
+    return Row(
+      children: [
+        Text(key, style: RMConstant.normalTextDark),
+        SizedBox(width: 5),
+        Expanded(
+          child: Text(
+            value,
+            style: RMConstant.normalTextDark,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        SizedBox(width: 10),
+        SizedBox(
+          width: 25,
+          height: 25,
+          child: IconButton(
+            padding: EdgeInsets.zero,
+            onPressed: onPressed,
+            icon: Icon(
+              RMICons.COPY,
+              color: RMColors.primaryColor,
+            ),
+          ),
+        )
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +57,20 @@ class HomeItemWidget extends StatelessWidget {
       child: Row(
         children: [
           Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: RMColors.primaryColor.withOpacity(0.3),
+                  offset: Offset(1, 1),
+                  blurRadius: 0.5,
+                )
+              ],
+            ),
             alignment: Alignment.center,
-            color: Colors.red,
             width: 40,
             child:
                 Text('${itemModel.id}', style: RMConstant.bigTextPrimaryBold),
-          ),
-          Container(
-            color: Colors.green,
-            width: 5,
           ),
           Expanded(
             child: Padding(
@@ -43,20 +79,19 @@ class HomeItemWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(itemModel.title, style: RMConstant.normalTextDark),
-                  Text('账号: ' + itemModel.account,
-                      style: RMConstant.normalTextDark),
-                  Text('密码: ' + itemModel.account,
-                      style: RMConstant.normalTextDark)
+                  Text(itemModel.title, style: RMConstant.normalTextDarkW500),
+                  itemView('账号:', itemModel.account, () {
+                    var data = new ClipboardData(text: itemModel.account);
+                    Clipboard.setData(data);
+                    // Get.snackbar('Hi', 'i am a modern snackbar');
+                  }),
+                  itemView('密码:', itemModel.password, () {}),
                 ],
               ),
             ),
           ),
-          Image.asset(
-            'assets/imgs/arrow.png',
-            width: 9,
-            height: 16,
-          )
+          Icon(RMICons.arrow, size: 15),
+          SizedBox(width: 10)
         ],
       ),
     );
