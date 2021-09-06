@@ -67,9 +67,9 @@ class _HomeItemSearchPagePageState extends State<HomeItemSearchPagePage> {
       body: Container(
         margin: EdgeInsets.only(top: 10),
         child: ListView.builder(
-          itemCount: Mock.items.length,
+          itemCount: _itemList.length,
           itemBuilder: (context, index) {
-            return HomeItemWidget(itemModel: Mock.items[index]);
+            return HomeItemWidget(itemModel: _itemList[index]);
           },
         ),
       ),
