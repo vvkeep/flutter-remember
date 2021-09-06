@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/instance_manager.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:remember/config/style.dart';
 import 'package:remember/model/item_model.dart';
 
@@ -81,11 +81,17 @@ class HomeItemWidget extends StatelessWidget {
                 children: [
                   Text(itemModel.title, style: RMConstant.normalTextDarkW500),
                   itemView('账号:', itemModel.account, () {
-                    var data = new ClipboardData(text: itemModel.account);
-                    Clipboard.setData(data);
-                    // Get.snackbar('Hi', 'i am a modern snackbar');
+                    Clipboard.setData(
+                        new ClipboardData(text: itemModel.account));
+                    Fluttertoast.showToast(
+                        msg: '账号复制成功', gravity: ToastGravity.TOP);
                   }),
-                  itemView('密码:', itemModel.password, () {}),
+                  itemView('密码:', itemModel.password, () {
+                    Clipboard.setData(
+                        new ClipboardData(text: itemModel.password));
+                    Fluttertoast.showToast(
+                        msg: '密码复制成功', gravity: ToastGravity.TOP);
+                  }),
                 ],
               ),
             ),

@@ -14,6 +14,7 @@ class RMColors {
 class RMConstant {
   static const lagerTextSize = 30.0;
   static const bigTextSize = 23.0;
+  static const midTextSize = 18.0;
   static const normalTextSize = 15.0;
   static const minTextSize = 12.0;
 
@@ -37,6 +38,18 @@ class RMConstant {
 
   static const bigTextPrimaryBold = TextStyle(
     color: RMColors.primaryColor,
+    fontSize: bigTextSize,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const midTextWhite = TextStyle(
+    color: RMColors.white,
+    fontSize: midTextSize,
+    fontWeight: FontWeight.normal,
+  );
+
+  static const bigTextWhiteBold = TextStyle(
+    color: RMColors.white,
     fontSize: bigTextSize,
     fontWeight: FontWeight.bold,
   );

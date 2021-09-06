@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.homePage,
       theme: ThemeData(primaryColor: RMColors.primaryColor),
-      defaultTransition: Transition.fade,
+      defaultTransition: Transition.cupertino,
       getPages: AppPages.pages,
       home: HomeCategoryListPage(),
     );

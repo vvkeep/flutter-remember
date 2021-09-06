@@ -31,7 +31,9 @@ class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
         slivers: [
           SliverToBoxAdapter(
             child: HomeSearchBarWidget(
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(Routes.searchPage);
+              },
             ),
           ),
           SliverToBoxAdapter(
