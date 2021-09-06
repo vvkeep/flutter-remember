@@ -45,15 +45,16 @@ class _HomeItemSearchPagePageState extends State<HomeItemSearchPagePage> {
           child: TextField(
             onChanged: (value) => onSearch(value),
             decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                contentPadding: EdgeInsets.zero,
-                prefixIcon: Icon(Icons.search, color: Colors.grey.shade500),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(50),
-                    borderSide: BorderSide.none),
-                hintStyle: TextStyle(fontSize: 14, color: Colors.grey.shade500),
-                hintText: '搜索标题或用户名'),
+              filled: true,
+              fillColor: Colors.white,
+              contentPadding: EdgeInsets.zero,
+              prefixIcon: Icon(Icons.search, color: Colors.grey.shade500),
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: BorderSide.none),
+              hintStyle: TextStyle(fontSize: 14, color: Colors.grey.shade500),
+              hintText: '搜索标题或用户名',
+            ),
           ),
         ),
         actions: [
