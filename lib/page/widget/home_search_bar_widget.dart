@@ -33,7 +33,10 @@ class HomeSearchBarWidget extends StatelessWidget {
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Icon(Icons.search), Text('请输入账号或标题')],
+                  children: [
+                    Icon(Icons.search, color: RMColors.darkTextColor),
+                    Text('请输入账号或标题', style: RMConstant.normalTextDark)
+                  ],
                 ),
               ),
             ),

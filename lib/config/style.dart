@@ -5,6 +5,7 @@ class RMColors {
   static const Color primaryColor = Color(0XFF337DF9);
   static const Color white = Color(0xFFFFFFFF);
   static const Color darkTextColor = Color(0xFF111111);
+  static const Color lightTextColor = Color(0xFFBBBBBB);
 
   static const Color mainBackgroundColor = Color(0xFFF4F6F8);
   static const Color itemBackgroundColor = Color(0xFFFFFFFF);
@@ -20,6 +21,12 @@ class RMConstant {
 
   static const normalTextDark = TextStyle(
     color: RMColors.darkTextColor,
+    fontSize: normalTextSize,
+    fontWeight: FontWeight.normal,
+  );
+
+  static const normalTextLight = TextStyle(
+    color: RMColors.lightTextColor,
     fontSize: normalTextSize,
     fontWeight: FontWeight.normal,
   );
@@ -46,6 +53,12 @@ class RMConstant {
     color: RMColors.white,
     fontSize: midTextSize,
     fontWeight: FontWeight.normal,
+  );
+
+  static const midTextWhiteBlod = TextStyle(
+    color: RMColors.white,
+    fontSize: midTextSize,
+    fontWeight: FontWeight.bold,
   );
 
   static const bigTextWhiteBold = TextStyle(
