@@ -13,7 +13,7 @@ class HomeCategoryItemWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       decoration: BoxDecoration(
-        color: RMColors.itemBackgroundColor,
+        color: RMColors.white,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(

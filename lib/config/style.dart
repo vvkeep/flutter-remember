@@ -8,7 +8,6 @@ class RMColors {
   static const Color lightTextColor = Color(0xFFBBBBBB);
 
   static const Color mainBackgroundColor = Color(0xFFF4F6F8);
-  static const Color itemBackgroundColor = Color(0xFFFFFFFF);
 }
 
 ///文本样式
