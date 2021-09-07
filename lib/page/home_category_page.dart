@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:remember/config/style.dart';
 import 'package:remember/mock/mock.dart';
+import 'package:remember/model/item_model.dart';
 import 'package:remember/page/widget/home_category_item_widget.dart';
 import 'package:remember/page/widget/home_search_bar_widget.dart';
 import 'package:remember/router/routers.dart';
@@ -50,7 +51,7 @@ class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
                 ),
                 itemCount: Mock.categroyItems.length,
                 itemBuilder: (context, index) {
-                  var category = Mock.categroyItems[index];
+                  RMCategoryModel category = Mock.categroyItems[index];
                   return GestureDetector(
                     child: HomeCategoryItemWidget(categoryModel: category),
                     onTap: () {

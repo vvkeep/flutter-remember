@@ -14,9 +14,15 @@ class RMColors {
 class RMConstant {
   static const lagerTextSize = 30.0;
   static const bigTextSize = 23.0;
-  static const midTextSize = 18.0;
+  static const midTextSize = 16.0;
   static const normalTextSize = 15.0;
   static const minTextSize = 12.0;
+
+  static const minTextLight = TextStyle(
+    color: RMColors.lightTextColor,
+    fontSize: minTextSize,
+    fontWeight: FontWeight.normal,
+  );
 
   static const normalTextDark = TextStyle(
     color: RMColors.darkTextColor,
