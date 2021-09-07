@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
 import 'package:remember/page/home_category_page.dart';
+import 'package:remember/page/home_item_detail_page.dart';
 import 'package:remember/page/home_item_list_page.dart';
 import 'package:remember/page/home_item_search_page.dart';
 
 abstract class Routes {
   static String homePage = "/";
   static String itemListPage = "/item_list_page";
-  static String searchPage = "/searchPage";
+  static String searchPage = "/search_page";
+  static String itemDetailPage = "/item_detail_page";
 }
 
 abstract class AppPages {
@@ -24,5 +26,9 @@ abstract class AppPages {
       page: () => HomeItemSearchPagePage(),
       transition: Transition.fade,
     ),
+    GetPage(
+      name: Routes.itemDetailPage,
+      page: () => HomeItemDetailPage(),
+    )
   ];
 }

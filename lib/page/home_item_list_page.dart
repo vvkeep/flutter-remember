@@ -5,6 +5,7 @@ import 'package:remember/mock/mock.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:remember/page/widget/home_item_widget.dart';
 import 'package:get/get.dart';
+import 'package:remember/router/routers.dart';
 
 class HomeItemListPage extends StatefulWidget {
   @override
@@ -33,7 +34,10 @@ class _HomeItemListPageState extends State<HomeItemListPage> {
         child: ListView.builder(
           itemCount: Mock.items.length,
           itemBuilder: (context, index) {
-            return HomeItemWidget(itemModel: Mock.items[index]);
+            return GestureDetector(
+              child: HomeItemWidget(itemModel: Mock.items[index]),
+              onTap: () => {Get.toNamed(Routes.itemDetailPage)},
+            );
           },
         ),
       ),
