@@ -48,7 +48,22 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
             child: Row(
               children: [
                 Text('账号分类', style: RMConstant.normalTextDark),
-                Spacer()
+                Spacer(),
+                PopupMenuButton(
+                  itemBuilder: (BuildContext context) {
+                    return Mock.categroyItems
+                        .map((category) =>
+                            PopupMenuItem(child: Text(category.title)))
+                        .toList();
+                  },
+                  child: Row(
+                    children: [
+                      Text('请选择账号分类'),
+                      Icon(RMICons.arrow, size: 15),
+                      SizedBox(width: 10),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
