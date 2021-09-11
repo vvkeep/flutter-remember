@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:remember/config/style.dart';
 import 'package:remember/mock/mock.dart';
-import 'package:remember/router/routers.dart';
-import 'package:get/get.dart';
+import 'package:remember/page/widget/home_item_detail_choose_image_widget.dart';
 
 class HomeItemDetailPage extends StatefulWidget {
   HomeItemDetailPage({Key? key}) : super(key: key);
@@ -12,6 +11,48 @@ class HomeItemDetailPage extends StatefulWidget {
 }
 
 class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
+  Widget _buildInputField(String hitText) {
+    return Container(
+      height: 50,
+      margin: EdgeInsets.symmetric(horizontal: 15),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: RMColors.divideColor,
+            width: 1.0,
+          ),
+        ),
+      ),
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: hitText,
+          hintStyle: RMConstant.normalTextLight,
+          border: InputBorder.none,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSectionTitleView(String title) {
+    return Container(
+      alignment: Alignment.center,
+      width: 100,
+      height: 35,
+      decoration: BoxDecoration(
+        color: RMColors.primaryColor,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
+        boxShadow: [
+          BoxShadow(
+            color: RMColors.primaryColor.withOpacity(0.3),
+            offset: Offset(2.0, 2.0),
+            blurRadius: 1,
+          )
+        ],
+      ),
+      child: Text(title, style: RMConstant.midTextWhite),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +61,7 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
         title: Text("添加账号"),
         actions: [
           IconButton(
-            icon: Icon(Icons.save),
+            icon: Icon(RMICons.save),
             onPressed: () {},
           )
         ],
@@ -69,25 +110,8 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                 ),
               ),
               SizedBox(height: 10),
+              _buildSectionTitleView("账号信息"),
               Container(
-                alignment: Alignment.center,
-                width: 100,
-                height: 35,
-                decoration: BoxDecoration(
-                  color: RMColors.primaryColor,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: RMColors.primaryColor.withOpacity(0.3),
-                      offset: Offset(2.0, 2.0),
-                      blurRadius: 1,
-                    )
-                  ],
-                ),
-                child: Text('账号信息', style: RMConstant.midTextWhite),
-              ),
-              Container(
-                height: 50,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: RMColors.white,
@@ -106,19 +130,90 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                 ),
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        Container(
-                          width: 80,
-                          color: Colors.red,
-                          child: Text('标 题',
-                              style: RMConstant.normalTextDark,
-                              textAlign: TextAlign.end),
-                        ),
-                        Expanded(child: TextField())
-                      ],
+                    _buildInputField("请输入账号标题"),
+                    _buildInputField("请输入用户名"),
+                    _buildInputField("请输入密码"),
+                    _buildInputField("请输入支付密码"),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+              _buildSectionTitleView("附件图片"),
+              HomeItemDetailChooseImageWidget(),
+              SizedBox(height: 10),
+              _buildSectionTitleView("选择标签"),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: RMColors.white,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(5),
+                    bottomLeft: Radius.circular(5),
+                    bottomRight: Radius.circular(5),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: RMColors.primaryColor.withOpacity(0.3),
+                      offset: Offset(2.0, 2.0),
+                      blurRadius: 1,
                     )
                   ],
+                ),
+                child: GridView.count(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  physics: new NeverScrollableScrollPhysics(),
+                  crossAxisCount: 5,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                  childAspectRatio: 1.8,
+                  children: Mock.tagItems.map((tag) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                          color: RMColors.primaryColor.withOpacity(0.5),
+                          width: 1,
+                        ),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(tag.title, style: RMConstant.normalTextLight),
+                    );
+                  }).toList(),
+                ),
+              ),
+              SizedBox(height: 10),
+              _buildSectionTitleView("添加备注"),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+                margin: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).padding.bottom),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: RMColors.white,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(5),
+                    bottomLeft: Radius.circular(5),
+                    bottomRight: Radius.circular(5),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: RMColors.primaryColor.withOpacity(0.3),
+                      offset: Offset(2.0, 2.0),
+                      blurRadius: 1,
+                    )
+                  ],
+                ),
+                child: TextField(
+                  decoration: InputDecoration(
+                    isCollapsed: true,
+                    border: InputBorder.none,
+                    hintText: '请输入此账号的备注',
+                    hintStyle: RMConstant.normalTextLight,
+                  ),
+                  style: RMConstant.normalTextDark,
+                  maxLines: 5,
                 ),
               )
             ],

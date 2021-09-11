@@ -13,6 +13,17 @@ class Mock {
     RMCategoryModel(id: 4, title: "其他", count: 32),
   ];
 
+  static final tagItems = [
+    RMCategoryModel(id: 0, title: "游戏", count: 10),
+    RMCategoryModel(id: 1, title: "生活", count: 8),
+    RMCategoryModel(id: 2, title: "工作", count: 8),
+    RMCategoryModel(id: 3, title: "购物", count: 8),
+    RMCategoryModel(id: 4, title: "云盘", count: 14),
+    RMCategoryModel(id: 4, title: "电商", count: 12),
+    RMCategoryModel(id: 4, title: "聊天", count: 22),
+    RMCategoryModel(id: 4, title: "其他", count: 32),
+  ];
+
   static final items = [
     RMItemModel(
         id: 0,

@@ -22,3 +22,10 @@ class RMCategoryModel {
 
   RMCategoryModel({required this.id, required this.title, required this.count});
 }
+
+class RMTagModel {
+  int id;
+  String title;
+
+  RMTagModel({required this.id, required this.title});
+}

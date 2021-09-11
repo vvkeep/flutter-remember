@@ -25,7 +25,9 @@ class _HomeItemListPageState extends State<HomeItemListPage> {
           IconButton(
             tooltip: '添加账号',
             icon: Icon(Icons.add),
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(Routes.itemDetailPage);
+            },
           )
         ],
       ),

@@ -8,6 +8,7 @@ class RMColors {
   static const Color lightTextColor = Color(0xFFBBBBBB);
 
   static const Color mainBackgroundColor = Color(0xFFF4F6F8);
+  static const Color divideColor = Color(0xFFEEEEEE);
 }
 
 ///文本样式
@@ -86,6 +87,8 @@ class RMICons {
       const IconData(0xe671, fontFamily: RMICons.FONT_FAMILY);
   static const IconData arrow =
       const IconData(0xe604, fontFamily: RMICons.FONT_FAMILY);
+  static const IconData save =
+      const IconData(0xe67d, fontFamily: RMICons.FONT_FAMILY);
 
   static const IconData PUSH_ITEM_EDIT = Icons.mode_edit;
   static const IconData PUSH_ITEM_ADD = Icons.add_box;
