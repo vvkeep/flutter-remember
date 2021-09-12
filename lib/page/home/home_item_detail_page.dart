@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:remember/config/style.dart';
 import 'package:remember/mock/mock.dart';
-import 'package:remember/page/widget/home_item_detail_choose_image_widget.dart';
+import 'package:remember/page/home/widget/home_item_detail_choose_image_widget.dart';
 
 class HomeItemDetailPage extends StatefulWidget {
   HomeItemDetailPage({Key? key}) : super(key: key);
