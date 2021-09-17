@@ -17,9 +17,10 @@ class HomeCategoryItemWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-              color: RMColors.primaryColor.withOpacity(0.3),
-              offset: Offset(5.0, 5.0),
-              blurRadius: 3.0)
+            color: RMColors.primaryColor.withOpacity(0.3),
+            offset: Offset(5.0, 5.0),
+            blurRadius: 3.0,
+          )
         ],
       ),
       child: Column(

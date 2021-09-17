@@ -56,10 +56,22 @@ class RMConstant {
     fontWeight: FontWeight.bold,
   );
 
+  static const bigTextPrimaryW500 = TextStyle(
+    color: RMColors.primaryColor,
+    fontSize: bigTextSize,
+    fontWeight: FontWeight.w500,
+  );
+
   static const midTextWhite = TextStyle(
     color: RMColors.white,
     fontSize: midTextSize,
     fontWeight: FontWeight.normal,
+  );
+
+  static const midTextPrimaryW500 = TextStyle(
+    color: RMColors.primaryColor,
+    fontSize: midTextSize,
+    fontWeight: FontWeight.w500,
   );
 
   static const midTextWhiteBlod = TextStyle(

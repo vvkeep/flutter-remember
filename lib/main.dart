@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:remember/config/style.dart';
-import 'package:remember/page/home_category_page.dart';
+import 'package:remember/page/home/home_category_page.dart';
+import 'package:remember/page/login/login_page.dart';
 import 'package:remember/router/routers.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primaryColor: RMColors.primaryColor),
       defaultTransition: Transition.cupertino,
       getPages: AppPages.pages,
-      home: HomeCategoryListPage(),
+      home: LoginPage(),
     );
   }
 }

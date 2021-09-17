@@ -3,12 +3,14 @@ import 'package:remember/page/home/home_category_page.dart';
 import 'package:remember/page/home/home_item_detail_page.dart';
 import 'package:remember/page/home/home_item_list_page.dart';
 import 'package:remember/page/home/home_item_search_page.dart';
+import 'package:remember/page/login/login_page.dart';
 
 abstract class Routes {
   static String homePage = "/";
   static String itemListPage = "/item_list_page";
   static String searchPage = "/search_page";
   static String itemDetailPage = "/item_detail_page";
+  static String loginPage = "/logo_page";
 }
 
 abstract class AppPages {
@@ -29,6 +31,10 @@ abstract class AppPages {
     GetPage(
       name: Routes.itemDetailPage,
       page: () => HomeItemDetailPage(),
+    ),
+    GetPage(
+      name: Routes.loginPage,
+      page: () => LoginPage(),
     )
   ];
 }
