@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:remember/page/home_category_page.dart';
-import 'package:remember/page/home_item_detail_page.dart';
-import 'package:remember/page/home_item_list_page.dart';
-import 'package:remember/page/home_item_search_page.dart';
+import 'package:remember/page/home/home_category_page.dart';
+import 'package:remember/page/home/home_item_detail_page.dart';
+import 'package:remember/page/home/home_item_list_page.dart';
+import 'package:remember/page/home/home_item_search_page.dart';
 
 abstract class Routes {
   static String homePage = "/";
