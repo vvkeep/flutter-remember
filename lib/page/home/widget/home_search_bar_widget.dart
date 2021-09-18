@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:remember/config/style.dart';
+import 'package:remember/common/constant.dart';
 
 class HomeSearchBarWidget extends StatelessWidget {
   final VoidCallback onPressed;
@@ -35,7 +35,7 @@ class HomeSearchBarWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.search, color: RMColors.darkTextColor),
-                    Text('请输入账号或标题', style: RMConstant.normalTextDark)
+                    Text('请输入账号或标题', style: RMTextStyle.normalTextDark)
                   ],
                 ),
               ),

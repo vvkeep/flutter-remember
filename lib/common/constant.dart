@@ -13,7 +13,7 @@ class RMColors {
 }
 
 ///文本样式
-class RMConstant {
+class RMTextStyle {
   static const lagerTextSize = 30.0;
   static const bigTextSize = 23.0;
   static const midTextSize = 16.0;
@@ -106,4 +106,8 @@ class RMICons {
   static const IconData PUSH_ITEM_EDIT = Icons.mode_edit;
   static const IconData PUSH_ITEM_ADD = Icons.add_box;
   static const IconData PUSH_ITEM_MIN = Icons.indeterminate_check_box;
+}
+
+class RMConstant {
+  static const String LOGIN_INFO_KEY = "LOGIN_INFO_KEY";
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:remember/config/style.dart';
+import 'package:remember/common/constant.dart';
 
 class HomeItemDetailChooseImageWidget extends StatefulWidget {
   const HomeItemDetailChooseImageWidget({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
-import 'package:remember/config/style.dart';
+import 'package:remember/common/constant.dart';
 import 'package:get/get.dart';
 import 'package:remember/page/login/widget/input_password_field.dart';
 
@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: Get.mediaQuery.padding.top + 45),
-              Text('欢迎使用记得', style: RMConstant.bigTextWhiteBold),
+              Text('欢迎使用记得', style: RMTextStyle.bigTextWhiteBold),
               SizedBox(height: 35 + 45),
               Stack(
                 clipBehavior: Clip.none,
@@ -40,7 +40,7 @@ class LoginPage extends StatelessWidget {
                     child: Column(
                       children: [
                         SizedBox(height: 45 + 20),
-                        Text("登录", style: RMConstant.midTextPrimaryW500),
+                        Text("登录", style: RMTextStyle.midTextPrimaryW500),
                         SizedBox(height: 50),
                         InputPasswordField(hintText: '登录密码'),
                         SizedBox(height: 50),
@@ -80,7 +80,7 @@ class LoginPage extends StatelessWidget {
                     color: RMColors.white,
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: Text("确定", style: RMConstant.midTextPrimaryW500),
+                  child: Text("确定", style: RMTextStyle.midTextPrimaryW500),
                 ),
               ),
             ],

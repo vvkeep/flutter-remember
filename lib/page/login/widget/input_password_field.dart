@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:remember/config/style.dart';
+import 'package:remember/common/constant.dart';
 
 class InputPasswordField extends StatefulWidget {
   final String hintText;
@@ -27,7 +27,7 @@ class _InputPasswordFieldState extends State<InputPasswordField> {
         filled: true,
         fillColor: RMColors.mainBackgroundColor,
         hintText: this.widget.hintText,
-        hintStyle: RMConstant.normalTextLight,
+        hintStyle: RMTextStyle.normalTextLight,
         suffixIcon: IconButton(
           onPressed: () {
             setState(() {

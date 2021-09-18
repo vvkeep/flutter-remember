@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:remember/config/style.dart';
+import 'package:remember/common/constant.dart';
 import 'package:remember/mock/mock.dart';
 import 'package:remember/page/home/widget/home_item_detail_choose_image_widget.dart';
 
@@ -26,7 +26,7 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
       child: TextField(
         decoration: InputDecoration(
           hintText: hitText,
-          hintStyle: RMConstant.normalTextLight,
+          hintStyle: RMTextStyle.normalTextLight,
           border: InputBorder.none,
         ),
       ),
@@ -49,7 +49,7 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
           )
         ],
       ),
-      child: Text(title, style: RMConstant.midTextWhite),
+      child: Text(title, style: RMTextStyle.midTextWhite),
     );
   }
 
@@ -89,7 +89,7 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                 ),
                 child: Row(
                   children: [
-                    Text('账号分类', style: RMConstant.normalTextDark),
+                    Text('账号分类', style: RMTextStyle.normalTextDark),
                     Spacer(),
                     PopupMenuButton(
                       itemBuilder: (BuildContext context) {
@@ -100,7 +100,7 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                       },
                       child: Row(
                         children: [
-                          Text('请选择账号分类', style: RMConstant.normalTextLight),
+                          Text('请选择账号分类', style: RMTextStyle.normalTextLight),
                           Icon(RMICons.arrow, size: 15),
                           SizedBox(width: 10),
                         ],
@@ -178,7 +178,8 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                         ),
                       ),
                       alignment: Alignment.center,
-                      child: Text(tag.title, style: RMConstant.normalTextLight),
+                      child:
+                          Text(tag.title, style: RMTextStyle.normalTextLight),
                     );
                   }).toList(),
                 ),
@@ -210,9 +211,9 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                     isCollapsed: true,
                     border: InputBorder.none,
                     hintText: '请输入此账号的备注',
-                    hintStyle: RMConstant.normalTextLight,
+                    hintStyle: RMTextStyle.normalTextLight,
                   ),
-                  style: RMConstant.normalTextDark,
+                  style: RMTextStyle.normalTextDark,
                   maxLines: 5,
                 ),
               )

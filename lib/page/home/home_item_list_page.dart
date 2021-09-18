@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
-import 'package:remember/config/style.dart';
+import 'package:remember/common/constant.dart';
 import 'package:remember/mock/mock.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:remember/page/home/widget/home_item_widget.dart';

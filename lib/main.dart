@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:remember/config/style.dart';
+import 'package:remember/common/login_manager.dart';
+import 'package:remember/common/constant.dart';
 import 'package:remember/page/login/login_page.dart';
+import 'package:remember/page/login/register_page.dart';
 import 'package:remember/router/routers.dart';
 
-void main() {
+void main() async {
+  await LoginManager.getInstance();
   runApp(MyApp());
 }
 
@@ -18,7 +21,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primaryColor: RMColors.primaryColor),
       defaultTransition: Transition.cupertino,
       getPages: AppPages.pages,
-      home: LoginPage(),
+      home:
+          LoginManager.getUserInfo().isRegister ? LoginPage() : RegisterPage(),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:remember/config/style.dart';
+import 'package:remember/common/constant.dart';
 import 'package:remember/model/item_model.dart';
 
 class HomeItemWidget extends StatelessWidget {
@@ -11,12 +11,12 @@ class HomeItemWidget extends StatelessWidget {
   Widget itemView(String key, String value, VoidCallback? onPressed) {
     return Row(
       children: [
-        Text(key, style: RMConstant.normalTextDark),
+        Text(key, style: RMTextStyle.normalTextDark),
         SizedBox(width: 5),
         Expanded(
           child: Text(
             value,
-            style: RMConstant.normalTextDark,
+            style: RMTextStyle.normalTextDark,
             overflow: TextOverflow.ellipsis,
           ),
         ),
@@ -70,7 +70,7 @@ class HomeItemWidget extends StatelessWidget {
             alignment: Alignment.center,
             width: 40,
             child:
-                Text('${itemModel.id}', style: RMConstant.bigTextPrimaryBold),
+                Text('${itemModel.id}', style: RMTextStyle.bigTextPrimaryBold),
           ),
           Expanded(
             child: Padding(
@@ -79,7 +79,7 @@ class HomeItemWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(itemModel.title, style: RMConstant.normalTextDarkW500),
+                  Text(itemModel.title, style: RMTextStyle.normalTextDarkW500),
                   itemView('账号:', itemModel.account, () {
                     Clipboard.setData(
                         new ClipboardData(text: itemModel.account));

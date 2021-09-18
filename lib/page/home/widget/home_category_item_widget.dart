@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:remember/config/style.dart';
+import 'package:remember/common/constant.dart';
 import 'package:remember/model/item_model.dart';
 
 class HomeCategoryItemWidget extends StatelessWidget {
@@ -39,7 +39,7 @@ class HomeCategoryItemWidget extends StatelessWidget {
             width: double.infinity,
             child: Text(
               categoryModel.title,
-              style: RMConstant.normalTextWhiteBold,
+              style: RMTextStyle.normalTextWhiteBold,
             ),
           ),
           Expanded(
@@ -48,7 +48,7 @@ class HomeCategoryItemWidget extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 '${categoryModel.count}',
-                style: RMConstant.largeTextPrimaryBold,
+                style: RMTextStyle.largeTextPrimaryBold,
               ),
             ),
           ),

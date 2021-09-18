@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
-import 'package:remember/config/style.dart';
+import 'package:remember/common/constant.dart';
 import 'package:remember/mock/mock.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:remember/page/home/widget/home_item_widget.dart';
@@ -52,7 +52,7 @@ class _HomeItemSearchPagePageState extends State<HomeItemSearchPagePage> {
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
                   borderSide: BorderSide.none),
-              hintStyle: RMConstant.normalTextLight,
+              hintStyle: RMTextStyle.normalTextLight,
               hintText: '搜索标题或用户名',
             ),
           ),
@@ -62,7 +62,7 @@ class _HomeItemSearchPagePageState extends State<HomeItemSearchPagePage> {
               onPressed: () {
                 Get.back();
               },
-              child: Text("取消", style: RMConstant.midTextWhite))
+              child: Text("取消", style: RMTextStyle.midTextWhite))
         ],
       ),
       body: Container(
