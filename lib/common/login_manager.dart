@@ -14,11 +14,15 @@ class LoginManager {
   static UserInfo getUserInfo() {
     UserInfo? userInfo =
         SpUtil.getObj(RMConstant.LOGIN_INFO_KEY, (v) => UserInfo.fromJson(v));
-
+    print(userInfo.toString());
     if (userInfo == null) {
       return UserInfo(isRegister: false, isLocalAuth: false);
     } else {
       return userInfo;
     }
+  }
+
+  static bool isRegisted() {
+    return getUserInfo().isRegister;
   }
 }

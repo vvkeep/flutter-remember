@@ -18,12 +18,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.homePage,
+      initialRoute:
+          LoginManager.isRegisted() ? Routes.loginPage : Routes.registerPage,
       theme: ThemeData(primaryColor: RMColors.primaryColor),
       defaultTransition: Transition.cupertino,
       getPages: AppPages.pages,
-      home:
-          LoginManager.getUserInfo().isRegister ? LoginPage() : RegisterPage(),
     );
   }
 }
