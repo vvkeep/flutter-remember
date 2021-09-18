@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:remember/common/login_manager.dart';
 import 'package:remember/common/constant.dart';
-import 'package:remember/page/login/login_page.dart';
-import 'package:remember/page/login/register_page.dart';
 import 'package:remember/router/routers.dart';
 
 void main() async {
