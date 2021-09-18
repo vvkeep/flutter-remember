@@ -6,7 +6,7 @@ import 'package:remember/page/home/home_item_search_page.dart';
 import 'package:remember/page/login/login_page.dart';
 
 abstract class Routes {
-  static String homePage = "/";
+  static String homePage = "/home_page";
   static String itemListPage = "/item_list_page";
   static String searchPage = "/search_page";
   static String itemDetailPage = "/item_detail_page";

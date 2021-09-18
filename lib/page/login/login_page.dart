@@ -3,6 +3,7 @@ import 'package:get/instance_manager.dart';
 import 'package:remember/common/constant.dart';
 import 'package:get/get.dart';
 import 'package:remember/page/login/widget/input_password_field.dart';
+import 'package:remember/router/routers.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -71,7 +72,6 @@ class LoginPage extends StatelessWidget {
               ),
               SizedBox(height: 50),
               TextButton(
-                onPressed: () {},
                 child: Container(
                   alignment: Alignment.center,
                   width: Get.width - 50,
@@ -82,6 +82,9 @@ class LoginPage extends StatelessWidget {
                   ),
                   child: Text("确定", style: RMTextStyle.midTextPrimaryW500),
                 ),
+                onPressed: () {
+                  Get.offAllNamed(Routes.homePage);
+                },
               ),
             ],
           ),

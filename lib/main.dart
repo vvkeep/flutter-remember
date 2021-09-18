@@ -7,6 +7,7 @@ import 'package:remember/page/login/register_page.dart';
 import 'package:remember/router/routers.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await LoginManager.getInstance();
   runApp(MyApp());
 }
