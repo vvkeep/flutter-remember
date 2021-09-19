@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:remember/common/login_manager.dart';
 import 'package:remember/page/login/widget/input_password_field.dart';
 import 'package:remember/router/routers.dart';
+import 'package:local_auth/local_auth.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -17,6 +18,22 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final FocusNode focusNode = FocusNode();
   final passwordController = TextEditingController();
+
+  /// 本地认证框架
+  final LocalAuthentication auth = LocalAuthentication();
+  BiometricType? authType;
+
+  @override
+  void initState() {
+    super.initState();
+    _getAuthType().then((type) {
+      setState(() {
+        this.authType = type;
+      });
+
+      _authenticateWithBiometrics();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,11 +131,86 @@ class _LoginPageState extends State<LoginPage> {
                     Get.offAllNamed(Routes.homePage);
                   },
                 ),
+                Visibility(
+                  visible: authType == null ? false : true,
+                  child: _biometricAuthWidget(),
+                )
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  Widget _biometricAuthWidget() {
+    IconData iconData = RMICons.faceId;
+    String authText = '';
+
+    switch (authType) {
+      case BiometricType.face:
+        iconData = RMICons.faceId;
+        authText = "点击进行面容识别";
+        break;
+      case BiometricType.fingerprint:
+        iconData = RMICons.touchId;
+        authText = "点击进行指纹识别";
+        break;
+      case BiometricType.iris:
+        iconData = RMICons.irisId;
+        authText = "点击进行虹膜识别";
+        break;
+      default:
+        break;
+    }
+
+    return GestureDetector(
+      child: Container(
+        margin: EdgeInsets.only(top: 25),
+        width: double.infinity,
+        child: Column(
+          children: [
+            Icon(
+              iconData,
+              color: RMColors.primaryColor,
+              size: 35,
+            ),
+            SizedBox(height: 10),
+            Text(
+              authText,
+              style: RMTextStyle.minTextWhite,
+            )
+          ],
+        ),
+      ),
+      onTap: () {
+        this._authenticateWithBiometrics();
+      },
+    );
+  }
+
+  /// 获取生物识别技术列表
+  Future<BiometricType?> _getAuthType() async {
+    List<BiometricType> availableBiometrics =
+        await auth.getAvailableBiometrics();
+    if (availableBiometrics.contains(BiometricType.face)) {
+      return BiometricType.face;
+    } else if (availableBiometrics.contains(BiometricType.fingerprint)) {
+      return BiometricType.fingerprint;
+    } else {
+      return null;
+    }
+  }
+
+  _authenticateWithBiometrics() async {
+    bool authenticated = await auth.authenticate(
+        localizedReason: '请进行身份验证以登录应用',
+        useErrorDialogs: true,
+        stickyAuth: true,
+        biometricOnly: true);
+    if (authenticated) {
+      Fluttertoast.showToast(msg: '登录成功', gravity: ToastGravity.TOP);
+      Get.offAllNamed(Routes.homePage);
+    }
   }
 }

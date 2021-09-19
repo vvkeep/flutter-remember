@@ -114,6 +114,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 onPressed: () {
                   String password = passwordController.text;
                   String password2 = password2Controller.text;
+                  if (password.isEmpty) {
+                    Fluttertoast.showToast(
+                        msg: '请输入登录密码', gravity: ToastGravity.TOP);
+                    return;
+                  }
 
                   if (password != password2) {
                     Fluttertoast.showToast(

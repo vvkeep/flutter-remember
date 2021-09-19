@@ -26,6 +26,12 @@ class RMTextStyle {
     fontWeight: FontWeight.normal,
   );
 
+  static const minTextWhite = TextStyle(
+    color: RMColors.white,
+    fontSize: minTextSize,
+    fontWeight: FontWeight.normal,
+  );
+
   static const normalTextDark = TextStyle(
     color: RMColors.darkTextColor,
     fontSize: normalTextSize,
@@ -102,6 +108,13 @@ class RMICons {
       const IconData(0xe604, fontFamily: RMICons.FONT_FAMILY);
   static const IconData save =
       const IconData(0xe67d, fontFamily: RMICons.FONT_FAMILY);
+
+  static const IconData faceId =
+      const IconData(0xe649, fontFamily: RMICons.FONT_FAMILY);
+  static const IconData touchId =
+      const IconData(0xe690, fontFamily: RMICons.FONT_FAMILY);
+  static const IconData irisId =
+      const IconData(0xe60c, fontFamily: RMICons.FONT_FAMILY);
 
   static const IconData PUSH_ITEM_EDIT = Icons.mode_edit;
   static const IconData PUSH_ITEM_ADD = Icons.add_box;
