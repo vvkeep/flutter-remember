@@ -97,6 +97,11 @@ class RMTextStyle {
     fontSize: lagerTextSize,
     fontWeight: FontWeight.bold,
   );
+  static const largeTextWhiteBold = TextStyle(
+    color: RMColors.white,
+    fontSize: lagerTextSize,
+    fontWeight: FontWeight.bold,
+  );
 }
 
 class RMICons {

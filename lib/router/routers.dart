@@ -20,6 +20,7 @@ abstract class AppPages {
     GetPage(
       name: Routes.homePage,
       page: () => HomeCategoryListPage(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: Routes.itemListPage,
