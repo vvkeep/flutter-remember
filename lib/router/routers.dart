@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:remember/page/category/category_list_page.dart';
 import 'package:remember/page/home/home_category_page.dart';
 import 'package:remember/page/home/home_item_detail_page.dart';
 import 'package:remember/page/home/home_item_list_page.dart';
@@ -13,6 +14,7 @@ abstract class Routes {
   static String itemDetailPage = "/item_detail_page";
   static String loginPage = "/login_page";
   static String registerPage = "/register_page";
+  static String categoryListPage = "/category_list_page";
 }
 
 abstract class AppPages {
@@ -42,6 +44,10 @@ abstract class AppPages {
     GetPage(
       name: Routes.registerPage,
       page: () => RegisterPage(),
-    )
+    ),
+    GetPage(
+      name: Routes.categoryListPage,
+      page: () => CategoryListPage(),
+    ),
   ];
 }

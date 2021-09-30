@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/instance_manager.dart';
 import 'package:remember/common/constant.dart';
@@ -7,6 +8,7 @@ import 'package:remember/common/login_manager.dart';
 import 'package:remember/page/login/widget/input_password_field.dart';
 import 'package:remember/router/routers.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:local_auth/error_codes.dart' as auth_error;
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -203,14 +205,18 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _authenticateWithBiometrics() async {
-    bool authenticated = await auth.authenticate(
-        localizedReason: '请进行身份验证以登录应用',
-        useErrorDialogs: true,
-        stickyAuth: true,
-        biometricOnly: true);
-    if (authenticated) {
-      Fluttertoast.showToast(msg: '登录成功', gravity: ToastGravity.TOP);
-      Get.offAllNamed(Routes.homePage);
+    try {
+      bool authenticated = await auth.authenticate(
+          localizedReason: '请进行身份验证以登录应用',
+          useErrorDialogs: false,
+          stickyAuth: true,
+          biometricOnly: true);
+      if (authenticated) {
+        Fluttertoast.showToast(msg: '登录成功', gravity: ToastGravity.TOP);
+        Get.offAllNamed(Routes.homePage);
+      }
+    } on PlatformException catch (e) {
+      printInfo(info: "${e.message}");
     }
   }
 }

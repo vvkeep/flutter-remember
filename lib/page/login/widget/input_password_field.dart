@@ -50,6 +50,7 @@ class _InputPasswordFieldState extends State<InputPasswordField> {
               this.isVisible = !this.isVisible;
             });
           },
+          iconSize: 20,
           icon: Icon(this.isVisible ? Icons.visibility : Icons.visibility_off),
         ),
       ),
