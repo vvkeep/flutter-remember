@@ -28,7 +28,7 @@ class HomeItemWidget extends StatelessWidget {
             padding: EdgeInsets.zero,
             onPressed: onPressed,
             icon: Icon(
-              RMICons.COPY,
+              RMIcons.COPY,
               color: RMColors.primaryColor,
             ),
           ),
@@ -69,8 +69,7 @@ class HomeItemWidget extends StatelessWidget {
             ),
             alignment: Alignment.center,
             width: 40,
-            child:
-                Text('${itemModel.id}', style: RMTextStyle.bigTextPrimaryBold),
+            child: Text('${itemModel.id}', style: RMTextStyle.bigTextPrimaryBold),
           ),
           Expanded(
             child: Padding(
@@ -81,22 +80,18 @@ class HomeItemWidget extends StatelessWidget {
                 children: [
                   Text(itemModel.title, style: RMTextStyle.normalTextDarkW500),
                   itemView('账号:', itemModel.account, () {
-                    Clipboard.setData(
-                        new ClipboardData(text: itemModel.account));
-                    Fluttertoast.showToast(
-                        msg: '账号复制成功', gravity: ToastGravity.TOP);
+                    Clipboard.setData(new ClipboardData(text: itemModel.account));
+                    Fluttertoast.showToast(msg: '账号复制成功', gravity: ToastGravity.TOP);
                   }),
                   itemView('密码:', itemModel.password, () {
-                    Clipboard.setData(
-                        new ClipboardData(text: itemModel.password));
-                    Fluttertoast.showToast(
-                        msg: '密码复制成功', gravity: ToastGravity.TOP);
+                    Clipboard.setData(new ClipboardData(text: itemModel.password));
+                    Fluttertoast.showToast(msg: '密码复制成功', gravity: ToastGravity.TOP);
                   }),
                 ],
               ),
             ),
           ),
-          Icon(RMICons.arrow, size: 15),
+          Icon(RMIcons.arrow, size: 15),
           SizedBox(width: 10)
         ],
       ),

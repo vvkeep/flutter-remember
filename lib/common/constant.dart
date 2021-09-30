@@ -9,7 +9,7 @@ class RMColors {
   static const Color lightTextColor = Color(0xFFBBBBBB);
 
   static const Color mainBackgroundColor = Color(0xFFF4F6F8);
-  static const Color divideColor = Color(0xFFEEEEEE);
+  static const Color divideColor = Color(0xFFBBBBBB);
 }
 
 ///文本样式
@@ -104,22 +104,17 @@ class RMTextStyle {
   );
 }
 
-class RMICons {
+class RMIcons {
   static const String FONT_FAMILY = 'appIconFont';
 
-  static const IconData COPY =
-      const IconData(0xe671, fontFamily: RMICons.FONT_FAMILY);
-  static const IconData arrow =
-      const IconData(0xe604, fontFamily: RMICons.FONT_FAMILY);
-  static const IconData save =
-      const IconData(0xe67d, fontFamily: RMICons.FONT_FAMILY);
+  static const IconData COPY = const IconData(0xe671, fontFamily: RMIcons.FONT_FAMILY);
+  static const IconData arrow = const IconData(0xe604, fontFamily: RMIcons.FONT_FAMILY);
+  static const IconData save = const IconData(0xe67d, fontFamily: RMIcons.FONT_FAMILY);
+  static const IconData drag = const IconData(0xe79e, fontFamily: RMIcons.FONT_FAMILY);
 
-  static const IconData faceId =
-      const IconData(0xe649, fontFamily: RMICons.FONT_FAMILY);
-  static const IconData touchId =
-      const IconData(0xe690, fontFamily: RMICons.FONT_FAMILY);
-  static const IconData irisId =
-      const IconData(0xe60c, fontFamily: RMICons.FONT_FAMILY);
+  static const IconData faceId = const IconData(0xe649, fontFamily: RMIcons.FONT_FAMILY);
+  static const IconData touchId = const IconData(0xe690, fontFamily: RMIcons.FONT_FAMILY);
+  static const IconData irisId = const IconData(0xe60c, fontFamily: RMIcons.FONT_FAMILY);
 
   static const IconData PUSH_ITEM_EDIT = Icons.mode_edit;
   static const IconData PUSH_ITEM_ADD = Icons.add_box;

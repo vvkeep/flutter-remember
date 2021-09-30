@@ -8,7 +8,6 @@ import 'package:remember/common/login_manager.dart';
 import 'package:remember/page/login/widget/input_password_field.dart';
 import 'package:remember/router/routers.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:local_auth/error_codes.dart' as auth_error;
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -77,9 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                           Text("登录", style: RMTextStyle.midTextPrimaryW500),
                           SizedBox(height: 50),
                           InputPasswordField(
-                              controller: passwordController,
-                              hintText: '登录密码',
-                              focusNode: this.focusNode),
+                              controller: passwordController, hintText: '登录密码', focusNode: this.focusNode),
                           SizedBox(height: 50),
                         ],
                       ),
@@ -123,13 +120,11 @@ class _LoginPageState extends State<LoginPage> {
                     String password2 = LoginManager.getUserInfo().password;
 
                     if (password != password2) {
-                      Fluttertoast.showToast(
-                          msg: '密码错误，请重试', gravity: ToastGravity.TOP);
+                      Fluttertoast.showToast(msg: '密码错误，请重试', gravity: ToastGravity.TOP);
                       return;
                     }
 
-                    Fluttertoast.showToast(
-                        msg: '登录成功', gravity: ToastGravity.TOP);
+                    Fluttertoast.showToast(msg: '登录成功', gravity: ToastGravity.TOP);
                     Get.offAllNamed(Routes.homePage);
                   },
                 ),
@@ -146,20 +141,20 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _biometricAuthWidget() {
-    IconData iconData = RMICons.faceId;
+    IconData iconData = RMIcons.faceId;
     String authText = '';
 
     switch (authType) {
       case BiometricType.face:
-        iconData = RMICons.faceId;
+        iconData = RMIcons.faceId;
         authText = "点击进行面容识别";
         break;
       case BiometricType.fingerprint:
-        iconData = RMICons.touchId;
+        iconData = RMIcons.touchId;
         authText = "点击进行指纹识别";
         break;
       case BiometricType.iris:
-        iconData = RMICons.irisId;
+        iconData = RMIcons.irisId;
         authText = "点击进行虹膜识别";
         break;
       default:
@@ -193,8 +188,7 @@ class _LoginPageState extends State<LoginPage> {
 
   /// 获取生物识别技术列表
   Future<BiometricType?> _getAuthType() async {
-    List<BiometricType> availableBiometrics =
-        await auth.getAvailableBiometrics();
+    List<BiometricType> availableBiometrics = await auth.getAvailableBiometrics();
     if (availableBiometrics.contains(BiometricType.face)) {
       return BiometricType.face;
     } else if (availableBiometrics.contains(BiometricType.fingerprint)) {
@@ -207,10 +201,7 @@ class _LoginPageState extends State<LoginPage> {
   _authenticateWithBiometrics() async {
     try {
       bool authenticated = await auth.authenticate(
-          localizedReason: '请进行身份验证以登录应用',
-          useErrorDialogs: false,
-          stickyAuth: true,
-          biometricOnly: true);
+          localizedReason: '请进行身份验证以登录应用', useErrorDialogs: false, stickyAuth: true, biometricOnly: true);
       if (authenticated) {
         Fluttertoast.showToast(msg: '登录成功', gravity: ToastGravity.TOP);
         Get.offAllNamed(Routes.homePage);

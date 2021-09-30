@@ -61,7 +61,7 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
         title: Text("添加账号"),
         actions: [
           IconButton(
-            icon: Icon(RMICons.save),
+            icon: Icon(RMIcons.save),
             onPressed: () {},
           )
         ],
@@ -94,14 +94,13 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                     PopupMenuButton(
                       itemBuilder: (BuildContext context) {
                         return Mock.categroyItems
-                            .map((category) =>
-                                PopupMenuItem(child: Text(category.title)))
+                            .map((category) => PopupMenuItem(child: Text(category.title)))
                             .toList();
                       },
                       child: Row(
                         children: [
                           Text('请选择账号分类', style: RMTextStyle.normalTextLight),
-                          Icon(RMICons.arrow, size: 15),
+                          Icon(RMIcons.arrow, size: 15),
                           SizedBox(width: 10),
                         ],
                       ),
@@ -178,8 +177,7 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                         ),
                       ),
                       alignment: Alignment.center,
-                      child:
-                          Text(tag.title, style: RMTextStyle.normalTextLight),
+                      child: Text(tag.title, style: RMTextStyle.normalTextLight),
                     );
                   }).toList(),
                 ),
@@ -188,8 +186,7 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
               _buildSectionTitleView("添加备注"),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-                margin: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).padding.bottom),
+                margin: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: RMColors.white,

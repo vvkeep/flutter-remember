@@ -7,10 +7,10 @@ class Mock {
     RMCategoryModel(id: 2, title: "Apple", count: 8),
     RMCategoryModel(id: 3, title: "邮箱", count: 8),
     RMCategoryModel(id: 4, title: "手机号", count: 14),
-    RMCategoryModel(id: 4, title: "学习", count: 12),
-    RMCategoryModel(id: 4, title: "工作", count: 22),
-    RMCategoryModel(id: 4, title: "娱乐", count: 45),
-    RMCategoryModel(id: 4, title: "其他", count: 32),
+    RMCategoryModel(id: 5, title: "学习", count: 12),
+    RMCategoryModel(id: 6, title: "工作", count: 22),
+    RMCategoryModel(id: 7, title: "娱乐", count: 45),
+    RMCategoryModel(id: 8, title: "其他", count: 32),
   ];
 
   static final tagItems = [
@@ -18,10 +18,10 @@ class Mock {
     RMCategoryModel(id: 1, title: "生活", count: 8),
     RMCategoryModel(id: 2, title: "工作", count: 8),
     RMCategoryModel(id: 3, title: "购物", count: 8),
-    RMCategoryModel(id: 4, title: "云盘", count: 14),
-    RMCategoryModel(id: 4, title: "电商", count: 12),
-    RMCategoryModel(id: 4, title: "聊天", count: 22),
-    RMCategoryModel(id: 4, title: "其他", count: 32),
+    RMCategoryModel(id: 5, title: "云盘", count: 14),
+    RMCategoryModel(id: 6, title: "电商", count: 12),
+    RMCategoryModel(id: 7, title: "聊天", count: 22),
+    RMCategoryModel(id: 8, title: "其他", count: 32),
   ];
 
   static final items = [

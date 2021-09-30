@@ -10,11 +10,22 @@ class CategoryListItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15),
-      child: Row(
+      color: Colors.white,
+      child: Column(
         children: [
-          Text('$this.categoryModel.title}', style: RMTextStyle.normalTextDark),
-          Spacer(),
-          Text('${this.categoryModel.count}', style: RMTextStyle.normalTextDark),
+          SizedBox(
+            height: 55,
+            child: Row(
+              children: [
+                Text('${this.categoryModel.title}', style: RMTextStyle.normalTextDarkW500),
+                Spacer(),
+                Text('${this.categoryModel.count}', style: RMTextStyle.normalTextDark),
+                SizedBox(width: 15),
+                Icon(RMIcons.drag, color: RMColors.divideColor.withOpacity(0.5))
+              ],
+            ),
+          ),
+          Divider(height: 0, color: RMColors.divideColor),
         ],
       ),
     );
