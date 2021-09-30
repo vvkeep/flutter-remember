@@ -3,6 +3,7 @@ import 'package:get/instance_manager.dart';
 import 'package:remember/common/constant.dart';
 import 'package:remember/mock/mock.dart';
 import 'package:remember/model/item_model.dart';
+import 'package:remember/page/category/widget/category_list_item_widget.dart';
 import 'package:remember/page/home/widget/home_item_widget.dart';
 import 'package:get/get.dart';
 import 'package:remember/router/routers.dart';
@@ -34,7 +35,12 @@ class _CategoryListPageState extends State<CategoryListPage> {
       body: Container(
         margin: EdgeInsets.only(top: 10),
         child: ReorderableListView.builder(
-            itemBuilder: (context, index) {}, itemCount: Mock.categroyItems.length, onReorder: (oldIndex, newIndex) {}),
+          itemBuilder: (context, index) {
+            return CategoryListItemWidget(categoryModel: Mock.categroyItems[index]);
+          },
+          itemCount: Mock.categroyItems.length,
+          onReorder: (oldIndex, newIndex) {},
+        ),
       ),
     );
   }
