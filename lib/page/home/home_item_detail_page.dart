@@ -167,7 +167,7 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
                   childAspectRatio: 1.8,
-                  children: Mock.tagItems.map((tag) {
+                  children: Mock.tags.map((tag) {
                     return Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),

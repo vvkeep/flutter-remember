@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:remember/common/constant.dart';
+import 'package:remember/common/data_manager.dart';
+import 'package:remember/common/event_bus.dart';
 import 'package:remember/mock/mock.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:remember/page/home/widget/home_category_item_widget.dart';
@@ -14,6 +16,18 @@ class HomeCategoryListPage extends StatefulWidget {
 }
 
 class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
+  late List<RMCategoryModel> categoryList;
+
+  @override
+  void initState() {
+    super.initState();
+    eventBus.on<CategoryListEvent>().listen((event) {
+      setState(() {
+        this.categoryList = DataManager.instance.categoryList;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,9 +132,9 @@ class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
                   mainAxisSpacing: 10,
                   childAspectRatio: 1,
                 ),
-                itemCount: Mock.categroyItems.length,
+                itemCount: categoryList.length,
                 itemBuilder: (context, index) {
-                  RMCategoryModel category = Mock.categroyItems[index];
+                  RMCategoryModel category = categoryList[index];
                   return GestureDetector(
                     child: HomeCategoryItemWidget(categoryModel: category),
                     onTap: () {

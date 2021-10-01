@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:remember/common/constant.dart';
+import 'package:remember/common/data_manager.dart';
+import 'package:remember/common/event_bus.dart';
 import 'package:remember/common/widget.dart';
 import 'package:remember/mock/mock.dart';
 import 'package:remember/model/item_model.dart';
@@ -56,17 +58,18 @@ class _CategoryListPageState extends State<CategoryListPage> {
               return deleteCategory(category);
             },
             onDismissed: (direction) {
+              DataManager.instance.removeCategory(category.id);
+              eventBus.fire(CategoryListEvent());
               Get.showSnackbar(successBar('删除成功'));
             },
           );
         }).toList(),
         onReorder: (oldIndex, newIndex) {
-          if (oldIndex < newIndex) {
-            newIndex -= 1;
-          }
-          var item = categroyItems.removeAt(oldIndex);
-          categroyItems.insert(newIndex, item);
-          setState(() {});
+          DataManager.instance.swapCategorySort(oldIndex, newIndex);
+          setState(() {
+            this.categroyItems = DataManager.instance.categoryList;
+            eventBus.fire(CategoryListEvent());
+          });
         },
       ),
     );
