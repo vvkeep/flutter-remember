@@ -16,7 +16,7 @@ class HomeCategoryListPage extends StatefulWidget {
 }
 
 class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
-  late List<RMCategoryModel> categoryList;
+  late List<RMCategoryModel> categoryList = DataManager.instance.categoryList;
 
   @override
   void initState() {

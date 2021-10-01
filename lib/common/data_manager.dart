@@ -30,4 +30,16 @@ class DataManager {
     var item = categoryList.removeAt(oldIndex);
     categoryList.insert(newIndex, item);
   }
+
+  removeTag(int id) {
+    tagList.removeWhere((tag) => tag.id == id);
+  }
+
+  swapTagSort(oldIndex, newIndex) {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    var item = tagList.removeAt(oldIndex);
+    tagList.insert(newIndex, item);
+  }
 }
