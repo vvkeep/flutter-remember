@@ -25,7 +25,7 @@ class CategoryListItemWidget extends StatelessWidget {
               ],
             ),
           ),
-          Divider(height: 0, color: RMColors.divideColor),
+          Divider(height: 0, color: RMColors.darkDivideColor),
         ],
       ),
     );

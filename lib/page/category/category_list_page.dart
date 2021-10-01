@@ -38,7 +38,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
       body: ReorderableListView(
         children: categroyItems.map((category) {
           return Dismissible(
-            key: ValueKey('${category.id}'),
+            key: Key('key_${category.id}'),
             direction: DismissDirection.endToStart,
             background: Container(
               width: 55,

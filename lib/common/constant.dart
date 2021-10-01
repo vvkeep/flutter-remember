@@ -9,7 +9,8 @@ class RMColors {
   static const Color lightTextColor = Color(0xFFBBBBBB);
 
   static const Color mainBackgroundColor = Color(0xFFF4F6F8);
-  static const Color divideColor = Color(0xFFBBBBBB);
+  static const Color divideColor = Color(0xFFEEEEEE);
+  static const Color darkDivideColor = Color(0xFFBBBBBB);
 }
 
 ///文本样式
