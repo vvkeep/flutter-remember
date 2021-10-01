@@ -66,8 +66,10 @@ class _CategoryListPageState extends State<CategoryListPage> {
         }).toList(),
         onReorder: (oldIndex, newIndex) {
           DataManager.instance.swapCategorySort(oldIndex, newIndex);
-          this.categroyItems = DataManager.instance.categoryList;
           eventBus.fire(CategoryListEvent());
+          setState(() {
+            this.categroyItems = DataManager.instance.categoryList;
+          });
         },
       ),
     );
