@@ -58,6 +58,9 @@ class _TagListPageState extends State<TagListPage> {
         }).toList(),
         onReorder: (oldIndex, newIndex) {
           DataManager.instance.swapTagSort(oldIndex, newIndex);
+          setState(() {
+            this.tagList = DataManager.instance.tagList;
+          });
         },
       ),
     );
