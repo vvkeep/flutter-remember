@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:remember/page/category/category_list_page.dart';
 import 'package:remember/page/home/home_category_page.dart';
@@ -6,6 +7,7 @@ import 'package:remember/page/home/home_item_list_page.dart';
 import 'package:remember/page/home/home_item_search_page.dart';
 import 'package:remember/page/login/login_page.dart';
 import 'package:remember/page/login/register_page.dart';
+import 'package:remember/page/tag/tag_list_page.dart';
 
 abstract class Routes {
   static String homePage = "/";
@@ -15,6 +17,7 @@ abstract class Routes {
   static String loginPage = "/login_page";
   static String registerPage = "/register_page";
   static String categoryListPage = "/category_list_page";
+  static String tagListPage = "/tag_list_page";
 }
 
 abstract class AppPages {
@@ -49,5 +52,9 @@ abstract class AppPages {
       name: Routes.categoryListPage,
       page: () => CategoryListPage(),
     ),
+    GetPage(
+      name: Routes.tagListPage,
+      page: () => TagListPage(),
+    )
   ];
 }

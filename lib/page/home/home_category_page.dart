@@ -89,7 +89,10 @@ class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
               Divider(),
               ListTile(
                 title: Text("标签管理", style: RMTextStyle.normalTextDarkW500),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Get.toNamed(Routes.tagListPage);
+                },
               ),
               Divider(),
               ListTile(
