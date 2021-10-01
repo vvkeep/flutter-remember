@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:remember/common/constant.dart';
+import 'package:remember/common/widget.dart';
 import 'package:remember/mock/mock.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:remember/page/category/widget/category_list_item_widget.dart';
@@ -42,13 +43,21 @@ class _CategoryListPageState extends State<CategoryListPage> {
             background: Container(
               width: 55,
               color: Colors.red,
-              child: Icon(Icons.delete, color: Colors.white),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Icon(Icons.delete, color: Colors.white),
+                  SizedBox(width: 15),
+                ],
+              ),
             ),
             child: CategoryListItemWidget(categoryModel: category),
             confirmDismiss: (direction) {
-              return deleteCategory();
+              return deleteCategory(category);
             },
-            onDismissed: (direction) {},
+            onDismissed: (direction) {
+              Get.showSnackbar(successBar('删除成功'));
+            },
           );
         }).toList(),
         onReorder: (oldIndex, newIndex) {
@@ -63,7 +72,12 @@ class _CategoryListPageState extends State<CategoryListPage> {
     );
   }
 
-  deleteCategory() async {
-    return true;
+  Future<bool> deleteCategory(RMCategoryModel category) async {
+    if (category.count > 0) {
+      Get.showSnackbar(errorBar('该分类下还有${category.count}项，不允许删除'));
+      return false;
+    } else {
+      return true;
+    }
   }
 }
