@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:remember/common/constant.dart';
 
 // ignore: must_be_immutable
 class PhotoViewGalleryScreen extends StatefulWidget {
@@ -31,6 +32,7 @@ class _PhotoViewGalleryScreenState extends State<PhotoViewGalleryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Stack(
         children: <Widget>[
           Positioned(
@@ -40,7 +42,8 @@ class _PhotoViewGalleryScreenState extends State<PhotoViewGalleryScreen> {
             right: 0,
             child: Container(
                 child: PhotoViewGallery.builder(
-              scrollPhysics: const BouncingScrollPhysics(),
+              allowImplicitScrolling: true,
+              scrollPhysics: BouncingScrollPhysics(),
               builder: (BuildContext context, int index) {
                 return PhotoViewGalleryPageOptions(
                   imageProvider: FileImage(this.widget.files[index]),
