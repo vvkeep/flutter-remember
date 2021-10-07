@@ -7,8 +7,8 @@ import 'package:remember/mock/mock.dart';
 import 'package:remember/model/img_model.dart';
 import 'package:remember/page/home/widget/home_item_detail_choose_image_widget.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:photo_view/photo_view.dart';
 import 'package:remember/widget/image_preview/photo_view_gallery_screen.dart';
+import 'package:remember/widget/other/widget.dart';
 
 class HomeItemDetailPage extends StatefulWidget {
   HomeItemDetailPage({Key? key}) : super(key: key);
@@ -218,22 +218,24 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                         ),
                       ));
                     } else {
+                      var files = pickedList
+                          .map((item) {
+                            if (item.type != PickImageMediaType.add) {
+                              return item.file;
+                            } else {
+                              return null;
+                            }
+                          })
+                          .where((e) => e != null)
+                          .map((e) => e!)
+                          .toList();
                       var page = PhotoViewGalleryScreen(
-                        files: pickedList
-                            .map((item) {
-                              if (item.type != PickImageMediaType.add) {
-                                return item.file;
-                              } else {
-                                return null;
-                              }
-                            })
-                            .where((e) => e != null)
-                            .map((e) => e!)
-                            .toList(), //传入图片list
-                        index: index, //传入当前点击的图片的index
+                        files: files, //传入图片list
+                        index: index,
+                        heroTag: files[index].path, //传入当前点击的图片的index
                       );
 
-                      Get.to(page, transition: Transition.fade);
+                      Navigator.of(context).push(FadeRoute(page: page));
                     }
                   },
                 ),
