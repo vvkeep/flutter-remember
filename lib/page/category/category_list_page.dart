@@ -4,7 +4,7 @@ import 'package:get/instance_manager.dart';
 import 'package:remember/common/constant.dart';
 import 'package:remember/common/data_manager.dart';
 import 'package:remember/common/event_bus.dart';
-import 'package:remember/common/widget.dart';
+import 'package:remember/widget/other/widget.dart';
 import 'package:remember/mock/mock.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:remember/page/category/widget/category_list_item_widget.dart';

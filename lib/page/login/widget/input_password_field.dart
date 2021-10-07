@@ -7,12 +7,7 @@ class InputPasswordField extends StatefulWidget {
   final String hintText;
   final FocusNode? focusNode;
 
-  InputPasswordField(
-      {Key? key,
-      required this.controller,
-      this.focusNode,
-      required this.hintText})
-      : super(key: key);
+  InputPasswordField({Key? key, required this.controller, this.focusNode, required this.hintText}) : super(key: key);
 
   @override
   _InputPasswordFieldState createState() => _InputPasswordFieldState();
@@ -46,6 +41,11 @@ class _InputPasswordFieldState extends State<InputPasswordField> {
         hintStyle: RMTextStyle.normalTextLight,
         suffixIcon: IconButton(
           onPressed: () {
+            this.widget.focusNode?.unfocus();
+            this.widget.focusNode?.canRequestFocus = false;
+            Future.delayed(Duration(milliseconds: 100), () {
+              this.widget.focusNode?.canRequestFocus = true;
+            });
             setState(() {
               this.isVisible = !this.isVisible;
             });

@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:remember/common/constant.dart';
 import 'package:remember/mock/mock.dart';
+import 'package:remember/model/img_model.dart';
 import 'package:remember/page/home/widget/home_item_detail_choose_image_widget.dart';
-import 'dart:async';
-import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:remember/widget/image_preview/photo_view_gallery_screen.dart';
 
 class HomeItemDetailPage extends StatefulWidget {
   HomeItemDetailPage({Key? key}) : super(key: key);
@@ -19,18 +23,26 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
   final FocusNode passwordNode = FocusNode();
   final FocusNode payNode = FocusNode();
   final FocusNode remarkNode = FocusNode();
+  final _picker = ImagePicker();
+
+  List<RMPickImageItem> pickedList = [RMPickImageItem(path: 'assets/imgs/add_img.png', type: PickImageMediaType.add)];
 
   @override
   void initState() {
     super.initState();
   }
 
-  chooseImg() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile == null) {
+  _choosePhoto(ImageSource source) async {
+    XFile? file = await _picker.pickImage(source: source);
+    if (file == null) {
       return;
     }
+
+    RMPickImageItem item = RMPickImageItem(type: PickImageMediaType.source, file: File(file.path));
+    var index = pickedList.length - 1 > 0 ? pickedList.length - 1 : 0;
+    setState(() {
+      pickedList.insert(index, item);
+    });
   }
 
   Widget _buildInputField(String hitText, FocusNode focusNode) {
@@ -51,18 +63,6 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
           hintText: hitText,
           hintStyle: RMTextStyle.normalTextLight,
           border: InputBorder.none,
-          suffixIcon: IconButton(
-            onPressed: () {
-              focusNode.unfocus();
-              focusNode.canRequestFocus = false;
-              Future.delayed(Duration(milliseconds: 100), () {
-                focusNode.canRequestFocus = true;
-              });
-              this.chooseImg();
-            },
-            iconSize: 20,
-            icon: Icon(Icons.photo_camera, color: RMColors.lightTextColor),
-          ),
         ),
       ),
     );
@@ -181,7 +181,62 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                 ),
                 SizedBox(height: 10),
                 _buildSectionTitleView("附件图片"),
-                HomeItemDetailChooseImageWidget(),
+                HomeItemDetailChooseImageWidget(
+                  itemList: this.pickedList,
+                  callback: (item, index) {
+                    if (item.type == PickImageMediaType.add) {
+                      Get.bottomSheet(Container(
+                        color: RMColors.white,
+                        child: Wrap(
+                          children: [
+                            ListTile(
+                              leading: Icon(Icons.camera),
+                              title: Text("相机"),
+                              onTap: () {
+                                Get.back();
+                                this._choosePhoto(ImageSource.camera);
+                              },
+                            ),
+                            Divider(height: 0, color: RMColors.divideColor),
+                            ListTile(
+                              leading: Icon(Icons.photo),
+                              title: Text("相册"),
+                              onTap: () {
+                                Get.back();
+                                this._choosePhoto(ImageSource.gallery);
+                              },
+                            ),
+                            Divider(height: 0, color: RMColors.divideColor),
+                            ListTile(
+                              leading: Icon(Icons.cancel),
+                              title: Text("退出"),
+                              onTap: () {
+                                Get.back();
+                              },
+                            )
+                          ],
+                        ),
+                      ));
+                    } else {
+                      var page = PhotoViewGalleryScreen(
+                        files: pickedList
+                            .map((item) {
+                              if (item.type != PickImageMediaType.add) {
+                                return item.file;
+                              } else {
+                                return null;
+                              }
+                            })
+                            .where((e) => e != null)
+                            .map((e) => e!)
+                            .toList(), //传入图片list
+                        index: index, //传入当前点击的图片的index
+                      );
+
+                      Get.to(page, transition: Transition.fade);
+                    }
+                  },
+                ),
                 SizedBox(height: 10),
                 _buildSectionTitleView("选择标签"),
                 Container(
