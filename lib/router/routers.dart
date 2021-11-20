@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:remember/page/category/category_list_page.dart';
+import 'package:remember/page/feature/app_feature_page.dart';
 import 'package:remember/page/home/home_category_page.dart';
 import 'package:remember/page/home/home_item_detail_page.dart';
 import 'package:remember/page/home/home_item_list_page.dart';
@@ -11,6 +11,7 @@ import 'package:remember/page/tag/tag_list_page.dart';
 
 abstract class Routes {
   static String homePage = "/";
+  static String appFeaturePage = "/app_feature_apge";
   static String itemListPage = "/item_list_page";
   static String searchPage = "/search_page";
   static String itemDetailPage = "/item_detail_page";
@@ -26,6 +27,10 @@ abstract class AppPages {
       name: Routes.homePage,
       page: () => HomeCategoryListPage(),
       transition: Transition.fade,
+    ),
+    GetPage(
+      name: Routes.appFeaturePage,
+      page: () => AppFeaturePage(),
     ),
     GetPage(
       name: Routes.itemListPage,

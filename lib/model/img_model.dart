@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-
 enum PickImageMediaType { add, temp, source }
 
 class RMPickImageItem {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:remember/common/constant.dart';
 import 'package:remember/common/data_manager.dart';
-import 'package:remember/common/event_bus.dart';
 import 'package:remember/widget/other/widget.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:remember/page/tag/widget/tag_list_item_widget.dart';
