@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      // initialRoute: LoginManager.isRegisted() ? Routes.loginPage : Routes.registerPage,
-      initialRoute: Routes.appFeaturePage,
+      initialRoute: LoginManager.isRegisted() ? Routes.loginPage : Routes.appFeaturePage,
+      // initialRoute: Routes.appFeaturePage,
       theme: ThemeData(primaryColor: RMColors.primaryColor),
       defaultTransition: Transition.cupertino,
       getPages: AppPages.pages,

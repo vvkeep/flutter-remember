@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 SizedBox(height: Get.mediaQuery.padding.top + 45),
-                Text('欢迎使用记得', style: RMTextStyle.bigTextWhiteBold),
+                Text('欢迎使用记得', style: RMTextStyle.biggerTextWhiteBold),
                 SizedBox(height: 35 + 45),
                 Stack(
                   clipBehavior: Clip.none,

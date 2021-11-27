@@ -16,7 +16,8 @@ class RMColors {
 ///文本样式
 class RMTextStyle {
   static const lagerTextSize = 30.0;
-  static const bigTextSize = 23.0;
+  static const biggerTextSize = 23.0;
+  static const bigTextSize = 20.0;
   static const midTextSize = 16.0;
   static const normalTextSize = 15.0;
   static const minTextSize = 12.0;
@@ -57,15 +58,15 @@ class RMTextStyle {
     fontWeight: FontWeight.bold,
   );
 
-  static const bigTextPrimaryBold = TextStyle(
+  static const biggerTextPrimaryBold = TextStyle(
     color: RMColors.primaryColor,
-    fontSize: bigTextSize,
+    fontSize: biggerTextSize,
     fontWeight: FontWeight.bold,
   );
 
-  static const bigTextPrimaryW500 = TextStyle(
+  static const biggerTextPrimaryW500 = TextStyle(
     color: RMColors.primaryColor,
-    fontSize: bigTextSize,
+    fontSize: biggerTextSize,
     fontWeight: FontWeight.w500,
   );
 
@@ -87,10 +88,16 @@ class RMTextStyle {
     fontWeight: FontWeight.bold,
   );
 
-  static const bigTextWhiteBold = TextStyle(
+  static const biggerTextWhiteBold = TextStyle(
+    color: RMColors.white,
+    fontSize: biggerTextSize,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const bigTextWhiteW500 = TextStyle(
     color: RMColors.white,
     fontSize: bigTextSize,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w500,
   );
 
   static const largeTextPrimaryBold = TextStyle(

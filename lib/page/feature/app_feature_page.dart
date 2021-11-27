@@ -19,16 +19,10 @@ class _AppFeaturePageState extends State<AppFeaturePage> {
   late LiquidController liquidController;
 
   List<AppFeatureItemModel> dataList = [
-    AppFeatureItemModel(Colors.blue, 'assets/imgs/app_feature.png', "Hi", "It's Me!", 'Remember'),
-    AppFeatureItemModel(Colors.deepPurpleAccent, 'assets/imgs/app_feature.png', "Take a", "Safe", 'App'),
-    AppFeatureItemModel(RMColors.primaryColor, 'assets/imgs/app_feature.png', "Do", "Try it", 'Thank you')
+    AppFeatureItemModel(Colors.blue, 'assets/imgs/app_feature.png', "嗨，您好！", "欢迎使用账号密码助手-记得"),
+    AppFeatureItemModel(Colors.deepPurpleAccent, 'assets/imgs/app_feature.png', "记得将致力于", "安全便捷的管理账号密码等重要信息"),
+    AppFeatureItemModel(RMColors.primaryColor, 'assets/imgs/app_feature.png', "欢迎留下您使用过程的各种宝贵建议", "它对我们非常重要！")
   ];
-
-  static final fontStype = TextStyle(
-    fontSize: 30,
-    fontFamily: "Billy",
-    fontWeight: FontWeight.w600,
-  );
 
   @override
   void initState() {
@@ -66,12 +60,12 @@ class _AppFeaturePageState extends State<AppFeaturePage> {
         children: [
           LiquidSwipe.builder(
             positionSlideIcon: 0.8,
-            slideIconWidget: Icon(Icons.arrow_back_ios),
+            slideIconWidget: this.page == this.dataList.length - 1 ? null : Icon(Icons.arrow_back_ios),
             waveType: WaveType.liquidReveal,
             liquidController: liquidController,
             fullTransitionValue: 880,
             enableSideReveal: true,
-            enableLoop: true,
+            enableLoop: false,
             ignoreUserGestureWhileAnimating: true,
             onPageChangeCallback: (int index) {
               setState(() {
@@ -98,16 +92,13 @@ class _AppFeaturePageState extends State<AppFeaturePage> {
                       children: [
                         Text(
                           dataList[index].text1,
-                          style: fontStype,
+                          style: RMTextStyle.bigTextWhiteW500,
                         ),
+                        SizedBox(height: 10),
                         Text(
                           dataList[index].text2,
-                          style: fontStype,
-                        ),
-                        Text(
-                          dataList[index].text3,
-                          style: fontStype,
-                        ),
+                          style: RMTextStyle.bigTextWhiteW500,
+                        )
                       ],
                     )
                   ],
@@ -133,25 +124,7 @@ class _AppFeaturePageState extends State<AppFeaturePage> {
               padding: EdgeInsets.all(25.0),
               child: TextButton(
                 child: Text(
-                  "Skip to End",
-                  style: TextStyle(color: Colors.white),
-                ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.white.withOpacity(0.1)),
-                ),
-                onPressed: () {
-                  liquidController.animateToPage(page: dataList.length - 1, duration: 600);
-                },
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Padding(
-              padding: EdgeInsets.all(25.0),
-              child: TextButton(
-                child: Text(
-                  "Next",
+                  this.page == this.dataList.length - 1 ? "进入应用" : "下一步",
                   style: TextStyle(color: Colors.white),
                 ),
                 style: ButtonStyle(

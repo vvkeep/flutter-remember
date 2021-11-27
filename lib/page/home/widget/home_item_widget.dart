@@ -69,7 +69,7 @@ class HomeItemWidget extends StatelessWidget {
             ),
             alignment: Alignment.center,
             width: 40,
-            child: Text('${itemModel.id}', style: RMTextStyle.bigTextPrimaryBold),
+            child: Text('${itemModel.id}', style: RMTextStyle.biggerTextPrimaryBold),
           ),
           Expanded(
             child: Padding(

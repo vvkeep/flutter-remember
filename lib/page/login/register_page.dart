@@ -45,7 +45,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               children: [
                 SizedBox(height: Get.mediaQuery.padding.top + 45),
-                Text('欢迎使用记得', style: RMTextStyle.bigTextWhiteBold),
+                Text('欢迎使用记得', style: RMTextStyle.biggerTextWhiteBold),
                 SizedBox(height: 35 + 45),
                 Stack(
                   clipBehavior: Clip.none,
@@ -115,19 +115,16 @@ class _RegisterPageState extends State<RegisterPage> {
                     String password = passwordController.text;
                     String password2 = password2Controller.text;
                     if (password.isEmpty) {
-                      Fluttertoast.showToast(
-                          msg: '请输入登录密码', gravity: ToastGravity.TOP);
+                      Fluttertoast.showToast(msg: '请输入登录密码', gravity: ToastGravity.TOP);
                       return;
                     }
 
                     if (password != password2) {
-                      Fluttertoast.showToast(
-                          msg: '密码不一致，请检查密码', gravity: ToastGravity.TOP);
+                      Fluttertoast.showToast(msg: '密码不一致，请检查密码', gravity: ToastGravity.TOP);
                       return;
                     }
 
-                    Fluttertoast.showToast(
-                        msg: '登录密码设置成功', gravity: ToastGravity.TOP);
+                    Fluttertoast.showToast(msg: '登录密码设置成功', gravity: ToastGravity.TOP);
                     UserInfo userInfo = LoginManager.getUserInfo();
                     userInfo.password = password;
                     userInfo.isRegister = true;
