@@ -6,16 +6,16 @@ part of 'user_info.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserInfo _$UserInfoFromJson(Map<dynamic, dynamic> json) {
+UserInfo _$UserInfoFromJson(Map<String, dynamic> json) {
   return UserInfo(
-    password: json['password'] as String,
     isRegister: json['isRegister'] as bool,
     isLocalAuth: json['isLocalAuth'] as bool,
+    password: json['password'] as String,
   );
 }
 
-Map<dynamic, dynamic> _$UserInfoToJson(UserInfo instance) => <dynamic, dynamic>{
-      'password': instance.password,
+Map<String, dynamic> _$UserInfoToJson(UserInfo instance) => <String, dynamic>{
       'isRegister': instance.isRegister,
       'isLocalAuth': instance.isLocalAuth,
+      'password': instance.password,
     };

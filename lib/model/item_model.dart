@@ -1,4 +1,9 @@
-class RMItemModel {
+import 'package:json_annotation/json_annotation.dart';
+
+part 'item_model.g.dart';
+
+@JsonSerializable()
+class ItemModel {
   int id;
   int categoryId;
   String title;
@@ -6,28 +11,38 @@ class RMItemModel {
   String password;
   String description;
 
-  RMItemModel(
+  ItemModel(
       {required this.id,
       required this.categoryId,
       required this.title,
       required this.account,
       required this.password,
       required this.description});
+
+  factory ItemModel.fromJson(Map<dynamic, dynamic> json) => _$ItemModelFromJson(json);
+  Map<dynamic, dynamic> toJson() => _$ItemModelToJson(this);
 }
 
-class RMCategoryModel {
+@JsonSerializable()
+class CategoryModel {
   int id;
   String title;
   int count;
   int sort;
 
-  RMCategoryModel({required this.id, required this.title, required this.count, required this.sort});
+  CategoryModel({required this.id, required this.title, required this.count, required this.sort});
+  factory CategoryModel.fromJson(Map<dynamic, dynamic> json) => _$CategoryModelFromJson(json);
+  Map<dynamic, dynamic> toJson() => _$CategoryModelToJson(this);
 }
 
-class RMTagModel {
+@JsonSerializable()
+class TagModel {
   int id;
   String title;
   int count;
 
-  RMTagModel({required this.id, required this.title, required this.count});
+  TagModel({required this.id, required this.title, required this.count});
+
+  factory TagModel.fromJson(Map<dynamic, dynamic> json) => _$TagModelFromJson(json);
+  Map<dynamic, dynamic> toJson() => _$TagModelToJson(this);
 }
