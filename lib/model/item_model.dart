@@ -19,8 +19,8 @@ class ItemModel {
       required this.password,
       required this.description});
 
-  factory ItemModel.fromJson(Map<dynamic, dynamic> json) => _$ItemModelFromJson(json);
-  Map<dynamic, dynamic> toJson() => _$ItemModelToJson(this);
+  factory ItemModel.fromJson(Map<String, dynamic> json) => _$ItemModelFromJson(json);
+  Map<String, dynamic> toJson() => _$ItemModelToJson(this);
 }
 
 @JsonSerializable()
@@ -31,8 +31,9 @@ class CategoryModel {
   int sort;
 
   CategoryModel({required this.id, required this.title, required this.count, required this.sort});
-  factory CategoryModel.fromJson(Map<dynamic, dynamic> json) => _$CategoryModelFromJson(json);
-  Map<dynamic, dynamic> toJson() => _$CategoryModelToJson(this);
+
+  factory CategoryModel.fromJson(Map<String, dynamic> json) => _$CategoryModelFromJson(json);
+  Map<String, dynamic> toJson() => _$CategoryModelToJson(this);
 }
 
 @JsonSerializable()
@@ -43,6 +44,6 @@ class TagModel {
 
   TagModel({required this.id, required this.title, required this.count});
 
-  factory TagModel.fromJson(Map<dynamic, dynamic> json) => _$TagModelFromJson(json);
-  Map<dynamic, dynamic> toJson() => _$TagModelToJson(this);
+  factory TagModel.fromJson(Map<String, dynamic> json) => _$TagModelFromJson(json);
+  Map<String, dynamic> toJson() => _$TagModelToJson(this);
 }

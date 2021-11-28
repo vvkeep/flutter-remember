@@ -12,9 +12,7 @@ class LoginManager {
   }
 
   static UserInfo getUserInfo() {
-    UserInfo? userInfo =
-        SpUtil.getObj(RMConstant.LOGIN_INFO_KEY, (v) => UserInfo.fromJson(v));
-    print(userInfo.toString());
+    UserInfo? userInfo = SpUtil.getObj(RMConstant.LOGIN_INFO_KEY, (v) => UserInfo.fromJson(v as Map<String, dynamic>));
     if (userInfo == null) {
       return UserInfo(isRegister: false, isLocalAuth: false);
     } else {
