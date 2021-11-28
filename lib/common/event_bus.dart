@@ -6,7 +6,7 @@ EventBus eventBus = new EventBus();
 class CategoryListEvent {}
 
 class CategoryEvent {
-  RMCategoryModel category;
+  CategoryModel category;
 
   CategoryEvent(this.category);
 }

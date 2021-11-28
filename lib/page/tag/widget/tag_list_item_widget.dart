@@ -3,7 +3,7 @@ import 'package:remember/common/constant.dart';
 import 'package:remember/model/item_model.dart';
 
 class TagListItemWidget extends StatelessWidget {
-  final RMTagModel tagModel;
+  final TagModel tagModel;
   const TagListItemWidget({Key? key, required this.tagModel}) : super(key: key);
 
   @override

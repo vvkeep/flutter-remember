@@ -15,7 +15,7 @@ class HomeCategoryListPage extends StatefulWidget {
 }
 
 class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
-  late List<RMCategoryModel> categoryList = DataManager.instance.categoryList;
+  late List<CategoryModel> categoryList = DataManager.instance.categoryList;
 
   @override
   void initState() {
@@ -136,7 +136,7 @@ class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
                 ),
                 itemCount: categoryList.length,
                 itemBuilder: (context, index) {
-                  RMCategoryModel category = categoryList[index];
+                  CategoryModel category = categoryList[index];
                   return GestureDetector(
                     child: HomeCategoryItemWidget(categoryModel: category),
                     onTap: () {

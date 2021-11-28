@@ -5,7 +5,7 @@ import 'package:remember/common/constant.dart';
 import 'package:remember/model/item_model.dart';
 
 class HomeItemWidget extends StatelessWidget {
-  final RMItemModel itemModel;
+  final ItemModel itemModel;
   const HomeItemWidget({Key? key, required this.itemModel}) : super(key: key);
 
   Widget itemView(String key, String value, VoidCallback? onPressed) {

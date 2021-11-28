@@ -15,7 +15,7 @@ class HomeItemListPage extends StatefulWidget {
 class _HomeItemListPageState extends State<HomeItemListPage> {
   @override
   Widget build(BuildContext context) {
-    var category = Get.arguments as RMCategoryModel;
+    var category = Get.arguments as CategoryModel;
 
     return Scaffold(
       backgroundColor: RMColors.mainBackgroundColor,

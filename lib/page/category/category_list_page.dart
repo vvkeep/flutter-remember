@@ -19,7 +19,7 @@ class CategoryListPage extends StatefulWidget {
 }
 
 class _CategoryListPageState extends State<CategoryListPage> {
-  List<RMCategoryModel> categroyItems = Mock.categroyItems;
+  List<CategoryModel> categroyItems = Mock.categroyItems;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
             tooltip: '添加账号',
             icon: Icon(Icons.add),
             onPressed: () {
-              Get.toNamed(Routes.itemDetailPage);
+              Get.toNamed(Routes.newCategoryListPage);
             },
           )
         ],
@@ -75,7 +75,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
     );
   }
 
-  Future<bool> deleteCategory(RMCategoryModel category) async {
+  Future<bool> deleteCategory(CategoryModel category) async {
     if (category.count > 0) {
       Get.showSnackbar(errorBar('该分类下还有${category.count}项，不允许删除'));
       return false;

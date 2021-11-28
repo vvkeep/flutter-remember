@@ -12,7 +12,7 @@ class HomeItemSearchPagePage extends StatefulWidget {
 }
 
 class _HomeItemSearchPagePageState extends State<HomeItemSearchPagePage> {
-  List<RMItemModel> _itemList = [];
+  List<ItemModel> _itemList = [];
 
   @override
   void initState() {

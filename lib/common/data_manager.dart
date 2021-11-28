@@ -1,9 +1,9 @@
 import 'package:remember/model/item_model.dart';
 
 class DataManager {
-  List<RMCategoryModel> categoryList = [];
-  List<RMTagModel> tagList = [];
-  List<RMItemModel> itemList = [];
+  List<CategoryModel> categoryList = [];
+  List<TagModel> tagList = [];
+  List<ItemModel> itemList = [];
 
   DataManager._privateConstructor();
 
@@ -13,7 +13,7 @@ class DataManager {
     return _instance;
   }
 
-  setup(List<RMCategoryModel> categoryList, List<RMTagModel> tagList, List<RMItemModel> itemList) {
+  setup(List<CategoryModel> categoryList, List<TagModel> tagList, List<ItemModel> itemList) {
     this.categoryList = categoryList;
     this.tagList = tagList;
     this.itemList = itemList;

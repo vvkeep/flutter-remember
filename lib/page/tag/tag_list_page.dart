@@ -15,7 +15,7 @@ class TagListPage extends StatefulWidget {
 }
 
 class _TagListPageState extends State<TagListPage> {
-  List<RMTagModel> tagList = DataManager.instance.tagList;
+  List<TagModel> tagList = DataManager.instance.tagList;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +65,7 @@ class _TagListPageState extends State<TagListPage> {
     );
   }
 
-  Future<bool> deleteTag(RMTagModel tag) async {
+  Future<bool> deleteTag(TagModel tag) async {
     if (tag.count > 0) {
       Get.showSnackbar(errorBar('改标签下还有${tag.count}项，不允许删除'));
       return false;

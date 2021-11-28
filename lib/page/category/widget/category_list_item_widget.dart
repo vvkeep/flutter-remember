@@ -3,7 +3,7 @@ import 'package:remember/common/constant.dart';
 import 'package:remember/model/item_model.dart';
 
 class CategoryListItemWidget extends StatelessWidget {
-  final RMCategoryModel categoryModel;
+  final CategoryModel categoryModel;
   const CategoryListItemWidget({Key? key, required this.categoryModel}) : super(key: key);
 
   @override
