@@ -4,6 +4,7 @@ import 'package:get/instance_manager.dart';
 import 'package:remember/common/constant.dart';
 import 'package:remember/common/data_manager.dart';
 import 'package:remember/common/event_bus.dart';
+import 'package:remember/helper/database_helper.dart';
 import 'package:remember/widget/other/widget.dart';
 import 'package:remember/mock/mock.dart';
 import 'package:remember/model/item_model.dart';
@@ -19,7 +20,20 @@ class CategoryListPage extends StatefulWidget {
 }
 
 class _CategoryListPageState extends State<CategoryListPage> {
-  List<CategoryModel> categroyItems = Mock.categroyItems;
+  List<CategoryModel> categroyItems = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    List<CategoryModel> list = await DatabaseHelper.shared.categoryList();
+    setState(() {
+      this.categroyItems = list;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +46,13 @@ class _CategoryListPageState extends State<CategoryListPage> {
             tooltip: '添加账号',
             icon: Icon(Icons.add),
             onPressed: () {
-              Get.toNamed(Routes.newCategoryListPage);
+              Map<String, Object> args = {
+                "callback": () {
+                  this.loadData();
+                },
+              };
+
+              Get.toNamed(Routes.newCategoryListPage, arguments: args);
             },
           )
         ],
@@ -53,7 +73,18 @@ class _CategoryListPageState extends State<CategoryListPage> {
                 ],
               ),
             ),
-            child: CategoryListItemWidget(categoryModel: category),
+            child: GestureDetector(
+              onTap: () {
+                Map<String, Object> args = {
+                  "callback": () {
+                    this.loadData();
+                  },
+                  "category": category
+                };
+                Get.toNamed(Routes.newCategoryListPage, arguments: args);
+              },
+              child: CategoryListItemWidget(categoryModel: category),
+            ),
             confirmDismiss: (direction) {
               return deleteCategory(category);
             },
@@ -80,6 +111,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
       Get.showSnackbar(errorBar('该分类下还有${category.count}项，不允许删除'));
       return false;
     } else {
+      await DatabaseHelper.shared.deleteCategory(category.id);
       return true;
     }
   }

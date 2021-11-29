@@ -41,10 +41,10 @@ class DatabaseHelper {
 
   Future<int> updateCategory(CategoryModel categoryModel) async {
     Map<String, dynamic> map = categoryModel.toJson();
-    return _db.update(SQL.tableCategory, map, where: "id = ?", whereArgs: ["$categoryModel.id"]);
+    return _db.update(SQL.tableCategory, map, where: "id = ?", whereArgs: [categoryModel.id]);
   }
 
-  Future<int> deleteCategory(List<int> categoryIds) async {
-    return _db.delete(SQL.tableCategory, where: "id in ?", whereArgs: categoryIds);
+  Future<int> deleteCategory(int categoryId) async {
+    return _db.delete(SQL.tableCategory, where: "id = ?", whereArgs: [categoryId]);
   }
 }

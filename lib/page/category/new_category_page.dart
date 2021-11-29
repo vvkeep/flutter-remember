@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:remember/common/constant.dart';
 import 'package:remember/helper/database_helper.dart';
+import 'package:remember/model/item_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class NewCategoryPage extends StatefulWidget {
@@ -15,9 +16,16 @@ class NewCategoryPage extends StatefulWidget {
 class _NewCategoryPageState extends State<NewCategoryPage> {
   final FocusNode focusNode = FocusNode();
   final nameController = TextEditingController();
+  VoidCallback? categoryChangedCallback;
+  CategoryModel? categoryModel;
 
   @override
   Widget build(BuildContext context) {
+    Map<String, Object> args = Get.arguments as Map<String, Object>;
+    categoryChangedCallback = args["callback"] as VoidCallback?;
+    categoryModel = args["category"] as CategoryModel?;
+    nameController.text = categoryModel?.title ?? "";
+
     return Scaffold(
       backgroundColor: RMColors.white,
       appBar: AppBar(
@@ -35,7 +43,7 @@ class _NewCategoryPageState extends State<NewCategoryPage> {
               SizedBox(height: 25),
               Container(
                 width: Get.width - 50,
-                height: 85,
+                height: 75,
                 child: TextField(
                   controller: nameController,
                   focusNode: this.focusNode,
@@ -77,17 +85,24 @@ class _NewCategoryPageState extends State<NewCategoryPage> {
 
                   focusNode.unfocus();
                   try {
-                    await DatabaseHelper.shared.insertCategory(name);
-                    Fluttertoast.showToast(msg: '添加成功', gravity: ToastGravity.TOP);
+                    if (this.categoryModel != null) {
+                      categoryModel!.title = name;
+                      await DatabaseHelper.shared.updateCategory(categoryModel!);
+                      Fluttertoast.showToast(msg: '编辑成功', gravity: ToastGravity.TOP);
+                    } else {
+                      await DatabaseHelper.shared.insertCategory(name);
+                      Fluttertoast.showToast(msg: '添加成功', gravity: ToastGravity.TOP);
+                    }
+                    categoryChangedCallback!();
                     Get.back();
                   } on DatabaseException catch (e) {
                     if (e.isUniqueConstraintError('category.title')) {
                       Fluttertoast.showToast(msg: '此分类已存在，请修改分类名称', gravity: ToastGravity.TOP);
                     } else {
-                      Fluttertoast.showToast(msg: '数据库插入失败，请重试', gravity: ToastGravity.TOP);
+                      Fluttertoast.showToast(msg: '数据库操作失败，请重试', gravity: ToastGravity.TOP);
                     }
                   } catch (e) {
-                    Fluttertoast.showToast(msg: '添加失败，请重试', gravity: ToastGravity.TOP);
+                    Fluttertoast.showToast(msg: '操作失败，请重试', gravity: ToastGravity.TOP);
                   }
                 },
               ),

@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       // initialRoute: LoginManager.isRegisted() ? Routes.loginPage : Routes.appFeaturePage,
-      initialRoute: Routes.newCategoryListPage,
+      initialRoute: Routes.categoryListPage,
       theme: ThemeData(primaryColor: RMColors.primaryColor),
       defaultTransition: Transition.cupertino,
       getPages: AppPages.pages,
