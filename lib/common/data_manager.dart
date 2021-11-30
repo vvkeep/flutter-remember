@@ -16,8 +16,8 @@ class DataManager {
 
   init() async {
     this.categoryList = await DatabaseHelper.shared.categoryList();
-    // this.tagList = await DatabaseHelper.shared.categoryList();;
-    // this.itemList = itemList;
+    this.tagList = await DatabaseHelper.shared.tagList();
+    this.itemList = await DatabaseHelper.shared.itemList();
   }
 
   removeCategory(int id) async {
