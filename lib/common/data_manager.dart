@@ -1,3 +1,4 @@
+import 'package:remember/common/database_helper.dart';
 import 'package:remember/model/item_model.dart';
 
 class DataManager {
@@ -9,26 +10,32 @@ class DataManager {
 
   static final DataManager _instance = DataManager._privateConstructor();
 
-  static DataManager get instance {
+  static DataManager get shared {
     return _instance;
   }
 
-  setup(List<CategoryModel> categoryList, List<TagModel> tagList, List<ItemModel> itemList) {
-    this.categoryList = categoryList;
-    this.tagList = tagList;
-    this.itemList = itemList;
+  init() async {
+    this.categoryList = await DatabaseHelper.shared.categoryList();
+    // this.tagList = await DatabaseHelper.shared.categoryList();;
+    // this.itemList = itemList;
   }
 
-  removeCategory(int id) {
+  removeCategory(int id) async {
+    await DatabaseHelper.shared.deleteCategory(id);
     categoryList.removeWhere((category) => category.id == id);
   }
 
-  swapCategorySort(oldIndex, newIndex) {
+  swapCategorySort(oldIndex, newIndex) async {
     if (oldIndex < newIndex) {
       newIndex -= 1;
     }
     var item = categoryList.removeAt(oldIndex);
     categoryList.insert(newIndex, item);
+
+    for (int i = 0; i < categoryList.length; i++) {
+      categoryList[i].sort = i;
+      await DatabaseHelper.shared.updateCategory(categoryList[i]);
+    }
   }
 
   removeTag(int id) {

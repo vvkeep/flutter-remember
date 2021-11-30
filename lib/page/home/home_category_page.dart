@@ -15,14 +15,14 @@ class HomeCategoryListPage extends StatefulWidget {
 }
 
 class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
-  late List<CategoryModel> categoryList = DataManager.instance.categoryList;
+  late List<CategoryModel> categoryList = DataManager.shared.categoryList;
 
   @override
   void initState() {
     super.initState();
     eventBus.on<CategoryListEvent>().listen((event) {
       setState(() {
-        this.categoryList = DataManager.instance.categoryList;
+        this.categoryList = DataManager.shared.categoryList;
       });
     });
   }

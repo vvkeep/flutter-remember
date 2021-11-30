@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:remember/common/constant.dart';
-import 'package:remember/helper/database_helper.dart';
+import 'package:remember/common/database_helper.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:sqflite/sqflite.dart';
 

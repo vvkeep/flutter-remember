@@ -15,7 +15,7 @@ class TagListPage extends StatefulWidget {
 }
 
 class _TagListPageState extends State<TagListPage> {
-  List<TagModel> tagList = DataManager.instance.tagList;
+  List<TagModel> tagList = DataManager.shared.tagList;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,15 +50,15 @@ class _TagListPageState extends State<TagListPage> {
               return deleteTag(tag);
             },
             onDismissed: (direction) {
-              DataManager.instance.removeTag(tag.id);
+              DataManager.shared.removeTag(tag.id);
               Get.showSnackbar(successBar('删除成功'));
             },
           );
         }).toList(),
         onReorder: (oldIndex, newIndex) {
-          DataManager.instance.swapTagSort(oldIndex, newIndex);
+          DataManager.shared.swapTagSort(oldIndex, newIndex);
           setState(() {
-            this.tagList = DataManager.instance.tagList;
+            this.tagList = DataManager.shared.tagList;
           });
         },
       ),

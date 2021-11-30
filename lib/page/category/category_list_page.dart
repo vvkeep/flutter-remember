@@ -4,9 +4,8 @@ import 'package:get/instance_manager.dart';
 import 'package:remember/common/constant.dart';
 import 'package:remember/common/data_manager.dart';
 import 'package:remember/common/event_bus.dart';
-import 'package:remember/helper/database_helper.dart';
+import 'package:remember/common/database_helper.dart';
 import 'package:remember/widget/other/widget.dart';
-import 'package:remember/mock/mock.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:remember/page/category/widget/category_list_item_widget.dart';
 import 'package:get/get.dart';
@@ -88,18 +87,18 @@ class _CategoryListPageState extends State<CategoryListPage> {
             confirmDismiss: (direction) {
               return deleteCategory(category);
             },
-            onDismissed: (direction) {
-              DataManager.instance.removeCategory(category.id);
+            onDismissed: (direction) async {
+              DataManager.shared.removeCategory(category.id);
               eventBus.fire(CategoryListEvent());
               Get.showSnackbar(successBar('删除成功'));
             },
           );
         }).toList(),
         onReorder: (oldIndex, newIndex) {
-          DataManager.instance.swapCategorySort(oldIndex, newIndex);
+          DataManager.shared.swapCategorySort(oldIndex, newIndex);
           eventBus.fire(CategoryListEvent());
           setState(() {
-            this.categroyItems = DataManager.instance.categoryList;
+            this.categroyItems = DataManager.shared.categoryList;
           });
         },
       ),
@@ -111,7 +110,6 @@ class _CategoryListPageState extends State<CategoryListPage> {
       Get.showSnackbar(errorBar('该分类下还有${category.count}项，不允许删除'));
       return false;
     } else {
-      await DatabaseHelper.shared.deleteCategory(category.id);
       return true;
     }
   }
