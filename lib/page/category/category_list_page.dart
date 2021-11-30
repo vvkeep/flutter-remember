@@ -2,9 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:remember/common/constant.dart';
-import 'package:remember/common/data_manager.dart';
+import 'package:remember/manager/data_manager.dart';
 import 'package:remember/common/event_bus.dart';
-import 'package:remember/common/database_helper.dart';
+import 'package:remember/manager/database_helper.dart';
 import 'package:remember/widget/other/widget.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:remember/page/category/widget/category_list_item_widget.dart';
@@ -19,7 +19,7 @@ class CategoryListPage extends StatefulWidget {
 }
 
 class _CategoryListPageState extends State<CategoryListPage> {
-  List<CategoryModel> categroyItems = [];
+  List<CategoryModel> categroyItems = DataManager.shared.categoryList;
 
   @override
   void initState() {
@@ -28,9 +28,8 @@ class _CategoryListPageState extends State<CategoryListPage> {
   }
 
   loadData() async {
-    List<CategoryModel> list = await DatabaseHelper.shared.categoryList();
     setState(() {
-      this.categroyItems = list;
+      this.categroyItems = DataManager.shared.categoryList;
     });
   }
 
@@ -51,7 +50,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
                 },
               };
 
-              Get.toNamed(Routes.newCategoryListPage, arguments: args);
+              Get.toNamed(Routes.newCategoryPage, arguments: args);
             },
           )
         ],
@@ -80,7 +79,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
                   },
                   "category": category
                 };
-                Get.toNamed(Routes.newCategoryListPage, arguments: args);
+                Get.toNamed(Routes.newCategoryPage, arguments: args);
               },
               child: CategoryListItemWidget(categoryModel: category),
             ),
@@ -97,9 +96,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
         onReorder: (oldIndex, newIndex) {
           DataManager.shared.swapCategorySort(oldIndex, newIndex);
           eventBus.fire(CategoryListEvent());
-          setState(() {
-            this.categroyItems = DataManager.shared.categoryList;
-          });
+          this.loadData();
         },
       ),
     );

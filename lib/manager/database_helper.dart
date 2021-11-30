@@ -1,5 +1,3 @@
-import 'dart:ffi';
-import 'dart:io';
 import 'package:remember/common/SQL.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -21,7 +19,7 @@ class DatabaseHelper {
     String path = join(await getDatabasesPath(), "remember.db");
     print('remember database path:$path');
 
-    return await openDatabase(path, version: 2, onCreate: (Database db, int version) async {
+    return await openDatabase(path, version: 1, onCreate: (Database db, int version) async {
       await db.execute(SQL.initItemTable);
       await db.execute(SQL.initCategoryTable);
       await db.execute(SQL.initTagTable);
@@ -53,13 +51,13 @@ extension DatabaseHelperCategoryExtension on DatabaseHelper {
 
 extension DatabaseHelperTagExtension on DatabaseHelper {
   Future<List<TagModel>> tagList() async {
-    List<Map<String, Object?>> maps = await _db.query(SQL.tableTag);
+    List<Map<String, Object?>> maps = await _db.query(SQL.tableTag, orderBy: "sort ASC, id DESC");
     List<TagModel> list = maps.isNotEmpty ? maps.map((v) => TagModel.fromJson(v)).toList() : [];
     return list;
   }
 
   Future<int> insertTag(String title) async {
-    Map<String, dynamic> map = {'title': title, 'count': 0};
+    Map<String, dynamic> map = {'title': title, 'count': 0, 'sort': 0};
     return _db.insert(SQL.tableTag, map);
   }
 

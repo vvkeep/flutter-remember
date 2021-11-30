@@ -12,8 +12,10 @@ ItemModel _$ItemModelFromJson(Map<String, dynamic> json) {
     categoryId: json['categoryId'] as int,
     title: json['title'] as String,
     account: json['account'] as String,
-    password: json['password'] as String,
-    description: json['description'] as String,
+    tagIds: json['tagIds'] as String?,
+    password: json['password'] as String?,
+    description: json['description'] as String?,
+    imgs: json['imgs'] as String?,
   );
 }
 
@@ -22,8 +24,10 @@ Map<String, dynamic> _$ItemModelToJson(ItemModel instance) => <String, dynamic>{
       'categoryId': instance.categoryId,
       'title': instance.title,
       'account': instance.account,
+      'tagIds': instance.tagIds,
       'password': instance.password,
       'description': instance.description,
+      'imgs': instance.imgs,
     };
 
 CategoryModel _$CategoryModelFromJson(Map<String, dynamic> json) {
@@ -35,7 +39,8 @@ CategoryModel _$CategoryModelFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$CategoryModelToJson(CategoryModel instance) => <String, dynamic>{
+Map<String, dynamic> _$CategoryModelToJson(CategoryModel instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'count': instance.count,
@@ -47,6 +52,7 @@ TagModel _$TagModelFromJson(Map<String, dynamic> json) {
     id: json['id'] as int,
     title: json['title'] as String,
     count: json['count'] as int,
+    sort: json['sort'] as int,
   );
 }
 
@@ -54,4 +60,5 @@ Map<String, dynamic> _$TagModelToJson(TagModel instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'count': instance.count,
+      'sort': instance.sort,
     };

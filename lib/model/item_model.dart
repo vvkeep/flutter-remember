@@ -8,16 +8,20 @@ class ItemModel {
   int categoryId;
   String title;
   String account;
-  String password;
-  String description;
+  String? tagIds;
+  String? password;
+  String? description;
+  String? imgs;
 
   ItemModel(
       {required this.id,
       required this.categoryId,
       required this.title,
       required this.account,
-      required this.password,
-      required this.description});
+      this.tagIds,
+      this.password,
+      this.description,
+      this.imgs});
 
   factory ItemModel.fromJson(Map<String, dynamic> json) => _$ItemModelFromJson(json);
   Map<String, dynamic> toJson() => _$ItemModelToJson(this);
@@ -41,8 +45,9 @@ class TagModel {
   int id;
   String title;
   int count;
+  int sort;
 
-  TagModel({required this.id, required this.title, required this.count});
+  TagModel({required this.id, required this.title, required this.count, required this.sort});
 
   factory TagModel.fromJson(Map<String, dynamic> json) => _$TagModelFromJson(json);
   Map<String, dynamic> toJson() => _$TagModelToJson(this);

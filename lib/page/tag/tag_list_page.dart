@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:remember/common/constant.dart';
-import 'package:remember/common/data_manager.dart';
+import 'package:remember/manager/data_manager.dart';
+import 'package:remember/router/routers.dart';
 import 'package:remember/widget/other/widget.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:remember/page/tag/widget/tag_list_item_widget.dart';
@@ -16,6 +17,19 @@ class TagListPage extends StatefulWidget {
 
 class _TagListPageState extends State<TagListPage> {
   List<TagModel> tagList = DataManager.shared.tagList;
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    setState(() {
+      this.tagList = DataManager.shared.tagList;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,9 +38,18 @@ class _TagListPageState extends State<TagListPage> {
         title: Text("标签管理"),
         actions: [
           IconButton(
-            onPressed: () {},
+            tooltip: '添加标签',
             icon: Icon(Icons.add),
-          ),
+            onPressed: () {
+              Map<String, Object> args = {
+                "callback": () {
+                  this.loadData();
+                },
+              };
+
+              Get.toNamed(Routes.newTagPage, arguments: args);
+            },
+          )
         ],
       ),
       body: ReorderableListView(
@@ -45,7 +68,18 @@ class _TagListPageState extends State<TagListPage> {
                 ],
               ),
             ),
-            child: TagListItemWidget(tagModel: tag),
+            child: GestureDetector(
+              onTap: () {
+                Map<String, Object> args = {
+                  "callback": () {
+                    this.loadData();
+                  },
+                  "tag": tag
+                };
+                Get.toNamed(Routes.newTagPage, arguments: args);
+              },
+              child: TagListItemWidget(tagModel: tag),
+            ),
             confirmDismiss: (direction) {
               return deleteTag(tag);
             },
@@ -57,9 +91,7 @@ class _TagListPageState extends State<TagListPage> {
         }).toList(),
         onReorder: (oldIndex, newIndex) {
           DataManager.shared.swapTagSort(oldIndex, newIndex);
-          setState(() {
-            this.tagList = DataManager.shared.tagList;
-          });
+          this.loadData();
         },
       ),
     );

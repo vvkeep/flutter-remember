@@ -7,30 +7,30 @@ import 'package:remember/manager/database_helper.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:sqflite/sqflite.dart';
 
-class NewCategoryPage extends StatefulWidget {
-  NewCategoryPage({Key? key}) : super(key: key);
+class NewTagPage extends StatefulWidget {
+  NewTagPage({Key? key}) : super(key: key);
 
   @override
-  _NewCategoryPageState createState() => _NewCategoryPageState();
+  _NewTagPageState createState() => _NewTagPageState();
 }
 
-class _NewCategoryPageState extends State<NewCategoryPage> {
+class _NewTagPageState extends State<NewTagPage> {
   final FocusNode focusNode = FocusNode();
   final nameController = TextEditingController();
   VoidCallback? categoryChangedCallback;
-  CategoryModel? categoryModel;
+  TagModel? tagModel;
 
   @override
   Widget build(BuildContext context) {
     Map<String, Object> args = Get.arguments as Map<String, Object>;
     categoryChangedCallback = args["callback"] as VoidCallback?;
-    categoryModel = args["category"] as CategoryModel?;
-    nameController.text = categoryModel?.title ?? "";
+    tagModel = args["tag"] as TagModel?;
+    nameController.text = tagModel?.title ?? "";
 
     return Scaffold(
       backgroundColor: RMColors.white,
       appBar: AppBar(
-        title: Text('添加分类'),
+        title: Text('添加标签'),
       ),
       body: GestureDetector(
         onTap: () {
@@ -80,25 +80,25 @@ class _NewCategoryPageState extends State<NewCategoryPage> {
                 onPressed: () async {
                   String name = nameController.text;
                   if (name.isEmpty) {
-                    Fluttertoast.showToast(msg: '请输入分类名称', gravity: ToastGravity.TOP);
+                    Fluttertoast.showToast(msg: '请输入标签名称', gravity: ToastGravity.TOP);
                     return;
                   }
 
                   focusNode.unfocus();
                   try {
-                    if (this.categoryModel != null) {
-                      categoryModel!.title = name;
-                      await DataManager.shared.updateCategory(categoryModel!);
+                    if (this.tagModel != null) {
+                      tagModel!.title = name;
+                      await DataManager.shared.updateTag(tagModel!);
                       Fluttertoast.showToast(msg: '编辑成功', gravity: ToastGravity.TOP);
                     } else {
-                      await DataManager.shared.addCategory(name);
+                      await DataManager.shared.addTag(name);
                       Fluttertoast.showToast(msg: '添加成功', gravity: ToastGravity.TOP);
                     }
                     categoryChangedCallback!();
                     Get.back();
                   } on DatabaseException catch (e) {
-                    if (e.isUniqueConstraintError('category.title')) {
-                      Fluttertoast.showToast(msg: '此分类已存在，请修改分类名称', gravity: ToastGravity.TOP);
+                    if (e.isUniqueConstraintError('tag.title')) {
+                      Fluttertoast.showToast(msg: '此标签已存在，请修改分类名称', gravity: ToastGravity.TOP);
                     } else {
                       Fluttertoast.showToast(msg: '数据库操作失败，请重试', gravity: ToastGravity.TOP);
                     }

@@ -124,7 +124,7 @@ class _AppFeaturePageState extends State<AppFeaturePage> {
               padding: EdgeInsets.all(25.0),
               child: TextButton(
                 child: Text(
-                  this.page == this.dataList.length - 1 ? "进入应用" : "下一步",
+                  this.page == this.dataList.length - 1 ? "立即体验" : "下一步",
                   style: TextStyle(color: Colors.white),
                 ),
                 style: ButtonStyle(

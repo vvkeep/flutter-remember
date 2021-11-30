@@ -83,7 +83,7 @@ class HomeItemWidget extends StatelessWidget {
                     Clipboard.setData(new ClipboardData(text: itemModel.account));
                     Fluttertoast.showToast(msg: '账号复制成功', gravity: ToastGravity.TOP);
                   }),
-                  itemView('密码:', itemModel.password, () {
+                  itemView('密码:', itemModel.password ?? "", () {
                     Clipboard.setData(new ClipboardData(text: itemModel.password));
                     Fluttertoast.showToast(msg: '密码复制成功', gravity: ToastGravity.TOP);
                   }),

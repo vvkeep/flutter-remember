@@ -9,8 +9,10 @@ class SQL {
     "categoryId" INTEGER NOT NULL,
     "title" TEXT NOT NULL,
     "account" TEXT NOT NULL,
+    "tagIds" TEXT,
     "password" TEXT,
     "description" TEXT,
+    "imgs" TEXT,
     CONSTRAINT "id" PRIMARY KEY ("id")
     CONSTRAINT "index_title" UNIQUE ("title") ON CONFLICT ABORT
     );
@@ -32,6 +34,7 @@ class SQL {
     "id" INTEGER NOT NULL,
     "title" TEXT NOT NULL,
     "count" INTEGER NOT NULL,
+    "sort" INTEGER NOT NULL,
     CONSTRAINT "id" PRIMARY KEY ("id")
     CONSTRAINT "index_title" UNIQUE ("title") ON CONFLICT ABORT
     );

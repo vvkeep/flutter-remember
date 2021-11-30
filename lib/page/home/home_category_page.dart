@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:remember/common/constant.dart';
-import 'package:remember/common/data_manager.dart';
+import 'package:remember/manager/data_manager.dart';
 import 'package:remember/common/event_bus.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:remember/page/home/widget/home_category_item_widget.dart';

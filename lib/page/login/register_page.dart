@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/instance_manager.dart';
 import 'package:remember/common/constant.dart';
 import 'package:get/get.dart';
-import 'package:remember/common/login_manager.dart';
+import 'package:remember/manager/login_manager.dart';
 import 'package:remember/model/user_info.dart';
 import 'package:remember/page/login/widget/input_password_field.dart';
 import 'package:remember/router/routers.dart';

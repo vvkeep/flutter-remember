@@ -14,14 +14,14 @@ class Mock {
   ];
 
   static final tags = [
-    TagModel(id: 0, title: "游戏", count: 10),
-    TagModel(id: 1, title: "生活", count: 8),
-    TagModel(id: 2, title: "工作", count: 8),
-    TagModel(id: 3, title: "购物", count: 0),
-    TagModel(id: 5, title: "云盘", count: 14),
-    TagModel(id: 6, title: "电商", count: 0),
-    TagModel(id: 7, title: "聊天", count: 22),
-    TagModel(id: 8, title: "其他", count: 0),
+    TagModel(id: 0, title: "游戏", count: 10, sort: 0),
+    TagModel(id: 1, title: "生活", count: 8, sort: 0),
+    TagModel(id: 2, title: "工作", count: 8, sort: 0),
+    TagModel(id: 3, title: "购物", count: 0, sort: 0),
+    TagModel(id: 5, title: "云盘", count: 14, sort: 0),
+    TagModel(id: 6, title: "电商", count: 0, sort: 0),
+    TagModel(id: 7, title: "聊天", count: 22, sort: 0),
+    TagModel(id: 8, title: "其他", count: 0, sort: 0),
   ];
 
   static final items = [

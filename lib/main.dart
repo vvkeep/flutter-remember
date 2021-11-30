@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:remember/common/data_manager.dart';
-import 'package:remember/common/login_manager.dart';
+import 'package:remember/manager/data_manager.dart';
+import 'package:remember/manager/login_manager.dart';
 import 'package:remember/common/constant.dart';
-import 'package:remember/common/database_helper.dart';
+import 'package:remember/manager/database_helper.dart';
 import 'package:remember/router/routers.dart';
 
 void main() async {
@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      // initialRoute: LoginManager.isRegisted() ? Routes.loginPage : Routes.appFeaturePage,
-      initialRoute: Routes.categoryListPage,
+      initialRoute: LoginManager.isRegisted() ? Routes.loginPage : Routes.appFeaturePage,
+      // initialRoute: Routes.categoryListPage,
       theme: ThemeData(primaryColor: RMColors.primaryColor),
       defaultTransition: Transition.cupertino,
       getPages: AppPages.pages,

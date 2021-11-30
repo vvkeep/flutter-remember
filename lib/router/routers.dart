@@ -8,8 +8,8 @@ import 'package:remember/page/home/home_item_list_page.dart';
 import 'package:remember/page/home/home_item_search_page.dart';
 import 'package:remember/page/login/login_page.dart';
 import 'package:remember/page/login/register_page.dart';
+import 'package:remember/page/tag/new_tag_page.dart';
 import 'package:remember/page/tag/tag_list_page.dart';
-import 'package:sqflite/sqlite_api.dart';
 
 abstract class Routes {
   static String homePage = "/";
@@ -20,8 +20,9 @@ abstract class Routes {
   static String loginPage = "/login_page";
   static String registerPage = "/register_page";
   static String categoryListPage = "/category_list_page";
-  static String newCategoryListPage = "/new_category_page";
+  static String newCategoryPage = "/new_category_page";
   static String tagListPage = "/tag_list_page";
+  static String newTagPage = "/new_tag_page";
 }
 
 abstract class AppPages {
@@ -62,12 +63,16 @@ abstract class AppPages {
       page: () => CategoryListPage(),
     ),
     GetPage(
-      name: Routes.newCategoryListPage,
+      name: Routes.newCategoryPage,
       page: () => NewCategoryPage(),
     ),
     GetPage(
       name: Routes.tagListPage,
       page: () => TagListPage(),
-    )
+    ),
+    GetPage(
+      name: Routes.newTagPage,
+      page: () => NewTagPage(),
+    ),
   ];
 }
