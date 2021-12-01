@@ -3,7 +3,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:remember/common/constant.dart';
 import 'package:remember/manager/data_manager.dart';
-import 'package:remember/manager/database_helper.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -33,6 +32,7 @@ class _NewCategoryPageState extends State<NewCategoryPage> {
         title: Text('添加分类'),
       ),
       body: GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTap: () {
           focusNode.unfocus();
         },

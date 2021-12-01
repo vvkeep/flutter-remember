@@ -3,7 +3,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:remember/common/constant.dart';
 import 'package:remember/manager/data_manager.dart';
-import 'package:remember/manager/database_helper.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -28,11 +27,12 @@ class _NewTagPageState extends State<NewTagPage> {
     nameController.text = tagModel?.title ?? "";
 
     return Scaffold(
-      backgroundColor: RMColors.white,
+      // backgroundColor: RMColors.white,
       appBar: AppBar(
         title: Text('添加标签'),
       ),
       body: GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTap: () {
           focusNode.unfocus();
         },

@@ -47,6 +47,16 @@ extension DatabaseHelperCategoryExtension on DatabaseHelper {
   Future<int> deleteCategory(int categoryId) async {
     return _db.delete(SQL.tableCategory, where: "id = ?", whereArgs: [categoryId]);
   }
+
+  Future<int> decremenCategoryItemCount(int categoryId) async {
+    int count = await _db.rawUpdate("UPDATE tag SET count = count-1 WHERE id = $categoryId");
+    return count;
+  }
+
+  Future<int> incremenCategoryItemCount(int categoryId) async {
+    int count = await _db.rawUpdate("UPDATE tag SET count = count+1 WHERE id = $categoryId");
+    return count;
+  }
 }
 
 extension DatabaseHelperTagExtension on DatabaseHelper {
@@ -69,6 +79,16 @@ extension DatabaseHelperTagExtension on DatabaseHelper {
   Future<int> deleteTag(int tagId) async {
     return _db.delete(SQL.tableTag, where: "id = ?", whereArgs: [tagId]);
   }
+
+  Future<int> decremenTagItemCount(String tagIds) async {
+    int count = await _db.rawUpdate("UPDATE tag SET count = count-1 WHERE id in ($tagIds)");
+    return count;
+  }
+
+  Future<int> incremenTagItemCount(String tagIds) async {
+    int count = await _db.rawUpdate("UPDATE tag SET count = count+1 WHERE id in ($tagIds)");
+    return count;
+  }
 }
 
 extension DatabaseHelperItemExtension on DatabaseHelper {
@@ -76,6 +96,12 @@ extension DatabaseHelperItemExtension on DatabaseHelper {
     List<Map<String, Object?>> maps = await _db.query(SQL.tableItem);
     List<ItemModel> list = maps.isNotEmpty ? maps.map((v) => ItemModel.fromJson(v)).toList() : [];
     return list;
+  }
+
+  Future<ItemModel> selectItem(int itemId) async {
+    List<Map<String, Object?>> maps = await _db.query(SQL.tableItem, where: "id = ?", whereArgs: [itemId]);
+    List<ItemModel> list = maps.isNotEmpty ? maps.map((v) => ItemModel.fromJson(v)).toList() : [];
+    return list.first;
   }
 
   Future<int> insertItem(ItemModel itemModel) async {

@@ -1,8 +1,8 @@
-import 'dart:math';
-
+import 'package:flustars/flustars.dart';
 import 'package:remember/manager/database_helper.dart';
 import 'package:remember/mock/mock.dart';
 import 'package:remember/model/item_model.dart';
+import 'package:remember/utils/storage_utils.dart';
 
 class DataManager {
   List<CategoryModel> categoryList = [];
@@ -18,13 +18,13 @@ class DataManager {
   }
 
   init() async {
-    Mock.categroyItems.forEach((element) async {
-      await addCategory(element.title);
-    });
+    // Mock.categroyItems.forEach((element) async {
+    //   await addCategory(element.title);
+    // });
 
-    Mock.tags.forEach((element) async {
-      await addTag(element.title);
-    });
+    // Mock.tags.forEach((element) async {
+    //   await addTag(element.title);
+    // });
 
     this.categoryList = await DatabaseHelper.shared.categoryList();
     this.tagList = await DatabaseHelper.shared.tagList();
@@ -87,5 +87,66 @@ extension DataManagerTagExtension on DataManager {
       tagList[i].sort = i;
       await DatabaseHelper.shared.updateTag(tagList[i]);
     }
+  }
+}
+
+extension DataManagerItemExtension on DataManager {
+  addItem(ItemModel itemModel) async {
+    // 标签加1
+    if (ObjectUtil.isNotEmpty(itemModel.tagIds)) {
+      await DatabaseHelper.shared.incremenTagItemCount(itemModel.tagIds!);
+    }
+
+    // 分类加1
+    await DatabaseHelper.shared.incremenCategoryItemCount(itemModel.categoryId);
+    await DatabaseHelper.shared.insertItem(itemModel);
+    await init();
+  }
+
+  updateItem(ItemModel newItem) async {
+    ItemModel currentItem = await DatabaseHelper.shared.selectItem(newItem.id);
+
+    // 判断 图片地址是否相同，如果不同就删除旧的缓存图片
+    if (ObjectUtil.isNotEmpty(currentItem.imgs) && (currentItem.imgs != newItem.imgs)) {
+      List<String> imgNames = currentItem.imgs!.split(",");
+      await StorageUtils.delteItemImgs(imgNames);
+    }
+
+    // 判断 标签是否相同，如果不同 就统一把旧的标签数量减1, 然后把新的标签加1
+    if (ObjectUtil.isNotEmpty(currentItem.tagIds) && (currentItem.tagIds != newItem.tagIds)) {
+      await DatabaseHelper.shared.decremenTagItemCount(currentItem.tagIds!);
+      if (ObjectUtil.isNotEmpty(newItem.tagIds)) {
+        await DatabaseHelper.shared.incremenTagItemCount(newItem.tagIds!);
+      }
+    }
+
+    // 判断 分类是否相同，如果不同 就把旧的分类数量减1，然后把新的分类加1
+    if (currentItem.categoryId != newItem.categoryId) {
+      await DatabaseHelper.shared.decremenCategoryItemCount(currentItem.categoryId);
+      await DatabaseHelper.shared.incremenCategoryItemCount(newItem.categoryId);
+    }
+
+    await DatabaseHelper.shared.updateItem(newItem);
+    await init();
+  }
+
+  removeItem(int itemId) async {
+    ItemModel item = await DatabaseHelper.shared.selectItem(itemId);
+    // 标签减1
+    if (ObjectUtil.isNotEmpty(item.tagIds)) {
+      await DatabaseHelper.shared.decremenTagItemCount(item.tagIds!);
+    }
+
+    //分类减1
+    await DatabaseHelper.shared.decremenCategoryItemCount(item.categoryId);
+
+    //删除图片
+    if (ObjectUtil.isNotEmpty(item.imgs)) {
+      List<String> imgNames = item.imgs!.split(",");
+      await StorageUtils.delteItemImgs(imgNames);
+    }
+
+    await DatabaseHelper.shared.deleteItem(itemId);
+    await init();
   }
 }

@@ -141,6 +141,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.15.0"
+  common_utils:
+    dependency: transitive
+    description:
+      name: common_utils
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.2"
   convert:
     dependency: transitive
     description:
@@ -176,6 +183,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.3"
+  decimal:
+    dependency: transitive
+    description:
+      name: decimal
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.5.0"
   device_info:
     dependency: "direct main"
     description:
@@ -225,6 +239,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.0"
+  flustars:
+    dependency: "direct main"
+    description:
+      name: flustars
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -541,6 +562,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.0"
+  rational:
+    dependency: transitive
+    description:
+      name: rational
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.2.1"
   shared_preferences:
     dependency: transitive
     description:
