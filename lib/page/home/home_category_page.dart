@@ -27,6 +27,20 @@ class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
     });
   }
 
+  _buildLeftSideItem(String title, VoidCallback onTap) {
+    return ListTile(
+      title: Container(
+        alignment: Alignment.centerLeft,
+        height: 60,
+        child: Text(title, style: RMTextStyle.normalTextDarkW500),
+      ),
+      onTap: () {
+        Navigator.of(context).pop();
+        onTap();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,42 +87,23 @@ class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
                   ],
                 ),
               ),
-              ListTile(
-                title: Text("主页面", style: RMTextStyle.normalTextDarkW500),
-                onTap: () {},
-              ),
-              Divider(),
-              ListTile(
-                title: Text("分类管理", style: RMTextStyle.normalTextDarkW500),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Get.toNamed(Routes.categoryListPage);
-                },
-              ),
-              Divider(),
-              ListTile(
-                title: Text("标签管理", style: RMTextStyle.normalTextDarkW500),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Get.toNamed(Routes.tagListPage);
-                },
-              ),
-              Divider(),
-              ListTile(
-                title: Text("安全设置", style: RMTextStyle.normalTextDarkW500),
-                onTap: () {},
-              ),
-              Divider(),
-              ListTile(
-                title: Text("回收站", style: RMTextStyle.normalTextDarkW500),
-                onTap: () {},
-              ),
-              Divider(),
-              ListTile(
-                title: Text("建议与反馈", style: RMTextStyle.normalTextDarkW500),
-                onTap: () {},
-              ),
-              Divider(),
+              Divider(height: 0),
+              _buildLeftSideItem("分类管理", () {
+                Get.toNamed(Routes.categoryListPage);
+              }),
+              Divider(height: 0),
+              _buildLeftSideItem("标签管理", () {
+                Get.toNamed(Routes.tagListPage);
+              }),
+              Divider(height: 0),
+              _buildLeftSideItem("安全设置", () {
+                Get.toNamed(Routes.tagListPage);
+              }),
+              Divider(height: 0),
+              _buildLeftSideItem("建议与反馈", () {
+                Get.toNamed(Routes.tagListPage);
+              }),
+              Divider(height: 0),
             ],
           ),
         ),

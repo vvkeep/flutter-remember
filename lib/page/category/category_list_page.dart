@@ -87,14 +87,14 @@ class _CategoryListPageState extends State<CategoryListPage> {
               return deleteCategory(category);
             },
             onDismissed: (direction) async {
-              DataManager.shared.removeCategory(category.id);
+              await DataManager.shared.removeCategory(category.id);
               eventBus.fire(CategoryListEvent());
               Get.showSnackbar(successBar('删除成功'));
             },
           );
         }).toList(),
-        onReorder: (oldIndex, newIndex) {
-          DataManager.shared.swapCategorySort(oldIndex, newIndex);
+        onReorder: (oldIndex, newIndex) async {
+          await DataManager.shared.swapCategorySort(oldIndex, newIndex);
           eventBus.fire(CategoryListEvent());
           this.loadData();
         },

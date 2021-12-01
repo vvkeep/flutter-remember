@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       initialRoute: LoginManager.isRegisted() ? Routes.loginPage : Routes.appFeaturePage,
       // initialRoute: Routes.categoryListPage,
       theme: ThemeData(primaryColor: RMColors.primaryColor),
-      defaultTransition: Transition.cupertino,
+      defaultTransition: Transition.native,
       getPages: AppPages.pages,
     );
   }

@@ -83,14 +83,14 @@ class _TagListPageState extends State<TagListPage> {
             confirmDismiss: (direction) {
               return deleteTag(tag);
             },
-            onDismissed: (direction) {
-              DataManager.shared.removeTag(tag.id);
+            onDismissed: (direction) async {
+              await DataManager.shared.removeTag(tag.id);
               Get.showSnackbar(successBar('删除成功'));
             },
           );
         }).toList(),
-        onReorder: (oldIndex, newIndex) {
-          DataManager.shared.swapTagSort(oldIndex, newIndex);
+        onReorder: (oldIndex, newIndex) async {
+          await DataManager.shared.swapTagSort(oldIndex, newIndex);
           this.loadData();
         },
       ),

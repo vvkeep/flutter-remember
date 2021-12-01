@@ -11,8 +11,15 @@ class SQL {
     "account" TEXT NOT NULL,
     "tagIds" TEXT,
     "password" TEXT,
+    "payPassword" TEXT,
     "description" TEXT,
     "imgs" TEXT,
+    "extend1Key" TEXT,
+    "extend1Value" TEXT,
+    "extend2Key" TEXT,
+    "extend2Value" TEXT,
+    "extend3Key" TEXT,
+    "extend3Value" TEXT,
     CONSTRAINT "id" PRIMARY KEY ("id")
     CONSTRAINT "index_title" UNIQUE ("title") ON CONFLICT ABORT
     );

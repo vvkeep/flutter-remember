@@ -12,6 +12,13 @@ class ItemModel {
   String? password;
   String? description;
   String? imgs;
+  String? payPassword;
+  String? extend1Key;
+  String? extend1Value;
+  String? extend2Key;
+  String? extend2Value;
+  String? extend3Key;
+  String? extend3Value;
 
   ItemModel(
       {required this.id,
@@ -21,7 +28,14 @@ class ItemModel {
       this.tagIds,
       this.password,
       this.description,
-      this.imgs});
+      this.imgs,
+      this.payPassword,
+      this.extend1Key,
+      this.extend1Value,
+      this.extend2Key,
+      this.extend2Value,
+      this.extend3Key,
+      this.extend3Value});
 
   factory ItemModel.fromJson(Map<String, dynamic> json) => _$ItemModelFromJson(json);
   Map<String, dynamic> toJson() => _$ItemModelToJson(this);

@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:remember/manager/database_helper.dart';
+import 'package:remember/mock/mock.dart';
 import 'package:remember/model/item_model.dart';
 
 class DataManager {
@@ -15,6 +18,14 @@ class DataManager {
   }
 
   init() async {
+    Mock.categroyItems.forEach((element) async {
+      await addCategory(element.title);
+    });
+
+    Mock.tags.forEach((element) async {
+      await addTag(element.title);
+    });
+
     this.categoryList = await DatabaseHelper.shared.categoryList();
     this.tagList = await DatabaseHelper.shared.tagList();
     this.itemList = await DatabaseHelper.shared.itemList();

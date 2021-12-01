@@ -4,19 +4,25 @@ import 'package:path_provider/path_provider.dart';
 import 'package:get/get.dart';
 
 class StorageUtils {
-  Future<String> get _localPath async {
+  Future<String> get _localItemImgsPath async {
     final _path = await getTemporaryDirectory();
-    return _path.path;
+    return _path.path + "/item_imgs";
   }
 
-  Future<File> localFile(String name) async {
-    final path = await _localPath;
-    return File('$path/cname');
+  Future<File> _localItemImgFile(String name) async {
+    final path = await _localItemImgsPath;
+    return File("$path/name");
   }
 
-  Future<bool> saveFile(String name, Object val) async {
+  Future<bool> isItemImgExists(String name) async {
+    final file = await _localItemImgFile(name);
+    var exist = await file.exists();
+    return exist;
+  }
+
+  Future<bool> saveItemImg(String name, Object val) async {
     try {
-      final file = await localFile(name);
+      final file = await _localItemImgFile(name);
       IOSink sink = file.openWrite();
       sink.write(val);
       sink.close();
@@ -26,5 +32,11 @@ class StorageUtils {
       printError(info: "文件写入错误: $e");
       return false;
     }
+  }
+
+  Future<bool> deleteItemImg(String name) async {
+    final file = await _localItemImgFile(name);
+    await file.delete(recursive: false);
+    return true;
   }
 }
