@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:remember/common/constant.dart';
+import 'package:remember/manager/data_manager.dart';
 import 'package:remember/mock/mock.dart';
 import 'package:remember/model/img_model.dart';
+import 'package:remember/model/item_model.dart';
 import 'package:remember/page/home/widget/home_item_detail_choose_image_widget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:remember/widget/image_preview/photo_view_gallery_screen.dart';
@@ -25,11 +27,40 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
   final FocusNode remarkNode = FocusNode();
   final _picker = ImagePicker();
 
-  List<RMPickImageItem> pickedList = [RMPickImageItem(path: 'assets/imgs/add_img.png', type: PickImageMediaType.add)];
+  List<RMPickImageItem> _pickedList = [RMPickImageItem(path: 'assets/imgs/add_img.png', type: PickImageMediaType.add)];
+  List<CategoryModel> _categoryList = DataManager.shared.categoryList;
+  List<TagModel> _tagList = DataManager.shared.tagList;
+  late ItemModel itemModel;
+
+  String get _chooseCategoryValueText {
+    return this.itemModel.categoryId == -1
+        ? '请选择账号分类'
+        : this._categoryList.firstWhere((e) => e.id == this.itemModel.categoryId).title;
+  }
+
+  TextStyle get _chooseCategoryValueTextStyle {
+    return this.itemModel.categoryId == -1 ? RMTextStyle.normalTextLight : RMTextStyle.normalTextDark;
+  }
+
+  TextStyle _chooseCategoryListTextStyle(int id) {
+    return this.itemModel.categoryId == id ? RMTextStyle.normalTextDark : RMTextStyle.normalTextLight;
+  }
 
   @override
   void initState() {
     super.initState();
+    _initUI();
+  }
+
+  _initUI() {
+    ItemModel? item = Get.arguments as ItemModel?;
+    setState(() {
+      if (item == null) {
+        this.itemModel = ItemModel(id: -1, categoryId: -1, account: '', title: '');
+      } else {
+        this.itemModel = ItemModel.fromJson(item.toJson());
+      }
+    });
   }
 
   _choosePhoto(ImageSource source) async {
@@ -39,9 +70,9 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
     }
 
     RMPickImageItem item = RMPickImageItem(type: PickImageMediaType.source, file: File(file.path));
-    var index = pickedList.length - 1 > 0 ? pickedList.length - 1 : 0;
+    var index = _pickedList.length - 1 > 0 ? _pickedList.length - 1 : 0;
     setState(() {
-      pickedList.insert(index, item);
+      _pickedList.insert(index, item);
     });
   }
 
@@ -135,15 +166,32 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                       Text('账号分类', style: RMTextStyle.normalTextDark),
                       Spacer(),
                       PopupMenuButton(
+                        onSelected: (int? categoryId) {
+                          setState(() {
+                            this.itemModel.categoryId = categoryId!;
+                          });
+                        },
                         itemBuilder: (BuildContext context) {
-                          return Mock.categroyItems
-                              .map((category) => PopupMenuItem(child: Text(category.title)))
+                          return this
+                              ._categoryList
+                              .map(
+                                (category) => PopupMenuItem(
+                                  value: category.id,
+                                  child: Text(
+                                    category.title,
+                                    style: _chooseCategoryListTextStyle(category.id),
+                                  ),
+                                ),
+                              )
                               .toList();
                         },
                         child: Row(
                           children: [
-                            Text('请选择账号分类', style: RMTextStyle.normalTextLight),
-                            Icon(RMIcons.arrow, size: 15, color: RMColors.lightTextColor),
+                            Text(_chooseCategoryValueText, style: _chooseCategoryValueTextStyle),
+                            Icon(RMIcons.arrow,
+                                size: 15,
+                                color:
+                                    this.itemModel.categoryId == -1 ? RMColors.lightTextColor : RMColors.darkTextColor),
                             SizedBox(width: 10),
                           ],
                         ),
@@ -182,7 +230,7 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                 SizedBox(height: 10),
                 _buildSectionTitleView("附件图片"),
                 HomeItemDetailChooseImageWidget(
-                  itemList: this.pickedList,
+                  itemList: this._pickedList,
                   callback: (item, index) {
                     if (item.type == PickImageMediaType.add) {
                       Get.bottomSheet(Container(
@@ -218,7 +266,7 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                         ),
                       ));
                     } else {
-                      var files = pickedList
+                      var files = _pickedList
                           .map((item) {
                             if (item.type != PickImageMediaType.add) {
                               return item.file;
@@ -267,7 +315,7 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                     crossAxisSpacing: 12,
                     mainAxisSpacing: 12,
                     childAspectRatio: 1.8,
-                    children: Mock.tags.map((tag) {
+                    children: this._tagList.map((tag) {
                       return Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
