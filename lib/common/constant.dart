@@ -46,6 +46,12 @@ class RMTextStyle {
     fontWeight: FontWeight.normal,
   );
 
+  static const normalTextWhite = TextStyle(
+    color: RMColors.white,
+    fontSize: normalTextSize,
+    fontWeight: FontWeight.normal,
+  );
+
   static const normalTextDarkW500 = TextStyle(
     color: RMColors.darkTextColor,
     fontSize: normalTextSize,

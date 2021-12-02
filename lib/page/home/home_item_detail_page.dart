@@ -1,16 +1,23 @@
+import 'dart:html';
 import 'dart:io';
+import 'dart:math';
 
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:remember/common/constant.dart';
+import 'package:remember/common/event_bus.dart';
 import 'package:remember/manager/data_manager.dart';
-import 'package:remember/mock/mock.dart';
 import 'package:remember/model/img_model.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:remember/page/home/widget/home_item_detail_choose_image_widget.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:remember/page/home/widget/home_item_detail_tag_widget.dart';
+import 'package:remember/utils/storage_utils.dart';
 import 'package:remember/widget/image_preview/photo_view_gallery_screen.dart';
 import 'package:remember/widget/other/widget.dart';
+import 'package:sqflite/sqflite.dart';
 
 class HomeItemDetailPage extends StatefulWidget {
   HomeItemDetailPage({Key? key}) : super(key: key);
@@ -20,11 +27,18 @@ class HomeItemDetailPage extends StatefulWidget {
 }
 
 class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
-  final FocusNode accountNode = FocusNode();
-  final FocusNode userNameNode = FocusNode();
-  final FocusNode passwordNode = FocusNode();
-  final FocusNode payNode = FocusNode();
-  final FocusNode remarkNode = FocusNode();
+  final FocusNode _accountNode = FocusNode();
+  final FocusNode _userNameNode = FocusNode();
+  final FocusNode _passwordNode = FocusNode();
+  final FocusNode _payNode = FocusNode();
+  final FocusNode _remarkNode = FocusNode();
+
+  final TextEditingController _titleTextController = TextEditingController();
+  final TextEditingController _userNameTextController = TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();
+  final TextEditingController _payTextController = TextEditingController();
+  final TextEditingController _remarkTextController = TextEditingController();
+
   final _picker = ImagePicker();
 
   List<RMPickImageItem> _pickedList = [RMPickImageItem(path: 'assets/imgs/add_img.png', type: PickImageMediaType.add)];
@@ -46,20 +60,52 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
     return this.itemModel.categoryId == id ? RMTextStyle.normalTextDark : RMTextStyle.normalTextLight;
   }
 
+  List<String> get _currentItemTagIds {
+    if (ObjectUtil.isNotEmpty(this.itemModel.tagIds)) {
+      return this.itemModel.tagIds!.split(",");
+    } else {
+      return [];
+    }
+  }
+
+  bool get _isHaveNewImg {
+    for (var item in _pickedList) {
+      if (item.path == null) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   @override
   void initState() {
     super.initState();
     _initUI();
   }
 
-  _initUI() {
+  _initUI() async {
     ItemModel? item = Get.arguments as ItemModel?;
+    List<RMPickImageItem> tempPickedList = [];
+
+    if (item != null && ObjectUtil.isNotEmpty(item.imgs)) {
+      List<String> imgNames = item.imgs!.split(",");
+
+      for (var imgName in imgNames) {
+        File file = await StorageUtils.localItemImgFile(imgName);
+        RMPickImageItem pickItem = RMPickImageItem(type: PickImageMediaType.source, file: file, path: imgName);
+        tempPickedList.add(pickItem);
+      }
+    }
+
     setState(() {
       if (item == null) {
         this.itemModel = ItemModel(id: -1, categoryId: -1, account: '', title: '');
       } else {
         this.itemModel = ItemModel.fromJson(item.toJson());
       }
+
+      this._pickedList = tempPickedList;
     });
   }
 
@@ -76,7 +122,59 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
     });
   }
 
-  Widget _buildInputField(String hitText, FocusNode focusNode) {
+  _save() async {
+    if (ObjectUtil.isEmpty(_titleTextController.text)) {
+      Fluttertoast.showToast(msg: '标题不能为空', gravity: ToastGravity.TOP);
+      return;
+    }
+
+    if (ObjectUtil.isEmpty(_userNameTextController.text)) {
+      Fluttertoast.showToast(msg: '用户名不能为空', gravity: ToastGravity.TOP);
+      return;
+    }
+
+    itemModel.title = _titleTextController.text;
+    itemModel.account = _userNameTextController.text;
+    itemModel.password = _passwordTextController.text;
+    itemModel.payPassword = _payTextController.text;
+    itemModel.description = _remarkTextController.text;
+
+    List<String> tempImgPaths = [];
+    if (_isHaveNewImg) {
+      for (var item in _pickedList) {
+        if (item.type == PickImageMediaType.source) {
+          final bytes = await item.file!.readAsBytes();
+          String? path = await StorageUtils.saveItemImg(bytes);
+          if (path != null) {
+            tempImgPaths.add(path);
+          }
+        }
+      }
+
+      itemModel.imgs = tempImgPaths.join(",");
+    }
+
+    try {
+      if (itemModel.id == -1) {
+        await DataManager.shared.addItem(itemModel);
+      } else {
+        await DataManager.shared.updateItem(itemModel);
+      }
+
+      Fluttertoast.showToast(msg: '保存成功', gravity: ToastGravity.TOP);
+      eventBus.fire(ItemEvent());
+    } on DatabaseException catch (e) {
+      if (e.isUniqueConstraintError('item.title')) {
+        Fluttertoast.showToast(msg: '此账号已存在，请修改分类名称', gravity: ToastGravity.TOP);
+      } else {
+        Fluttertoast.showToast(msg: '数据库操作失败，请重试', gravity: ToastGravity.TOP);
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: '操作失败，请重试', gravity: ToastGravity.TOP);
+    }
+  }
+
+  Widget _buildInputField(String hitText, FocusNode focusNode, TextEditingController? controller) {
     return Container(
       height: 50,
       margin: EdgeInsets.symmetric(horizontal: 15),
@@ -89,6 +187,7 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
         ),
       ),
       child: TextField(
+        controller: controller,
         focusNode: focusNode,
         decoration: InputDecoration(
           hintText: hitText,
@@ -128,17 +227,19 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
         actions: [
           IconButton(
             icon: Icon(RMIcons.save),
-            onPressed: () {},
+            onPressed: () {
+              this._save();
+            },
           )
         ],
       ),
       body: GestureDetector(
         onTap: () {
-          accountNode.unfocus();
-          userNameNode.unfocus();
-          passwordNode.unfocus();
-          payNode.unfocus();
-          remarkNode.unfocus();
+          _accountNode.unfocus();
+          _userNameNode.unfocus();
+          _passwordNode.unfocus();
+          _payNode.unfocus();
+          _remarkNode.unfocus();
         },
         child: SingleChildScrollView(
           child: Padding(
@@ -220,10 +321,10 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                   ),
                   child: Column(
                     children: [
-                      _buildInputField("请输入账号标题", accountNode),
-                      _buildInputField("请输入用户名", userNameNode),
-                      _buildInputField("请输入密码", passwordNode),
-                      _buildInputField("请输入支付密码", payNode),
+                      _buildInputField("请输入账号标题", _accountNode, _titleTextController),
+                      _buildInputField("请输入用户名", _userNameNode, _userNameTextController),
+                      _buildInputField("请输入密码", _passwordNode, _passwordTextController),
+                      _buildInputField("请输入支付密码", _payNode, _payTextController),
                     ],
                   ),
                 ),
@@ -310,23 +411,28 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                   child: GridView.count(
                     padding: EdgeInsets.zero,
                     shrinkWrap: true,
-                    physics: new NeverScrollableScrollPhysics(),
+                    physics: NeverScrollableScrollPhysics(),
                     crossAxisCount: 5,
                     crossAxisSpacing: 12,
                     mainAxisSpacing: 12,
                     childAspectRatio: 1.8,
-                    children: this._tagList.map((tag) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(
-                            color: RMColors.primaryColor.withOpacity(0.5),
-                            width: 1,
-                          ),
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(tag.title, style: RMTextStyle.normalTextLight),
-                      );
+                    children: _tagList.map((tag) {
+                      bool isSelected = this._currentItemTagIds.contains('${tag.id}');
+                      return HomeItemDetailTagWidget(
+                          tag: tag,
+                          isSelected: isSelected,
+                          onTap: () {
+                            List<String> list = this._currentItemTagIds;
+                            if (isSelected) {
+                              list.removeWhere((e) => e == '${tag.id}');
+                            } else {
+                              list.add('${tag.id}');
+                            }
+
+                            setState(() {
+                              this.itemModel.tagIds = list.join(",");
+                            });
+                          });
                     }).toList(),
                   ),
                 ),
@@ -352,7 +458,8 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                     ],
                   ),
                   child: TextField(
-                    focusNode: remarkNode,
+                    controller: _remarkTextController,
+                    focusNode: _remarkNode,
                     decoration: InputDecoration(
                       isCollapsed: true,
                       border: InputBorder.none,
