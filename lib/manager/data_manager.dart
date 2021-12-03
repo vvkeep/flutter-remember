@@ -1,6 +1,6 @@
 import 'package:flustars/flustars.dart';
 import 'package:remember/manager/database_helper.dart';
-import 'package:remember/mock/mock.dart';
+// import 'package:remember/mock/mock.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:remember/utils/storage_utils.dart';
 
@@ -18,13 +18,13 @@ class DataManager {
   }
 
   init() async {
-    Mock.categroyItems.forEach((element) async {
-      await addCategory(element.title);
-    });
+    // Mock.categroyItems.forEach((element) async {
+    //   await addCategory(element.title);
+    // });
 
-    Mock.tags.forEach((element) async {
-      await addTag(element.title);
-    });
+    // Mock.tags.forEach((element) async {
+    //   await addTag(element.title);
+    // });
 
     this.categoryList = await DatabaseHelper.shared.categoryList();
     this.tagList = await DatabaseHelper.shared.tagList();
@@ -94,7 +94,10 @@ extension DataManagerItemExtension on DataManager {
   addItem(ItemModel itemModel) async {
     // 标签加1
     if (ObjectUtil.isNotEmpty(itemModel.tagIds)) {
-      await DatabaseHelper.shared.incremenTagItemCount(itemModel.tagIds!);
+      List<String> tagIdList = itemModel.tagIds!.split(",");
+      tagIdList.forEach((tagId) async {
+        await DatabaseHelper.shared.incremenTagItemCount(tagId);
+      });
     }
 
     // 分类加1

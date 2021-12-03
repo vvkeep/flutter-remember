@@ -1,7 +1,7 @@
 import 'package:event_bus/event_bus.dart';
 import 'package:remember/model/item_model.dart';
 
-EventBus eventBus = new EventBus();
+EventBus eventBus = EventBus();
 
 class CategoryListEvent {}
 
@@ -11,5 +11,4 @@ class CategoryEvent {
   CategoryEvent(this.category);
 }
 
-class ItemEvent {
-}
+class ItemEvent {}

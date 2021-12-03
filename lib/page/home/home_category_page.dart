@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:remember/common/constant.dart';
 import 'package:remember/manager/data_manager.dart';
@@ -16,21 +18,22 @@ class HomeCategoryListPage extends StatefulWidget {
 
 class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
   late List<CategoryModel> categoryList = DataManager.shared.categoryList;
+  late StreamSubscription<CategoryListEvent> subscription;
 
   @override
   void initState() {
     super.initState();
-    eventBus.on<CategoryListEvent>().listen((event) {
+    subscription = eventBus.on<CategoryListEvent>().listen((event) {
       setState(() {
         this.categoryList = DataManager.shared.categoryList;
       });
     });
+  }
 
-    eventBus.on<ItemEvent>().listen((event) {
-      setState(() {
-        this.categoryList = DataManager.shared.categoryList;
-      });
-    });
+  @override
+  dispose() {
+    super.dispose();
+    subscription.cancel();
   }
 
   _buildLeftSideItem(String title, VoidCallback onTap) {

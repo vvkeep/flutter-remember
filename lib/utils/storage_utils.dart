@@ -4,13 +4,25 @@ import 'package:uuid/uuid.dart';
 
 class StorageUtils {
   static Future<String> get _localItemImgsPath async {
-    final _path = await getTemporaryDirectory();
-    return _path.path + "/item_imgs";
+    final _path = await getApplicationDocumentsDirectory();
+    String itemImgsPath = _path.path + "/item_imgs";
+    var file = Directory(itemImgsPath);
+
+    try {
+      bool exist = await file.exists();
+      if (!exist) {
+        await file.create();
+      }
+    } catch (e) {
+      print('create item image path error: ' + e.toString());
+    }
+
+    return itemImgsPath;
   }
 
   static Future<File> localItemImgFile(String name) async {
     final path = await _localItemImgsPath;
-    return File("$path/name");
+    return File("$path/$name");
   }
 
   static Future<bool> isItemImgExists(String name) async {
@@ -43,7 +55,7 @@ class StorageUtils {
   }
 
   static Future<bool> deleteItemImg(String name) async {
-    final file = await _localItemImgFile(name);
+    final file = await localItemImgFile(name);
     await file.delete(recursive: false);
     return true;
   }

@@ -103,7 +103,7 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
         this.itemModel = ItemModel.fromJson(item.toJson());
       }
 
-      this._pickedList = tempPickedList;
+      this._pickedList.addAll(tempPickedList);
     });
   }
 
@@ -161,13 +161,17 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
 
       Fluttertoast.showToast(msg: '保存成功', gravity: ToastGravity.TOP);
       eventBus.fire(ItemEvent());
+      eventBus.fire(CategoryListEvent());
+      Get.back();
     } on DatabaseException catch (e) {
       if (e.isUniqueConstraintError('item.title')) {
         Fluttertoast.showToast(msg: '此账号已存在，请修改分类名称', gravity: ToastGravity.TOP);
       } else {
+        print(e.toString());
         Fluttertoast.showToast(msg: '数据库操作失败，请重试', gravity: ToastGravity.TOP);
       }
     } catch (e) {
+      print(e.toString());
       Fluttertoast.showToast(msg: '操作失败，请重试', gravity: ToastGravity.TOP);
     }
   }

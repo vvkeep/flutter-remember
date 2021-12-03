@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:remember/common/constant.dart';
@@ -17,13 +19,22 @@ class _HomeItemListPageState extends State<HomeItemListPage> {
   List<ItemModel> _itemList = [];
   late CategoryModel category;
 
+  late StreamSubscription<ItemEvent> subscription;
   @override
   void initState() {
     super.initState();
     category = Get.arguments as CategoryModel;
-    eventBus.on<ItemEvent>().listen((event) {
+    _getItemList();
+
+    subscription = eventBus.on<ItemEvent>().listen((event) {
       _getItemList();
     });
+  }
+
+  @override
+  dispose() {
+    super.dispose();
+    subscription.cancel();
   }
 
   _getItemList() {

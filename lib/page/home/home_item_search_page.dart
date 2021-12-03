@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:remember/common/constant.dart';
-import 'package:remember/mock/mock.dart';
+import 'package:remember/manager/data_manager.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:remember/page/home/widget/home_item_widget.dart';
 import 'package:get/get.dart';
@@ -19,16 +19,14 @@ class _HomeItemSearchPagePageState extends State<HomeItemSearchPagePage> {
     super.initState();
 
     setState(() {
-      _itemList = Mock.items;
+      _itemList = DataManager.shared.itemList;
     });
   }
 
   void onSearch(String search) {
     setState(() {
-      _itemList = Mock.items
-          .where((item) =>
-              item.title.toLowerCase().contains(search) ||
-              item.account.toLowerCase().contains(search))
+      _itemList = DataManager.shared.itemList
+          .where((item) => item.title.toLowerCase().contains(search) || item.account.toLowerCase().contains(search))
           .toList();
     });
   }
@@ -49,9 +47,7 @@ class _HomeItemSearchPagePageState extends State<HomeItemSearchPagePage> {
               fillColor: Colors.white,
               contentPadding: EdgeInsets.zero,
               prefixIcon: Icon(Icons.search, color: RMColors.lightTextColor),
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide.none),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide.none),
               hintStyle: RMTextStyle.normalTextLight,
               hintText: '搜索标题或用户名',
             ),

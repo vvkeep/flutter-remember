@@ -18,7 +18,7 @@ class DatabaseHelper {
   _initDatabase() async {
     String path = join(await getDatabasesPath(), "remember.db");
     print('remember database path:$path');
-    await deleteDatabase(path);
+    // await deleteDatabase(path);
     return await openDatabase(path, version: 1, onCreate: (Database db, int version) async {
       await db.execute(SQL.initItemTable);
       await db.execute(SQL.initCategoryTable);
@@ -49,12 +49,12 @@ extension DatabaseHelperCategoryExtension on DatabaseHelper {
   }
 
   Future<int> decremenCategoryItemCount(int categoryId) async {
-    int count = await _db.rawUpdate("UPDATE tag SET count = count-1 WHERE id = $categoryId");
+    int count = await _db.rawUpdate("UPDATE ${SQL.tableCategory} SET count = count-1 WHERE id = $categoryId");
     return count;
   }
 
   Future<int> incremenCategoryItemCount(int categoryId) async {
-    int count = await _db.rawUpdate("UPDATE tag SET count = count+1 WHERE id = $categoryId");
+    int count = await _db.rawUpdate("UPDATE ${SQL.tableCategory} SET count = count+1 WHERE id = $categoryId");
     return count;
   }
 }
@@ -81,12 +81,12 @@ extension DatabaseHelperTagExtension on DatabaseHelper {
   }
 
   Future<int> decremenTagItemCount(String tagIds) async {
-    int count = await _db.rawUpdate("UPDATE tag SET count = count-1 WHERE id in ($tagIds)");
+    int count = await _db.rawUpdate("UPDATE ${SQL.tableTag} SET count = count-1 WHERE id in ($tagIds)");
     return count;
   }
 
   Future<int> incremenTagItemCount(String tagIds) async {
-    int count = await _db.rawUpdate("UPDATE tag SET count = count+1 WHERE id in ($tagIds)");
+    int count = await _db.rawUpdate("UPDATE ${SQL.tableTag} SET count = count+1 WHERE id in ($tagIds)");
     return count;
   }
 }
@@ -106,6 +106,7 @@ extension DatabaseHelperItemExtension on DatabaseHelper {
 
   Future<int> insertItem(ItemModel itemModel) async {
     Map<String, dynamic> map = itemModel.toJson();
+    map.remove("id");
     return _db.insert(SQL.tableItem, map);
   }
 
