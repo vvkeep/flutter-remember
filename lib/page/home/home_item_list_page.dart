@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:remember/common/constant.dart';
-import 'package:remember/mock/mock.dart';
+import 'package:remember/common/event_bus.dart';
+import 'package:remember/manager/data_manager.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:remember/page/home/widget/home_item_widget.dart';
 import 'package:get/get.dart';
@@ -13,10 +14,26 @@ class HomeItemListPage extends StatefulWidget {
 }
 
 class _HomeItemListPageState extends State<HomeItemListPage> {
+  List<ItemModel> _itemList = [];
+  late CategoryModel category;
+
+  @override
+  void initState() {
+    super.initState();
+    category = Get.arguments as CategoryModel;
+    eventBus.on<ItemEvent>().listen((event) {
+      _getItemList();
+    });
+  }
+
+  _getItemList() {
+    setState(() {
+      _itemList = DataManager.shared.itemList.where((e) => e.categoryId == category.id).toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    var category = Get.arguments as CategoryModel;
-
     return Scaffold(
       backgroundColor: RMColors.mainBackgroundColor,
       appBar: AppBar(
@@ -34,10 +51,10 @@ class _HomeItemListPageState extends State<HomeItemListPage> {
       body: Container(
         margin: EdgeInsets.only(top: 10),
         child: ListView.builder(
-          itemCount: Mock.items.length,
+          itemCount: _itemList.length,
           itemBuilder: (context, index) {
             return GestureDetector(
-              child: HomeItemWidget(itemModel: Mock.items[index]),
+              child: HomeItemWidget(itemModel: _itemList[index]),
               onTap: () => {Get.toNamed(Routes.itemDetailPage)},
             );
           },

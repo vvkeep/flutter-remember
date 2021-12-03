@@ -10,3 +10,6 @@ class CategoryEvent {
 
   CategoryEvent(this.category);
 }
+
+class ItemEvent {
+}

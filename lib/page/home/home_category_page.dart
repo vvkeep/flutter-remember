@@ -25,6 +25,12 @@ class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
         this.categoryList = DataManager.shared.categoryList;
       });
     });
+
+    eventBus.on<ItemEvent>().listen((event) {
+      setState(() {
+        this.categoryList = DataManager.shared.categoryList;
+      });
+    });
   }
 
   _buildLeftSideItem(String title, VoidCallback onTap) {
