@@ -23,6 +23,7 @@ class DatabaseHelper {
       await db.execute(SQL.initItemTable);
       await db.execute(SQL.initCategoryTable);
       await db.execute(SQL.initTagTable);
+      await db.execute(SQL.initTableData);
     });
   }
 }
@@ -104,18 +105,21 @@ extension DatabaseHelperItemExtension on DatabaseHelper {
     return list.first;
   }
 
-  Future<int> insertItem(ItemModel itemModel) async {
+  Future<bool> insertItem(ItemModel itemModel) async {
     Map<String, dynamic> map = itemModel.toJson();
     map.remove("id");
-    return _db.insert(SQL.tableItem, map);
+    int count = await _db.insert(SQL.tableItem, map);
+    return count == 1;
   }
 
-  Future<int> updateItem(ItemModel itemModel) async {
+  Future<bool> updateItem(ItemModel itemModel) async {
     Map<String, dynamic> map = itemModel.toJson();
-    return _db.update(SQL.tableItem, map, where: "id = ?", whereArgs: [itemModel.id]);
+    int count = await _db.update(SQL.tableItem, map, where: "id = ?", whereArgs: [itemModel.id]);
+    return count == 1;
   }
 
-  Future<int> deleteItem(int itemId) async {
-    return _db.delete(SQL.tableItem, where: "id = ?", whereArgs: [itemId]);
+  Future<bool> deleteItem(int itemId) async {
+    int count = await _db.delete(SQL.tableItem, where: "id = ?", whereArgs: [itemId]);
+    return count == 1;
   }
 }
