@@ -3,21 +3,20 @@ import 'package:get/route_manager.dart';
 import 'package:remember/common/constant.dart';
 import 'package:remember/model/item_model.dart';
 
-class HomeItemDetailTagWidget extends StatefulWidget {
+class ItemDetailTagWidget extends StatefulWidget {
   final TagModel tag;
 
   final bool isSelected;
 
   final VoidCallback onTap;
 
-  HomeItemDetailTagWidget({Key? key, required this.tag, required this.isSelected, required this.onTap})
-      : super(key: key);
+  ItemDetailTagWidget({Key? key, required this.tag, required this.isSelected, required this.onTap}) : super(key: key);
 
   @override
-  _HomeItemDetailTagWidgetState createState() => _HomeItemDetailTagWidgetState();
+  _ItemDetailTagWidgetState createState() => _ItemDetailTagWidgetState();
 }
 
-class _HomeItemDetailTagWidgetState extends State<HomeItemDetailTagWidget> {
+class _ItemDetailTagWidgetState extends State<ItemDetailTagWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

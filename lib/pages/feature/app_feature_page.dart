@@ -132,7 +132,7 @@ class _AppFeaturePageState extends State<AppFeaturePage> {
                 ),
                 onPressed: () {
                   if (liquidController.currentPage + 1 > dataList.length - 1) {
-                    Get.offNamed(Routes.registerPage);
+                    Get.offNamed(RMRouter.registerPage);
                   } else {
                     liquidController.jumpToPage(page: liquidController.currentPage + 1);
                   }

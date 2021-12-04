@@ -9,22 +9,22 @@ import 'package:remember/common/event_bus.dart';
 import 'package:remember/manager/data_manager.dart';
 import 'package:remember/model/img_model.dart';
 import 'package:remember/model/item_model.dart';
-import 'package:remember/page/home/widget/home_item_detail_choose_image_widget.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:remember/page/home/widget/home_item_detail_tag_widget.dart';
+import 'package:remember/pages/item/widget/item_detail_choose_image_widget.dart';
+import 'package:remember/pages/item/widget/item_detail_tag_widget.dart';
 import 'package:remember/utils/storage_utils.dart';
 import 'package:remember/widget/image_preview/photo_view_gallery_screen.dart';
 import 'package:remember/widget/other/widget.dart';
 import 'package:sqflite/sqflite.dart';
 
-class HomeItemDetailPage extends StatefulWidget {
-  HomeItemDetailPage({Key? key}) : super(key: key);
+class ItemDetailPage extends StatefulWidget {
+  ItemDetailPage({Key? key}) : super(key: key);
 
   @override
-  _HomeItemDetailPageState createState() => _HomeItemDetailPageState();
+  _ItemDetailPageState createState() => _ItemDetailPageState();
 }
 
-class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
+class _ItemDetailPageState extends State<ItemDetailPage> {
   final FocusNode _accountNode = FocusNode();
   final FocusNode _userNameNode = FocusNode();
   final FocusNode _passwordNode = FocusNode();
@@ -332,7 +332,7 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                 ),
                 SizedBox(height: 10),
                 _buildSectionTitleView("附件图片"),
-                HomeItemDetailChooseImageWidget(
+                ItemDetailChooseImageWidget(
                   itemList: this._pickedList,
                   callback: (item, index) {
                     if (item.type == PickImageMediaType.add) {
@@ -420,7 +420,7 @@ class _HomeItemDetailPageState extends State<HomeItemDetailPage> {
                     childAspectRatio: 1.8,
                     children: _tagList.map((tag) {
                       bool isSelected = this._currentItemTagIds.contains('${tag.id}');
-                      return HomeItemDetailTagWidget(
+                      return ItemDetailTagWidget(
                           tag: tag,
                           isSelected: isSelected,
                           onTap: () {

@@ -6,16 +6,16 @@ import 'package:remember/common/constant.dart';
 import 'package:remember/common/event_bus.dart';
 import 'package:remember/manager/data_manager.dart';
 import 'package:remember/model/item_model.dart';
-import 'package:remember/page/home/widget/home_item_widget.dart';
+import 'package:remember/pages/item/widget/item_list_item_widget.dart';
 import 'package:get/get.dart';
 import 'package:remember/router/routers.dart';
 
-class HomeItemListPage extends StatefulWidget {
+class ItemListPage extends StatefulWidget {
   @override
-  _HomeItemListPageState createState() => _HomeItemListPageState();
+  _ItemListPageState createState() => _ItemListPageState();
 }
 
-class _HomeItemListPageState extends State<HomeItemListPage> {
+class _ItemListPageState extends State<ItemListPage> {
   List<ItemModel> _itemList = [];
   late CategoryModel category;
 
@@ -54,7 +54,7 @@ class _HomeItemListPageState extends State<HomeItemListPage> {
             tooltip: '添加账号',
             icon: Icon(Icons.add),
             onPressed: () {
-              Get.toNamed(Routes.itemDetailPage);
+              Get.toNamed(RMRouter.itemDetailPage);
             },
           )
         ],
@@ -65,8 +65,8 @@ class _HomeItemListPageState extends State<HomeItemListPage> {
           itemCount: _itemList.length,
           itemBuilder: (context, index) {
             return GestureDetector(
-              child: HomeItemWidget(itemModel: _itemList[index]),
-              onTap: () => {Get.toNamed(Routes.itemDetailPage)},
+              child: ItemListItemWidget(itemModel: _itemList[index]),
+              onTap: () => {Get.toNamed(RMRouter.itemDetailPage)},
             );
           },
         ),

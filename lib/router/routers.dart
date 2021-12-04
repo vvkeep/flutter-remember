@@ -1,17 +1,17 @@
 import 'package:get/get.dart';
-import 'package:remember/page/category/category_list_page.dart';
-import 'package:remember/page/category/new_category_page.dart';
-import 'package:remember/page/feature/app_feature_page.dart';
-import 'package:remember/page/home/home_category_page.dart';
-import 'package:remember/page/home/home_item_detail_page.dart';
-import 'package:remember/page/home/home_item_list_page.dart';
-import 'package:remember/page/home/home_item_search_page.dart';
-import 'package:remember/page/login/login_page.dart';
-import 'package:remember/page/login/register_page.dart';
-import 'package:remember/page/tag/new_tag_page.dart';
-import 'package:remember/page/tag/tag_list_page.dart';
+import 'package:remember/pages/category/category_list_page.dart';
+import 'package:remember/pages/category/new_category_page.dart';
+import 'package:remember/pages/feature/app_feature_page.dart';
+import 'package:remember/pages/home/home_category_page.dart';
+import 'package:remember/pages/item/item_detail_page.dart';
+import 'package:remember/pages/item/item_list_page.dart';
+import 'package:remember/pages/item/item_search_page.dart';
+import 'package:remember/pages/login/login_page.dart';
+import 'package:remember/pages/login/register_page.dart';
+import 'package:remember/pages/tag/new_tag_page.dart';
+import 'package:remember/pages/tag/tag_list_page.dart';
 
-abstract class Routes {
+abstract class RMRouter {
   static String homePage = "/";
   static String appFeaturePage = "/app_feature_apge";
   static String itemListPage = "/item_list_page";
@@ -28,50 +28,50 @@ abstract class Routes {
 abstract class AppPages {
   static final pages = [
     GetPage(
-      name: Routes.homePage,
+      name: RMRouter.homePage,
       page: () => HomeCategoryListPage(),
       transition: Transition.fade,
     ),
     GetPage(
-      name: Routes.appFeaturePage,
+      name: RMRouter.appFeaturePage,
       page: () => AppFeaturePage(),
     ),
     GetPage(
-      name: Routes.itemListPage,
-      page: () => HomeItemListPage(),
+      name: RMRouter.itemListPage,
+      page: () => ItemListPage(),
     ),
     GetPage(
-      name: Routes.searchPage,
-      page: () => HomeItemSearchPagePage(),
+      name: RMRouter.searchPage,
+      page: () => ItemSearchPagePage(),
       transition: Transition.fade,
     ),
     GetPage(
-      name: Routes.itemDetailPage,
-      page: () => HomeItemDetailPage(),
+      name: RMRouter.itemDetailPage,
+      page: () => ItemDetailPage(),
     ),
     GetPage(
-      name: Routes.loginPage,
+      name: RMRouter.loginPage,
       page: () => LoginPage(),
     ),
     GetPage(
-      name: Routes.registerPage,
+      name: RMRouter.registerPage,
       page: () => RegisterPage(),
       transition: Transition.fadeIn,
     ),
     GetPage(
-      name: Routes.categoryListPage,
+      name: RMRouter.categoryListPage,
       page: () => CategoryListPage(),
     ),
     GetPage(
-      name: Routes.newCategoryPage,
+      name: RMRouter.newCategoryPage,
       page: () => NewCategoryPage(),
     ),
     GetPage(
-      name: Routes.tagListPage,
+      name: RMRouter.tagListPage,
       page: () => TagListPage(),
     ),
     GetPage(
-      name: Routes.newTagPage,
+      name: RMRouter.newTagPage,
       page: () => NewTagPage(),
     ),
   ];

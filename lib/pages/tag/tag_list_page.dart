@@ -5,7 +5,7 @@ import 'package:remember/manager/data_manager.dart';
 import 'package:remember/router/routers.dart';
 import 'package:remember/widget/other/widget.dart';
 import 'package:remember/model/item_model.dart';
-import 'package:remember/page/tag/widget/tag_list_item_widget.dart';
+import 'package:remember/pages/tag/widget/tag_list_item_widget.dart';
 import 'package:get/get.dart';
 
 class TagListPage extends StatefulWidget {
@@ -47,7 +47,7 @@ class _TagListPageState extends State<TagListPage> {
                 },
               };
 
-              Get.toNamed(Routes.newTagPage, arguments: args);
+              Get.toNamed(RMRouter.newTagPage, arguments: args);
             },
           )
         ],
@@ -76,7 +76,7 @@ class _TagListPageState extends State<TagListPage> {
                   },
                   "tag": tag
                 };
-                Get.toNamed(Routes.newTagPage, arguments: args);
+                Get.toNamed(RMRouter.newTagPage, arguments: args);
               },
               child: TagListItemWidget(tagModel: tag),
             ),

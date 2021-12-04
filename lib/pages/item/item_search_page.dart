@@ -3,15 +3,15 @@ import 'package:get/instance_manager.dart';
 import 'package:remember/common/constant.dart';
 import 'package:remember/manager/data_manager.dart';
 import 'package:remember/model/item_model.dart';
-import 'package:remember/page/home/widget/home_item_widget.dart';
+import 'package:remember/pages/item/widget/item_list_item_widget.dart';
 import 'package:get/get.dart';
 
-class HomeItemSearchPagePage extends StatefulWidget {
+class ItemSearchPagePage extends StatefulWidget {
   @override
-  _HomeItemSearchPagePageState createState() => _HomeItemSearchPagePageState();
+  _ItemSearchPagePageState createState() => _ItemSearchPagePageState();
 }
 
-class _HomeItemSearchPagePageState extends State<HomeItemSearchPagePage> {
+class _ItemSearchPagePageState extends State<ItemSearchPagePage> {
   List<ItemModel> _itemList = [];
 
   @override
@@ -66,7 +66,7 @@ class _HomeItemSearchPagePageState extends State<HomeItemSearchPagePage> {
         child: ListView.builder(
           itemCount: _itemList.length,
           itemBuilder: (context, index) {
-            return HomeItemWidget(itemModel: _itemList[index]);
+            return ItemListItemWidget(itemModel: _itemList[index]);
           },
         ),
       ),

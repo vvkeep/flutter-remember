@@ -3,18 +3,18 @@ import 'package:remember/common/constant.dart';
 import 'package:remember/model/img_model.dart';
 
 // ignore: must_be_immutable
-class HomeItemDetailChooseImageWidget extends StatefulWidget {
+class ItemDetailChooseImageWidget extends StatefulWidget {
   void Function(RMPickImageItem item, int index) callback;
 
   List<RMPickImageItem> itemList;
 
-  HomeItemDetailChooseImageWidget({Key? key, required this.itemList, required this.callback}) : super(key: key);
+  ItemDetailChooseImageWidget({Key? key, required this.itemList, required this.callback}) : super(key: key);
 
   @override
-  _HomeItemDetailChooseImageWidgetState createState() => _HomeItemDetailChooseImageWidgetState();
+  _ItemDetailChooseImageWidgetState createState() => _ItemDetailChooseImageWidgetState();
 }
 
-class _HomeItemDetailChooseImageWidgetState extends State<HomeItemDetailChooseImageWidget> {
+class _ItemDetailChooseImageWidgetState extends State<ItemDetailChooseImageWidget> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width - 20;

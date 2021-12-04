@@ -6,7 +6,7 @@ import 'package:remember/manager/data_manager.dart';
 import 'package:remember/common/event_bus.dart';
 import 'package:remember/widget/other/widget.dart';
 import 'package:remember/model/item_model.dart';
-import 'package:remember/page/category/widget/category_list_item_widget.dart';
+import 'package:remember/pages/category/widget/category_list_item_widget.dart';
 import 'package:get/get.dart';
 import 'package:remember/router/routers.dart';
 
@@ -49,7 +49,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
                 },
               };
 
-              Get.toNamed(Routes.newCategoryPage, arguments: args);
+              Get.toNamed(RMRouter.newCategoryPage, arguments: args);
             },
           )
         ],
@@ -78,7 +78,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
                   },
                   "category": category
                 };
-                Get.toNamed(Routes.newCategoryPage, arguments: args);
+                Get.toNamed(RMRouter.newCategoryPage, arguments: args);
               },
               child: CategoryListItemWidget(categoryModel: category),
             ),

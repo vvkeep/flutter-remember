@@ -5,9 +5,9 @@ import 'package:remember/common/constant.dart';
 import 'package:remember/manager/data_manager.dart';
 import 'package:remember/common/event_bus.dart';
 import 'package:remember/model/item_model.dart';
-import 'package:remember/page/home/widget/home_category_item_widget.dart';
-import 'package:remember/page/home/widget/home_search_bar_widget.dart';
-import 'package:remember/page/home/widget/wave_animation_widget.dart';
+import 'package:remember/pages/home/widget/home_category_item_widget.dart';
+import 'package:remember/pages/home/widget/home_search_bar_widget.dart';
+import 'package:remember/pages/home/widget/wave_animation_widget.dart';
 import 'package:remember/router/routers.dart';
 import 'package:get/get.dart';
 
@@ -62,7 +62,7 @@ class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
             tooltip: '添加账号',
             icon: Icon(Icons.add),
             onPressed: () {
-              Get.toNamed(Routes.itemDetailPage);
+              Get.toNamed(RMRouter.itemDetailPage);
             },
           )
         ],
@@ -98,19 +98,19 @@ class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
               ),
               Divider(height: 0),
               _buildLeftSideItem("分类管理", () {
-                Get.toNamed(Routes.categoryListPage);
+                Get.toNamed(RMRouter.categoryListPage);
               }),
               Divider(height: 0),
               _buildLeftSideItem("标签管理", () {
-                Get.toNamed(Routes.tagListPage);
+                Get.toNamed(RMRouter.tagListPage);
               }),
               Divider(height: 0),
               _buildLeftSideItem("安全设置", () {
-                Get.toNamed(Routes.tagListPage);
+                Get.toNamed(RMRouter.tagListPage);
               }),
               Divider(height: 0),
               _buildLeftSideItem("建议与反馈", () {
-                Get.toNamed(Routes.tagListPage);
+                Get.toNamed(RMRouter.tagListPage);
               }),
               Divider(height: 0),
             ],
@@ -122,7 +122,7 @@ class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
           SliverToBoxAdapter(
             child: HomeSearchBarWidget(
               onPressed: () {
-                Get.toNamed(Routes.searchPage);
+                Get.toNamed(RMRouter.searchPage);
               },
             ),
           ),
@@ -144,7 +144,7 @@ class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
                   return GestureDetector(
                     child: HomeCategoryItemWidget(categoryModel: category),
                     onTap: () {
-                      Get.toNamed(Routes.itemListPage, arguments: category);
+                      Get.toNamed(RMRouter.itemListPage, arguments: category);
                     },
                   );
                 },

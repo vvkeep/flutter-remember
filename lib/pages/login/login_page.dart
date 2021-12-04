@@ -5,7 +5,7 @@ import 'package:get/instance_manager.dart';
 import 'package:remember/common/constant.dart';
 import 'package:get/get.dart';
 import 'package:remember/manager/login_manager.dart';
-import 'package:remember/page/login/widget/input_password_field.dart';
+import 'package:remember/pages/login/widget/input_password_field.dart';
 import 'package:remember/router/routers.dart';
 import 'package:local_auth/local_auth.dart';
 
@@ -125,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                     }
 
                     Fluttertoast.showToast(msg: '登录成功', gravity: ToastGravity.TOP);
-                    Get.offAllNamed(Routes.homePage);
+                    Get.offAllNamed(RMRouter.homePage);
                   },
                 ),
                 Visibility(
@@ -204,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
           localizedReason: '请进行身份验证以登录应用', useErrorDialogs: false, stickyAuth: true, biometricOnly: true);
       if (authenticated) {
         Fluttertoast.showToast(msg: '登录成功', gravity: ToastGravity.TOP);
-        Get.offAllNamed(Routes.homePage);
+        Get.offAllNamed(RMRouter.homePage);
       }
     } on PlatformException catch (e) {
       printInfo(info: "${e.message}");

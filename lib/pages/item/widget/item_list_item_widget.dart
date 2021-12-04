@@ -4,9 +4,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:remember/common/constant.dart';
 import 'package:remember/model/item_model.dart';
 
-class HomeItemWidget extends StatelessWidget {
+class ItemListItemWidget extends StatelessWidget {
   final ItemModel itemModel;
-  const HomeItemWidget({Key? key, required this.itemModel}) : super(key: key);
+  const ItemListItemWidget({Key? key, required this.itemModel}) : super(key: key);
 
   Widget itemView(String key, String value, VoidCallback? onPressed) {
     return Row(
