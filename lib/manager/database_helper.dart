@@ -18,12 +18,20 @@ class DatabaseHelper {
   _initDatabase() async {
     String path = join(await getDatabasesPath(), "remember.db");
     print('remember database path:$path');
-    // await deleteDatabase(path);
+    await deleteDatabase(path);
     return await openDatabase(path, version: 1, onCreate: (Database db, int version) async {
-      await db.execute(SQL.initItemTable);
       await db.execute(SQL.initCategoryTable);
       await db.execute(SQL.initTagTable);
-      await db.execute(SQL.initTableData);
+      await db.execute(SQL.initItemTable);
+
+      Batch batch = db.batch();
+      SQL.initCategoryList.forEach((e) {
+        db.rawInsert(e);
+      });
+      SQL.initTagList.forEach((e) {
+        db.rawInsert(e);
+      });
+      await batch.commit(noResult: true);
     });
   }
 }

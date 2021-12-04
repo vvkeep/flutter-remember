@@ -10,12 +10,12 @@ import 'package:remember/pages/item/widget/item_list_item_widget.dart';
 import 'package:get/get.dart';
 import 'package:remember/router/routers.dart';
 
-class ItemListPage extends StatefulWidget {
+class CategoryItemListPage extends StatefulWidget {
   @override
-  _ItemListPageState createState() => _ItemListPageState();
+  _CategoryItemListPageState createState() => _CategoryItemListPageState();
 }
 
-class _ItemListPageState extends State<ItemListPage> {
+class _CategoryItemListPageState extends State<CategoryItemListPage> {
   List<ItemModel> _itemList = [];
   late CategoryModel category;
 
@@ -54,7 +54,7 @@ class _ItemListPageState extends State<ItemListPage> {
             tooltip: '添加账号',
             icon: Icon(Icons.add),
             onPressed: () {
-              Get.toNamed(RMRouter.itemDetailPage);
+              Get.toNamed(RMRouter.itemDetailPage, parameters: {'categoryId': "${category.id}"});
             },
           )
         ],

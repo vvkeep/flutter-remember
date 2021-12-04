@@ -25,6 +25,8 @@ class ItemDetailPage extends StatefulWidget {
 }
 
 class _ItemDetailPageState extends State<ItemDetailPage> {
+  ItemModel itemModel = ItemModel(id: -1, categoryId: -1, account: '', title: '');
+
   final FocusNode _accountNode = FocusNode();
   final FocusNode _userNameNode = FocusNode();
   final FocusNode _passwordNode = FocusNode();
@@ -42,7 +44,6 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   List<RMPickImageItem> _pickedList = [RMPickImageItem(path: 'assets/imgs/add_img.png', type: PickImageMediaType.add)];
   List<CategoryModel> _categoryList = DataManager.shared.categoryList;
   List<TagModel> _tagList = DataManager.shared.tagList;
-  late ItemModel itemModel;
 
   String get _chooseCategoryValueText {
     return this.itemModel.categoryId == -1
@@ -84,6 +85,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
 
   _initUI() async {
     ItemModel? item = Get.arguments as ItemModel?;
+
     List<RMPickImageItem> tempPickedList = [];
 
     if (item != null && ObjectUtil.isNotEmpty(item.imgs)) {
@@ -96,17 +98,19 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
       }
     }
 
-    if (item == null) {
-      itemModel = ItemModel(id: -1, categoryId: -1, account: '', title: '');
-    } else {
-      itemModel = ItemModel.fromJson(item.toJson());
+    if (ObjectUtil.isNotEmpty(item)) {
+      itemModel = ItemModel.fromJson(item!.toJson());
+    }
+
+    if (ObjectUtil.isNotEmpty(Get.parameters["categoryId"])) {
+      itemModel.categoryId = int.parse(Get.parameters["categoryId"]!);
     }
 
     setState(() {
       _titleTextController.text = this.itemModel.title;
       _accountTextController.text = this.itemModel.account;
       _passwordTextController.text = this.itemModel.password ?? "";
-      _payTextController.text = this.itemModel.password ?? "";
+      _payTextController.text = this.itemModel.payPassword ?? "";
       _descTextController.text = this.itemModel.description ?? "";
       _pickedList.insertAll(0, tempPickedList);
     });

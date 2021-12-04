@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:remember/manager/data_manager.dart';
 import 'package:remember/manager/login_manager.dart';
@@ -11,8 +12,7 @@ void main() async {
   await LoginManager.getInstance();
   await DatabaseHelper.shared.init();
   await DataManager.shared.init();
-
-  runApp(MyApp());
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {

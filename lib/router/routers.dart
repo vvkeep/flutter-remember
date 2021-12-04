@@ -4,7 +4,7 @@ import 'package:remember/pages/category/new_category_page.dart';
 import 'package:remember/pages/feature/app_feature_page.dart';
 import 'package:remember/pages/home/home_category_page.dart';
 import 'package:remember/pages/item/item_detail_page.dart';
-import 'package:remember/pages/item/item_list_page.dart';
+import 'package:remember/pages/item/category_item_list_page.dart';
 import 'package:remember/pages/item/item_search_page.dart';
 import 'package:remember/pages/login/login_page.dart';
 import 'package:remember/pages/login/register_page.dart';
@@ -38,7 +38,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: RMRouter.itemListPage,
-      page: () => ItemListPage(),
+      page: () => CategoryItemListPage(),
     ),
     GetPage(
       name: RMRouter.searchPage,

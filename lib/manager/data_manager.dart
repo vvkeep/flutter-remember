@@ -87,10 +87,7 @@ extension DataManagerItemExtension on DataManager {
     if (isSuccess) {
       // 标签加1
       if (ObjectUtil.isNotEmpty(itemModel.tagIds)) {
-        List<String> tagIdList = itemModel.tagIds!.split(",");
-        tagIdList.forEach((tagId) async {
-          await DatabaseHelper.shared.incremenTagItemCount(tagId);
-        });
+        await DatabaseHelper.shared.incremenTagItemCount(itemModel.tagIds!);
       }
 
       // 分类加1
