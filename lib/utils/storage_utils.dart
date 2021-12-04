@@ -1,9 +1,10 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
-class StorageUtils {
-  static Future<String> get _localItemImgsPath async {
+class ItemImgCacheUtils {
+  static Future<String> get _imgsDirectory async {
     final _path = await getApplicationDocumentsDirectory();
     String itemImgsPath = _path.path + "/item_imgs";
     var file = Directory(itemImgsPath);
@@ -20,25 +21,17 @@ class StorageUtils {
     return itemImgsPath;
   }
 
-  static Future<File> localItemImgFile(String name) async {
-    final path = await _localItemImgsPath;
+  static Future<File> imgFile(String name) async {
+    final path = await _imgsDirectory;
     return File("$path/$name");
   }
 
-  static Future<bool> isItemImgExists(String name) async {
-    final file = await localItemImgFile(name);
-    var exist = await file.exists();
-    return exist;
-  }
-
-  static Future<String?> saveItemImg(Object val) async {
+  static Future<String?> save(Uint8List bytes, String suffix) async {
     try {
       var uuid = Uuid();
-      String name = uuid.v1() + ".png";
-      final file = await localItemImgFile(name);
-      IOSink sink = file.openWrite();
-      sink.write(val);
-      sink.close();
+      String name = uuid.v1() + '.' + suffix;
+      final file = await imgFile(name);
+      await file.writeAsBytes(bytes);
       return name;
     } catch (e) {
       //写入错误
@@ -47,15 +40,15 @@ class StorageUtils {
     }
   }
 
-  static Future<bool> delteItemImgs(List<String> names) async {
+  static Future<bool> deleteImgs(List<String> names) async {
     for (var name in names) {
-      await deleteItemImg(name);
+      await delete(name);
     }
     return true;
   }
 
-  static Future<bool> deleteItemImg(String name) async {
-    final file = await localItemImgFile(name);
+  static Future<bool> delete(String name) async {
+    final file = await imgFile(name);
     await file.delete(recursive: false);
     return true;
   }

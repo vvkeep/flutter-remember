@@ -32,10 +32,10 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   final FocusNode _remarkNode = FocusNode();
 
   final TextEditingController _titleTextController = TextEditingController();
-  final TextEditingController _userNameTextController = TextEditingController();
+  final TextEditingController _accountTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
   final TextEditingController _payTextController = TextEditingController();
-  final TextEditingController _remarkTextController = TextEditingController();
+  final TextEditingController _descTextController = TextEditingController();
 
   final _picker = ImagePicker();
 
@@ -90,20 +90,25 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
       List<String> imgNames = item.imgs!.split(",");
 
       for (var imgName in imgNames) {
-        File file = await StorageUtils.localItemImgFile(imgName);
+        File file = await ItemImgCacheUtils.imgFile(imgName);
         RMPickImageItem pickItem = RMPickImageItem(type: PickImageMediaType.source, file: file, path: imgName);
         tempPickedList.add(pickItem);
       }
     }
 
-    setState(() {
-      if (item == null) {
-        this.itemModel = ItemModel(id: -1, categoryId: -1, account: '', title: '');
-      } else {
-        this.itemModel = ItemModel.fromJson(item.toJson());
-      }
+    if (item == null) {
+      itemModel = ItemModel(id: -1, categoryId: -1, account: '', title: '');
+    } else {
+      itemModel = ItemModel.fromJson(item.toJson());
+    }
 
-      this._pickedList.addAll(tempPickedList);
+    setState(() {
+      _titleTextController.text = this.itemModel.title;
+      _accountTextController.text = this.itemModel.account;
+      _passwordTextController.text = this.itemModel.password ?? "";
+      _payTextController.text = this.itemModel.password ?? "";
+      _descTextController.text = this.itemModel.description ?? "";
+      _pickedList.insertAll(0, tempPickedList);
     });
   }
 
@@ -126,23 +131,24 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
       return;
     }
 
-    if (ObjectUtil.isEmpty(_userNameTextController.text)) {
+    if (ObjectUtil.isEmpty(_accountTextController.text)) {
       Fluttertoast.showToast(msg: '用户名不能为空', gravity: ToastGravity.TOP);
       return;
     }
 
     itemModel.title = _titleTextController.text;
-    itemModel.account = _userNameTextController.text;
+    itemModel.account = _accountTextController.text;
     itemModel.password = _passwordTextController.text;
     itemModel.payPassword = _payTextController.text;
-    itemModel.description = _remarkTextController.text;
+    itemModel.description = _descTextController.text;
 
     List<String> tempImgPaths = [];
     if (_isHaveNewImg) {
       for (var item in _pickedList) {
         if (item.type == PickImageMediaType.source) {
           final bytes = await item.file!.readAsBytes();
-          String? path = await StorageUtils.saveItemImg(bytes);
+          String suffix = item.file!.path.split(".").last;
+          String? path = await ItemImgCacheUtils.save(bytes, suffix);
           if (path != null) {
             tempImgPaths.add(path);
           }
@@ -324,7 +330,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                   child: Column(
                     children: [
                       _buildInputField("请输入账号标题", _accountNode, _titleTextController),
-                      _buildInputField("请输入用户名", _userNameNode, _userNameTextController),
+                      _buildInputField("请输入用户名", _userNameNode, _accountTextController),
                       _buildInputField("请输入密码", _passwordNode, _passwordTextController),
                       _buildInputField("请输入支付密码", _payNode, _payTextController),
                     ],
@@ -460,7 +466,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                     ],
                   ),
                   child: TextField(
-                    controller: _remarkTextController,
+                    controller: _descTextController,
                     focusNode: _remarkNode,
                     decoration: InputDecoration(
                       isCollapsed: true,

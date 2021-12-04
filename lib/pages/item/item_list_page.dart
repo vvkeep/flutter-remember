@@ -66,7 +66,7 @@ class _ItemListPageState extends State<ItemListPage> {
           itemBuilder: (context, index) {
             return GestureDetector(
               child: ItemListItemWidget(itemModel: _itemList[index]),
-              onTap: () => {Get.toNamed(RMRouter.itemDetailPage)},
+              onTap: () => {Get.toNamed(RMRouter.itemDetailPage, arguments: _itemList[index])},
             );
           },
         ),

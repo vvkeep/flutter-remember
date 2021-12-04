@@ -112,7 +112,7 @@ extension DataManagerItemExtension on DataManager {
     // 判断 图片地址是否相同，如果不同就删除旧的缓存图片
     if (ObjectUtil.isNotEmpty(currentItem.imgs) && (currentItem.imgs != newItem.imgs)) {
       List<String> imgNames = currentItem.imgs!.split(",");
-      await StorageUtils.delteItemImgs(imgNames);
+      await ItemImgCacheUtils.deleteImgs(imgNames);
     }
 
     // 判断 标签是否相同，如果不同 就统一把旧的标签数量减1, 然后把新的标签加1
@@ -146,7 +146,7 @@ extension DataManagerItemExtension on DataManager {
     //删除图片
     if (ObjectUtil.isNotEmpty(item.imgs)) {
       List<String> imgNames = item.imgs!.split(",");
-      await StorageUtils.delteItemImgs(imgNames);
+      await ItemImgCacheUtils.deleteImgs(imgNames);
     }
 
     await DatabaseHelper.shared.deleteItem(itemId);
