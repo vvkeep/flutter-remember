@@ -67,16 +67,6 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
     }
   }
 
-  bool get _isHaveNewImg {
-    for (var item in _pickedList) {
-      if (item.path == null) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
   @override
   void initState() {
     super.initState();
@@ -122,7 +112,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
       return;
     }
 
-    RMPickImageItem item = RMPickImageItem(type: PickImageMediaType.source, file: File(file.path));
+    RMPickImageItem item = RMPickImageItem(type: PickImageMediaType.temp, file: File(file.path));
     var index = _pickedList.length - 1 > 0 ? _pickedList.length - 1 : 0;
     setState(() {
       _pickedList.insert(index, item);
@@ -147,15 +137,17 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
     itemModel.description = _descTextController.text;
 
     List<String> tempImgPaths = [];
-    if (_isHaveNewImg) {
-      for (var item in _pickedList) {
+    if (_pickedList.where((e) => e.type == PickImageMediaType.temp).toList().length > 0) {
+      var itemList = _pickedList.where((e) => e.type != PickImageMediaType.add).toList();
+
+      for (var item in itemList) {
         if (item.type == PickImageMediaType.source) {
+          tempImgPaths.add(item.path!);
+        } else {
           final bytes = await item.file!.readAsBytes();
           String suffix = item.file!.path.split(".").last;
           String? path = await ItemImgCacheUtils.save(bytes, suffix);
-          if (path != null) {
-            tempImgPaths.add(path);
-          }
+          tempImgPaths.add(path!);
         }
       }
 

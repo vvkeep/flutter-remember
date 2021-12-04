@@ -99,26 +99,32 @@ extension DataManagerItemExtension on DataManager {
   }
 
   Future<bool> updateItem(ItemModel newItem) async {
-    ItemModel currentItem = await DatabaseHelper.shared.selectItem(newItem.id);
+    ItemModel oldItem = await DatabaseHelper.shared.selectItem(newItem.id);
     bool isSuccess = await DatabaseHelper.shared.updateItem(newItem);
     if (isSuccess) {
       // 判断 图片地址是否相同，如果不同就删除旧的缓存图片
-      if (ObjectUtil.isNotEmpty(currentItem.imgs) && (currentItem.imgs != newItem.imgs)) {
-        List<String> imgNames = currentItem.imgs!.split(",");
-        await ItemImgCacheUtils.deleteImgs(imgNames);
+      if (ObjectUtil.isNotEmpty(oldItem.imgs) && (oldItem.imgs != newItem.imgs)) {
+        List<String> oldImgs = oldItem.imgs!.split(",");
+        if (ObjectUtil.isEmpty(newItem.imgs)) {
+          await ItemImgCacheUtils.deleteImgs(oldImgs);
+        } else {
+          List<String> newImgs = newItem.imgs!.split(",");
+          var imgs = oldImgs.where((e) => !newImgs.contains(e)).toList();
+          await ItemImgCacheUtils.deleteImgs(imgs);
+        }
       }
 
       // 判断 标签是否相同，如果不同 就统一把旧的标签数量减1, 然后把新的标签加1
-      if (ObjectUtil.isNotEmpty(currentItem.tagIds) && (currentItem.tagIds != newItem.tagIds)) {
-        await DatabaseHelper.shared.decremenTagItemCount(currentItem.tagIds!);
+      if (ObjectUtil.isNotEmpty(oldItem.tagIds) && (oldItem.tagIds != newItem.tagIds)) {
+        await DatabaseHelper.shared.decremenTagItemCount(oldItem.tagIds!);
         if (ObjectUtil.isNotEmpty(newItem.tagIds)) {
           await DatabaseHelper.shared.incremenTagItemCount(newItem.tagIds!);
         }
       }
 
       // 判断 分类是否相同，如果不同 就把旧的分类数量减1，然后把新的分类加1
-      if (currentItem.categoryId != newItem.categoryId) {
-        await DatabaseHelper.shared.decremenCategoryItemCount(currentItem.categoryId);
+      if (oldItem.categoryId != newItem.categoryId) {
+        await DatabaseHelper.shared.decremenCategoryItemCount(oldItem.categoryId);
         await DatabaseHelper.shared.incremenCategoryItemCount(newItem.categoryId);
       }
 
@@ -129,20 +135,20 @@ extension DataManagerItemExtension on DataManager {
   }
 
   Future<bool> removeItem(int itemId) async {
-    ItemModel currentItem = await DatabaseHelper.shared.selectItem(itemId);
+    ItemModel oldItem = await DatabaseHelper.shared.selectItem(itemId);
     bool isSuccess = await DatabaseHelper.shared.deleteItem(itemId);
     if (isSuccess) {
       // 标签减1
-      if (ObjectUtil.isNotEmpty(currentItem.tagIds)) {
-        await DatabaseHelper.shared.decremenTagItemCount(currentItem.tagIds!);
+      if (ObjectUtil.isNotEmpty(oldItem.tagIds)) {
+        await DatabaseHelper.shared.decremenTagItemCount(oldItem.tagIds!);
       }
 
       //分类减1
-      await DatabaseHelper.shared.decremenCategoryItemCount(currentItem.categoryId);
+      await DatabaseHelper.shared.decremenCategoryItemCount(oldItem.categoryId);
 
       //删除图片
-      if (ObjectUtil.isNotEmpty(currentItem.imgs)) {
-        List<String> imgNames = currentItem.imgs!.split(",");
+      if (ObjectUtil.isNotEmpty(oldItem.imgs)) {
+        List<String> imgNames = oldItem.imgs!.split(",");
         await ItemImgCacheUtils.deleteImgs(imgNames);
       }
 
