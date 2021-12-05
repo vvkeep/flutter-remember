@@ -17,7 +17,9 @@ class HomeCategoryListPage extends StatefulWidget {
 }
 
 class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
-  late List<CategoryModel> categoryList = DataManager.shared.categoryList;
+  List<CategoryModel> categoryList = DataManager.shared.categoryList;
+  List<ItemModel> itemList = DataManager.shared.itemList;
+
   late StreamSubscription<CategoryListEvent> subscription;
 
   @override
@@ -26,6 +28,7 @@ class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
     subscription = eventBus.on<CategoryListEvent>().listen((event) {
       setState(() {
         this.categoryList = DataManager.shared.categoryList;
+        this.itemList = DataManager.shared.itemList;
       });
     });
   }
@@ -85,7 +88,7 @@ class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
                     ),
                     Center(
                       child: Text(
-                        "56",
+                        '${itemList.length}',
                         style: TextStyle(
                           color: RMColors.white,
                           fontSize: 45,
@@ -106,11 +109,7 @@ class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
               }),
               Divider(height: 0),
               _buildLeftSideItem("安全设置", () {
-                Get.toNamed(RMRouter.tagListPage);
-              }),
-              Divider(height: 0),
-              _buildLeftSideItem("建议与反馈", () {
-                Get.toNamed(RMRouter.tagListPage);
+                Get.toNamed(RMRouter.appSettingPage);
               }),
               Divider(height: 0),
             ],

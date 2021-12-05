@@ -27,6 +27,11 @@ class RMTextStyle {
     fontSize: minTextSize,
     fontWeight: FontWeight.normal,
   );
+  static const minTextDark = TextStyle(
+    color: RMColors.darkTextColor,
+    fontSize: minTextSize,
+    fontWeight: FontWeight.normal,
+  );
 
   static const minTextWhite = TextStyle(
     color: RMColors.white,

@@ -27,13 +27,15 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    _getAuthType().then((type) {
-      setState(() {
-        this.authType = type;
-      });
+    if (LoginManager.isLocalAuth()) {
+      _getAuthType().then((type) {
+        setState(() {
+          this.authType = type;
+        });
 
-      _authenticateWithBiometrics();
-    });
+        _authenticateWithBiometrics();
+      });
+    }
   }
 
   @override
@@ -193,6 +195,8 @@ class _LoginPageState extends State<LoginPage> {
       return BiometricType.face;
     } else if (availableBiometrics.contains(BiometricType.fingerprint)) {
       return BiometricType.fingerprint;
+    } else if (availableBiometrics.contains(BiometricType.iris)) {
+      return BiometricType.iris;
     } else {
       return null;
     }

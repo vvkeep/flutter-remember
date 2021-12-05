@@ -128,6 +128,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     UserInfo userInfo = LoginManager.getUserInfo();
                     userInfo.password = password;
                     userInfo.isRegister = true;
+                    userInfo.isLocalAuth = true;
                     LoginManager.saveUserInfo(userInfo);
                     Get.offAllNamed(RMRouter.homePage);
                   },

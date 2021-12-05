@@ -23,4 +23,8 @@ class LoginManager {
   static bool isRegisted() {
     return getUserInfo().isRegister;
   }
+
+  static bool isLocalAuth() {
+    return getUserInfo().isLocalAuth;
+  }
 }

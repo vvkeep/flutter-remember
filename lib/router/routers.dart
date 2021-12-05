@@ -8,6 +8,7 @@ import 'package:remember/pages/item/category_item_list_page.dart';
 import 'package:remember/pages/item/item_search_page.dart';
 import 'package:remember/pages/login/login_page.dart';
 import 'package:remember/pages/login/register_page.dart';
+import 'package:remember/pages/setting/app_setting_page.dart';
 import 'package:remember/pages/tag/new_tag_page.dart';
 import 'package:remember/pages/tag/tag_list_page.dart';
 
@@ -23,6 +24,7 @@ abstract class RMRouter {
   static String newCategoryPage = "/new_category_page";
   static String tagListPage = "/tag_list_page";
   static String newTagPage = "/new_tag_page";
+  static String appSettingPage = '/app_setting_page';
 }
 
 abstract class AppPages {
@@ -74,5 +76,9 @@ abstract class AppPages {
       name: RMRouter.newTagPage,
       page: () => NewTagPage(),
     ),
+    GetPage(
+      name: RMRouter.appSettingPage,
+      page: () => AppSettingPage(),
+    )
   ];
 }

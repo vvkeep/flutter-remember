@@ -116,8 +116,8 @@ extension DatabaseHelperItemExtension on DatabaseHelper {
   Future<bool> insertItem(ItemModel itemModel) async {
     Map<String, dynamic> map = itemModel.toJson();
     map.remove("id");
-    int count = await _db.insert(SQL.tableItem, map);
-    return count == 1;
+    int id = await _db.insert(SQL.tableItem, map);
+    return id != 0;
   }
 
   Future<bool> updateItem(ItemModel itemModel) async {

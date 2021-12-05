@@ -70,12 +70,11 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   @override
   void initState() {
     super.initState();
-    _initUI();
+    _init();
   }
 
-  _initUI() async {
+  _init() async {
     ItemModel? item = Get.arguments as ItemModel?;
-
     List<RMPickImageItem> tempPickedList = [];
 
     if (item != null && ObjectUtil.isNotEmpty(item.imgs)) {
@@ -120,6 +119,11 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   }
 
   _save() async {
+    if (itemModel.categoryId == -1) {
+      Fluttertoast.showToast(msg: '分类不能为空', gravity: ToastGravity.TOP);
+      return;
+    }
+
     if (ObjectUtil.isEmpty(_titleTextController.text)) {
       Fluttertoast.showToast(msg: '标题不能为空', gravity: ToastGravity.TOP);
       return;
@@ -137,37 +141,38 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
     itemModel.description = _descTextController.text;
 
     List<String> tempImgPaths = [];
-    if (_pickedList.where((e) => e.type == PickImageMediaType.temp).toList().length > 0) {
-      var itemList = _pickedList.where((e) => e.type != PickImageMediaType.add).toList();
-
-      for (var item in itemList) {
-        if (item.type == PickImageMediaType.source) {
-          tempImgPaths.add(item.path!);
-        } else {
-          final bytes = await item.file!.readAsBytes();
-          String suffix = item.file!.path.split(".").last;
-          String? path = await ItemImgCacheUtils.save(bytes, suffix);
-          tempImgPaths.add(path!);
-        }
+    final itemList = _pickedList.where((e) => e.type != PickImageMediaType.add).toList();
+    for (var item in itemList) {
+      if (item.type == PickImageMediaType.source) {
+        tempImgPaths.add(item.path!);
+      } else {
+        final bytes = await item.file!.readAsBytes();
+        String suffix = item.file!.path.split(".").last;
+        String? path = await ItemImgCacheUtils.save(bytes, suffix);
+        tempImgPaths.add(path!);
       }
-
-      itemModel.imgs = tempImgPaths.join(",");
     }
 
+    itemModel.imgs = tempImgPaths.join(",");
+
     try {
+      bool isSuccess = false;
       if (itemModel.id == -1) {
-        await DataManager.shared.addItem(itemModel);
+        isSuccess = await DataManager.shared.addItem(itemModel);
       } else {
-        await DataManager.shared.updateItem(itemModel);
+        isSuccess = await DataManager.shared.updateItem(itemModel);
       }
 
-      Fluttertoast.showToast(msg: '保存成功', gravity: ToastGravity.TOP);
-      eventBus.fire(ItemEvent());
-      eventBus.fire(CategoryListEvent());
-      Get.back();
+      final msg = "${itemModel.id == -1 ? '添加' : "编辑"}${isSuccess ? '成功' : '失败'}";
+      Fluttertoast.showToast(msg: msg, gravity: ToastGravity.TOP);
+      if (isSuccess) {
+        eventBus.fire(ItemEvent());
+        eventBus.fire(CategoryListEvent());
+        Get.back();
+      }
     } on DatabaseException catch (e) {
       if (e.isUniqueConstraintError('item.title')) {
-        Fluttertoast.showToast(msg: '此账号已存在，请修改分类名称', gravity: ToastGravity.TOP);
+        Fluttertoast.showToast(msg: '此账号标题已存在，请修改标题', gravity: ToastGravity.TOP);
       } else {
         print(e.toString());
         Fluttertoast.showToast(msg: '数据库操作失败，请重试', gravity: ToastGravity.TOP);
