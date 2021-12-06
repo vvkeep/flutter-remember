@@ -29,21 +29,22 @@
                                     <constraint firstAttribute="height" constant="120" id="ucN-6z-Ig7"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="隐私安全 记得保护" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hxp-aP-ANq">
-                                <rect key="frame" x="98.5" y="438" width="217" height="32"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
-                                <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome" translatesAutoresizingMaskIntoConstraints="NO" id="xTk-4T-VzE">
+                                <rect key="frame" x="87" y="408" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="DB2-P5-QW4"/>
+                                    <constraint firstAttribute="height" constant="128" id="mw9-G9-SRA"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="1a2-6s-vTC"/>
                             <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="4X2-HB-R7a"/>
                             <constraint firstItem="OgB-3D-8xF" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="IRv-Xk-c2k"/>
-                            <constraint firstItem="Hxp-aP-ANq" firstAttribute="top" secondItem="OgB-3D-8xF" secondAttribute="bottom" constant="30" id="ir7-4a-h4F"/>
-                            <constraint firstItem="Hxp-aP-ANq" firstAttribute="centerX" secondItem="OgB-3D-8xF" secondAttribute="centerX" id="mq8-Dm-lBH"/>
                             <constraint firstItem="OgB-3D-8xF" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-40" id="rdw-Zt-3Bi"/>
+                            <constraint firstItem="xTk-4T-VzE" firstAttribute="centerX" secondItem="OgB-3D-8xF" secondAttribute="centerX" id="vKv-Aq-0Qc"/>
+                            <constraint firstItem="xTk-4T-VzE" firstAttribute="top" secondItem="OgB-3D-8xF" secondAttribute="bottom" id="ve0-b0-xcM"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -55,5 +56,6 @@
     <resources>
         <image name="LaunchImage" width="0.5" height="0.5"/>
         <image name="icon-60" width="60" height="60"/>
+        <image name="welcome" width="242.5" height="88.5"/>
     </resources>
 </document>
