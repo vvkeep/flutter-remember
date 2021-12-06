@@ -22,29 +22,16 @@
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ey4">
                                 <rect key="frame" x="207" y="448" width="0.5" height="0.5"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-60" translatesAutoresizingMaskIntoConstraints="NO" id="OgB-3D-8xF">
-                                <rect key="frame" x="147" y="288" width="120" height="120"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="VNV-F9-8He"/>
-                                    <constraint firstAttribute="height" constant="120" id="ucN-6z-Ig7"/>
-                                </constraints>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome" translatesAutoresizingMaskIntoConstraints="NO" id="xTk-4T-VzE">
-                                <rect key="frame" x="87" y="408" width="240" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="DB2-P5-QW4"/>
-                                    <constraint firstAttribute="height" constant="128" id="mw9-G9-SRA"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_image" translatesAutoresizingMaskIntoConstraints="NO" id="8wD-0L-79R">
+                                <rect key="frame" x="113.5" y="389" width="187" height="118"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="1a2-6s-vTC"/>
+                            <constraint firstItem="8wD-0L-79R" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="1xf-Q7-bJd"/>
                             <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="4X2-HB-R7a"/>
-                            <constraint firstItem="OgB-3D-8xF" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="IRv-Xk-c2k"/>
-                            <constraint firstItem="OgB-3D-8xF" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-40" id="rdw-Zt-3Bi"/>
-                            <constraint firstItem="xTk-4T-VzE" firstAttribute="centerX" secondItem="OgB-3D-8xF" secondAttribute="centerX" id="vKv-Aq-0Qc"/>
-                            <constraint firstItem="xTk-4T-VzE" firstAttribute="top" secondItem="OgB-3D-8xF" secondAttribute="bottom" id="ve0-b0-xcM"/>
+                            <constraint firstItem="8wD-0L-79R" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="q1M-Qd-SDi"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -55,7 +42,6 @@
     </scenes>
     <resources>
         <image name="LaunchImage" width="0.5" height="0.5"/>
-        <image name="icon-60" width="60" height="60"/>
-        <image name="welcome" width="242.5" height="88.5"/>
+        <image name="launch_image" width="187" height="118"/>
     </resources>
 </document>
