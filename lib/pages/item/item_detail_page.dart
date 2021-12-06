@@ -12,7 +12,7 @@ import 'package:remember/model/item_model.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:remember/pages/item/widget/item_detail_choose_image_widget.dart';
 import 'package:remember/pages/item/widget/item_detail_tag_widget.dart';
-import 'package:remember/utils/storage_utils.dart';
+import 'package:remember/utils/item_img_cache_utils.dart';
 import 'package:remember/widget/image_preview/photo_view_gallery_screen.dart';
 import 'package:remember/widget/other/widget.dart';
 import 'package:sqflite/sqflite.dart';

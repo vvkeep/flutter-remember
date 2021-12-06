@@ -1,7 +1,7 @@
 import 'package:flustars/flustars.dart';
 import 'package:remember/manager/database_helper.dart';
 import 'package:remember/model/item_model.dart';
-import 'package:remember/utils/storage_utils.dart';
+import 'package:remember/utils/item_img_cache_utils.dart';
 
 class DataManager {
   List<CategoryModel> categoryList = [];
