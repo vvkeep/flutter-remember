@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 import 'package:remember/common/constant.dart';
 import 'package:remember/model/item_model.dart';
 
