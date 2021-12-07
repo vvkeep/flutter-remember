@@ -32,6 +32,9 @@ class DatabaseHelper {
       SQL.initTagList.forEach((e) {
         db.rawInsert(e);
       });
+      // SQL.initItemList.forEach((e) {
+      //   db.rawInsert(e);
+      // });
       await batch.commit(noResult: true);
     });
   }
@@ -107,8 +110,8 @@ extension DatabaseHelperItemExtension on DatabaseHelper {
     List<ItemModel> list = maps.isNotEmpty
         ? maps.map((v) {
             final item = ItemModel.fromJson(v);
-            item.password = EncryptUtils.decrypt(item.password);
-            item.payPassword = EncryptUtils.decrypt(item.payPassword);
+            // item.password = EncryptUtils.decrypt(item.password);
+            // item.payPassword = EncryptUtils.decrypt(item.payPassword);
             return item;
           }).toList()
         : [];

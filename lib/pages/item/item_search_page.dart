@@ -13,11 +13,12 @@ class ItemSearchPagePage extends StatefulWidget {
 
 class _ItemSearchPagePageState extends State<ItemSearchPagePage> {
   List<ItemModel> _itemList = [];
+  FocusNode focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-
+    focusNode.requestFocus();
     setState(() {
       _itemList = DataManager.shared.itemList;
     });
@@ -41,6 +42,7 @@ class _ItemSearchPagePageState extends State<ItemSearchPagePage> {
         title: Container(
           height: 38,
           child: TextField(
+            focusNode: focusNode,
             onChanged: (value) => onSearch(value),
             decoration: InputDecoration(
               filled: true,
@@ -66,7 +68,7 @@ class _ItemSearchPagePageState extends State<ItemSearchPagePage> {
         child: ListView.builder(
           itemCount: _itemList.length,
           itemBuilder: (context, index) {
-            return ItemListItemWidget(itemModel: _itemList[index]);
+            return ItemListItemWidget(itemModel: _itemList[index], index: index);
           },
         ),
       ),

@@ -6,7 +6,8 @@ import 'package:remember/model/item_model.dart';
 
 class ItemListItemWidget extends StatelessWidget {
   final ItemModel itemModel;
-  const ItemListItemWidget({Key? key, required this.itemModel}) : super(key: key);
+  final int index;
+  const ItemListItemWidget({Key? key, required this.itemModel, required this.index}) : super(key: key);
 
   Widget itemView(String key, String value, VoidCallback? onPressed) {
     return Row(
@@ -69,7 +70,7 @@ class ItemListItemWidget extends StatelessWidget {
             ),
             alignment: Alignment.center,
             width: 40,
-            child: Text('${itemModel.id}', style: RMTextStyle.biggerTextPrimaryBold),
+            child: Text('${index + 1}', style: RMTextStyle.biggerTextPrimaryBold),
           ),
           Expanded(
             child: Padding(
