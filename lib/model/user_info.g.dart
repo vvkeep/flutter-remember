@@ -11,6 +11,7 @@ UserInfo _$UserInfoFromJson(Map<String, dynamic> json) {
     isRegister: json['isRegister'] as bool,
     isLocalAuth: json['isLocalAuth'] as bool,
     password: json['password'] as String,
+    secretKey: json['secretKey'] as String,
   );
 }
 
@@ -18,4 +19,5 @@ Map<String, dynamic> _$UserInfoToJson(UserInfo instance) => <String, dynamic>{
       'isRegister': instance.isRegister,
       'isLocalAuth': instance.isLocalAuth,
       'password': instance.password,
+      'secretKey': instance.secretKey,
     };

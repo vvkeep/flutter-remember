@@ -1,5 +1,6 @@
 import 'package:remember/common/SQL.dart';
 import 'package:remember/model/item_model.dart';
+import 'package:remember/utils/encrypt_utils.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart';
@@ -18,7 +19,7 @@ class DatabaseHelper {
   _initDatabase() async {
     String path = join(await getDatabasesPath(), "remember.db");
     print('remember database path:$path');
-    // await deleteDatabase(path);
+    await deleteDatabase(path);
     return await openDatabase(path, version: 1, onCreate: (Database db, int version) async {
       await db.execute(SQL.initCategoryTable);
       await db.execute(SQL.initTagTable);
@@ -103,25 +104,47 @@ extension DatabaseHelperTagExtension on DatabaseHelper {
 extension DatabaseHelperItemExtension on DatabaseHelper {
   Future<List<ItemModel>> itemList() async {
     List<Map<String, Object?>> maps = await _db.query(SQL.tableItem);
-    List<ItemModel> list = maps.isNotEmpty ? maps.map((v) => ItemModel.fromJson(v)).toList() : [];
+    List<ItemModel> list = maps.isNotEmpty
+        ? maps.map((v) {
+            final item = ItemModel.fromJson(v);
+            item.password = EncryptUtils.decrypt(item.password);
+            item.payPassword = EncryptUtils.decrypt(item.payPassword);
+            return item;
+          }).toList()
+        : [];
     return list;
   }
 
   Future<ItemModel> selectItem(int itemId) async {
     List<Map<String, Object?>> maps = await _db.query(SQL.tableItem, where: "id = ?", whereArgs: [itemId]);
-    List<ItemModel> list = maps.isNotEmpty ? maps.map((v) => ItemModel.fromJson(v)).toList() : [];
+    List<ItemModel> list = maps.isNotEmpty
+        ? maps.map((v) {
+            final item = ItemModel.fromJson(v);
+            item.password = EncryptUtils.decrypt(item.password);
+            item.payPassword = EncryptUtils.decrypt(item.payPassword);
+            return item;
+          }).toList()
+        : [];
     return list.first;
   }
 
   Future<bool> insertItem(ItemModel itemModel) async {
+    final password = EncryptUtils.encrypt(itemModel.password);
+    final payPassword = EncryptUtils.encrypt(itemModel.payPassword);
     Map<String, dynamic> map = itemModel.toJson();
     map.remove("id");
+    map['password'] = password;
+    map['payPassword'] = payPassword;
     int id = await _db.insert(SQL.tableItem, map);
     return id != 0;
   }
 
   Future<bool> updateItem(ItemModel itemModel) async {
+    final password = EncryptUtils.encrypt(itemModel.password);
+    final payPassword = EncryptUtils.encrypt(itemModel.payPassword);
     Map<String, dynamic> map = itemModel.toJson();
+    map['password'] = password;
+    map['payPassword'] = payPassword;
     int count = await _db.update(SQL.tableItem, map, where: "id = ?", whereArgs: [itemModel.id]);
     return count == 1;
   }

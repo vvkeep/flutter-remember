@@ -14,7 +14,7 @@ class LoginManager {
   static UserInfo getUserInfo() {
     UserInfo? userInfo = SpUtil.getObj(RMConstant.LOGIN_INFO_KEY, (v) => UserInfo.fromJson(v as Map<String, dynamic>));
     if (userInfo == null) {
-      return UserInfo(isRegister: false, isLocalAuth: false);
+      return UserInfo(isRegister: false, isLocalAuth: false, password: "", secretKey: "");
     } else {
       return userInfo;
     }

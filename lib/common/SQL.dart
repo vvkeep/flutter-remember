@@ -49,15 +49,15 @@ class SQL {
 
   static List<String> initCategoryList = [
     "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('邮箱', 0, 0);",
-    "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('银行卡', 0, 0);",
-    "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('手机号', 0, 0);",
-    "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('工作', 0, 0);",
-    "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('APPLE ID', 0, 0);",
-    "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('网盘', 0, 0);",
-    "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('网站', 0, 0);",
-    "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('APP', 0, 0);",
-    "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('游戏', 0, 0);",
-    "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('其他', 0, 0);']"
+    "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('银行卡', 0, 1);",
+    "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('手机号', 0, 2);",
+    "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('工作', 0, 3);",
+    "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('APPLE ID', 0, 4);",
+    "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('网盘', 0, 5);",
+    "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('网站', 0, 6);",
+    "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('APP', 0, 7);",
+    "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('游戏', 0, 8);",
+    "INSERT INTO $tableCategory ('title', 'count', 'sort') VALUES ('其他', 0, 9);']"
   ];
 
   static List<String> initTagList = [
