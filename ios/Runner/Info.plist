@@ -23,13 +23,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>记得识别图片文字时候需要使用相机权限</string>
+	<string>APP需要您的同意，才能访问相机进行拍摄，如禁止将无法拍照拍摄图片存储</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>记得需要使用生物特征识别验证登录应用</string>
+	<string>APP需要您的同意，才能使用生物特征识别验证， 如禁止将无法使用生物特征识别验证登录应用</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>记得识别录制视频文字时需要是使用麦克风权限</string>
+	<string>App需要您的同意,才能访问麦克风进行录制音频，如禁止将无法录制音频</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>记得识别相册图片文字时需要使用相册权限</string>
+	<string>APP需要您的同意，才能访问相册进行选择照片存储，如禁止将无法储选择照片</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
