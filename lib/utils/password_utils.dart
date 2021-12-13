@@ -1,12 +1,7 @@
 import 'dart:math';
 
 class PasswordUtils {
-  static String generate(
-      {bool isLetterLowerCase = true,
-      bool isLetterUpperCase = true,
-      bool isNumber = true,
-      bool isSpecial = true,
-      int length = 20}) {
+  static String generate(bool isLetterLowerCase, bool isLetterUpperCase, bool isNumber, bool isSpecial, int length) {
     final letterLowerCase = "abcdefghijklmnopqrstuvwxyz";
     final letterUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     final number = '0123456789';

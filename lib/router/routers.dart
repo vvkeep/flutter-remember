@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:remember/pages/category/category_list_page.dart';
 import 'package:remember/pages/category/new_category_page.dart';
 import 'package:remember/pages/feature/app_feature_page.dart';
+import 'package:remember/pages/generate/generate_password_page.dart';
 import 'package:remember/pages/home/home_category_page.dart';
 import 'package:remember/pages/item/item_detail_page.dart';
 import 'package:remember/pages/item/category_item_list_page.dart';
@@ -25,6 +26,7 @@ abstract class RMRouter {
   static String tagListPage = "/tag_list_page";
   static String newTagPage = "/new_tag_page";
   static String appSettingPage = '/app_setting_page';
+  static String generatePasswordPage = "/generate_password_page";
 }
 
 abstract class AppPages {
@@ -32,7 +34,6 @@ abstract class AppPages {
     GetPage(
       name: RMRouter.homePage,
       page: () => HomeCategoryListPage(),
-      transition: Transition.fade,
     ),
     GetPage(
       name: RMRouter.appFeaturePage,
@@ -79,6 +80,10 @@ abstract class AppPages {
     GetPage(
       name: RMRouter.appSettingPage,
       page: () => AppSettingPage(),
+    ),
+    GetPage(
+      name: RMRouter.generatePasswordPage,
+      page: () => GeneratePasswordPage(),
     )
   ];
 }
