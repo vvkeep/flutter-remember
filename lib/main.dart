@@ -12,6 +12,7 @@ void main() async {
   await LoginManager.getInstance();
   await DatabaseHelper.shared.init();
   await DataManager.shared.init();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) => runApp(MyApp()));
 }
 
