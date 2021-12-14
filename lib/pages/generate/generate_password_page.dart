@@ -2,10 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 import 'package:remember/common/constant.dart';
 import 'package:remember/utils/password_utils.dart';
-import 'package:remember/widget/other/widget.dart';
 
 class GeneratePasswordPage extends StatefulWidget {
   GeneratePasswordPage({Key? key}) : super(key: key);
@@ -255,7 +253,7 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
 
   _generateBtnAction() {
     final password =
-        PasswordUtils.generate(_isLetterLowerCase, _isLetterUpperCase, _isNumber, _isSpecial, _passwordLength as Int);
+        PasswordUtils.generate(_isLetterLowerCase, _isLetterUpperCase, _isNumber, _isSpecial, _passwordLength.toInt());
     _controller.text = password;
   }
 }
