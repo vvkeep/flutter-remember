@@ -7,16 +7,17 @@ import 'package:remember/common/event_bus.dart';
 import 'package:remember/model/item_model.dart';
 import 'package:remember/pages/home/widget/home_category_item_widget.dart';
 import 'package:remember/pages/home/widget/home_search_bar_widget.dart';
-import 'package:remember/pages/home/widget/wave_animation_widget.dart';
 import 'package:remember/router/routers.dart';
 import 'package:get/get.dart';
 
-class HomeCategoryListPage extends StatefulWidget {
+class HomeAccountCategoryPage extends StatefulWidget {
   @override
-  _HomeCategoryListPageState createState() => _HomeCategoryListPageState();
+  _HomeAccountCategoryPageState createState() => _HomeAccountCategoryPageState();
 }
 
-class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
+enum HomePopActionItems { ADD, GENERATE }
+
+class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
   List<CategoryModel> categoryList = DataManager.shared.categoryList;
   List<ItemModel> itemList = DataManager.shared.itemList;
 
@@ -39,17 +40,20 @@ class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
     subscription.cancel();
   }
 
-  _buildLeftSideItem(String title, VoidCallback onTap) {
-    return ListTile(
-      title: Container(
-        alignment: Alignment.centerLeft,
-        height: 60,
-        child: Text(title, style: RMTextStyle.normalTextDarkW500),
-      ),
-      onTap: () {
-        Navigator.of(context).pop();
-        onTap();
-      },
+  _buildPopupMenuItem(IconData iconData, String title) {
+    return Row(
+      children: <Widget>[
+        Icon(
+          iconData,
+          size: 22.0,
+          color: RMColors.lightTextColor,
+        ),
+        Container(width: 12.0),
+        Text(
+          title,
+          style: TextStyle(color: RMColors.lightTextColor),
+        ),
+      ],
     );
   }
 
@@ -60,61 +64,33 @@ class _HomeCategoryListPageState extends State<HomeCategoryListPage> {
       appBar: AppBar(
         title: Text('首页'),
         elevation: 0, // 去掉Appbar底部阴影
-        actions: [
-          IconButton(
-            tooltip: '添加账号',
-            icon: Icon(Icons.add),
-            onPressed: () {
-              Get.toNamed(RMRouter.itemDetailPage);
-            },
-          )
-        ],
-      ),
-      drawer: Drawer(
-        child: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
-          child: Column(
-            children: [
-              Container(
-                height: Get.height * 0.26,
-                color: RMColors.primaryColor,
-                child: Stack(
-                  children: [
-                    Container(
-                      color: RMColors.primaryColor,
-                      width: double.infinity,
-                      height: double.infinity,
-                      child: WaveAnimaitonWidget(),
-                    ),
-                    Center(
-                      child: Text(
-                        '${itemList.length}',
-                        style: TextStyle(
-                          color: RMColors.white,
-                          fontSize: 45,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    )
-                  ],
+        actions: <Widget>[
+          PopupMenuButton(
+            itemBuilder: (BuildContext context) {
+              return <PopupMenuItem<HomePopActionItems>>[
+                PopupMenuItem(
+                  child: _buildPopupMenuItem(RMIcons.add_, "添加账号"),
+                  value: HomePopActionItems.ADD,
                 ),
-              ),
-              Divider(height: 0),
-              _buildLeftSideItem("分类管理", () {
-                Get.toNamed(RMRouter.categoryListPage);
-              }),
-              Divider(height: 0),
-              _buildLeftSideItem("标签管理", () {
-                Get.toNamed(RMRouter.tagListPage);
-              }),
-              Divider(height: 0),
-              _buildLeftSideItem("安全设置", () {
-                Get.toNamed(RMRouter.appSettingPage);
-              }),
-              Divider(height: 0),
-            ],
+                PopupMenuItem(
+                  child: _buildPopupMenuItem(RMIcons.key, "生成密码"),
+                  value: HomePopActionItems.GENERATE,
+                ),
+              ];
+            },
+            icon: Icon(
+              RMIcons.add_border,
+              size: 22.0,
+            ),
+            onSelected: (HomePopActionItems selected) {
+              if (selected == HomePopActionItems.ADD) {
+                Get.toNamed(RMRouter.itemDetailPage);
+              } else {
+                Get.toNamed(RMRouter.generatePasswordPage);
+              }
+            },
           ),
-        ),
+        ],
       ),
       body: CustomScrollView(
         slivers: [

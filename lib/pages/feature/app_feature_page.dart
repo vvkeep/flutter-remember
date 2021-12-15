@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:remember/common/constant.dart';
-import 'package:remember/model/app_feature_item_model.dart';
+import 'package:remember/model/models.dart';
 import 'dart:math';
 
 import 'package:remember/router/routers.dart';

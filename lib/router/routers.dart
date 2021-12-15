@@ -3,18 +3,20 @@ import 'package:remember/pages/category/category_list_page.dart';
 import 'package:remember/pages/category/new_category_page.dart';
 import 'package:remember/pages/feature/app_feature_page.dart';
 import 'package:remember/pages/generate/generate_password_page.dart';
-import 'package:remember/pages/home/home_category_page.dart';
+import 'package:remember/pages/home/home_account_category_page.dart';
 import 'package:remember/pages/item/item_detail_page.dart';
 import 'package:remember/pages/item/category_item_list_page.dart';
 import 'package:remember/pages/item/item_search_page.dart';
 import 'package:remember/pages/login/login_page.dart';
 import 'package:remember/pages/login/register_page.dart';
+import 'package:remember/pages/main/app_main_page.dart';
 import 'package:remember/pages/setting/app_setting_page.dart';
 import 'package:remember/pages/tag/new_tag_page.dart';
 import 'package:remember/pages/tag/tag_list_page.dart';
 
 abstract class RMRouter {
-  static String homePage = "/";
+  static String mianPage = "/";
+  static String homeCategoryPage = "/home_category_page";
   static String appFeaturePage = "/app_feature_apge";
   static String itemListPage = "/item_list_page";
   static String searchPage = "/search_page";
@@ -32,8 +34,12 @@ abstract class RMRouter {
 abstract class AppPages {
   static final pages = [
     GetPage(
-      name: RMRouter.homePage,
-      page: () => HomeCategoryListPage(),
+      name: RMRouter.mianPage,
+      page: () => AppMainPage(),
+    ),
+    GetPage(
+      name: RMRouter.homeCategoryPage,
+      page: () => HomeAccountCategoryPage(),
     ),
     GetPage(
       name: RMRouter.appFeaturePage,

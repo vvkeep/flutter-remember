@@ -135,6 +135,10 @@ class RMIcons {
   static const IconData touchId = const IconData(0xe690, fontFamily: RMIcons.FONT_FAMILY);
   static const IconData irisId = const IconData(0xe60c, fontFamily: RMIcons.FONT_FAMILY);
 
+  static const IconData add_border = const IconData(0xe657, fontFamily: RMIcons.FONT_FAMILY);
+  static const IconData add_ = const IconData(0xe622, fontFamily: RMIcons.FONT_FAMILY);
+  static const IconData key = const IconData(0xe627, fontFamily: RMIcons.FONT_FAMILY);
+
   static const IconData PUSH_ITEM_EDIT = Icons.mode_edit;
   static const IconData PUSH_ITEM_ADD = Icons.add_box;
   static const IconData PUSH_ITEM_MIN = Icons.indeterminate_check_box;
