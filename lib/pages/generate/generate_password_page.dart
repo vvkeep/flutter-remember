@@ -13,7 +13,7 @@ class GeneratePasswordPage extends StatefulWidget {
 }
 
 class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
-  double _passwordLength = 0;
+  double _passwordLength = 16;
   bool _isLetterLowerCase = true;
   bool _isLetterUpperCase = true;
   bool _isSpecial = true;
@@ -119,11 +119,11 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
                     ),
                     Expanded(
                       child: Slider(
-                        label: "$_passwordLength",
+                        label: "${_passwordLength.toInt()}",
                         divisions: 10,
                         value: _passwordLength,
-                        min: 6,
-                        max: 46,
+                        min: 10,
+                        max: 20,
                         onChanged: (value) {
                           setState(() {
                             _passwordLength = value;
