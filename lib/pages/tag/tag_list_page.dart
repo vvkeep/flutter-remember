@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/manager/data_manager.dart';
-import 'package:remember/router/routers.dart';
-import 'package:remember/widget/other/widget.dart';
-import 'package:remember/model/item_model.dart';
-import 'package:remember/pages/tag/widget/tag_list_item_widget.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/manager/data_manager.dart';
+import 'package:iron_box/router/routers.dart';
+import 'package:iron_box/widget/other/widget.dart';
+import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/pages/tag/widget/tag_list_item_widget.dart';
 import 'package:get/get.dart';
 
 class TagListPage extends StatefulWidget {
@@ -16,7 +16,7 @@ class TagListPage extends StatefulWidget {
 }
 
 class _TagListPageState extends State<TagListPage> {
-  List<TagModel> tagList = DataManager.shared.tagList;
+  List<TagModel> tagList = DataManager.shared.accTagList;
 
   @override
   void initState() {
@@ -26,7 +26,7 @@ class _TagListPageState extends State<TagListPage> {
 
   loadData() async {
     setState(() {
-      this.tagList = DataManager.shared.tagList;
+      this.tagList = DataManager.shared.accTagList;
     });
   }
 
@@ -47,7 +47,7 @@ class _TagListPageState extends State<TagListPage> {
                 },
               };
 
-              Get.toNamed(RMRouter.newTagPage, arguments: args);
+              Get.toNamed(APPRouter.newTagPage, arguments: args);
             },
           )
         ],
@@ -76,7 +76,7 @@ class _TagListPageState extends State<TagListPage> {
                   },
                   "tag": tag
                 };
-                Get.toNamed(RMRouter.newTagPage, arguments: args);
+                Get.toNamed(APPRouter.newTagPage, arguments: args);
               },
               child: TagListItemWidget(tagModel: tag),
             ),

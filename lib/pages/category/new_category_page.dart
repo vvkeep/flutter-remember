@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/manager/data_manager.dart';
-import 'package:remember/model/item_model.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/manager/data_manager.dart';
+import 'package:iron_box/model/item_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class NewCategoryPage extends StatefulWidget {
@@ -91,7 +91,7 @@ class _NewCategoryPageState extends State<NewCategoryPage> {
                       await DataManager.shared.updateCategory(categoryModel!);
                       Fluttertoast.showToast(msg: '编辑成功', gravity: ToastGravity.TOP);
                     } else {
-                      await DataManager.shared.addCategory(name);
+                      await DataManager.shared.addCategory(name, 0);
                       Fluttertoast.showToast(msg: '添加成功', gravity: ToastGravity.TOP);
                     }
                     categoryChangedCallback!();

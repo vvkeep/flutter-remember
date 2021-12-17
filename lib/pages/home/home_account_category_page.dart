@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/manager/data_manager.dart';
-import 'package:remember/common/event_bus.dart';
-import 'package:remember/model/item_model.dart';
-import 'package:remember/pages/home/widget/home_category_item_widget.dart';
-import 'package:remember/pages/home/widget/home_search_bar_widget.dart';
-import 'package:remember/router/routers.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/manager/data_manager.dart';
+import 'package:iron_box/common/event_bus.dart';
+import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/pages/home/widget/home_category_item_widget.dart';
+import 'package:iron_box/pages/home/widget/home_search_bar_widget.dart';
+import 'package:iron_box/router/routers.dart';
 import 'package:get/get.dart';
 
 class HomeAccountCategoryPage extends StatefulWidget {
@@ -18,8 +18,8 @@ class HomeAccountCategoryPage extends StatefulWidget {
 enum HomePopActionItems { ADD, GENERATE }
 
 class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
-  List<CategoryModel> categoryList = DataManager.shared.categoryList;
-  List<ItemModel> itemList = DataManager.shared.itemList;
+  List<CategoryModel> categoryList = DataManager.shared.accCateList;
+  List<ItemModel> itemList = DataManager.shared.accountList;
 
   late StreamSubscription<CategoryListEvent> subscription;
 
@@ -28,8 +28,8 @@ class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
     super.initState();
     subscription = eventBus.on<CategoryListEvent>().listen((event) {
       setState(() {
-        this.categoryList = DataManager.shared.categoryList;
-        this.itemList = DataManager.shared.itemList;
+        this.categoryList = DataManager.shared.accCateList;
+        this.itemList = DataManager.shared.accountList;
       });
     });
   }
@@ -84,9 +84,9 @@ class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
             ),
             onSelected: (HomePopActionItems selected) {
               if (selected == HomePopActionItems.ADD) {
-                Get.toNamed(RMRouter.itemDetailPage);
+                Get.toNamed(APPRouter.itemDetailPage);
               } else {
-                Get.toNamed(RMRouter.generatePasswordPage);
+                Get.toNamed(APPRouter.generatePasswordPage);
               }
             },
           ),
@@ -97,7 +97,7 @@ class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
           SliverToBoxAdapter(
             child: HomeSearchBarWidget(
               onPressed: () {
-                Get.toNamed(RMRouter.searchPage);
+                Get.toNamed(APPRouter.searchPage);
               },
             ),
           ),
@@ -119,7 +119,7 @@ class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
                   return GestureDetector(
                     child: HomeCategoryItemWidget(categoryModel: category),
                     onTap: () {
-                      Get.toNamed(RMRouter.itemListPage, arguments: category);
+                      Get.toNamed(APPRouter.itemListPage, arguments: category);
                     },
                   );
                 },

@@ -1,12 +1,13 @@
 import 'package:flustars/flustars.dart';
-import 'package:remember/manager/database_helper.dart';
-import 'package:remember/model/item_model.dart';
-import 'package:remember/utils/item_img_cache_utils.dart';
+import 'package:iron_box/manager/database_helper.dart';
+import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/utils/item_img_cache_utils.dart';
 
 class DataManager {
-  List<CategoryModel> categoryList = [];
-  List<TagModel> tagList = [];
-  List<ItemModel> itemList = [];
+  List<CategoryModel> accountCategoryList = [];
+  List<CategoryModel> photoCategoryList = [];
+  List<TagModel> accountTagList = [];
+  List<ItemModel> accountList = [];
 
   DataManager._privateConstructor();
 
@@ -17,16 +18,18 @@ class DataManager {
   }
 
   init() async {
-    this.categoryList = await DatabaseHelper.shared.categoryList();
-    this.tagList = await DatabaseHelper.shared.tagList();
-    this.itemList = await DatabaseHelper.shared.itemList();
+    this.accountCategoryList = await DatabaseHelper.shared.categoryList(0);
+    this.photoCategoryList = await DatabaseHelper.shared.categoryList(0);
+    this.accountTagList = await DatabaseHelper.shared.tagList();
+    this.accountList = await DatabaseHelper.shared.itemList();
   }
 }
 
 extension DataManagerCategoryExtension on DataManager {
-  addCategory(String name) async {
-    await DatabaseHelper.shared.insertCategory(name);
-    this.categoryList = await DatabaseHelper.shared.categoryList();
+  /// type: 0 account, 1 photo
+  addCategory(String name, int type) async {
+    await DatabaseHelper.shared.insertCategory(name, type);
+    this.accountCategoryList = await DatabaseHelper.shared.categoryList(type);
   }
 
   updateCategory(CategoryModel categoryModel) async {
@@ -35,19 +38,20 @@ extension DataManagerCategoryExtension on DataManager {
 
   removeCategory(int id) async {
     await DatabaseHelper.shared.deleteCategory(id);
-    categoryList.removeWhere((category) => category.id == id);
+    accountCategoryList.removeWhere((category) => category.id == id);
   }
 
   swapCategorySort(oldIndex, newIndex) async {
     if (oldIndex < newIndex) {
       newIndex -= 1;
     }
-    var item = categoryList.removeAt(oldIndex);
-    categoryList.insert(newIndex, item);
 
-    for (int i = 0; i < categoryList.length; i++) {
-      categoryList[i].sort = i;
-      await DatabaseHelper.shared.updateCategory(categoryList[i]);
+    var item = accountCategoryList.removeAt(oldIndex);
+    accountCategoryList.insert(newIndex, item);
+
+    for (int i = 0; i < accountCategoryList.length; i++) {
+      accountCategoryList[i].sort = i;
+      await DatabaseHelper.shared.updateCategory(accountCategoryList[i]);
     }
   }
 }
@@ -55,7 +59,7 @@ extension DataManagerCategoryExtension on DataManager {
 extension DataManagerTagExtension on DataManager {
   addTag(String name) async {
     await DatabaseHelper.shared.insertTag(name);
-    this.tagList = await DatabaseHelper.shared.tagList();
+    this.accountTagList = await DatabaseHelper.shared.tagList();
   }
 
   updateTag(TagModel tagModel) async {
@@ -64,19 +68,20 @@ extension DataManagerTagExtension on DataManager {
 
   removeTag(int id) async {
     await DatabaseHelper.shared.deleteTag(id);
-    tagList.removeWhere((tag) => tag.id == id);
+    accountTagList.removeWhere((tag) => tag.id == id);
   }
 
   swapTagSort(oldIndex, newIndex) async {
     if (oldIndex < newIndex) {
       newIndex -= 1;
     }
-    var item = tagList.removeAt(oldIndex);
-    tagList.insert(newIndex, item);
 
-    for (int i = 0; i < tagList.length; i++) {
-      tagList[i].sort = i;
-      await DatabaseHelper.shared.updateTag(tagList[i]);
+    var item = accountTagList.removeAt(oldIndex);
+    accountTagList.insert(newIndex, item);
+
+    for (int i = 0; i < accountTagList.length; i++) {
+      accountTagList[i].sort = i;
+      await DatabaseHelper.shared.updateTag(accountTagList[i]);
     }
   }
 }

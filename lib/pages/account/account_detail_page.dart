@@ -4,27 +4,27 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/common/event_bus.dart';
-import 'package:remember/manager/data_manager.dart';
-import 'package:remember/model/img_model.dart';
-import 'package:remember/model/item_model.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/common/event_bus.dart';
+import 'package:iron_box/manager/data_manager.dart';
+import 'package:iron_box/model/img_model.dart';
+import 'package:iron_box/model/item_model.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:remember/pages/item/widget/item_detail_choose_image_widget.dart';
-import 'package:remember/pages/item/widget/item_detail_tag_widget.dart';
-import 'package:remember/utils/item_img_cache_utils.dart';
-import 'package:remember/widget/image_preview/photo_view_gallery_screen.dart';
-import 'package:remember/widget/other/widget.dart';
+import 'package:iron_box/pages/account/widget/account_detail_choose_image_widget.dart';
+import 'package:iron_box/pages/account/widget/account_detail_tag_widget.dart';
+import 'package:iron_box/utils/item_img_cache_utils.dart';
+import 'package:iron_box/widget/image_preview/photo_view_gallery_screen.dart';
+import 'package:iron_box/widget/other/widget.dart';
 import 'package:sqflite/sqflite.dart';
 
-class ItemDetailPage extends StatefulWidget {
-  ItemDetailPage({Key? key}) : super(key: key);
+class AccountDetailPage extends StatefulWidget {
+  AccountDetailPage({Key? key}) : super(key: key);
 
   @override
-  _ItemDetailPageState createState() => _ItemDetailPageState();
+  _AccountDetailPageState createState() => _AccountDetailPageState();
 }
 
-class _ItemDetailPageState extends State<ItemDetailPage> {
+class _AccountDetailPageState extends State<AccountDetailPage> {
   ItemModel itemModel = ItemModel(id: -1, categoryId: -1, account: '', title: '');
 
   final FocusNode _accountNode = FocusNode();
@@ -42,8 +42,8 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   final _picker = ImagePicker();
 
   List<RMPickImageItem> _pickedList = [RMPickImageItem(path: 'assets/imgs/add_img.png', type: PickImageMediaType.add)];
-  List<CategoryModel> _categoryList = DataManager.shared.categoryList;
-  List<TagModel> _tagList = DataManager.shared.tagList;
+  List<CategoryModel> _categoryList = DataManager.shared.accountCategoryList;
+  List<TagModel> _tagList = DataManager.shared.accountTagList;
 
   String get _chooseCategoryValueText {
     return this.itemModel.categoryId == -1
@@ -340,7 +340,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                 ),
                 SizedBox(height: 10),
                 _buildSectionTitleView("附件图片"),
-                ItemDetailChooseImageWidget(
+                AccountDetailChooseImageWidget(
                   itemList: this._pickedList,
                   callback: (item, index) {
                     if (item.type == PickImageMediaType.add) {

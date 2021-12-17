@@ -1,6 +1,6 @@
 import 'package:encrypt/encrypt.dart';
 import 'package:flustars/flustars.dart';
-import 'package:remember/manager/login_manager.dart';
+import 'package:iron_box/manager/login_manager.dart';
 
 class EncryptUtils {
   static String encrypt(String? text) {

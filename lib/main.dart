@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:remember/manager/data_manager.dart';
-import 'package:remember/manager/login_manager.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/manager/database_helper.dart';
-import 'package:remember/router/routers.dart';
+import 'package:iron_box/manager/data_manager.dart';
+import 'package:iron_box/manager/login_manager.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/manager/database_helper.dart';
+import 'package:iron_box/router/routers.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LoginManager.getInstance();
   await DatabaseHelper.shared.init();
   await DataManager.shared.init();
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent));
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) => runApp(MyApp()));
 }
 
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       // initialRoute: LoginManager.isRegisted() ? RMRouter.loginPage : RMRouter.appFeaturePage,
-      initialRoute: RMRouter.mianPage,
+      initialRoute: APPRouter.mianPage,
       theme: ThemeData(primaryColor: APPColors.primaryColor),
       defaultTransition: Transition.native,
       getPages: AppPages.pages,

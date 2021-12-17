@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/utils/password_utils.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/utils/password_utils.dart';
 
 class GeneratePasswordPage extends StatefulWidget {
   GeneratePasswordPage({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/model/item_model.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/model/item_model.dart';
 
 class ItemDetailTagWidget extends StatefulWidget {
   final TagModel tag;

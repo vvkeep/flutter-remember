@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/manager/data_manager.dart';
-import 'package:remember/model/item_model.dart';
-import 'package:remember/pages/home/widget/wave_animation_widget.dart';
-import 'package:remember/router/routers.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/manager/data_manager.dart';
+import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/pages/home/widget/wave_animation_widget.dart';
+import 'package:iron_box/router/routers.dart';
 
 class HomeProfilePage extends StatefulWidget {
   HomeProfilePage({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class HomeProfilePage extends StatefulWidget {
 }
 
 class _HomeProfilePageState extends State<HomeProfilePage> {
-  List<ItemModel> itemList = DataManager.shared.itemList;
+  List<ItemModel> itemList = DataManager.shared.accountList;
 
   _buildLeftSideItem(String title, VoidCallback onTap) {
     return ListTile(
@@ -64,15 +64,15 @@ class _HomeProfilePageState extends State<HomeProfilePage> {
               ),
               Divider(height: 0),
               _buildLeftSideItem("分类管理", () {
-                Get.toNamed(RMRouter.categoryListPage);
+                Get.toNamed(APPRouter.categoryListPage);
               }),
               Divider(height: 0),
               _buildLeftSideItem("标签管理", () {
-                Get.toNamed(RMRouter.tagListPage);
+                Get.toNamed(APPRouter.tagListPage);
               }),
               Divider(height: 0),
               _buildLeftSideItem("安全设置", () {
-                Get.toNamed(RMRouter.appSettingPage);
+                Get.toNamed(APPRouter.appSettingPage);
               }),
               Divider(height: 0),
             ],

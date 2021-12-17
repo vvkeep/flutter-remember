@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/instance_manager.dart';
-import 'package:remember/common/constant.dart';
+import 'package:iron_box/common/constant.dart';
 import 'package:get/get.dart';
-import 'package:remember/manager/login_manager.dart';
-import 'package:remember/pages/login/widget/input_password_field.dart';
-import 'package:remember/router/routers.dart';
+import 'package:iron_box/manager/login_manager.dart';
+import 'package:iron_box/pages/login/widget/input_password_field.dart';
+import 'package:iron_box/router/routers.dart';
 import 'package:local_auth/local_auth.dart';
 
 class LoginPage extends StatefulWidget {
@@ -127,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                     }
 
                     Fluttertoast.showToast(msg: '登录成功', gravity: ToastGravity.TOP);
-                    Get.offAllNamed(RMRouter.homeCategoryPage);
+                    Get.offAllNamed(APPRouter.homeCategoryPage);
                   },
                 ),
                 Visibility(
@@ -208,7 +208,7 @@ class _LoginPageState extends State<LoginPage> {
           localizedReason: '请进行身份验证以登录应用', useErrorDialogs: false, stickyAuth: true, biometricOnly: true);
       if (authenticated) {
         Fluttertoast.showToast(msg: '登录成功', gravity: ToastGravity.TOP);
-        Get.offAllNamed(RMRouter.homeCategoryPage);
+        Get.offAllNamed(APPRouter.homeCategoryPage);
       }
     } on PlatformException catch (e) {
       printInfo(info: "${e.message}");

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/model/img_model.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/model/img_model.dart';
 
 // ignore: must_be_immutable
-class ItemDetailChooseImageWidget extends StatefulWidget {
+class AccountDetailChooseImageWidget extends StatefulWidget {
   void Function(RMPickImageItem item, int index) callback;
 
   List<RMPickImageItem> itemList;
 
-  ItemDetailChooseImageWidget({Key? key, required this.itemList, required this.callback}) : super(key: key);
+  AccountDetailChooseImageWidget({Key? key, required this.itemList, required this.callback}) : super(key: key);
 
   @override
-  _ItemDetailChooseImageWidgetState createState() => _ItemDetailChooseImageWidgetState();
+  _AccountDetailChooseImageWidgetState createState() => _AccountDetailChooseImageWidgetState();
 }
 
-class _ItemDetailChooseImageWidgetState extends State<ItemDetailChooseImageWidget> {
+class _AccountDetailChooseImageWidgetState extends State<AccountDetailChooseImageWidget> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width - 20;

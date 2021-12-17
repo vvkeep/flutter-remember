@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/model/models.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/model/models.dart';
 import 'dart:math';
 
-import 'package:remember/router/routers.dart';
+import 'package:iron_box/router/routers.dart';
 import 'package:get/get.dart';
 
 class AppFeaturePage extends StatefulWidget {
@@ -134,7 +134,7 @@ class _AppFeaturePageState extends State<AppFeaturePage> {
                 ),
                 onPressed: () {
                   if (liquidController.currentPage + 1 > dataList.length - 1) {
-                    Get.offNamed(RMRouter.registerPage);
+                    Get.offNamed(APPRouter.registerPage);
                   } else {
                     liquidController.jumpToPage(page: liquidController.currentPage + 1);
                   }

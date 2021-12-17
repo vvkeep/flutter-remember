@@ -2,12 +2,12 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/instance_manager.dart';
-import 'package:remember/common/constant.dart';
+import 'package:iron_box/common/constant.dart';
 import 'package:get/get.dart';
-import 'package:remember/manager/login_manager.dart';
-import 'package:remember/model/user_info.dart';
-import 'package:remember/pages/login/widget/input_password_field.dart';
-import 'package:remember/router/routers.dart';
+import 'package:iron_box/manager/login_manager.dart';
+import 'package:iron_box/model/user_info.dart';
+import 'package:iron_box/pages/login/widget/input_password_field.dart';
+import 'package:iron_box/router/routers.dart';
 import 'package:uuid/uuid.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -135,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     final digest = EncryptUtil.encodeMd5(Uuid().v4());
                     userInfo.secretKey = digest.toString();
                     LoginManager.saveUserInfo(userInfo);
-                    Get.offAllNamed(RMRouter.homeCategoryPage);
+                    Get.offAllNamed(APPRouter.homeCategoryPage);
                   },
                 ),
               ],

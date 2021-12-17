@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/model/item_model.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/model/item_model.dart';
 
-class ItemListItemWidget extends StatelessWidget {
+class AccountListItemWidget extends StatelessWidget {
   final ItemModel itemModel;
   final int index;
-  const ItemListItemWidget({Key? key, required this.itemModel, required this.index}) : super(key: key);
+  const AccountListItemWidget({Key? key, required this.itemModel, required this.index}) : super(key: key);
 
   Widget itemView(String key, String value, VoidCallback? onPressed) {
     return Row(

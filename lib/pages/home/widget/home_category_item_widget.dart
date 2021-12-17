@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/model/item_model.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/model/item_model.dart';
 
 class HomeCategoryItemWidget extends StatelessWidget {
   final CategoryModel categoryModel;

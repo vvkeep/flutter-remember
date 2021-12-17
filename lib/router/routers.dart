@@ -1,20 +1,20 @@
 import 'package:get/get.dart';
-import 'package:remember/pages/category/category_list_page.dart';
-import 'package:remember/pages/category/new_category_page.dart';
-import 'package:remember/pages/feature/app_feature_page.dart';
-import 'package:remember/pages/generate/generate_password_page.dart';
-import 'package:remember/pages/home/home_account_category_page.dart';
-import 'package:remember/pages/item/item_detail_page.dart';
-import 'package:remember/pages/item/category_item_list_page.dart';
-import 'package:remember/pages/item/item_search_page.dart';
-import 'package:remember/pages/login/login_page.dart';
-import 'package:remember/pages/login/register_page.dart';
-import 'package:remember/pages/main/app_main_page.dart';
-import 'package:remember/pages/setting/app_setting_page.dart';
-import 'package:remember/pages/tag/new_tag_page.dart';
-import 'package:remember/pages/tag/tag_list_page.dart';
+import 'package:iron_box/pages/category/category_list_page.dart';
+import 'package:iron_box/pages/category/new_category_page.dart';
+import 'package:iron_box/pages/feature/app_feature_page.dart';
+import 'package:iron_box/pages/generate/generate_password_page.dart';
+import 'package:iron_box/pages/home/home_account_category_page.dart';
+import 'package:iron_box/pages/account/account_detail_page.dart';
+import 'package:iron_box/pages/account/account_category_list_page.dart';
+import 'package:iron_box/pages/account/account_search_page.dart';
+import 'package:iron_box/pages/login/login_page.dart';
+import 'package:iron_box/pages/login/register_page.dart';
+import 'package:iron_box/pages/main/app_main_page.dart';
+import 'package:iron_box/pages/setting/app_setting_page.dart';
+import 'package:iron_box/pages/tag/new_tag_page.dart';
+import 'package:iron_box/pages/tag/tag_list_page.dart';
 
-abstract class RMRouter {
+abstract class APPRouter {
   static String mianPage = "/";
   static String homeCategoryPage = "/home_category_page";
   static String appFeaturePage = "/app_feature_apge";
@@ -34,61 +34,61 @@ abstract class RMRouter {
 abstract class AppPages {
   static final pages = [
     GetPage(
-      name: RMRouter.mianPage,
+      name: APPRouter.mianPage,
       page: () => AppMainPage(),
     ),
     GetPage(
-      name: RMRouter.homeCategoryPage,
+      name: APPRouter.homeCategoryPage,
       page: () => HomeAccountCategoryPage(),
     ),
     GetPage(
-      name: RMRouter.appFeaturePage,
+      name: APPRouter.appFeaturePage,
       page: () => AppFeaturePage(),
     ),
     GetPage(
-      name: RMRouter.itemListPage,
-      page: () => CategoryItemListPage(),
+      name: APPRouter.itemListPage,
+      page: () => AccountCategoryListPage(),
     ),
     GetPage(
-      name: RMRouter.searchPage,
-      page: () => ItemSearchPagePage(),
+      name: APPRouter.searchPage,
+      page: () => AccountSearchPagePage(),
       transition: Transition.fade,
     ),
     GetPage(
-      name: RMRouter.itemDetailPage,
-      page: () => ItemDetailPage(),
+      name: APPRouter.itemDetailPage,
+      page: () => AccountDetailPage(),
     ),
     GetPage(
-      name: RMRouter.loginPage,
+      name: APPRouter.loginPage,
       page: () => LoginPage(),
     ),
     GetPage(
-      name: RMRouter.registerPage,
+      name: APPRouter.registerPage,
       page: () => RegisterPage(),
       transition: Transition.fadeIn,
     ),
     GetPage(
-      name: RMRouter.categoryListPage,
+      name: APPRouter.categoryListPage,
       page: () => CategoryListPage(),
     ),
     GetPage(
-      name: RMRouter.newCategoryPage,
+      name: APPRouter.newCategoryPage,
       page: () => NewCategoryPage(),
     ),
     GetPage(
-      name: RMRouter.tagListPage,
+      name: APPRouter.tagListPage,
       page: () => TagListPage(),
     ),
     GetPage(
-      name: RMRouter.newTagPage,
+      name: APPRouter.newTagPage,
       page: () => NewTagPage(),
     ),
     GetPage(
-      name: RMRouter.appSettingPage,
+      name: APPRouter.appSettingPage,
       page: () => AppSettingPage(),
     ),
     GetPage(
-      name: RMRouter.generatePasswordPage,
+      name: APPRouter.generatePasswordPage,
       page: () => GeneratePasswordPage(),
     )
   ];

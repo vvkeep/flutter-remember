@@ -1,6 +1,6 @@
-import 'package:remember/common/SQL.dart';
-import 'package:remember/model/item_model.dart';
-import 'package:remember/utils/encrypt_utils.dart';
+import 'package:iron_box/common/SQL.dart';
+import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/utils/encrypt_utils.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart';
@@ -41,14 +41,15 @@ class DatabaseHelper {
 }
 
 extension DatabaseHelperCategoryExtension on DatabaseHelper {
-  Future<List<CategoryModel>> categoryList() async {
-    List<Map<String, Object?>> maps = await _db.query(SQL.tableCategory, orderBy: "sort ASC, id DESC");
+  Future<List<CategoryModel>> categoryList(int type) async {
+    List<Map<String, Object?>> maps =
+        await _db.query(SQL.tableCategory, where: "type = ?", whereArgs: [type], orderBy: "sort ASC, id DESC");
     List<CategoryModel> list = maps.isNotEmpty ? maps.map((v) => CategoryModel.fromJson(v)).toList() : [];
     return list;
   }
 
-  Future<int> insertCategory(String title) async {
-    Map<String, dynamic> map = {'title': title, 'count': 0, 'sort': 0};
+  Future<int> insertCategory(String title, int type) async {
+    Map<String, dynamic> map = {'title': title, 'count': 0, 'sort': 0, 'type': type};
     return _db.insert(SQL.tableCategory, map);
   }
 

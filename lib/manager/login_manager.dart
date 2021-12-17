@@ -1,5 +1,5 @@
-import 'package:remember/common/constant.dart';
-import 'package:remember/model/user_info.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/model/user_info.dart';
 import 'package:sp_util/sp_util.dart';
 
 class LoginManager {

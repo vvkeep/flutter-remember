@@ -47,8 +47,9 @@ class CategoryModel {
   String title;
   int count;
   int sort;
+  int type;
 
-  CategoryModel({required this.id, required this.title, required this.count, required this.sort});
+  CategoryModel({required this.id, required this.title, required this.count, required this.sort, required this.type});
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) => _$CategoryModelFromJson(json);
   Map<String, dynamic> toJson() => _$CategoryModelToJson(this);

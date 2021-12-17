@@ -1,5 +1,5 @@
 import 'package:event_bus/event_bus.dart';
-import 'package:remember/model/item_model.dart';
+import 'package:iron_box/model/item_model.dart';
 
 EventBus eventBus = EventBus();
 

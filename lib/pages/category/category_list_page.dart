@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/manager/data_manager.dart';
-import 'package:remember/common/event_bus.dart';
-import 'package:remember/widget/other/widget.dart';
-import 'package:remember/model/item_model.dart';
-import 'package:remember/pages/category/widget/category_list_item_widget.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/manager/data_manager.dart';
+import 'package:iron_box/common/event_bus.dart';
+import 'package:iron_box/widget/other/widget.dart';
+import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/pages/category/widget/category_list_item_widget.dart';
 import 'package:get/get.dart';
-import 'package:remember/router/routers.dart';
+import 'package:iron_box/router/routers.dart';
 
 class CategoryListPage extends StatefulWidget {
   CategoryListPage({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class CategoryListPage extends StatefulWidget {
 }
 
 class _CategoryListPageState extends State<CategoryListPage> {
-  List<CategoryModel> categroyItems = DataManager.shared.categoryList;
+  List<CategoryModel> categroyItems = DataManager.shared.accCateList;
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
 
   loadData() async {
     setState(() {
-      this.categroyItems = DataManager.shared.categoryList;
+      this.categroyItems = DataManager.shared.accCateList;
     });
   }
 
@@ -49,7 +49,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
                 },
               };
 
-              Get.toNamed(RMRouter.newCategoryPage, arguments: args);
+              Get.toNamed(APPRouter.newCategoryPage, arguments: args);
             },
           )
         ],
@@ -78,7 +78,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
                   },
                   "category": category
                 };
-                Get.toNamed(RMRouter.newCategoryPage, arguments: args);
+                Get.toNamed(APPRouter.newCategoryPage, arguments: args);
               },
               child: CategoryListItemWidget(categoryModel: category),
             ),

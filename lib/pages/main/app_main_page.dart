@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/model/models.dart';
-import 'package:remember/pages/home/home_account_category_page.dart';
-import 'package:remember/pages/home/home_photo_category_page.dart';
-import 'package:remember/pages/home/home_profile_page.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/model/models.dart';
+import 'package:iron_box/pages/home/home_account_category_page.dart';
+import 'package:iron_box/pages/home/home_photo_category_page.dart';
+import 'package:iron_box/pages/home/home_profile_page.dart';
 
 class AppMainPage extends StatefulWidget {
   AppMainPage({Key? key}) : super(key: key);

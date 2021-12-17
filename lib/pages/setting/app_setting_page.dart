@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/manager/login_manager.dart';
-import 'package:remember/model/user_info.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/manager/login_manager.dart';
+import 'package:iron_box/model/user_info.dart';
 
 class AppSettingPage extends StatefulWidget {
   AppSettingPage({Key? key}) : super(key: key);

@@ -2,20 +2,20 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/common/event_bus.dart';
-import 'package:remember/manager/data_manager.dart';
-import 'package:remember/model/item_model.dart';
-import 'package:remember/pages/item/widget/item_list_item_widget.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/common/event_bus.dart';
+import 'package:iron_box/manager/data_manager.dart';
+import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/pages/account/widget/account_list_item_widget.dart';
 import 'package:get/get.dart';
-import 'package:remember/router/routers.dart';
+import 'package:iron_box/router/routers.dart';
 
-class CategoryItemListPage extends StatefulWidget {
+class AccountCategoryListPage extends StatefulWidget {
   @override
-  _CategoryItemListPageState createState() => _CategoryItemListPageState();
+  _AccountCategoryListPageState createState() => _AccountCategoryListPageState();
 }
 
-class _CategoryItemListPageState extends State<CategoryItemListPage> {
+class _AccountCategoryListPageState extends State<AccountCategoryListPage> {
   List<ItemModel> _itemList = [];
   late CategoryModel category;
 
@@ -39,7 +39,7 @@ class _CategoryItemListPageState extends State<CategoryItemListPage> {
 
   _getItemList() {
     setState(() {
-      _itemList = DataManager.shared.itemList.where((e) => e.categoryId == category.id).toList();
+      _itemList = DataManager.shared.accountList.where((e) => e.categoryId == category.id).toList();
     });
   }
 
@@ -54,7 +54,7 @@ class _CategoryItemListPageState extends State<CategoryItemListPage> {
             tooltip: '添加账号',
             icon: Icon(Icons.add),
             onPressed: () {
-              Get.toNamed(RMRouter.itemDetailPage, parameters: {'categoryId': "${category.id}"});
+              Get.toNamed(APPRouter.itemDetailPage, parameters: {'categoryId': "${category.id}"});
             },
           )
         ],
@@ -65,8 +65,8 @@ class _CategoryItemListPageState extends State<CategoryItemListPage> {
           itemCount: _itemList.length,
           itemBuilder: (context, index) {
             return GestureDetector(
-              child: ItemListItemWidget(itemModel: _itemList[index], index: index),
-              onTap: () => {Get.toNamed(RMRouter.itemDetailPage, arguments: _itemList[index])},
+              child: AccountListItemWidget(itemModel: _itemList[index], index: index),
+              onTap: () => {Get.toNamed(APPRouter.itemDetailPage, arguments: _itemList[index])},
             );
           },
         ),

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/manager/data_manager.dart';
-import 'package:remember/model/item_model.dart';
-import 'package:remember/pages/item/widget/item_list_item_widget.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/manager/data_manager.dart';
+import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/pages/account/widget/account_list_item_widget.dart';
 import 'package:get/get.dart';
 
-class ItemSearchPagePage extends StatefulWidget {
+class AccountSearchPagePage extends StatefulWidget {
   @override
-  _ItemSearchPagePageState createState() => _ItemSearchPagePageState();
+  _AccountSearchPagePageState createState() => _AccountSearchPagePageState();
 }
 
-class _ItemSearchPagePageState extends State<ItemSearchPagePage> {
+class _AccountSearchPagePageState extends State<AccountSearchPagePage> {
   List<ItemModel> _itemList = [];
   FocusNode focusNode = FocusNode();
 
@@ -20,13 +20,13 @@ class _ItemSearchPagePageState extends State<ItemSearchPagePage> {
     super.initState();
     focusNode.requestFocus();
     setState(() {
-      _itemList = DataManager.shared.itemList;
+      _itemList = DataManager.shared.accountList;
     });
   }
 
   void onSearch(String search) {
     setState(() {
-      _itemList = DataManager.shared.itemList
+      _itemList = DataManager.shared.accountList
           .where((item) => item.title.toLowerCase().contains(search) || item.account.toLowerCase().contains(search))
           .toList();
     });
@@ -68,7 +68,7 @@ class _ItemSearchPagePageState extends State<ItemSearchPagePage> {
         child: ListView.builder(
           itemCount: _itemList.length,
           itemBuilder: (context, index) {
-            return ItemListItemWidget(itemModel: _itemList[index], index: index);
+            return AccountListItemWidget(itemModel: _itemList[index], index: index);
           },
         ),
       ),
