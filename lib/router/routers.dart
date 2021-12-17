@@ -10,7 +10,7 @@ import 'package:iron_box/pages/account/account_search_page.dart';
 import 'package:iron_box/pages/login/login_page.dart';
 import 'package:iron_box/pages/login/register_page.dart';
 import 'package:iron_box/pages/main/app_main_page.dart';
-import 'package:iron_box/pages/setting/app_setting_page.dart';
+import 'package:iron_box/pages/profile/profile_page.dart';
 import 'package:iron_box/pages/tag/new_tag_page.dart';
 import 'package:iron_box/pages/tag/tag_list_page.dart';
 
@@ -85,7 +85,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: APPRouter.appSettingPage,
-      page: () => AppSettingPage(),
+      page: () => ProfilePage(),
     ),
     GetPage(
       name: APPRouter.generatePasswordPage,
