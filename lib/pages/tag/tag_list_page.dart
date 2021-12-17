@@ -16,7 +16,7 @@ class TagListPage extends StatefulWidget {
 }
 
 class _TagListPageState extends State<TagListPage> {
-  List<TagModel> tagList = DataManager.shared.accTagList;
+  List<TagModel> tagList = DataManager.shared.accountTagList;
 
   @override
   void initState() {
@@ -26,7 +26,7 @@ class _TagListPageState extends State<TagListPage> {
 
   loadData() async {
     setState(() {
-      this.tagList = DataManager.shared.accTagList;
+      this.tagList = DataManager.shared.accountTagList;
     });
   }
 
@@ -35,7 +35,10 @@ class _TagListPageState extends State<TagListPage> {
     return Scaffold(
       backgroundColor: APPColors.white,
       appBar: AppBar(
-        title: Text("标签管理"),
+        title: Text('标签管理', style: TextStyle(color: Colors.white)),
+        brightness: Brightness.dark,
+        iconTheme: IconThemeData(color: Colors.white),
+        elevation: 0, // 去掉Appbar底部阴影
         actions: [
           IconButton(
             tooltip: '添加标签',

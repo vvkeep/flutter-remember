@@ -29,7 +29,10 @@ class _NewCategoryPageState extends State<NewCategoryPage> {
     return Scaffold(
       backgroundColor: APPColors.white,
       appBar: AppBar(
-        title: Text('添加分类'),
+        title: Text('添加分类', style: TextStyle(color: Colors.white)),
+        brightness: Brightness.dark,
+        iconTheme: IconThemeData(color: Colors.white),
+        elevation: 0, // 去掉Appbar底部阴影
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,

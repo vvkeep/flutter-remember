@@ -232,10 +232,14 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
     return Scaffold(
       backgroundColor: APPColors.mainBackgroundColor,
       appBar: AppBar(
-        title: Text("添加账号"),
+        title: Text("添加账号", style: TextStyle(color: Colors.white)),
+        brightness: Brightness.dark,
+        elevation: 0, // 去掉Appbar底部阴影
+        iconTheme: IconThemeData(color: Colors.white),
         actions: [
           IconButton(
             icon: Icon(APPIcons.save),
+            color: Colors.white,
             onPressed: () {
               this._save();
             },

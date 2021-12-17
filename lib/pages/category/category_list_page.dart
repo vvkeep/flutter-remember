@@ -18,7 +18,7 @@ class CategoryListPage extends StatefulWidget {
 }
 
 class _CategoryListPageState extends State<CategoryListPage> {
-  List<CategoryModel> categroyItems = DataManager.shared.accCateList;
+  List<CategoryModel> categroyItems = DataManager.shared.accountCategoryList;
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
 
   loadData() async {
     setState(() {
-      this.categroyItems = DataManager.shared.accCateList;
+      this.categroyItems = DataManager.shared.accountCategoryList;
     });
   }
 
@@ -37,7 +37,10 @@ class _CategoryListPageState extends State<CategoryListPage> {
     return Scaffold(
       backgroundColor: APPColors.white,
       appBar: AppBar(
-        title: Text('分类管理'),
+        title: Text('分类管理', style: TextStyle(color: Colors.white)),
+        brightness: Brightness.dark,
+        iconTheme: IconThemeData(color: Colors.white),
+        elevation: 0, // 去掉Appbar底部阴影
         actions: [
           IconButton(
             tooltip: '添加账号',

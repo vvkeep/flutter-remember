@@ -31,6 +31,7 @@ class SQL {
     "title" TEXT NOT NULL,
     "count" INTEGER NOT NULL,
     "sort" INTEGER NOT NULL,
+    "type" INTEGER NOT NULL,
     CONSTRAINT "id" PRIMARY KEY ("id")
     CONSTRAINT "index_title" UNIQUE ("title") ON CONFLICT ABORT
     );
@@ -42,7 +43,6 @@ class SQL {
     "title" TEXT NOT NULL,
     "count" INTEGER NOT NULL,
     "sort" INTEGER NOT NULL,
-    "type" INTEGER NOT NULL,
     CONSTRAINT "id" PRIMARY KEY ("id")
     CONSTRAINT "index_title" UNIQUE ("title") ON CONFLICT ABORT
     );
@@ -58,7 +58,11 @@ class SQL {
     "INSERT INTO $tableCategory ('title', 'count', 'sort', 'type') VALUES ('网站', 0, 6, 0);",
     "INSERT INTO $tableCategory ('title', 'count', 'sort', 'type') VALUES ('APP', 0, 7, 0);",
     "INSERT INTO $tableCategory ('title', 'count', 'sort', 'type') VALUES ('游戏', 0, 8, 0);",
-    "INSERT INTO $tableCategory ('title', 'count', 'sort', 'type') VALUES ('其他', 0, 9), 0;']"
+    "INSERT INTO $tableCategory ('title', 'count', 'sort', 'type') VALUES ('其他', 0, 9, 0);",
+    "INSERT INTO $tableCategory ('title', 'count', 'sort', 'type') VALUES ('自拍', 0, 0, 1);",
+    "INSERT INTO $tableCategory ('title', 'count', 'sort', 'type') VALUES ('华山', 0, 1, 1);",
+    "INSERT INTO $tableCategory ('title', 'count', 'sort', 'type') VALUES ('电影', 0, 2, 1);",
+    "INSERT INTO $tableCategory ('title', 'count', 'sort', 'type') VALUES ('生活', 0, 3, 1);",
   ];
 
   static List<String> initTagList = [

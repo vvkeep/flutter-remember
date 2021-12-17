@@ -48,7 +48,10 @@ class _AccountCategoryListPageState extends State<AccountCategoryListPage> {
     return Scaffold(
       backgroundColor: APPColors.mainBackgroundColor,
       appBar: AppBar(
-        title: Text(category.title),
+        title: Text(category.title, style: TextStyle(color: Colors.white)),
+        brightness: Brightness.dark,
+        iconTheme: IconThemeData(color: Colors.white),
+        elevation: 0, // 去掉Appbar底部阴影
         actions: [
           IconButton(
             tooltip: '添加账号',

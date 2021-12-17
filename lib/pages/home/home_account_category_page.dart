@@ -18,7 +18,7 @@ class HomeAccountCategoryPage extends StatefulWidget {
 enum HomePopActionItems { ADD, GENERATE }
 
 class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
-  List<CategoryModel> categoryList = DataManager.shared.accCateList;
+  List<CategoryModel> categoryList = DataManager.shared.accountCategoryList;
   List<ItemModel> itemList = DataManager.shared.accountList;
 
   late StreamSubscription<CategoryListEvent> subscription;
@@ -28,7 +28,7 @@ class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
     super.initState();
     subscription = eventBus.on<CategoryListEvent>().listen((event) {
       setState(() {
-        this.categoryList = DataManager.shared.accCateList;
+        this.categoryList = DataManager.shared.accountCategoryList;
         this.itemList = DataManager.shared.accountList;
       });
     });
@@ -62,7 +62,8 @@ class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
     return Scaffold(
       backgroundColor: APPColors.mainBackgroundColor,
       appBar: AppBar(
-        title: Text('首页'),
+        title: Text('首页', style: TextStyle(color: Colors.white)),
+        brightness: Brightness.dark,
         elevation: 0, // 去掉Appbar底部阴影
         actions: <Widget>[
           PopupMenuButton(
@@ -80,6 +81,7 @@ class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
             },
             icon: Icon(
               APPIcons.addBorder,
+              color: Colors.white,
               size: 22.0,
             ),
             onSelected: (HomePopActionItems selected) {

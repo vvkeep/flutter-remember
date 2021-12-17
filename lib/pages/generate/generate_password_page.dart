@@ -26,7 +26,10 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
     return Scaffold(
       backgroundColor: APPColors.mainBackgroundColor,
       appBar: AppBar(
-        title: Text("密码生成"),
+        title: Text("生成密码", style: TextStyle(color: Colors.white)),
+        brightness: Brightness.dark,
+        iconTheme: IconThemeData(color: Colors.white),
+        elevation: 0, // 去掉Appbar底部阴影
       ),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
@@ -122,6 +125,7 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
                         label: "${_passwordLength.toInt()}",
                         divisions: 10,
                         value: _passwordLength,
+                        activeColor: APPColors.primaryColor,
                         min: 10,
                         max: 20,
                         onChanged: (value) {

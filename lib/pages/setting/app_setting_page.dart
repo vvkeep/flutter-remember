@@ -19,7 +19,10 @@ class _AppSettingPageState extends State<AppSettingPage> {
     return Scaffold(
       backgroundColor: APPColors.mainBackgroundColor,
       appBar: AppBar(
-        title: Text("安全设置"),
+        title: Text('安全设置', style: TextStyle(color: Colors.white)),
+        brightness: Brightness.dark,
+        iconTheme: IconThemeData(color: Colors.white),
+        elevation: 0, // 去掉Appbar底部阴影
       ),
       body: Column(
         children: [

@@ -19,7 +19,7 @@ class DatabaseHelper {
   _initDatabase() async {
     String path = join(await getDatabasesPath(), "remember.db");
     print('remember database path:$path');
-    // await deleteDatabase(path);
+    await deleteDatabase(path);
     return await openDatabase(path, version: 1, onCreate: (Database db, int version) async {
       await db.execute(SQL.initCategoryTable);
       await db.execute(SQL.initTagTable);

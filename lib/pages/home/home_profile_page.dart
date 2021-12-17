@@ -31,7 +31,9 @@ class _HomeProfilePageState extends State<HomeProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("设置"),
+        title: Text('我的', style: TextStyle(color: Colors.white)),
+        elevation: 0,
+        brightness: Brightness.dark,
       ),
       body: Container(
         child: SingleChildScrollView(

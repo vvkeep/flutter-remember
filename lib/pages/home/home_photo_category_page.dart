@@ -17,7 +17,7 @@ class HomePhotoCategoryPage extends StatefulWidget {
 }
 
 class _HomePhotoCategoryPageState extends State<HomePhotoCategoryPage> {
-  List<CategoryModel> categoryList = DataManager.shared.accCateList;
+  List<CategoryModel> categoryList = DataManager.shared.accountCategoryList;
   List<ItemModel> itemList = DataManager.shared.accountList;
 
   late StreamSubscription<CategoryListEvent> subscription;
@@ -27,7 +27,7 @@ class _HomePhotoCategoryPageState extends State<HomePhotoCategoryPage> {
     super.initState();
     subscription = eventBus.on<CategoryListEvent>().listen((event) {
       setState(() {
-        this.categoryList = DataManager.shared.accCateList;
+        this.categoryList = DataManager.shared.accountCategoryList;
         this.itemList = DataManager.shared.accountList;
       });
     });
@@ -44,7 +44,8 @@ class _HomePhotoCategoryPageState extends State<HomePhotoCategoryPage> {
     return Scaffold(
       backgroundColor: APPColors.mainBackgroundColor,
       appBar: AppBar(
-        title: Text('相册'),
+        title: Text('相册', style: TextStyle(color: Colors.white)),
+        brightness: Brightness.dark,
         elevation: 0, // 去掉Appbar底部阴影
       ),
       body: Container(

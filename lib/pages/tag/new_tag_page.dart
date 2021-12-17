@@ -29,7 +29,10 @@ class _NewTagPageState extends State<NewTagPage> {
     return Scaffold(
       // backgroundColor: APPColors.white,
       appBar: AppBar(
-        title: Text('添加标签'),
+        title: Text('添加标签', style: TextStyle(color: Colors.white)),
+        brightness: Brightness.dark,
+        iconTheme: IconThemeData(color: Colors.white),
+        elevation: 0, // 去掉Appbar底部阴影
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
