@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // initialRoute: LoginManager.isRegisted() ? RMRouter.loginPage : RMRouter.appFeaturePage,
       initialRoute: RMRouter.mianPage,
-      theme: ThemeData(primaryColor: RMColors.primaryColor),
+      theme: ThemeData(primaryColor: APPColors.primaryColor),
       defaultTransition: Transition.native,
       getPages: AppPages.pages,
     );

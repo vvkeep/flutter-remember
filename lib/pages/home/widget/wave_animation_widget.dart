@@ -69,7 +69,7 @@ class BezierPainter extends CustomPainter {
       ..strokeWidth = 1;
 
     _whitePaint = Paint()
-      ..color = RMColors.primaryColor
+      ..color = APPColors.primaryColor
       ..style = PaintingStyle.fill
       ..isAntiAlias = true
       ..strokeWidth = 1;

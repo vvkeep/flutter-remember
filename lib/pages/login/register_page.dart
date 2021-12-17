@@ -40,14 +40,14 @@ class _RegisterPageState extends State<RegisterPage> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               stops: [0.0, 1.0],
-              colors: [RMColors.primaryColor, RMColors.secondPrimaryColor],
+              colors: [APPColors.primaryColor, APPColors.secondPrimaryColor],
             ),
           ),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(height: Get.mediaQuery.padding.top + 45),
-                Text('欢迎使用记得', style: RMTextStyle.biggerTextWhiteBold),
+                Text('欢迎使用记得', style: APPTextStyle.biggerTextWhiteBold),
                 SizedBox(height: 35 + 45),
                 Stack(
                   clipBehavior: Clip.none,
@@ -55,14 +55,14 @@ class _RegisterPageState extends State<RegisterPage> {
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 15),
                       decoration: BoxDecoration(
-                        color: RMColors.white,
+                        color: APPColors.white,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       width: Get.width - 50,
                       child: Column(
                         children: [
                           SizedBox(height: 45 + 20),
-                          Text("设置登录密码", style: RMTextStyle.midTextPrimaryW500),
+                          Text("设置登录密码", style: APPTextStyle.midTextPrimaryW500),
                           SizedBox(height: 50),
                           InputPasswordField(
                             controller: passwordController,
@@ -86,11 +86,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         width: 90,
                         height: 90,
                         decoration: BoxDecoration(
-                          color: RMColors.white,
+                          color: APPColors.white,
                           borderRadius: BorderRadius.circular(90 / 2),
                           boxShadow: [
                             BoxShadow(
-                              color: RMColors.primaryColor.withOpacity(0.3),
+                              color: APPColors.primaryColor.withOpacity(0.3),
                               offset: Offset(0.0, 0.0),
                               blurRadius: 3.0,
                             )
@@ -108,10 +108,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     width: Get.width - 50,
                     height: 50,
                     decoration: BoxDecoration(
-                      color: RMColors.white,
+                      color: APPColors.white,
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: Text("确定", style: RMTextStyle.midTextPrimaryW500),
+                    child: Text("确定", style: APPTextStyle.midTextPrimaryW500),
                   ),
                   onPressed: () {
                     String password = passwordController.text;

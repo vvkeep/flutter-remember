@@ -38,7 +38,7 @@ class _ItemSearchPagePageState extends State<ItemSearchPagePage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,
-        backgroundColor: RMColors.primaryColor,
+        backgroundColor: APPColors.primaryColor,
         title: Container(
           height: 38,
           child: TextField(
@@ -48,9 +48,9 @@ class _ItemSearchPagePageState extends State<ItemSearchPagePage> {
               filled: true,
               fillColor: Colors.white,
               contentPadding: EdgeInsets.zero,
-              prefixIcon: Icon(Icons.search, color: RMColors.lightTextColor),
+              prefixIcon: Icon(Icons.search, color: APPColors.lightTextColor),
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide.none),
-              hintStyle: RMTextStyle.normalTextLight,
+              hintStyle: APPTextStyle.normalTextLight,
               hintText: '搜索标题或用户名',
             ),
           ),
@@ -60,7 +60,7 @@ class _ItemSearchPagePageState extends State<ItemSearchPagePage> {
               onPressed: () {
                 Get.back();
               },
-              child: Text("取消", style: RMTextStyle.midTextWhite))
+              child: Text("取消", style: APPTextStyle.midTextWhite))
         ],
       ),
       body: Container(

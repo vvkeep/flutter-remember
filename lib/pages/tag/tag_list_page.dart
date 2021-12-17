@@ -33,7 +33,7 @@ class _TagListPageState extends State<TagListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: RMColors.white,
+      backgroundColor: APPColors.white,
       appBar: AppBar(
         title: Text("标签管理"),
         actions: [

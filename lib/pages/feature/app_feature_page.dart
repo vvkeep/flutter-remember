@@ -21,7 +21,7 @@ class _AppFeaturePageState extends State<AppFeaturePage> {
   List<AppFeatureItemModel> dataList = [
     AppFeatureItemModel(Colors.blue, 'assets/imgs/app_feature.png', "嗨，您好！", "欢迎使用账号助手记得"),
     AppFeatureItemModel(Colors.deepPurpleAccent, 'assets/imgs/app_feature.png', "记得将致力于", "安全便捷的管理账号等重要信息"),
-    AppFeatureItemModel(RMColors.primaryColor, 'assets/imgs/app_feature.png', "欢迎留下您的宝贵建议", "它对我们非常重要！")
+    AppFeatureItemModel(APPColors.primaryColor, 'assets/imgs/app_feature.png', "欢迎留下您的宝贵建议", "它对我们非常重要！")
   ];
 
   @override
@@ -61,7 +61,7 @@ class _AppFeaturePageState extends State<AppFeaturePage> {
           LiquidSwipe.builder(
             positionSlideIcon: 0.8,
             slideIconWidget:
-                this.page == this.dataList.length - 1 ? null : Icon(Icons.arrow_back_ios, color: RMColors.white),
+                this.page == this.dataList.length - 1 ? null : Icon(Icons.arrow_back_ios, color: APPColors.white),
             waveType: WaveType.liquidReveal,
             liquidController: liquidController,
             fullTransitionValue: 880,
@@ -93,12 +93,12 @@ class _AppFeaturePageState extends State<AppFeaturePage> {
                       children: [
                         Text(
                           dataList[index].text1,
-                          style: RMTextStyle.bigTextWhiteW500,
+                          style: APPTextStyle.bigTextWhiteW500,
                         ),
                         SizedBox(height: 10),
                         Text(
                           dataList[index].text2,
-                          style: RMTextStyle.bigTextWhiteW500,
+                          style: APPTextStyle.bigTextWhiteW500,
                         )
                       ],
                     ),

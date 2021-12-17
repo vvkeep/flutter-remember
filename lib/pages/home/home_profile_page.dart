@@ -21,7 +21,7 @@ class _HomeProfilePageState extends State<HomeProfilePage> {
       title: Container(
         alignment: Alignment.centerLeft,
         height: 60,
-        child: Text(title, style: RMTextStyle.normalTextDarkW500),
+        child: Text(title, style: APPTextStyle.normalTextDarkW500),
       ),
       onTap: () => onTap(),
     );
@@ -40,11 +40,11 @@ class _HomeProfilePageState extends State<HomeProfilePage> {
             children: [
               Container(
                 height: Get.height * 0.26,
-                color: RMColors.primaryColor,
+                color: APPColors.primaryColor,
                 child: Stack(
                   children: [
                     Container(
-                      color: RMColors.primaryColor,
+                      color: APPColors.primaryColor,
                       width: double.infinity,
                       height: double.infinity,
                       child: WaveAnimaitonWidget(),
@@ -53,7 +53,7 @@ class _HomeProfilePageState extends State<HomeProfilePage> {
                       child: Text(
                         '${itemList.length}',
                         style: TextStyle(
-                          color: RMColors.white,
+                          color: APPColors.white,
                           fontSize: 45,
                           fontWeight: FontWeight.w500,
                         ),

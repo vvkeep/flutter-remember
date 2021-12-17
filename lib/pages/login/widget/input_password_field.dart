@@ -36,9 +36,9 @@ class _InputPasswordFieldState extends State<InputPasswordField> {
       decoration: InputDecoration(
         border: InputBorder.none,
         filled: true,
-        fillColor: RMColors.mainBackgroundColor,
+        fillColor: APPColors.mainBackgroundColor,
         hintText: this.widget.hintText,
-        hintStyle: RMTextStyle.normalTextLight,
+        hintStyle: APPTextStyle.normalTextLight,
         suffixIcon: IconButton(
           onPressed: () {
             this.widget.focusNode?.unfocus();

@@ -17,15 +17,15 @@ class TagListItemWidget extends StatelessWidget {
             height: 55,
             child: Row(
               children: [
-                Text('${this.tagModel.title}', style: RMTextStyle.normalTextDarkW500),
+                Text('${this.tagModel.title}', style: APPTextStyle.normalTextDarkW500),
                 Spacer(),
-                Text('${this.tagModel.count}', style: RMTextStyle.normalTextDark),
+                Text('${this.tagModel.count}', style: APPTextStyle.normalTextDark),
                 SizedBox(width: 15),
-                Icon(RMIcons.drag, color: RMColors.divideColor.withOpacity(0.5))
+                Icon(APPIcons.drag, color: APPColors.divideColor.withOpacity(0.5))
               ],
             ),
           ),
-          Divider(height: 0, color: RMColors.darkDivideColor),
+          Divider(height: 0, color: APPColors.darkDivideColor),
         ],
       ),
     );

@@ -46,7 +46,7 @@ class _CategoryItemListPageState extends State<CategoryItemListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: RMColors.mainBackgroundColor,
+      backgroundColor: APPColors.mainBackgroundColor,
       appBar: AppBar(
         title: Text(category.title),
         actions: [

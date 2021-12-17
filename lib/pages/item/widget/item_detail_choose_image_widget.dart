@@ -26,7 +26,7 @@ class _ItemDetailChooseImageWidgetState extends State<ItemDetailChooseImageWidge
       height: itemLength + 2 * itemVerMargin,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: RMColors.white,
+        color: APPColors.white,
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(5),
           bottomLeft: Radius.circular(5),
@@ -34,7 +34,7 @@ class _ItemDetailChooseImageWidgetState extends State<ItemDetailChooseImageWidge
         ),
         boxShadow: [
           BoxShadow(
-            color: RMColors.primaryColor.withOpacity(0.3),
+            color: APPColors.primaryColor.withOpacity(0.3),
             offset: Offset(2.0, 2.0),
             blurRadius: 1,
           )
@@ -57,7 +57,7 @@ class _ItemDetailChooseImageWidgetState extends State<ItemDetailChooseImageWidge
           width: itemLength,
           height: itemLength,
           decoration: BoxDecoration(
-            color: RMColors.primaryColor.withOpacity(0.1),
+            color: APPColors.primaryColor.withOpacity(0.1),
             borderRadius: BorderRadius.circular(5),
           ),
           child: _buildItemWidget(item),
@@ -90,7 +90,7 @@ class _ItemDetailChooseImageWidgetState extends State<ItemDetailChooseImageWidge
                   },
                   icon: Icon(
                     Icons.delete,
-                    color: RMColors.white,
+                    color: APPColors.white,
                   )),
             ),
           )

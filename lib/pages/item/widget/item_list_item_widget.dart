@@ -12,12 +12,12 @@ class ItemListItemWidget extends StatelessWidget {
   Widget itemView(String key, String value, VoidCallback? onPressed) {
     return Row(
       children: [
-        Text(key, style: RMTextStyle.normalTextDark),
+        Text(key, style: APPTextStyle.normalTextDark),
         SizedBox(width: 5),
         Expanded(
           child: Text(
             value,
-            style: RMTextStyle.normalTextDark,
+            style: APPTextStyle.normalTextDark,
             overflow: TextOverflow.ellipsis,
           ),
         ),
@@ -29,8 +29,8 @@ class ItemListItemWidget extends StatelessWidget {
             padding: EdgeInsets.zero,
             onPressed: onPressed,
             icon: Icon(
-              RMIcons.COPY,
-              color: RMColors.primaryColor,
+              APPIcons.copy,
+              color: APPColors.primaryColor,
             ),
           ),
         )
@@ -48,7 +48,7 @@ class ItemListItemWidget extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(5)),
         boxShadow: [
           BoxShadow(
-            color: RMColors.primaryColor.withOpacity(0.3),
+            color: APPColors.primaryColor.withOpacity(0.3),
             offset: Offset(1, 1),
             blurRadius: 0.5,
           )
@@ -62,7 +62,7 @@ class ItemListItemWidget extends StatelessWidget {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: RMColors.primaryColor.withOpacity(0.3),
+                  color: APPColors.primaryColor.withOpacity(0.3),
                   offset: Offset(1, 1),
                   blurRadius: 0.5,
                 )
@@ -70,7 +70,7 @@ class ItemListItemWidget extends StatelessWidget {
             ),
             alignment: Alignment.center,
             width: 40,
-            child: Text('${index + 1}', style: RMTextStyle.biggerTextPrimaryBold),
+            child: Text('${index + 1}', style: APPTextStyle.biggerTextPrimaryBold),
           ),
           Expanded(
             child: Padding(
@@ -79,7 +79,7 @@ class ItemListItemWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(itemModel.title, style: RMTextStyle.normalTextDarkW500),
+                  Text(itemModel.title, style: APPTextStyle.normalTextDarkW500),
                   itemView('账号:', itemModel.account, () {
                     Clipboard.setData(new ClipboardData(text: itemModel.account));
                     Fluttertoast.showToast(msg: '账号复制成功', gravity: ToastGravity.TOP);
@@ -92,7 +92,7 @@ class ItemListItemWidget extends StatelessWidget {
               ),
             ),
           ),
-          Icon(RMIcons.arrow, size: 15),
+          Icon(APPIcons.arrow, size: 15),
           SizedBox(width: 10)
         ],
       ),

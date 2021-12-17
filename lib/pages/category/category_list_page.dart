@@ -35,7 +35,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: RMColors.white,
+      backgroundColor: APPColors.white,
       appBar: AppBar(
         title: Text('分类管理'),
         actions: [

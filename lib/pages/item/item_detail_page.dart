@@ -52,11 +52,11 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   }
 
   TextStyle get _chooseCategoryValueTextStyle {
-    return this.itemModel.categoryId == -1 ? RMTextStyle.normalTextLight : RMTextStyle.normalTextDark;
+    return this.itemModel.categoryId == -1 ? APPTextStyle.normalTextLight : APPTextStyle.normalTextDark;
   }
 
   TextStyle _chooseCategoryListTextStyle(int id) {
-    return this.itemModel.categoryId == id ? RMTextStyle.normalTextDark : RMTextStyle.normalTextLight;
+    return this.itemModel.categoryId == id ? APPTextStyle.normalTextDark : APPTextStyle.normalTextLight;
   }
 
   List<String> get _currentItemTagIds {
@@ -190,7 +190,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: RMColors.divideColor,
+            color: APPColors.divideColor,
             width: 1.0,
           ),
         ),
@@ -200,7 +200,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
         focusNode: focusNode,
         decoration: InputDecoration(
           hintText: hitText,
-          hintStyle: RMTextStyle.normalTextLight,
+          hintStyle: APPTextStyle.normalTextLight,
           border: InputBorder.none,
         ),
       ),
@@ -213,29 +213,29 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
       width: 100,
       height: 35,
       decoration: BoxDecoration(
-        color: RMColors.primaryColor,
+        color: APPColors.primaryColor,
         borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
         boxShadow: [
           BoxShadow(
-            color: RMColors.primaryColor.withOpacity(0.3),
+            color: APPColors.primaryColor.withOpacity(0.3),
             offset: Offset(2.0, 2.0),
             blurRadius: 1,
           )
         ],
       ),
-      child: Text(title, style: RMTextStyle.midTextWhite),
+      child: Text(title, style: APPTextStyle.midTextWhite),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: RMColors.mainBackgroundColor,
+      backgroundColor: APPColors.mainBackgroundColor,
       appBar: AppBar(
         title: Text("添加账号"),
         actions: [
           IconButton(
-            icon: Icon(RMIcons.save),
+            icon: Icon(APPIcons.save),
             onPressed: () {
               this._save();
             },
@@ -261,11 +261,11 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                   width: double.infinity,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: RMColors.white,
+                    color: APPColors.white,
                     borderRadius: BorderRadius.circular(8),
                     boxShadow: [
                       BoxShadow(
-                        color: RMColors.primaryColor.withOpacity(0.2),
+                        color: APPColors.primaryColor.withOpacity(0.2),
                         offset: Offset(5.0, 5.0),
                         blurRadius: 3.0,
                       )
@@ -273,7 +273,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                   ),
                   child: Row(
                     children: [
-                      Text('账号分类', style: RMTextStyle.normalTextDark),
+                      Text('账号分类', style: APPTextStyle.normalTextDark),
                       Spacer(),
                       PopupMenuButton(
                         onSelected: (int? categoryId) {
@@ -298,10 +298,11 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                         child: Row(
                           children: [
                             Text(_chooseCategoryValueText, style: _chooseCategoryValueTextStyle),
-                            Icon(RMIcons.arrow,
+                            Icon(APPIcons.arrow,
                                 size: 15,
-                                color:
-                                    this.itemModel.categoryId == -1 ? RMColors.lightTextColor : RMColors.darkTextColor),
+                                color: this.itemModel.categoryId == -1
+                                    ? APPColors.lightTextColor
+                                    : APPColors.darkTextColor),
                             SizedBox(width: 10),
                           ],
                         ),
@@ -314,7 +315,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: RMColors.white,
+                    color: APPColors.white,
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(5),
                       bottomLeft: Radius.circular(5),
@@ -322,7 +323,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: RMColors.primaryColor.withOpacity(0.3),
+                        color: APPColors.primaryColor.withOpacity(0.3),
                         offset: Offset(2.0, 2.0),
                         blurRadius: 1,
                       )
@@ -344,7 +345,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                   callback: (item, index) {
                     if (item.type == PickImageMediaType.add) {
                       Get.bottomSheet(Container(
-                        color: RMColors.white,
+                        color: APPColors.white,
                         child: Wrap(
                           children: [
                             ListTile(
@@ -355,7 +356,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                                 this._choosePhoto(ImageSource.camera);
                               },
                             ),
-                            Divider(height: 0, color: RMColors.divideColor),
+                            Divider(height: 0, color: APPColors.divideColor),
                             ListTile(
                               leading: Icon(Icons.photo),
                               title: Text("相册"),
@@ -364,7 +365,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                                 this._choosePhoto(ImageSource.gallery);
                               },
                             ),
-                            Divider(height: 0, color: RMColors.divideColor),
+                            Divider(height: 0, color: APPColors.divideColor),
                             ListTile(
                               leading: Icon(Icons.cancel),
                               title: Text("退出"),
@@ -403,7 +404,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                   padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: RMColors.white,
+                    color: APPColors.white,
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(5),
                       bottomLeft: Radius.circular(5),
@@ -411,7 +412,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: RMColors.primaryColor.withOpacity(0.3),
+                        color: APPColors.primaryColor.withOpacity(0.3),
                         offset: Offset(2.0, 2.0),
                         blurRadius: 1,
                       )
@@ -452,7 +453,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                   margin: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: RMColors.white,
+                    color: APPColors.white,
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(5),
                       bottomLeft: Radius.circular(5),
@@ -460,7 +461,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: RMColors.primaryColor.withOpacity(0.3),
+                        color: APPColors.primaryColor.withOpacity(0.3),
                         offset: Offset(2.0, 2.0),
                         blurRadius: 1,
                       )
@@ -473,9 +474,9 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                       isCollapsed: true,
                       border: InputBorder.none,
                       hintText: '请输入此账号的备注',
-                      hintStyle: RMTextStyle.normalTextLight,
+                      hintStyle: APPTextStyle.normalTextLight,
                     ),
-                    style: RMTextStyle.normalTextDark,
+                    style: APPTextStyle.normalTextDark,
                     maxLines: 5,
                   ),
                 ),

@@ -17,22 +17,22 @@ class _AppSettingPageState extends State<AppSettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: RMColors.mainBackgroundColor,
+      backgroundColor: APPColors.mainBackgroundColor,
       appBar: AppBar(
         title: Text("安全设置"),
       ),
       body: Column(
         children: [
           Container(
-            color: RMColors.white,
+            color: APPColors.white,
             height: 60,
             child: Row(
               children: [
                 SizedBox(width: 15),
-                Text('生物特征识别', style: RMTextStyle.normalTextDarkW500),
+                Text('生物特征识别', style: APPTextStyle.normalTextDarkW500),
                 Expanded(child: SizedBox()),
                 CupertinoSwitch(
-                  activeColor: RMColors.primaryColor,
+                  activeColor: APPColors.primaryColor,
                   value: userInfo.isLocalAuth,
                   onChanged: (bool value) {
                     setState(() {
@@ -49,7 +49,7 @@ class _AppSettingPageState extends State<AppSettingPage> {
             padding: EdgeInsets.symmetric(horizontal: 15),
             child: Text(
               '开启后可以使用生物特征识别验证快速完成登录，设置仅对本机有效，如需修改生物识别特征，请在系统设置里操作。',
-              style: RMTextStyle.minTextDark,
+              style: APPTextStyle.minTextDark,
             ),
           )
         ],

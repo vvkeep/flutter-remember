@@ -53,14 +53,14 @@ class _LoginPageState extends State<LoginPage> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               stops: [0.0, 1.0],
-              colors: [RMColors.primaryColor, RMColors.secondPrimaryColor],
+              colors: [APPColors.primaryColor, APPColors.secondPrimaryColor],
             ),
           ),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(height: Get.mediaQuery.padding.top + 45),
-                Text('欢迎使用记得', style: RMTextStyle.biggerTextWhiteBold),
+                Text('欢迎使用记得', style: APPTextStyle.biggerTextWhiteBold),
                 SizedBox(height: 35 + 45),
                 Stack(
                   clipBehavior: Clip.none,
@@ -68,14 +68,14 @@ class _LoginPageState extends State<LoginPage> {
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 15),
                       decoration: BoxDecoration(
-                        color: RMColors.white,
+                        color: APPColors.white,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       width: Get.width - 50,
                       child: Column(
                         children: [
                           SizedBox(height: 45 + 20),
-                          Text("登录", style: RMTextStyle.midTextPrimaryW500),
+                          Text("登录", style: APPTextStyle.midTextPrimaryW500),
                           SizedBox(height: 50),
                           InputPasswordField(
                               controller: passwordController, hintText: '登录密码', focusNode: this.focusNode),
@@ -90,11 +90,11 @@ class _LoginPageState extends State<LoginPage> {
                         width: 90,
                         height: 90,
                         decoration: BoxDecoration(
-                          color: RMColors.white,
+                          color: APPColors.white,
                           borderRadius: BorderRadius.circular(90 / 2),
                           boxShadow: [
                             BoxShadow(
-                              color: RMColors.primaryColor.withOpacity(0.3),
+                              color: APPColors.primaryColor.withOpacity(0.3),
                               offset: Offset(0.0, 0.0),
                               blurRadius: 3.0,
                             )
@@ -112,10 +112,10 @@ class _LoginPageState extends State<LoginPage> {
                     width: Get.width - 50,
                     height: 50,
                     decoration: BoxDecoration(
-                      color: RMColors.white,
+                      color: APPColors.white,
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: Text("确定", style: RMTextStyle.midTextPrimaryW500),
+                    child: Text("确定", style: APPTextStyle.midTextPrimaryW500),
                   ),
                   onPressed: () {
                     String password = passwordController.text;
@@ -143,20 +143,20 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _biometricAuthWidget() {
-    IconData iconData = RMIcons.faceId;
+    IconData iconData = APPIcons.faceId;
     String authText = '';
 
     switch (authType) {
       case BiometricType.face:
-        iconData = RMIcons.faceId;
+        iconData = APPIcons.faceId;
         authText = "点击进行面容识别";
         break;
       case BiometricType.fingerprint:
-        iconData = RMIcons.touchId;
+        iconData = APPIcons.touchId;
         authText = "点击进行指纹识别";
         break;
       case BiometricType.iris:
-        iconData = RMIcons.irisId;
+        iconData = APPIcons.irisId;
         authText = "点击进行虹膜识别";
         break;
       default:
@@ -171,13 +171,13 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             Icon(
               iconData,
-              color: RMColors.primaryColor,
+              color: APPColors.primaryColor,
               size: 35,
             ),
             SizedBox(height: 10),
             Text(
               authText,
-              style: RMTextStyle.minTextWhite,
+              style: APPTextStyle.minTextWhite,
             )
           ],
         ),

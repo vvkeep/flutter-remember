@@ -46,12 +46,12 @@ class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
         Icon(
           iconData,
           size: 22.0,
-          color: RMColors.lightTextColor,
+          color: APPColors.lightTextColor,
         ),
         Container(width: 12.0),
         Text(
           title,
-          style: TextStyle(color: RMColors.lightTextColor),
+          style: TextStyle(color: APPColors.lightTextColor),
         ),
       ],
     );
@@ -60,7 +60,7 @@ class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: RMColors.mainBackgroundColor,
+      backgroundColor: APPColors.mainBackgroundColor,
       appBar: AppBar(
         title: Text('首页'),
         elevation: 0, // 去掉Appbar底部阴影
@@ -69,17 +69,17 @@ class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
             itemBuilder: (BuildContext context) {
               return <PopupMenuItem<HomePopActionItems>>[
                 PopupMenuItem(
-                  child: _buildPopupMenuItem(RMIcons.add_, "添加账号"),
+                  child: _buildPopupMenuItem(APPIcons.add_, "添加账号"),
                   value: HomePopActionItems.ADD,
                 ),
                 PopupMenuItem(
-                  child: _buildPopupMenuItem(RMIcons.key, "生成密码"),
+                  child: _buildPopupMenuItem(APPIcons.key, "生成密码"),
                   value: HomePopActionItems.GENERATE,
                 ),
               ];
             },
             icon: Icon(
-              RMIcons.add_border,
+              APPIcons.addBorder,
               size: 22.0,
             ),
             onSelected: (HomePopActionItems selected) {

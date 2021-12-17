@@ -5,19 +5,18 @@ import 'package:remember/model/item_model.dart';
 class HomeCategoryItemWidget extends StatelessWidget {
   final CategoryModel categoryModel;
 
-  const HomeCategoryItemWidget({Key? key, required this.categoryModel})
-      : super(key: key);
+  const HomeCategoryItemWidget({Key? key, required this.categoryModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       decoration: BoxDecoration(
-        color: RMColors.white,
+        color: APPColors.white,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: RMColors.primaryColor.withOpacity(0.3),
+            color: APPColors.primaryColor.withOpacity(0.3),
             offset: Offset(5.0, 5.0),
             blurRadius: 3.0,
           )
@@ -29,7 +28,7 @@ class HomeCategoryItemWidget extends StatelessWidget {
           Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: RMColors.primaryColor,
+              color: APPColors.primaryColor,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(8),
                 topRight: Radius.circular(8),
@@ -39,7 +38,7 @@ class HomeCategoryItemWidget extends StatelessWidget {
             width: double.infinity,
             child: Text(
               categoryModel.title,
-              style: RMTextStyle.normalTextWhiteBold,
+              style: APPTextStyle.normalTextWhiteBold,
             ),
           ),
           Expanded(
@@ -48,7 +47,7 @@ class HomeCategoryItemWidget extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 '${categoryModel.count}',
-                style: RMTextStyle.largeTextPrimaryBold,
+                style: APPTextStyle.largeTextPrimaryBold,
               ),
             ),
           ),

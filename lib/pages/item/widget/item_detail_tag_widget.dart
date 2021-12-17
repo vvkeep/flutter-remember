@@ -23,17 +23,17 @@ class _ItemDetailTagWidgetState extends State<ItemDetailTagWidget> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: this.widget.isSelected ? RMColors.primaryColor : null,
+          color: this.widget.isSelected ? APPColors.primaryColor : null,
           border: this.widget.isSelected
               ? null
               : Border.all(
-                  color: RMColors.primaryColor.withOpacity(0.5),
+                  color: APPColors.primaryColor.withOpacity(0.5),
                   width: 1,
                 ),
         ),
         alignment: Alignment.center,
         child: Text(this.widget.tag.title,
-            style: this.widget.isSelected ? RMTextStyle.normalTextWhite : RMTextStyle.normalTextLight),
+            style: this.widget.isSelected ? APPTextStyle.normalTextWhite : APPTextStyle.normalTextLight),
       ),
     );
   }

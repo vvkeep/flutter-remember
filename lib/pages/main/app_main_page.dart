@@ -42,7 +42,7 @@ class _AppMainPageState extends State<AppMainPage> {
       }).toList(),
       currentIndex: _currentIndex,
       type: BottomNavigationBarType.fixed,
-      fixedColor: RMColors.primaryColor,
+      fixedColor: APPColors.primaryColor,
       onTap: (int index) {
         setState(() {
           _currentIndex = index;

@@ -24,7 +24,7 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: RMColors.mainBackgroundColor,
+      backgroundColor: APPColors.mainBackgroundColor,
       appBar: AppBar(
         title: Text("密码生成"),
       ),
@@ -45,12 +45,12 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: RMColors.primaryColor,
+                        color: APPColors.primaryColor,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: RMColors.primaryColor,
+                        color: APPColors.primaryColor,
                       ),
                     ),
                   ),
@@ -61,7 +61,7 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(Size(1, 1)),
                   padding: MaterialStateProperty.all(EdgeInsets.zero),
-                  backgroundColor: MaterialStateProperty.all(RMColors.lightTextColor),
+                  backgroundColor: MaterialStateProperty.all(APPColors.lightTextColor),
                 ),
                 onPressed: () => _generateBtnAction(),
                 child: Container(
@@ -73,7 +73,7 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
                   ),
                   child: Text(
                     "重新生成",
-                    style: RMTextStyle.bigTextWhiteW500,
+                    style: APPTextStyle.bigTextWhiteW500,
                   ),
                 ),
               ),
@@ -82,7 +82,7 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(Size(1, 1)),
                   padding: MaterialStateProperty.all(EdgeInsets.zero),
-                  backgroundColor: MaterialStateProperty.all(RMColors.lightTextColor),
+                  backgroundColor: MaterialStateProperty.all(APPColors.lightTextColor),
                 ),
                 onPressed: () => _copyBtnAction(),
                 child: Container(
@@ -94,7 +94,7 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
                   ),
                   child: Text(
                     "复制密码",
-                    style: RMTextStyle.bigTextWhiteW500,
+                    style: APPTextStyle.bigTextWhiteW500,
                   ),
                 ),
               ),
@@ -102,11 +102,11 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
               Container(
                 width: double.infinity,
                 height: 40,
-                child: Text("选项", style: RMTextStyle.midTextPrimaryW500),
+                child: Text("选项", style: APPTextStyle.midTextPrimaryW500),
               ),
               Divider(
                 height: 0,
-                color: RMColors.darkDivideColor,
+                color: APPColors.darkDivideColor,
               ),
               Container(
                 height: 50,
@@ -115,7 +115,7 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
                   children: [
                     Text(
                       "长度",
-                      style: RMTextStyle.normalTextDarkW500,
+                      style: APPTextStyle.normalTextDarkW500,
                     ),
                     Expanded(
                       child: Slider(
@@ -136,7 +136,7 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
               ),
               Divider(
                 height: 0,
-                color: RMColors.darkDivideColor,
+                color: APPColors.darkDivideColor,
               ),
               Container(
                 height: 50,
@@ -146,10 +146,10 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
                   children: [
                     Text(
                       "小写字母",
-                      style: RMTextStyle.normalTextDarkW500,
+                      style: APPTextStyle.normalTextDarkW500,
                     ),
                     CupertinoSwitch(
-                      activeColor: RMColors.primaryColor,
+                      activeColor: APPColors.primaryColor,
                       value: _isLetterLowerCase,
                       onChanged: (bool value) {
                         setState(() {
@@ -162,7 +162,7 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
               ),
               Divider(
                 height: 0,
-                color: RMColors.darkDivideColor,
+                color: APPColors.darkDivideColor,
               ),
               Container(
                 height: 50,
@@ -172,10 +172,10 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
                   children: [
                     Text(
                       "大写字母",
-                      style: RMTextStyle.normalTextDarkW500,
+                      style: APPTextStyle.normalTextDarkW500,
                     ),
                     CupertinoSwitch(
-                      activeColor: RMColors.primaryColor,
+                      activeColor: APPColors.primaryColor,
                       value: _isLetterUpperCase,
                       onChanged: (bool value) {
                         setState(() {
@@ -188,7 +188,7 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
               ),
               Divider(
                 height: 0,
-                color: RMColors.darkDivideColor,
+                color: APPColors.darkDivideColor,
               ),
               Container(
                 height: 50,
@@ -198,10 +198,10 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
                   children: [
                     Text(
                       "特殊符号",
-                      style: RMTextStyle.normalTextDarkW500,
+                      style: APPTextStyle.normalTextDarkW500,
                     ),
                     CupertinoSwitch(
-                      activeColor: RMColors.primaryColor,
+                      activeColor: APPColors.primaryColor,
                       value: _isSpecial,
                       onChanged: (bool value) {
                         setState(() {
@@ -214,7 +214,7 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
               ),
               Divider(
                 height: 0,
-                color: RMColors.darkDivideColor,
+                color: APPColors.darkDivideColor,
               ),
               Container(
                 height: 50,
@@ -224,10 +224,10 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
                   children: [
                     Text(
                       "数字",
-                      style: RMTextStyle.normalTextDarkW500,
+                      style: APPTextStyle.normalTextDarkW500,
                     ),
                     CupertinoSwitch(
-                      activeColor: RMColors.primaryColor,
+                      activeColor: APPColors.primaryColor,
                       value: _isNumber,
                       onChanged: (bool value) {
                         setState(() {
