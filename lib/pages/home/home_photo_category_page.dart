@@ -18,7 +18,6 @@ class HomePhotoCategoryPage extends StatefulWidget {
 
 class _HomePhotoCategoryPageState extends State<HomePhotoCategoryPage> {
   List<CategoryModel> categoryList = DataManager.shared.accountCategoryList;
-  List<ItemModel> itemList = DataManager.shared.accountList;
 
   late StreamSubscription<CategoryListEvent> subscription;
 
@@ -27,8 +26,7 @@ class _HomePhotoCategoryPageState extends State<HomePhotoCategoryPage> {
     super.initState();
     subscription = eventBus.on<CategoryListEvent>().listen((event) {
       setState(() {
-        this.categoryList = DataManager.shared.accountCategoryList;
-        this.itemList = DataManager.shared.accountList;
+        this.categoryList = DataManager.shared.photoCategoryList;
       });
     });
   }
@@ -51,7 +49,6 @@ class _HomePhotoCategoryPageState extends State<HomePhotoCategoryPage> {
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: GridView.builder(
-          physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
