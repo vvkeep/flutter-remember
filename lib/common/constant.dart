@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 ///颜色
@@ -146,4 +148,9 @@ class APPIcons {
 
 class RMConstant {
   static const String LOGIN_INFO_KEY = "LOGIN_INFO_KEY";
+}
+
+class APPLayout {
+  static const double itemMargin = 10.0;
+  static const double itemMaxLength = 150.0;
 }

@@ -31,8 +31,10 @@ class _PhotoListPageState extends State<PhotoListPage> {
       return;
     }
 
-    var entityList =
-        await AssetPicker.pickAssets(context, maxAssets: 9, specialPickerType: SpecialPickerType.wechatMoment);
+    var entityList = await AssetPicker.pickAssets(context,
+        maxAssets: 9,
+        specialPickerType: SpecialPickerType.wechatMoment,
+        pickerTheme: ThemeData(primaryColor: APPColors.primaryColor));
     if (entityList == null) {
       return;
     }
@@ -68,11 +70,11 @@ class _PhotoListPageState extends State<PhotoListPage> {
         padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: GridView.builder(
           shrinkWrap: true,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
+          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            crossAxisSpacing: APPLayout.itemMargin,
+            mainAxisSpacing: APPLayout.itemMargin,
             childAspectRatio: 1,
+            maxCrossAxisExtent: APPLayout.itemMaxLength,
           ),
           itemCount: photoList.length,
           itemBuilder: (context, index) {
