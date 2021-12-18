@@ -13,6 +13,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:iron_box/pages/account/widget/account_detail_choose_image_widget.dart';
 import 'package:iron_box/pages/account/widget/account_detail_tag_widget.dart';
 import 'package:iron_box/utils/item_img_cache_utils.dart';
+import 'package:iron_box/utils/permission_utils.dart';
 import 'package:iron_box/widget/image_preview/photo_view_gallery_screen.dart';
 import 'package:iron_box/widget/other/widget.dart';
 import 'package:sqflite/sqflite.dart';
@@ -106,6 +107,11 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
   }
 
   _choosePhoto(ImageSource source) async {
+    bool granted = await PermissionUtils.checkPhotos() && await PermissionUtils.checkCamera();
+    if (!granted) {
+      return;
+    }
+
     XFile? file = await _picker.pickImage(source: source);
     if (file == null) {
       return;

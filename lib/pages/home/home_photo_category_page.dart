@@ -17,7 +17,7 @@ class HomePhotoCategoryPage extends StatefulWidget {
 }
 
 class _HomePhotoCategoryPageState extends State<HomePhotoCategoryPage> {
-  List<CategoryModel> categoryList = DataManager.shared.accountCategoryList;
+  List<CategoryModel> categoryList = DataManager.shared.photoCategoryList;
 
   late StreamSubscription<CategoryListEvent> subscription;
 
@@ -62,7 +62,7 @@ class _HomePhotoCategoryPageState extends State<HomePhotoCategoryPage> {
             return GestureDetector(
               child: HomeCategoryItemWidget(categoryModel: category),
               onTap: () {
-                Get.toNamed(APPRouter.itemListPage, arguments: category);
+                Get.toNamed(APPRouter.photoListPage, arguments: category);
               },
             );
           },

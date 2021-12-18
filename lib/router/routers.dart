@@ -10,6 +10,7 @@ import 'package:iron_box/pages/account/account_search_page.dart';
 import 'package:iron_box/pages/login/login_page.dart';
 import 'package:iron_box/pages/login/register_page.dart';
 import 'package:iron_box/pages/main/app_main_page.dart';
+import 'package:iron_box/pages/photo/photo_list_page.dart';
 import 'package:iron_box/pages/setting/app_setting_page.dart';
 import 'package:iron_box/pages/tag/new_tag_page.dart';
 import 'package:iron_box/pages/tag/tag_list_page.dart';
@@ -29,6 +30,7 @@ abstract class APPRouter {
   static String newTagPage = "/new_tag_page";
   static String appSettingPage = '/app_setting_page';
   static String generatePasswordPage = "/generate_password_page";
+  static String photoListPage = "/photo_list_page";
 }
 
 abstract class AppPages {
@@ -90,6 +92,10 @@ abstract class AppPages {
     GetPage(
       name: APPRouter.generatePasswordPage,
       page: () => GeneratePasswordPage(),
+    ),
+    GetPage(
+      name: APPRouter.photoListPage,
+      page: () => PhotoListPage(),
     )
   ];
 }

@@ -1,7 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/pages/photo/widget/photo_list_item_widget.dart';
+import 'package:iron_box/utils/permission_utils.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 class PhotoListPage extends StatefulWidget {
   PhotoListPage({Key? key}) : super(key: key);
@@ -12,16 +17,53 @@ class PhotoListPage extends StatefulWidget {
 
 class _PhotoListPageState extends State<PhotoListPage> {
   List<File> photoList = [];
+  late CategoryModel category;
+
+  @override
+  void initState() {
+    super.initState();
+    category = Get.arguments as CategoryModel;
+  }
+
+  pickPhotos() async {
+    bool granted = await PermissionUtils.checkPhotos() && await PermissionUtils.checkCamera();
+    if (!granted) {
+      return;
+    }
+
+    var entityList =
+        await AssetPicker.pickAssets(context, maxAssets: 9, specialPickerType: SpecialPickerType.wechatMoment);
+    if (entityList == null) {
+      return;
+    }
+
+    List<File> tempList = [];
+    for (var entity in entityList) {
+      var file = await entity.file;
+      tempList.add(file!);
+    }
+
+    setState(() {
+      this.photoList = tempList;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: APPColors.mainBackgroundColor,
       appBar: AppBar(
-        title: Text('相册', style: TextStyle(color: Colors.white)),
-        brightness: Brightness.dark,
-        elevation: 0, // 去掉Appbar底部阴影
-      ),
+          title: Text(category.title, style: TextStyle(color: Colors.white)),
+          brightness: Brightness.dark,
+          iconTheme: IconThemeData(color: Colors.white),
+          elevation: 0,
+          actions: [
+            IconButton(
+              tooltip: '添加图片',
+              icon: Icon(Icons.add),
+              onPressed: () => pickPhotos(),
+            )
+          ]),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: GridView.builder(
@@ -34,13 +76,11 @@ class _PhotoListPageState extends State<PhotoListPage> {
           ),
           itemCount: photoList.length,
           itemBuilder: (context, index) {
-            File category = photoList[index];
-            return GestureDetector(
-                // child: HomeCategoryItemWidget(categoryModel: category),
-                // onTap: () {
-                //   Get.toNamed(APPRouter.itemListPage, arguments: category);
-                // },
-                );
+            File file = photoList[index];
+            return PhotoListItemWidget(
+              file: file,
+              onTap: (file, index) {},
+            );
           },
         ),
       ),
