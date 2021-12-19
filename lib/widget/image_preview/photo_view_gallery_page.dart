@@ -5,21 +5,21 @@ import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 // ignore: must_be_immutable
-class PhotoViewGalleryScreen extends StatefulWidget {
+class PhotoViewGalleryPage extends StatefulWidget {
   List<File> files = [];
   int index = 0;
   String? heroTag;
   late PageController controller;
 
-  PhotoViewGalleryScreen({Key? key, required this.files, required this.index, this.heroTag}) : super(key: key) {
+  PhotoViewGalleryPage({Key? key, required this.files, required this.index, this.heroTag}) : super(key: key) {
     controller = PageController(initialPage: index);
   }
 
   @override
-  _PhotoViewGalleryScreenState createState() => _PhotoViewGalleryScreenState();
+  _PhotoViewGalleryPageState createState() => _PhotoViewGalleryPageState();
 }
 
-class _PhotoViewGalleryScreenState extends State<PhotoViewGalleryScreen> {
+class _PhotoViewGalleryPageState extends State<PhotoViewGalleryPage> {
   int currentIndex = 0;
 
   @override

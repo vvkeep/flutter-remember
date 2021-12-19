@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iron_box/common/constant.dart';
-import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/model/account_model.dart';
 
-class HomeCategoryItemWidget extends StatelessWidget {
-  final CategoryModel categoryModel;
+class HomePhotoFolderItemWidget extends StatelessWidget {
+  final FolderModel folderModel;
 
-  const HomeCategoryItemWidget({Key? key, required this.categoryModel}) : super(key: key);
+  const HomePhotoFolderItemWidget({Key? key, required this.folderModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class HomeCategoryItemWidget extends StatelessWidget {
             height: 45,
             width: double.infinity,
             child: Text(
-              categoryModel.title,
+              folderModel.title,
               style: APPTextStyle.normalTextWhiteBold,
             ),
           ),
@@ -46,7 +46,7 @@ class HomeCategoryItemWidget extends StatelessWidget {
               width: double.infinity,
               alignment: Alignment.center,
               child: Text(
-                '${categoryModel.count}',
+                '${folderModel.count}',
                 style: APPTextStyle.largeTextPrimaryBold,
               ),
             ),

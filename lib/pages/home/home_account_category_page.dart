@@ -5,6 +5,7 @@ import 'package:iron_box/common/constant.dart';
 import 'package:iron_box/manager/data_manager.dart';
 import 'package:iron_box/common/event_bus.dart';
 import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/pages/home/widget/home_accunt_category_item_widget.dart';
 import 'package:iron_box/pages/home/widget/home_category_item_widget.dart';
 import 'package:iron_box/pages/home/widget/home_search_bar_widget.dart';
 import 'package:iron_box/router/routers.dart';
@@ -106,20 +107,14 @@ class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
           SliverToBoxAdapter(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              child: GridView.builder(
+              child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 1,
-                ),
                 itemCount: categoryList.length,
                 itemBuilder: (context, index) {
                   CategoryModel category = categoryList[index];
                   return GestureDetector(
-                    child: HomeCategoryItemWidget(categoryModel: category),
+                    child: HomeAccountCategoryItemWidget(categoryModel: category),
                     onTap: () {
                       Get.toNamed(APPRouter.itemListPage, arguments: category);
                     },

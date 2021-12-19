@@ -2,6 +2,7 @@ class SQL {
   static final String tableItem = "item";
   static final String tableCategory = "category";
   static final String tableTag = "tag";
+  static final String tableFolder = "folder";
 
   static String initItemTable = '''
     CREATE TABLE $tableItem (
@@ -25,6 +26,7 @@ class SQL {
     );
   ''';
 
+  // type 0 代表代表账号，暂无其他
   static String initCategoryTable = '''
     CREATE TABLE $tableCategory (
     "id" INTEGER NOT NULL,
@@ -43,6 +45,22 @@ class SQL {
     "title" TEXT NOT NULL,
     "count" INTEGER NOT NULL,
     "sort" INTEGER NOT NULL,
+    CONSTRAINT "id" PRIMARY KEY ("id")
+    CONSTRAINT "index_title" UNIQUE ("title") ON CONFLICT ABORT
+    );
+  ''';
+
+  // type 0 代表相册，暂无其他
+  static String initFolderTable = '''
+    CREATE TABLE $tableFolder (
+    "id" INTEGER NOT NULL,
+    "title" TEXT NOT NULL,
+    "directory" TEXT NOT NULL,
+    "cover" TEXT,
+    "count" INTEGER NOT NULL,
+    "contents" TEXT,
+    "sort" INTEGER NOT NULL,
+    "type" INTEGER NOT NULL,
     CONSTRAINT "id" PRIMARY KEY ("id")
     CONSTRAINT "index_title" UNIQUE ("title") ON CONFLICT ABORT
     );
@@ -78,23 +96,5 @@ class SQL {
     "INSERT INTO $tableTag ('title', 'count', 'sort') VALUES ('电脑', 0, 0);",
     "INSERT INTO $tableTag ('title', 'count', 'sort') VALUES ('支付宝', 0, 0);",
     "INSERT INTO $tableTag ('title', 'count', 'sort') VALUES ('微信', 0, 0);",
-  ];
-
-  static List<String> initItemList = [
-    "INSERT INTO $tableItem ('categoryId', 'title', 'account', 'password', 'payPassword', 'description') VALUES (1, '英雄联盟12', 'lol@qq.com', 'bbbbbb', '1231231', '英联联盟账号');",
-    "INSERT INTO $tableItem ('categoryId', 'title', 'account', 'password', 'payPassword', 'description') VALUES (2, '英雄联盟21', 'lol@qq.com', 'bbbbbb', '1231231', '英联联盟账号');",
-    "INSERT INTO $tableItem ('categoryId', 'title', 'account', 'password', 'payPassword', 'description') VALUES (3, '英雄联盟22', 'lol@qq.com', 'bbbbbb', '1231231', '英联联盟账号');",
-    "INSERT INTO $tableItem ('categoryId', 'title', 'account', 'password', 'payPassword', 'description') VALUES (4, '英雄联盟23', 'lol@qq.com', 'bbbbbb', '1231231', '英联联盟账号');",
-    "INSERT INTO $tableItem ('categoryId', 'title', 'account', 'password', 'payPassword', 'description') VALUES (5, '英雄联盟4', 'lol@qq.com', 'bbbbbb', '1231231', '英联联盟账号');",
-    "INSERT INTO $tableItem ('categoryId', 'title', 'account', 'password', 'payPassword', 'description') VALUES (6, '英雄联盟5', 'lol@qq.com', 'bbbbbb', '1231231', '英联联盟账号');",
-    "INSERT INTO $tableItem ('categoryId', 'title', 'account', 'password', 'payPassword', 'description') VALUES (8, '英雄联盟6', 'lol@qq.com', 'bbbbbb', '1231231', '英联联盟账号');",
-    "INSERT INTO $tableItem ('categoryId', 'title', 'account', 'password', 'payPassword', 'description') VALUES (9, '英雄联盟7', 'lol@qq.com', 'bbbbbb', '1231231', '英联联盟账号');",
-    "INSERT INTO $tableItem ('categoryId', 'title', 'account', 'password', 'payPassword', 'description') VALUES (9, '英雄联盟8', 'lol@qq.com', 'bbbbbb', '1231231', '英联联盟账号');",
-    "INSERT INTO $tableItem ('categoryId', 'title', 'account', 'password', 'payPassword', 'description') VALUES (9, '英雄联盟9', 'lol@qq.com', 'bbbbbb', '1231231', '英联联盟账号');",
-    "INSERT INTO $tableItem ('categoryId', 'title', 'account', 'password', 'payPassword', 'description') VALUES (7, '小红书', 'lol@qq.com', 'bbbbbb', '1231231', '小红书账号');",
-    "INSERT INTO $tableItem ('categoryId', 'title', 'account', 'password', 'payPassword', 'description') VALUES (7, '半糖', 'lol@qq.com', 'bbbbbb', '1231231', '半糖账号');",
-    "INSERT INTO $tableItem ('categoryId', 'title', 'account', 'password', 'payPassword', 'description') VALUES (7, '京东', 'lol@qq.com', 'bbbbbb', '1231231', '京东账号');",
-    "INSERT INTO $tableItem ('categoryId', 'title', 'account', 'password', 'payPassword', 'description') VALUES (7, '拼多多', 'lol@qq.com', 'bbbbbb', '1231231', '拼多多账号');",
-    "INSERT INTO $tableItem ('categoryId', 'title', 'account', 'password', 'payPassword', 'description') VALUES (7, '淘宝', 'taobao@qq.com', 'bbbbbb', '1231231', '淘宝账号');",
   ];
 }

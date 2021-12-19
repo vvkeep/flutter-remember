@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'item_model.g.dart';
+part 'account_model.g.dart';
 
 @JsonSerializable()
-class ItemModel {
+class AccountModel {
   int id;
   int categoryId;
   String title;
@@ -20,7 +20,7 @@ class ItemModel {
   String? extend3Key;
   String? extend3Value;
 
-  ItemModel(
+  AccountModel(
       {required this.id,
       required this.categoryId,
       required this.title,
@@ -37,8 +37,8 @@ class ItemModel {
       this.extend3Key,
       this.extend3Value});
 
-  factory ItemModel.fromJson(Map<String, dynamic> json) => _$ItemModelFromJson(json);
-  Map<String, dynamic> toJson() => _$ItemModelToJson(this);
+  factory AccountModel.fromJson(Map<String, dynamic> json) => _$AccountModelFromJson(json);
+  Map<String, dynamic> toJson() => _$AccountModelToJson(this);
 }
 
 @JsonSerializable()
@@ -66,4 +66,29 @@ class TagModel {
 
   factory TagModel.fromJson(Map<String, dynamic> json) => _$TagModelFromJson(json);
   Map<String, dynamic> toJson() => _$TagModelToJson(this);
+}
+
+@JsonSerializable()
+class FolderModel {
+  int id;
+  String title;
+  String cover;
+  String directory;
+  int count;
+  String contents;
+  int sort;
+  int type;
+
+  FolderModel(
+      {required this.id,
+      required this.title,
+      required this.cover,
+      required this.directory,
+      required this.count,
+      required this.contents,
+      required this.sort,
+      required this.type});
+
+  factory FolderModel.fromJson(Map<String, dynamic> json) => _$FolderModelFromJson(json);
+  Map<String, dynamic> toJson() => _$FolderModelToJson(this);
 }

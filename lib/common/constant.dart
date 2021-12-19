@@ -152,5 +152,5 @@ class RMConstant {
 
 class APPLayout {
   static const double itemMargin = 10.0;
-  static const double itemMaxLength = 150.0;
+  static const double photoMaxLength = 150.0;
 }

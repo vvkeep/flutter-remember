@@ -1,13 +1,13 @@
 import 'package:flustars/flustars.dart';
 import 'package:iron_box/manager/database_helper.dart';
-import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/model/account_model.dart';
 import 'package:iron_box/utils/item_img_cache_utils.dart';
 
 class DataManager {
   List<CategoryModel> accountCategoryList = [];
-  List<CategoryModel> photoCategoryList = [];
+  List<FolderModel> photoFolderList = [];
   List<TagModel> accountTagList = [];
-  List<ItemModel> accountList = [];
+  List<AccountModel> accountList = [];
 
   DataManager._privateConstructor();
 
@@ -19,9 +19,9 @@ class DataManager {
 
   init() async {
     this.accountCategoryList = await DatabaseHelper.shared.categoryList(0);
-    this.photoCategoryList = await DatabaseHelper.shared.categoryList(1);
+    this.photoFolderList = await DatabaseHelper.shared.folderList(0);
     this.accountTagList = await DatabaseHelper.shared.tagList();
-    this.accountList = await DatabaseHelper.shared.itemList();
+    this.accountList = await DatabaseHelper.shared.accountList();
   }
 }
 
@@ -87,8 +87,8 @@ extension DataManagerTagExtension on DataManager {
 }
 
 extension DataManagerItemExtension on DataManager {
-  Future<bool> addItem(ItemModel itemModel) async {
-    bool isSuccess = await DatabaseHelper.shared.insertItem(itemModel);
+  Future<bool> addItem(AccountModel itemModel) async {
+    bool isSuccess = await DatabaseHelper.shared.insertAccount(itemModel);
     if (isSuccess) {
       // 标签加1
       if (ObjectUtil.isNotEmpty(itemModel.tagIds)) {
@@ -103,9 +103,9 @@ extension DataManagerItemExtension on DataManager {
     return isSuccess;
   }
 
-  Future<bool> updateItem(ItemModel newItem) async {
-    ItemModel oldItem = await DatabaseHelper.shared.selectItem(newItem.id);
-    bool isSuccess = await DatabaseHelper.shared.updateItem(newItem);
+  Future<bool> updateItem(AccountModel newItem) async {
+    AccountModel oldItem = await DatabaseHelper.shared.selectAccount(newItem.id);
+    bool isSuccess = await DatabaseHelper.shared.updateAccount(newItem);
     if (isSuccess) {
       // 判断 图片地址是否相同，如果不同就删除旧的缓存图片
       if (ObjectUtil.isNotEmpty(oldItem.imgs) && (oldItem.imgs != newItem.imgs)) {
@@ -140,8 +140,8 @@ extension DataManagerItemExtension on DataManager {
   }
 
   Future<bool> removeItem(int itemId) async {
-    ItemModel oldItem = await DatabaseHelper.shared.selectItem(itemId);
-    bool isSuccess = await DatabaseHelper.shared.deleteItem(itemId);
+    AccountModel oldItem = await DatabaseHelper.shared.selectAccount(itemId);
+    bool isSuccess = await DatabaseHelper.shared.deleteAccount(itemId);
     if (isSuccess) {
       // 标签减1
       if (ObjectUtil.isNotEmpty(oldItem.tagIds)) {

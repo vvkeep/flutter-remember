@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 class PhotoListItemWidget extends StatelessWidget {
-  final void Function(File file, int index) onTap;
+  final VoidCallback onTap;
 
   final File file;
 
@@ -11,10 +11,13 @@ class PhotoListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Image.file(
-        this.file,
-        fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () => onTap(),
+      child: Container(
+        child: Image.file(
+          this.file,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

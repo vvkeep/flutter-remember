@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:iron_box/common/constant.dart';
 import 'package:iron_box/common/event_bus.dart';
 import 'package:iron_box/manager/data_manager.dart';
-import 'package:iron_box/model/item_model.dart';
-import 'package:iron_box/pages/home/widget/home_category_item_widget.dart';
+import 'package:iron_box/model/account_model.dart';
+import 'package:iron_box/pages/home/widget/home_photo_folder_item_widget.dart';
 import 'package:iron_box/router/routers.dart';
 
 class HomePhotoCategoryPage extends StatefulWidget {
@@ -17,7 +17,7 @@ class HomePhotoCategoryPage extends StatefulWidget {
 }
 
 class _HomePhotoCategoryPageState extends State<HomePhotoCategoryPage> {
-  List<CategoryModel> categoryList = DataManager.shared.photoCategoryList;
+  List<FolderModel> photoFolderList = DataManager.shared.photoFolderList;
 
   late StreamSubscription<CategoryListEvent> subscription;
 
@@ -26,7 +26,7 @@ class _HomePhotoCategoryPageState extends State<HomePhotoCategoryPage> {
     super.initState();
     subscription = eventBus.on<CategoryListEvent>().listen((event) {
       setState(() {
-        this.categoryList = DataManager.shared.photoCategoryList;
+        this.photoFolderList = DataManager.shared.photoFolderList;
       });
     });
   }
@@ -56,13 +56,13 @@ class _HomePhotoCategoryPageState extends State<HomePhotoCategoryPage> {
             mainAxisSpacing: 10,
             childAspectRatio: 1,
           ),
-          itemCount: categoryList.length,
+          itemCount: photoFolderList.length,
           itemBuilder: (context, index) {
-            CategoryModel category = categoryList[index];
+            FolderModel folderModel = photoFolderList[index];
             return GestureDetector(
-              child: HomeCategoryItemWidget(categoryModel: category),
+              child: HomePhotoFolderItemWidget(folderModel: folderModel),
               onTap: () {
-                Get.toNamed(APPRouter.photoListPage, arguments: category);
+                Get.toNamed(APPRouter.photoListPage, arguments: folderModel);
               },
             );
           },
