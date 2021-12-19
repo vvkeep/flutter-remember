@@ -5,7 +5,7 @@ import 'package:get/instance_manager.dart';
 import 'package:iron_box/common/constant.dart';
 import 'package:iron_box/common/event_bus.dart';
 import 'package:iron_box/manager/data_manager.dart';
-import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/model/account_model.dart';
 import 'package:iron_box/pages/account/widget/account_list_item_widget.dart';
 import 'package:get/get.dart';
 import 'package:iron_box/router/routers.dart';
@@ -16,7 +16,7 @@ class AccountCategoryListPage extends StatefulWidget {
 }
 
 class _AccountCategoryListPageState extends State<AccountCategoryListPage> {
-  List<ItemModel> _itemList = [];
+  List<AccountModel> _itemList = [];
   late CategoryModel category;
 
   late StreamSubscription<ItemEvent> subscription;

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:iron_box/common/constant.dart';
 import 'package:iron_box/model/account_model.dart';
 
-class TagListItemWidget extends StatelessWidget {
-  final TagModel tagModel;
-  const TagListItemWidget({Key? key, required this.tagModel}) : super(key: key);
+class AlbumListItemWidget extends StatelessWidget {
+  final FolderModel folderModel;
+  const AlbumListItemWidget({Key? key, required this.folderModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +17,9 @@ class TagListItemWidget extends StatelessWidget {
             height: 55,
             child: Row(
               children: [
-                Text('${this.tagModel.title}', style: APPTextStyle.normalTextDarkW500),
+                Text('${this.folderModel.title}', style: APPTextStyle.normalTextDarkW500),
                 Spacer(),
-                Text('${this.tagModel.count}', style: APPTextStyle.normalTextDark),
+                Text('${this.folderModel.count}', style: APPTextStyle.normalTextDark),
                 SizedBox(width: 15),
                 Icon(APPIcons.drag, color: APPColors.divideColor.withOpacity(0.5))
               ],

@@ -10,6 +10,8 @@ import 'package:iron_box/pages/account/account_search_page.dart';
 import 'package:iron_box/pages/login/login_page.dart';
 import 'package:iron_box/pages/login/register_page.dart';
 import 'package:iron_box/pages/main/app_main_page.dart';
+import 'package:iron_box/pages/photo/album_list_page.dart';
+import 'package:iron_box/pages/photo/new_album_page.dart';
 import 'package:iron_box/pages/photo/photo_list_page.dart';
 import 'package:iron_box/pages/setting/app_setting_page.dart';
 import 'package:iron_box/pages/tag/new_tag_page.dart';
@@ -31,6 +33,8 @@ abstract class APPRouter {
   static String appSettingPage = '/app_setting_page';
   static String generatePasswordPage = "/generate_password_page";
   static String photoListPage = "/photo_list_page";
+  static String albumListPage = "/album_list_page";
+  static String newAlbumPage = "/new_album_page";
 }
 
 abstract class AppPages {
@@ -96,6 +100,14 @@ abstract class AppPages {
     GetPage(
       name: APPRouter.photoListPage,
       page: () => PhotoListPage(),
-    )
+    ),
+    GetPage(
+      name: APPRouter.albumListPage,
+      page: () => AlbumListPage(),
+    ),
+    GetPage(
+      name: APPRouter.newAlbumPage,
+      page: () => NewAlbumPage(),
+    ),
   ];
 }

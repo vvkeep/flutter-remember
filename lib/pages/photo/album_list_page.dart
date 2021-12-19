@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:get/instance_manager.dart';
+import 'package:get/get.dart';
 import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/common/event_bus.dart';
 import 'package:iron_box/manager/data_manager.dart';
+import 'package:iron_box/model/account_model.dart';
+import 'package:iron_box/pages/photo/widget/album_list_item_widget.dart';
 import 'package:iron_box/router/routers.dart';
 import 'package:iron_box/widget/other/widget.dart';
-import 'package:iron_box/model/account_model.dart';
-import 'package:iron_box/pages/tag/widget/tag_list_item_widget.dart';
-import 'package:get/get.dart';
 
-class TagListPage extends StatefulWidget {
-  TagListPage({Key? key}) : super(key: key);
+class AlbumListPage extends StatefulWidget {
+  AlbumListPage({Key? key}) : super(key: key);
 
   @override
-  _TagListPageState createState() => _TagListPageState();
+  _AlbumListPageState createState() => _AlbumListPageState();
 }
 
-class _TagListPageState extends State<TagListPage> {
-  List<TagModel> tagList = DataManager.shared.accountTagList;
+class _AlbumListPageState extends State<AlbumListPage> {
+  List<FolderModel> albumList = DataManager.shared.albumList;
 
   @override
   void initState() {
@@ -26,7 +26,7 @@ class _TagListPageState extends State<TagListPage> {
 
   loadData() async {
     setState(() {
-      this.tagList = DataManager.shared.accountTagList;
+      this.albumList = DataManager.shared.albumList;
     });
   }
 
@@ -35,13 +35,13 @@ class _TagListPageState extends State<TagListPage> {
     return Scaffold(
       backgroundColor: APPColors.white,
       appBar: AppBar(
-        title: Text('标签管理', style: TextStyle(color: Colors.white)),
+        title: Text('相簿管理', style: TextStyle(color: Colors.white)),
         brightness: Brightness.dark,
         iconTheme: IconThemeData(color: Colors.white),
-        elevation: 0, // 去掉Appbar底部阴影
+        elevation: 0,
         actions: [
           IconButton(
-            tooltip: '添加标签',
+            tooltip: '添加相簿',
             icon: Icon(Icons.add),
             onPressed: () {
               Map<String, Object> args = {
@@ -50,15 +50,15 @@ class _TagListPageState extends State<TagListPage> {
                 },
               };
 
-              Get.toNamed(APPRouter.newTagPage, arguments: args);
+              Get.toNamed(APPRouter.newAlbumPage, arguments: args);
             },
           )
         ],
       ),
       body: ReorderableListView(
-        children: tagList.map((tag) {
+        children: albumList.map((album) {
           return Dismissible(
-            key: Key('key_${tag.id})'),
+            key: Key('key_${album.id}'),
             direction: DismissDirection.endToStart,
             background: Container(
               width: 55,
@@ -77,32 +77,34 @@ class _TagListPageState extends State<TagListPage> {
                   "callback": () {
                     this.loadData();
                   },
-                  "tag": tag
+                  "album": album
                 };
-                Get.toNamed(APPRouter.newTagPage, arguments: args);
+                Get.toNamed(APPRouter.newAlbumPage, arguments: args);
               },
-              child: TagListItemWidget(tagModel: tag),
+              child: AlbumListItemWidget(folderModel: album),
             ),
             confirmDismiss: (direction) {
-              return deleteTag(tag);
+              return deleteAlbum(album);
             },
             onDismissed: (direction) async {
-              await DataManager.shared.removeTag(tag.id);
+              await DataManager.shared.removeCategory(album.id);
+              eventBus.fire(CategoryListEvent());
               Get.showSnackbar(successBar('删除成功'));
             },
           );
         }).toList(),
         onReorder: (oldIndex, newIndex) async {
-          await DataManager.shared.swapTagSort(oldIndex, newIndex);
+          await DataManager.shared.swapCategorySort(oldIndex, newIndex);
+          eventBus.fire(CategoryListEvent());
           this.loadData();
         },
       ),
     );
   }
 
-  Future<bool> deleteTag(TagModel tag) async {
-    if (tag.count > 0) {
-      Get.showSnackbar(errorBar('改标签下还有${tag.count}项，不允许删除'));
+  Future<bool> deleteAlbum(FolderModel folderModel) async {
+    if (folderModel.count > 0) {
+      Get.showSnackbar(errorBar('该相簿下还有${folderModel.count}项，不允许删除'));
       return false;
     } else {
       return true;

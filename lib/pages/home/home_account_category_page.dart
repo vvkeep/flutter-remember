@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:iron_box/common/constant.dart';
 import 'package:iron_box/manager/data_manager.dart';
 import 'package:iron_box/common/event_bus.dart';
-import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/model/account_model.dart';
 import 'package:iron_box/pages/home/widget/home_accunt_category_item_widget.dart';
-import 'package:iron_box/pages/home/widget/home_category_item_widget.dart';
+import 'package:iron_box/pages/home/widget/home_photo_folder_item_widget.dart';
 import 'package:iron_box/pages/home/widget/home_search_bar_widget.dart';
 import 'package:iron_box/router/routers.dart';
 import 'package:get/get.dart';
@@ -20,7 +20,7 @@ enum HomePopActionItems { ADD, GENERATE }
 
 class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
   List<CategoryModel> categoryList = DataManager.shared.accountCategoryList;
-  List<ItemModel> itemList = DataManager.shared.accountList;
+  List<AccountModel> itemList = DataManager.shared.accountList;
 
   late StreamSubscription<CategoryListEvent> subscription;
 

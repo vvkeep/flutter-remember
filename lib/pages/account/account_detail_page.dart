@@ -8,7 +8,7 @@ import 'package:iron_box/common/constant.dart';
 import 'package:iron_box/common/event_bus.dart';
 import 'package:iron_box/manager/data_manager.dart';
 import 'package:iron_box/model/img_model.dart';
-import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/model/account_model.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iron_box/pages/account/widget/account_detail_choose_image_widget.dart';
 import 'package:iron_box/pages/account/widget/account_detail_tag_widget.dart';
@@ -26,7 +26,7 @@ class AccountDetailPage extends StatefulWidget {
 }
 
 class _AccountDetailPageState extends State<AccountDetailPage> {
-  ItemModel itemModel = ItemModel(id: -1, categoryId: -1, account: '', title: '');
+  AccountModel itemModel = AccountModel(id: -1, categoryId: -1, account: '', title: '');
 
   final FocusNode _accountNode = FocusNode();
   final FocusNode _userNameNode = FocusNode();
@@ -75,7 +75,7 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
   }
 
   _init() async {
-    ItemModel? item = Get.arguments as ItemModel?;
+    AccountModel? item = Get.arguments as AccountModel?;
     List<RMPickImageItem> tempPickedList = [];
 
     if (item != null && ObjectUtil.isNotEmpty(item.imgs)) {
@@ -89,7 +89,7 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
     }
 
     if (ObjectUtil.isNotEmpty(item)) {
-      itemModel = ItemModel.fromJson(item!.toJson());
+      itemModel = AccountModel.fromJson(item!.toJson());
     }
 
     if (ObjectUtil.isNotEmpty(Get.parameters["categoryId"])) {

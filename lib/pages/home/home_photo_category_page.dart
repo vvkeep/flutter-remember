@@ -17,7 +17,7 @@ class HomePhotoCategoryPage extends StatefulWidget {
 }
 
 class _HomePhotoCategoryPageState extends State<HomePhotoCategoryPage> {
-  List<FolderModel> photoFolderList = DataManager.shared.photoFolderList;
+  List<FolderModel> photoFolderList = DataManager.shared.albumList;
 
   late StreamSubscription<CategoryListEvent> subscription;
 
@@ -26,7 +26,7 @@ class _HomePhotoCategoryPageState extends State<HomePhotoCategoryPage> {
     super.initState();
     subscription = eventBus.on<CategoryListEvent>().listen((event) {
       setState(() {
-        this.photoFolderList = DataManager.shared.photoFolderList;
+        this.photoFolderList = DataManager.shared.albumList;
       });
     });
   }

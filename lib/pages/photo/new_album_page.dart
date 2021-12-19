@@ -6,30 +6,30 @@ import 'package:iron_box/manager/data_manager.dart';
 import 'package:iron_box/model/account_model.dart';
 import 'package:sqflite/sqflite.dart';
 
-class NewCategoryPage extends StatefulWidget {
-  NewCategoryPage({Key? key}) : super(key: key);
+class NewAlbumPage extends StatefulWidget {
+  NewAlbumPage({Key? key}) : super(key: key);
 
   @override
-  _NewCategoryPageState createState() => _NewCategoryPageState();
+  _NewAlbumPageState createState() => _NewAlbumPageState();
 }
 
-class _NewCategoryPageState extends State<NewCategoryPage> {
+class _NewAlbumPageState extends State<NewAlbumPage> {
   final FocusNode focusNode = FocusNode();
   final nameController = TextEditingController();
-  VoidCallback? categoryChangedCallback;
-  CategoryModel? categoryModel;
+  VoidCallback? albumChangedCallback;
+  FolderModel? albumModel;
 
   @override
   Widget build(BuildContext context) {
     Map<String, Object> args = Get.arguments as Map<String, Object>;
-    categoryChangedCallback = args["callback"] as VoidCallback?;
-    categoryModel = args["category"] as CategoryModel?;
-    nameController.text = categoryModel?.title ?? "";
+    albumChangedCallback = args["callback"] as VoidCallback?;
+    albumModel = args["Album"] as FolderModel?;
+    nameController.text = albumModel?.title ?? "";
 
     return Scaffold(
       backgroundColor: APPColors.white,
       appBar: AppBar(
-        title: Text('添加分类', style: TextStyle(color: Colors.white)),
+        title: Text('添加相簿', style: TextStyle(color: Colors.white)),
         brightness: Brightness.dark,
         iconTheme: IconThemeData(color: Colors.white),
         elevation: 0, // 去掉Appbar底部阴影
@@ -53,7 +53,7 @@ class _NewCategoryPageState extends State<NewCategoryPage> {
                   focusNode: this.focusNode,
                   maxLength: 15,
                   decoration: InputDecoration(
-                    hintText: "请输入分类名称",
+                    hintText: "请输入相簿名称",
                     hintStyle: TextStyle(
                       color: Colors.grey,
                       textBaseline: TextBaseline.ideographic,
@@ -89,23 +89,24 @@ class _NewCategoryPageState extends State<NewCategoryPage> {
 
                   focusNode.unfocus();
                   try {
-                    if (this.categoryModel != null) {
-                      categoryModel!.title = name;
-                      await DataManager.shared.updateCategory(categoryModel!);
+                    if (this.albumModel != null) {
+                      albumModel!.title = name;
+                      await DataManager.shared.updateFolder(albumModel!);
                       Fluttertoast.showToast(msg: '编辑成功', gravity: ToastGravity.TOP);
                     } else {
-                      await DataManager.shared.addCategory(name, 0);
+                      await DataManager.shared.addFolder(name, 0);
                       Fluttertoast.showToast(msg: '添加成功', gravity: ToastGravity.TOP);
                     }
-                    categoryChangedCallback!();
+                    albumChangedCallback!();
                     Get.back();
                   } on DatabaseException catch (e) {
-                    if (e.isUniqueConstraintError('category.title')) {
+                    if (e.isUniqueConstraintError('album.title')) {
                       Fluttertoast.showToast(msg: '此分类已存在，请修改分类名称', gravity: ToastGravity.TOP);
                     } else {
                       Fluttertoast.showToast(msg: '数据库操作失败，请重试', gravity: ToastGravity.TOP);
                     }
                   } catch (e) {
+                    printError(info: e.toString());
                     Fluttertoast.showToast(msg: '操作失败，请重试', gravity: ToastGravity.TOP);
                   }
                 },

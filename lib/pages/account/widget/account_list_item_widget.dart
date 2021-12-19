@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iron_box/common/constant.dart';
-import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/model/account_model.dart';
 
 class AccountListItemWidget extends StatelessWidget {
-  final ItemModel itemModel;
+  final AccountModel itemModel;
   final int index;
   const AccountListItemWidget({Key? key, required this.itemModel, required this.index}) : super(key: key);
 

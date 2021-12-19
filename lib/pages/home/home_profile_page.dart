@@ -1,8 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iron_box/common/constant.dart';
 import 'package:iron_box/manager/data_manager.dart';
-import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/model/account_model.dart';
 import 'package:iron_box/pages/home/widget/wave_animation_widget.dart';
 import 'package:iron_box/router/routers.dart';
 
@@ -14,7 +16,7 @@ class HomeProfilePage extends StatefulWidget {
 }
 
 class _HomeProfilePageState extends State<HomeProfilePage> {
-  List<ItemModel> itemList = DataManager.shared.accountList;
+  List<AccountModel> itemList = DataManager.shared.accountList;
 
   _buildLeftSideItem(String title, VoidCallback onTap) {
     return ListTile(
@@ -71,6 +73,10 @@ class _HomeProfilePageState extends State<HomeProfilePage> {
               Divider(height: 0),
               _buildLeftSideItem("标签管理", () {
                 Get.toNamed(APPRouter.tagListPage);
+              }),
+              Divider(height: 0),
+              _buildLeftSideItem("相簿管理", () {
+                Get.toNamed(APPRouter.albumListPage);
               }),
               Divider(height: 0),
               _buildLeftSideItem("安全设置", () {

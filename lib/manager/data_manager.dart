@@ -5,7 +5,7 @@ import 'package:iron_box/utils/item_img_cache_utils.dart';
 
 class DataManager {
   List<CategoryModel> accountCategoryList = [];
-  List<FolderModel> photoFolderList = [];
+  List<FolderModel> albumList = [];
   List<TagModel> accountTagList = [];
   List<AccountModel> accountList = [];
 
@@ -19,7 +19,7 @@ class DataManager {
 
   init() async {
     this.accountCategoryList = await DatabaseHelper.shared.categoryList(0);
-    this.photoFolderList = await DatabaseHelper.shared.folderList(0);
+    this.albumList = await DatabaseHelper.shared.folderList(0);
     this.accountTagList = await DatabaseHelper.shared.tagList();
     this.accountList = await DatabaseHelper.shared.accountList();
   }
@@ -161,5 +161,37 @@ extension DataManagerItemExtension on DataManager {
     }
 
     return isSuccess;
+  }
+}
+
+extension DataManagerFolderExtension on DataManager {
+  /// type: 0 album
+  addFolder(String name, int type) async {
+    final directory = EncryptUtil.encodeMd5(name).toString();
+    await DatabaseHelper.shared.insertFolder(name, type, directory);
+    this.albumList = await DatabaseHelper.shared.folderList(type);
+  }
+
+  updateFolder(FolderModel model) async {
+    await DatabaseHelper.shared.updateFolder(model);
+  }
+
+  removeFolder(int id) async {
+    await DatabaseHelper.shared.deleteFolder(id);
+    albumList.removeWhere((category) => category.id == id);
+  }
+
+  swapFolderSort(oldIndex, newIndex) async {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+
+    var item = albumList.removeAt(oldIndex);
+    albumList.insert(newIndex, item);
+
+    for (int i = 0; i < albumList.length; i++) {
+      albumList[i].sort = i;
+      await DatabaseHelper.shared.updateFolder(albumList[i]);
+    }
   }
 }

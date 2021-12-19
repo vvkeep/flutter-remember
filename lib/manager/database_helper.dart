@@ -30,6 +30,7 @@ class DatabaseHelper {
       SQL.initCategoryList.forEach((e) {
         db.rawInsert(e);
       });
+
       SQL.initTagList.forEach((e) {
         db.rawInsert(e);
       });
@@ -105,7 +106,7 @@ extension DatabaseHelperTagExtension on DatabaseHelper {
 
 extension DatabaseHelperAccountExtension on DatabaseHelper {
   Future<List<AccountModel>> accountList() async {
-    List<Map<String, Object?>> maps = await _db.query(SQL.tableItem);
+    List<Map<String, Object?>> maps = await _db.query(SQL.tableAccount);
     List<AccountModel> list = maps.isNotEmpty
         ? maps.map((v) {
             final item = AccountModel.fromJson(v);
@@ -118,7 +119,7 @@ extension DatabaseHelperAccountExtension on DatabaseHelper {
   }
 
   Future<AccountModel> selectAccount(int itemId) async {
-    List<Map<String, Object?>> maps = await _db.query(SQL.tableItem, where: "id = ?", whereArgs: [itemId]);
+    List<Map<String, Object?>> maps = await _db.query(SQL.tableAccount, where: "id = ?", whereArgs: [itemId]);
     List<AccountModel> list = maps.isNotEmpty
         ? maps.map((v) {
             final item = AccountModel.fromJson(v);
@@ -137,7 +138,7 @@ extension DatabaseHelperAccountExtension on DatabaseHelper {
     map.remove("id");
     map['password'] = password;
     map['payPassword'] = payPassword;
-    int id = await _db.insert(SQL.tableItem, map);
+    int id = await _db.insert(SQL.tableAccount, map);
     return id != 0;
   }
 
@@ -147,12 +148,12 @@ extension DatabaseHelperAccountExtension on DatabaseHelper {
     Map<String, dynamic> map = itemModel.toJson();
     map['password'] = password;
     map['payPassword'] = payPassword;
-    int count = await _db.update(SQL.tableItem, map, where: "id = ?", whereArgs: [itemModel.id]);
+    int count = await _db.update(SQL.tableAccount, map, where: "id = ?", whereArgs: [itemModel.id]);
     return count == 1;
   }
 
   Future<bool> deleteAccount(int itemId) async {
-    int count = await _db.delete(SQL.tableItem, where: "id = ?", whereArgs: [itemId]);
+    int count = await _db.delete(SQL.tableAccount, where: "id = ?", whereArgs: [itemId]);
     return count == 1;
   }
 }
@@ -165,14 +166,20 @@ extension DatabaseHelperFolderExtension on DatabaseHelper {
     return list;
   }
 
-  Future<int> insertFolder(String title, int type) async {
-    Map<String, dynamic> map = {'title': title, 'count': 0, 'sort': 0, 'type': type};
+  Future<int> insertFolder(String title, int type, String directory) async {
+    Map<String, dynamic> map = {
+      'title': title,
+      'count': 0,
+      'sort': 0,
+      'type': type,
+      'directory': directory,
+    };
     return _db.insert(SQL.tableFolder, map);
   }
 
-  Future<int> updateFolder(CategoryModel categoryModel) async {
-    Map<String, dynamic> map = categoryModel.toJson();
-    return _db.update(SQL.tableFolder, map, where: "id = ?", whereArgs: [categoryModel.id]);
+  Future<int> updateFolder(FolderModel model) async {
+    Map<String, dynamic> map = model.toJson();
+    return _db.update(SQL.tableFolder, map, where: "id = ?", whereArgs: [model.id]);
   }
 
   Future<int> deleteFolder(int id) async {

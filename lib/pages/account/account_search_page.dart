@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:iron_box/common/constant.dart';
 import 'package:iron_box/manager/data_manager.dart';
-import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/model/account_model.dart';
 import 'package:iron_box/pages/account/widget/account_list_item_widget.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +12,7 @@ class AccountSearchPagePage extends StatefulWidget {
 }
 
 class _AccountSearchPagePageState extends State<AccountSearchPagePage> {
-  List<ItemModel> _itemList = [];
+  List<AccountModel> _itemList = [];
   FocusNode focusNode = FocusNode();
 
   @override

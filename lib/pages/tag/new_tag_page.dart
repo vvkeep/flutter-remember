@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:iron_box/common/constant.dart';
 import 'package:iron_box/manager/data_manager.dart';
-import 'package:iron_box/model/item_model.dart';
+import 'package:iron_box/model/account_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class NewTagPage extends StatefulWidget {

@@ -1,11 +1,11 @@
 class SQL {
-  static final String tableItem = "item";
+  static final String tableAccount = "account";
   static final String tableCategory = "category";
   static final String tableTag = "tag";
   static final String tableFolder = "folder";
 
   static String initItemTable = '''
-    CREATE TABLE $tableItem (
+    CREATE TABLE $tableAccount (
     "id" INTEGER NOT NULL,
     "categoryId" INTEGER NOT NULL,
     "title" TEXT NOT NULL,
