@@ -56,9 +56,9 @@ class SQL {
     "id" INTEGER NOT NULL,
     "title" TEXT NOT NULL,
     "directory" TEXT NOT NULL,
-    "cover" TEXT,
     "count" INTEGER NOT NULL,
     "contents" TEXT,
+    "cover" TEXT,
     "sort" INTEGER NOT NULL,
     "type" INTEGER NOT NULL,
     CONSTRAINT "id" PRIMARY KEY ("id")

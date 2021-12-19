@@ -167,13 +167,7 @@ extension DatabaseHelperFolderExtension on DatabaseHelper {
   }
 
   Future<int> insertFolder(String title, int type, String directory) async {
-    Map<String, dynamic> map = {
-      'title': title,
-      'count': 0,
-      'sort': 0,
-      'type': type,
-      'directory': directory,
-    };
+    Map<String, dynamic> map = {'title': title, 'count': 0, 'sort': 0, 'type': type, 'directory': directory};
     return _db.insert(SQL.tableFolder, map);
   }
 
