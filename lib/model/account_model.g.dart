@@ -84,10 +84,10 @@ FolderModel _$FolderModelFromJson(Map<String, dynamic> json) {
   return FolderModel(
     id: json['id'] as int,
     title: json['title'] as String,
-    cover: json['cover'] as String,
+    cover: json['cover'] as String?,
     directory: json['directory'] as String,
     count: json['count'] as int,
-    contents: json['contents'] as String,
+    contents: json['contents'] as String?,
     sort: json['sort'] as int,
     type: json['type'] as int,
   );

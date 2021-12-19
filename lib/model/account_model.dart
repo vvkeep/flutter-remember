@@ -72,10 +72,10 @@ class TagModel {
 class FolderModel {
   int id;
   String title;
-  String cover;
+  String? cover;
   String directory;
   int count;
-  String contents;
+  String? contents;
   int sort;
   int type;
 
