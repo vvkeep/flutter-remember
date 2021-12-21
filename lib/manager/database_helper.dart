@@ -25,6 +25,7 @@ class DatabaseHelper {
       await db.execute(SQL.initTagTable);
       await db.execute(SQL.initItemTable);
       await db.execute(SQL.initFolderTable);
+      await db.execute(SQL.initFolderItemTable);
 
       Batch batch = db.batch();
       SQL.initCategoryList.forEach((e) {
@@ -180,13 +181,36 @@ extension DatabaseHelperFolderExtension on DatabaseHelper {
     return _db.delete(SQL.tableFolder, where: "id = ?", whereArgs: [id]);
   }
 
-  Future<int> decremenFolderItemCount(int id) async {
+  Future<int> addFolderItemCount(int id, int count) async {
+    int rows = await _db.rawUpdate("UPDATE ${SQL.tableFolder} SET count = count+$count WHERE id = $id");
+    return rows;
+  }
+
+  Future<int> reduceFolderItemCount(int id, int count) async {
     int count = await _db.rawUpdate("UPDATE ${SQL.tableFolder} SET count = count-1 WHERE id = $id");
     return count;
   }
+}
 
-  Future<int> incremenFolderItemCount(int id) async {
-    int count = await _db.rawUpdate("UPDATE ${SQL.tableFolder} SET count = count+1 WHERE id = $id");
-    return count;
+extension DatabaseHelperFolderItemExtension on DatabaseHelper {
+  Future<List<FolderItemModel>> folderItemList(int folderId) async {
+    List<Map<String, Object?>> maps = await _db.query(SQL.tableFolderItem,
+        where: "folderId = ?", whereArgs: [folderId], orderBy: "sort ASC, id DESC");
+    List<FolderItemModel> list = maps.isNotEmpty ? maps.map((v) => FolderItemModel.fromJson(v)).toList() : [];
+    return list;
+  }
+
+  Future<int> insertFolderItem(String name, int folderId) async {
+    Map<String, dynamic> map = {'name': name, 'count': 0, 'sort': 0, 'folderId': folderId};
+    return _db.insert(SQL.tableFolderItem, map);
+  }
+
+  Future<int> updateFolderItem(FolderItemModel model) async {
+    Map<String, dynamic> map = model.toJson();
+    return _db.update(SQL.tableFolderItem, map, where: "id = ?", whereArgs: [model.id]);
+  }
+
+  Future<int> deleteFolderItem(int id) async {
+    return _db.delete(SQL.tableFolderItem, where: "id = ?", whereArgs: [id]);
   }
 }

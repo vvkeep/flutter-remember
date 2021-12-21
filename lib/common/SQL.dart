@@ -3,6 +3,7 @@ class SQL {
   static final String tableCategory = "category";
   static final String tableTag = "tag";
   static final String tableFolder = "folder";
+  static final String tableFolderItem = "folder_item";
 
   static String initItemTable = '''
     CREATE TABLE $tableAccount (
@@ -57,12 +58,23 @@ class SQL {
     "title" TEXT NOT NULL,
     "directory" TEXT NOT NULL,
     "count" INTEGER NOT NULL,
-    "contents" TEXT,
     "cover" TEXT,
     "sort" INTEGER NOT NULL,
     "type" INTEGER NOT NULL,
     CONSTRAINT "id" PRIMARY KEY ("id")
     CONSTRAINT "index_title" UNIQUE ("title") ON CONFLICT ABORT
+    );
+  ''';
+
+  // type 0 代表相册，暂无其他
+  static String initFolderItemTable = '''
+    CREATE TABLE $tableFolderItem (
+    "id" INTEGER NOT NULL,
+    "folderId" INTEGER NOT NULL,
+    "name" TEXT NOT NULL,
+    "sort" INTEGER NOT NULL,
+    CONSTRAINT "id" PRIMARY KEY ("id")
+    CONSTRAINT "index_title" UNIQUE ("name") ON CONFLICT ABORT
     );
   ''';
 

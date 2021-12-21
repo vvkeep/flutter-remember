@@ -1,13 +1,13 @@
 import 'package:flustars/flustars.dart';
 import 'package:iron_box/manager/database_helper.dart';
 import 'package:iron_box/model/account_model.dart';
-import 'package:iron_box/utils/item_img_cache_utils.dart';
+import 'package:iron_box/utils/cache_utils.dart';
 
 class DataManager {
   List<CategoryModel> accountCategoryList = [];
-  List<FolderModel> albumList = [];
   List<TagModel> accountTagList = [];
   List<AccountModel> accountList = [];
+  List<FolderModel> albumList = [];
 
   DataManager._privateConstructor();
 
@@ -19,9 +19,9 @@ class DataManager {
 
   init() async {
     this.accountCategoryList = await DatabaseHelper.shared.categoryList(0);
-    this.albumList = await DatabaseHelper.shared.folderList(0);
     this.accountTagList = await DatabaseHelper.shared.tagList();
     this.accountList = await DatabaseHelper.shared.accountList();
+    this.albumList = await DatabaseHelper.shared.folderList(0);
   }
 }
 
@@ -111,11 +111,11 @@ extension DataManagerItemExtension on DataManager {
       if (ObjectUtil.isNotEmpty(oldItem.imgs) && (oldItem.imgs != newItem.imgs)) {
         List<String> oldImgs = oldItem.imgs!.split(",");
         if (ObjectUtil.isEmpty(newItem.imgs)) {
-          await ItemImgCacheUtils.deleteImgs(oldImgs);
+          await CacheUtils.deleteList(CacheType.ACCOUNT_IMGS, oldImgs);
         } else {
           List<String> newImgs = newItem.imgs!.split(",");
           var imgs = oldImgs.where((e) => !newImgs.contains(e)).toList();
-          await ItemImgCacheUtils.deleteImgs(imgs);
+          await CacheUtils.deleteList(CacheType.ACCOUNT_IMGS, imgs);
         }
       }
 
@@ -154,7 +154,7 @@ extension DataManagerItemExtension on DataManager {
       //删除图片
       if (ObjectUtil.isNotEmpty(oldItem.imgs)) {
         List<String> imgNames = oldItem.imgs!.split(",");
-        await ItemImgCacheUtils.deleteImgs(imgNames);
+        await CacheUtils.deleteList(CacheType.ACCOUNT_IMGS, imgNames);
       }
 
       await init();
@@ -169,7 +169,6 @@ extension DataManagerFolderExtension on DataManager {
   addFolder(String name, int type) async {
     final directory = EncryptUtil.encodeMd5(name).toString();
     await DatabaseHelper.shared.insertFolder(name, type, directory);
-    this.albumList = await DatabaseHelper.shared.folderList(type);
   }
 
   updateFolder(FolderModel model) async {
@@ -178,10 +177,9 @@ extension DataManagerFolderExtension on DataManager {
 
   removeFolder(int id) async {
     await DatabaseHelper.shared.deleteFolder(id);
-    albumList.removeWhere((category) => category.id == id);
   }
 
-  swapFolderSort(oldIndex, newIndex) async {
+  swapFolderSort(int oldIndex, int newIndex) async {
     if (oldIndex < newIndex) {
       newIndex -= 1;
     }

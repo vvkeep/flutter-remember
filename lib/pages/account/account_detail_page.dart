@@ -12,7 +12,7 @@ import 'package:iron_box/model/account_model.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iron_box/pages/account/widget/account_detail_choose_image_widget.dart';
 import 'package:iron_box/pages/account/widget/account_detail_tag_widget.dart';
-import 'package:iron_box/utils/item_img_cache_utils.dart';
+import 'package:iron_box/utils/cache_utils.dart';
 import 'package:iron_box/utils/permission_utils.dart';
 import 'package:iron_box/widget/image_preview/photo_view_gallery_page.dart';
 import 'package:iron_box/widget/other/widget.dart';
@@ -82,7 +82,7 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
       List<String> imgNames = item.imgs!.split(",");
 
       for (var imgName in imgNames) {
-        File file = await ItemImgCacheUtils.imgFile(imgName);
+        final file = await CacheUtils.fileWithType(CacheType.ACCOUNT_IMGS, imgName);
         RMPickImageItem pickItem = RMPickImageItem(type: PickImageMediaType.source, file: file, path: imgName);
         tempPickedList.add(pickItem);
       }
@@ -152,9 +152,7 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
       if (item.type == PickImageMediaType.source) {
         tempImgPaths.add(item.path!);
       } else {
-        final bytes = await item.file!.readAsBytes();
-        String suffix = item.file!.path.split(".").last;
-        String? path = await ItemImgCacheUtils.save(bytes, suffix);
+        String? path = await CacheUtils.save(CacheType.ACCOUNT_IMGS, item.file!);
         tempImgPaths.add(path!);
       }
     }

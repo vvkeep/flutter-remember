@@ -75,7 +75,6 @@ class FolderModel {
   String? cover;
   String directory;
   int count;
-  String? contents;
   int sort;
   int type;
 
@@ -85,10 +84,22 @@ class FolderModel {
       required this.cover,
       required this.directory,
       required this.count,
-      required this.contents,
       required this.sort,
       required this.type});
 
   factory FolderModel.fromJson(Map<String, dynamic> json) => _$FolderModelFromJson(json);
   Map<String, dynamic> toJson() => _$FolderModelToJson(this);
+}
+
+@JsonSerializable()
+class FolderItemModel {
+  int id;
+  int folderId;
+  String name;
+  int sort;
+
+  FolderItemModel({required this.id, required this.folderId, required this.name, required this.sort});
+
+  factory FolderItemModel.fromJson(Map<String, dynamic> json) => _$FolderItemModelFromJson(json);
+  Map<String, dynamic> toJson() => _$FolderItemModelToJson(this);
 }
