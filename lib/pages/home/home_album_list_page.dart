@@ -6,7 +6,7 @@ import 'package:iron_box/common/constant.dart';
 import 'package:iron_box/common/event_bus.dart';
 import 'package:iron_box/manager/data_manager.dart';
 import 'package:iron_box/model/account_model.dart';
-import 'package:iron_box/pages/home/widget/home_photo_folder_item_widget.dart';
+import 'package:iron_box/pages/home/widget/home_album_item_widget.dart';
 import 'package:iron_box/router/routers.dart';
 
 class HomeAlbumListPage extends StatefulWidget {
@@ -60,7 +60,7 @@ class _HomeAlbumListPageState extends State<HomeAlbumListPage> {
           itemBuilder: (context, index) {
             FolderModel folderModel = photoFolderList[index];
             return GestureDetector(
-              child: HomePhotoFolderItemWidget(folderModel: folderModel),
+              child: HomeAlbumItemWidget(folderModel: folderModel),
               onTap: () {
                 Get.toNamed(APPRouter.photoListPage, arguments: folderModel);
               },

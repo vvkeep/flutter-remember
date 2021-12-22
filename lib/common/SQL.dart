@@ -110,6 +110,11 @@ class SQL {
   ];
 
   static List<String> initAlbumList = [
-    "INSERT INTO $tableTag ('title', 'count', 'sort', 'cover', 'type') VALUES ('自拍', 0, 0, '', 0);",
+    "INSERT INTO $tableFolder ('title', 'count', 'sort', 'cover', 'type') VALUES ('自拍', 0, 0, '', 0);",
+    "INSERT INTO $tableFolder ('title', 'count', 'sort', 'cover', 'type') VALUES ('宠物', 0, 0, '', 0);",
+    "INSERT INTO $tableFolder ('title', 'count', 'sort', 'cover', 'type') VALUES ('旅游', 0, 0, '', 0);",
+    "INSERT INTO $tableFolder ('title', 'count', 'sort', 'cover', 'type') VALUES ('Party', 0, 0, '', 0);",
+    "INSERT INTO $tableFolder ('title', 'count', 'sort', 'cover', 'type') VALUES ('生活', 0, 0, '', 0);",
+    "INSERT INTO $tableFolder ('title', 'count', 'sort', 'cover', 'type') VALUES ('植物', 0, 0, '', 0);",
   ];
 }

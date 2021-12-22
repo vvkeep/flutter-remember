@@ -35,6 +35,10 @@ class DatabaseHelper {
       SQL.initTagList.forEach((e) {
         db.rawInsert(e);
       });
+
+      SQL.initAlbumList.forEach((e) {
+        db.rawInsert(e);
+      });
       await batch.commit(noResult: true);
     });
   }
