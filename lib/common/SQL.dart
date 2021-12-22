@@ -56,7 +56,6 @@ class SQL {
     CREATE TABLE $tableFolder (
     "id" INTEGER NOT NULL,
     "title" TEXT NOT NULL,
-    "directory" TEXT NOT NULL,
     "count" INTEGER NOT NULL,
     "cover" TEXT,
     "sort" INTEGER NOT NULL,
@@ -108,5 +107,9 @@ class SQL {
     "INSERT INTO $tableTag ('title', 'count', 'sort') VALUES ('电脑', 0, 0);",
     "INSERT INTO $tableTag ('title', 'count', 'sort') VALUES ('支付宝', 0, 0);",
     "INSERT INTO $tableTag ('title', 'count', 'sort') VALUES ('微信', 0, 0);",
+  ];
+
+  static List<String> initAlbumList = [
+    "INSERT INTO $tableTag ('title', 'count', 'sort', 'cover', 'type') VALUES ('自拍', 0, 0, '', 0);",
   ];
 }

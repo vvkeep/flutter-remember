@@ -105,7 +105,6 @@ class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
           ),
           SliverToBoxAdapter(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,

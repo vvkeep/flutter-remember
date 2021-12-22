@@ -73,7 +73,6 @@ class FolderModel {
   int id;
   String title;
   String? cover;
-  String directory;
   int count;
   int sort;
   int type;
@@ -82,7 +81,6 @@ class FolderModel {
       {required this.id,
       required this.title,
       required this.cover,
-      required this.directory,
       required this.count,
       required this.sort,
       required this.type});

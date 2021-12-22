@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:iron_box/common/constant.dart';
 import 'package:iron_box/model/account_model.dart';
 
-class HomePhotoFolderItemWidget extends StatelessWidget {
+class HomeAlbumItemWidget extends StatelessWidget {
   final FolderModel folderModel;
 
-  const HomePhotoFolderItemWidget({Key? key, required this.folderModel}) : super(key: key);
+  const HomeAlbumItemWidget({Key? key, required this.folderModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

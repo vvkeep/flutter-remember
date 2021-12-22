@@ -12,23 +12,13 @@ class HomeAccountCategoryItemWidget extends StatelessWidget {
     return Container(
       height: 65,
       width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       decoration: BoxDecoration(
-        color: APPColors.white,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: APPColors.primaryColor.withOpacity(0.3),
-            offset: Offset(5.0, 5.0),
-            blurRadius: 3.0,
-          )
-        ],
-      ),
+          color: APPColors.white, border: Border(bottom: BorderSide(color: APPColors.divideColor, width: 1))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(width: 10),
+          SizedBox(width: 15),
           Text(categoryModel.title, style: APPTextStyle.normalTextDarkW500),
           Expanded(child: SizedBox()),
           Text('${categoryModel.count}', style: APPTextStyle.normalTextDarkW500),
