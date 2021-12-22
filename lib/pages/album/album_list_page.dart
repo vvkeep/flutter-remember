@@ -4,7 +4,7 @@ import 'package:iron_box/common/constant.dart';
 import 'package:iron_box/common/event_bus.dart';
 import 'package:iron_box/manager/data_manager.dart';
 import 'package:iron_box/model/account_model.dart';
-import 'package:iron_box/pages/photo/widget/album_list_item_widget.dart';
+import 'package:iron_box/pages/album/widget/album_list_item_widget.dart';
 import 'package:iron_box/router/routers.dart';
 import 'package:iron_box/widget/other/widget.dart';
 
@@ -88,14 +88,14 @@ class _AlbumListPageState extends State<AlbumListPage> {
             },
             onDismissed: (direction) async {
               await DataManager.shared.removeCategory(album.id);
-              eventBus.fire(CategoryListEvent());
+              eventBus.fire(AlbumListEvent());
               Get.showSnackbar(successBar('删除成功'));
             },
           );
         }).toList(),
         onReorder: (oldIndex, newIndex) async {
           await DataManager.shared.swapCategorySort(oldIndex, newIndex);
-          eventBus.fire(CategoryListEvent());
+          eventBus.fire(AlbumListEvent());
           this.loadData();
         },
       ),

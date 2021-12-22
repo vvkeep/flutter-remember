@@ -87,7 +87,6 @@ FolderModel _$FolderModelFromJson(Map<String, dynamic> json) {
     cover: json['cover'] as String?,
     directory: json['directory'] as String,
     count: json['count'] as int,
-    contents: json['contents'] as String?,
     sort: json['sort'] as int,
     type: json['type'] as int,
   );
@@ -100,7 +99,23 @@ Map<String, dynamic> _$FolderModelToJson(FolderModel instance) =>
       'cover': instance.cover,
       'directory': instance.directory,
       'count': instance.count,
-      'contents': instance.contents,
       'sort': instance.sort,
       'type': instance.type,
+    };
+
+FolderItemModel _$FolderItemModelFromJson(Map<String, dynamic> json) {
+  return FolderItemModel(
+    id: json['id'] as int,
+    folderId: json['folderId'] as int,
+    name: json['name'] as String,
+    sort: json['sort'] as int,
+  );
+}
+
+Map<String, dynamic> _$FolderItemModelToJson(FolderItemModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'folderId': instance.folderId,
+      'name': instance.name,
+      'sort': instance.sort,
     };

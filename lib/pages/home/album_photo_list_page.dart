@@ -1,28 +1,28 @@
 import 'dart:io';
 
-import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/common/event_bus.dart';
+import 'package:iron_box/manager/data_manager.dart';
 import 'package:iron_box/model/account_model.dart';
-import 'package:iron_box/pages/photo/widget/photo_list_item_widget.dart';
+import 'package:iron_box/pages/home/widget/home_photo_item_widget.dart';
 import 'package:iron_box/utils/cache_utils.dart';
 import 'package:iron_box/utils/permission_utils.dart';
 import 'package:iron_box/widget/image_preview/photo_view_gallery_page.dart';
 import 'package:iron_box/widget/other/widget.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
-class PhotoListPage extends StatefulWidget {
-  PhotoListPage({Key? key}) : super(key: key);
+class AlbumPhotoListPage extends StatefulWidget {
+  AlbumPhotoListPage({Key? key}) : super(key: key);
 
   @override
-  _PhotoListPageState createState() => _PhotoListPageState();
+  _AlbumPhotoListPageState createState() => _AlbumPhotoListPageState();
 }
 
-class _PhotoListPageState extends State<PhotoListPage> {
-  List<File> photoList = [];
+class _AlbumPhotoListPageState extends State<AlbumPhotoListPage> {
+  List<FolderItemModel> itemList = [];
   late FolderModel folderModel;
-  late String _folderName;
 
   @override
   void initState() {
@@ -32,11 +32,9 @@ class _PhotoListPageState extends State<PhotoListPage> {
 
   initData() async {
     folderModel = Get.arguments as FolderModel;
-    _folderName = EncryptUtil.encodeMd5(folderModel.title).toString();
-    final files = await CacheUtils.getFiles(_folderName);
-
+    final tempList = await DataManager.shared.folderItemList(folderModel.id);
     setState(() {
-      this.photoList = files;
+      this.itemList = tempList;
     });
   }
 
@@ -49,7 +47,7 @@ class _PhotoListPageState extends State<PhotoListPage> {
     var entityList = await AssetPicker.pickAssets(
       context,
       maxAssets: 9,
-      specialPickerType: SpecialPickerType.wechatMoment,
+      requestType: RequestType.image,
     );
 
     if (entityList == null) {
@@ -62,10 +60,12 @@ class _PhotoListPageState extends State<PhotoListPage> {
       tempList.add(file!);
     }
 
-    await CacheUtils.saveFiles(tempList, _folderName);
-    List<File> files = await CacheUtils.getFiles(_folderName);
+    await DataManager.shared.addFolderItems(folderModel.id, tempList);
+    final items = await DataManager.shared.folderItemList(folderModel.id);
+    eventBus.fire(AlbumListEvent());
+
     setState(() {
-      this.photoList = files;
+      this.itemList = items;
     });
   }
 
@@ -96,18 +96,23 @@ class _PhotoListPageState extends State<PhotoListPage> {
             childAspectRatio: 1,
             maxCrossAxisExtent: APPLayout.photoMaxLength,
           ),
-          itemCount: photoList.length,
+          itemCount: itemList.length,
           itemBuilder: (context, index) {
-            File file = photoList[index];
-            return PhotoListItemWidget(
-              file: file,
-              onTap: () {
-                final page = PhotoViewGalleryPage(
-                  files: photoList, //传入图片list
-                  index: index,
-                  heroTag: photoList[index].path, //传入当前点击的图片的index
-                );
+            FolderItemModel item = itemList[index];
+            return HomePhotoItemWidget(
+              item: item,
+              onTap: () async {
+                List<File> tempList = [];
+                for (var item in itemList) {
+                  final file = await CacheUtils.fileWithType(CacheType.PHTOT_IMGS, item.name);
+                  tempList.add(file);
+                }
 
+                final page = PhotoViewGalleryPage(
+                  files: tempList, //传入图片list
+                  index: index,
+                  heroTag: tempList[index].path, //传入当前点击的图片的index
+                );
                 Navigator.of(context).push(FadeRoute(page: page));
               },
             );

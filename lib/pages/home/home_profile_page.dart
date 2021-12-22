@@ -1,10 +1,6 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iron_box/common/constant.dart';
-import 'package:iron_box/manager/data_manager.dart';
-import 'package:iron_box/model/account_model.dart';
 import 'package:iron_box/pages/home/widget/wave_animation_widget.dart';
 import 'package:iron_box/router/routers.dart';
 
@@ -16,8 +12,6 @@ class HomeProfilePage extends StatefulWidget {
 }
 
 class _HomeProfilePageState extends State<HomeProfilePage> {
-  List<AccountModel> itemList = DataManager.shared.accountList;
-
   _buildLeftSideItem(String title, VoidCallback onTap) {
     return ListTile(
       title: Container(
@@ -43,7 +37,7 @@ class _HomeProfilePageState extends State<HomeProfilePage> {
           child: Column(
             children: [
               Container(
-                height: Get.height * 0.26,
+                height: Get.height * 0.2,
                 color: APPColors.primaryColor,
                 child: Stack(
                   children: [
@@ -53,16 +47,6 @@ class _HomeProfilePageState extends State<HomeProfilePage> {
                       height: double.infinity,
                       child: WaveAnimaitonWidget(),
                     ),
-                    Center(
-                      child: Text(
-                        '${itemList.length}',
-                        style: TextStyle(
-                          color: APPColors.white,
-                          fontSize: 45,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    )
                   ],
                 ),
               ),

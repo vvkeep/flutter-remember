@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iron_box/common/constant.dart';
 import 'package:iron_box/model/models.dart';
 import 'package:iron_box/pages/home/home_account_category_page.dart';
-import 'package:iron_box/pages/home/home_photo_category_page.dart';
+import 'package:iron_box/pages/home/home_album_list_page.dart';
 import 'package:iron_box/pages/home/home_profile_page.dart';
 
 class AppMainPage extends StatefulWidget {
@@ -29,7 +29,7 @@ class _AppMainPageState extends State<AppMainPage> {
     _pageController = PageController(initialPage: _currentIndex);
     _pages = [
       HomeAccountCategoryPage(),
-      HomePhotoCategoryPage(),
+      HomeAlbumListPage(),
       HomeProfilePage(),
     ];
   }

@@ -181,12 +181,12 @@ extension DatabaseHelperFolderExtension on DatabaseHelper {
     return _db.delete(SQL.tableFolder, where: "id = ?", whereArgs: [id]);
   }
 
-  Future<int> addFolderItemCount(int id, int count) async {
+  Future<int> addFolderCount(int id, int count) async {
     int rows = await _db.rawUpdate("UPDATE ${SQL.tableFolder} SET count = count+$count WHERE id = $id");
     return rows;
   }
 
-  Future<int> reduceFolderItemCount(int id, int count) async {
+  Future<int> reduceFolderCount(int id, int count) async {
     int count = await _db.rawUpdate("UPDATE ${SQL.tableFolder} SET count = count-1 WHERE id = $id");
     return count;
   }
@@ -201,7 +201,7 @@ extension DatabaseHelperFolderItemExtension on DatabaseHelper {
   }
 
   Future<int> insertFolderItem(String name, int folderId) async {
-    Map<String, dynamic> map = {'name': name, 'count': 0, 'sort': 0, 'folderId': folderId};
+    Map<String, dynamic> map = {'name': name, 'sort': 0, 'folderId': folderId};
     return _db.insert(SQL.tableFolderItem, map);
   }
 
@@ -212,5 +212,10 @@ extension DatabaseHelperFolderItemExtension on DatabaseHelper {
 
   Future<int> deleteFolderItem(int id) async {
     return _db.delete(SQL.tableFolderItem, where: "id = ?", whereArgs: [id]);
+  }
+
+  Future<int> deleteFolderItems(String ids) async {
+    int count = await _db.rawDelete("DELETE FROM ${SQL.tableFolderItem} WHERE id in ($ids)");
+    return count;
   }
 }

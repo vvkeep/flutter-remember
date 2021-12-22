@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flustars/flustars.dart';
 import 'package:iron_box/manager/database_helper.dart';
 import 'package:iron_box/model/account_model.dart';
@@ -169,6 +171,7 @@ extension DataManagerFolderExtension on DataManager {
   addFolder(String name, int type) async {
     final directory = EncryptUtil.encodeMd5(name).toString();
     await DatabaseHelper.shared.insertFolder(name, type, directory);
+    this.albumList = await DatabaseHelper.shared.folderList(0);
   }
 
   updateFolder(FolderModel model) async {
@@ -177,6 +180,7 @@ extension DataManagerFolderExtension on DataManager {
 
   removeFolder(int id) async {
     await DatabaseHelper.shared.deleteFolder(id);
+    albumList.removeWhere((e) => e.id == id);
   }
 
   swapFolderSort(int oldIndex, int newIndex) async {
@@ -191,5 +195,39 @@ extension DataManagerFolderExtension on DataManager {
       albumList[i].sort = i;
       await DatabaseHelper.shared.updateFolder(albumList[i]);
     }
+  }
+}
+
+extension DataManagerFolderItemExtension on DataManager {
+  Future<List<FolderItemModel>> folderItemList(int folderId) async {
+    List<FolderItemModel> list = await DatabaseHelper.shared.folderItemList(folderId);
+    return list;
+  }
+
+  addFolderItem(int folderId, File file) async {
+    final fileName = await CacheUtils.save(CacheType.PHTOT_IMGS, file);
+    await DatabaseHelper.shared.insertFolderItem(fileName!, folderId);
+    await DatabaseHelper.shared.addFolderCount(folderId, 1);
+    albumList.firstWhere((e) => e.id == folderId).count += 1;
+  }
+
+  addFolderItems(int folderId, List<File> files) async {
+    for (var file in files) {
+      final fileName = await CacheUtils.save(CacheType.PHTOT_IMGS, file);
+      await DatabaseHelper.shared.insertFolderItem(fileName!, folderId);
+    }
+
+    await DatabaseHelper.shared.addFolderCount(folderId, files.length);
+    albumList.firstWhere((e) => e.id == folderId).count += files.length;
+  }
+
+  removeFolderItems(int folderId, List<FolderItemModel> items) async {
+    await CacheUtils.deleteList(CacheType.PHTOT_IMGS, items.map((e) => e.name).toList());
+    await DatabaseHelper.shared.deleteFolderItems(items.map((e) => e.id).toList().join(","));
+  }
+
+  removeFolderItem(int folderId, FolderItemModel item) async {
+    await CacheUtils.delete(CacheType.PHTOT_IMGS, item.name);
+    await DatabaseHelper.shared.deleteFolderItem(item.id);
   }
 }

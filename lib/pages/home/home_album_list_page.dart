@@ -9,22 +9,22 @@ import 'package:iron_box/model/account_model.dart';
 import 'package:iron_box/pages/home/widget/home_photo_folder_item_widget.dart';
 import 'package:iron_box/router/routers.dart';
 
-class HomePhotoCategoryPage extends StatefulWidget {
-  HomePhotoCategoryPage({Key? key}) : super(key: key);
+class HomeAlbumListPage extends StatefulWidget {
+  HomeAlbumListPage({Key? key}) : super(key: key);
 
   @override
-  _HomePhotoCategoryPageState createState() => _HomePhotoCategoryPageState();
+  _HomeAlbumListPageState createState() => _HomeAlbumListPageState();
 }
 
-class _HomePhotoCategoryPageState extends State<HomePhotoCategoryPage> {
+class _HomeAlbumListPageState extends State<HomeAlbumListPage> {
   List<FolderModel> photoFolderList = DataManager.shared.albumList;
 
-  late StreamSubscription<CategoryListEvent> subscription;
+  late StreamSubscription<AlbumListEvent> subscription;
 
   @override
   void initState() {
     super.initState();
-    subscription = eventBus.on<CategoryListEvent>().listen((event) {
+    subscription = eventBus.on<AlbumListEvent>().listen((event) {
       setState(() {
         this.photoFolderList = DataManager.shared.albumList;
       });

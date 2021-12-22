@@ -5,6 +5,8 @@ EventBus eventBus = EventBus();
 
 class CategoryListEvent {}
 
+class AlbumListEvent {}
+
 class CategoryEvent {
   CategoryModel category;
 
