@@ -19,8 +19,8 @@ class _AppFeaturePageState extends State<AppFeaturePage> {
   late LiquidController liquidController;
 
   List<AppFeatureItemModel> dataList = [
-    AppFeatureItemModel(Colors.blue, 'assets/imgs/app_feature.png', "嗨，您好！", "欢迎使用账号助手记得"),
-    AppFeatureItemModel(Colors.deepPurpleAccent, 'assets/imgs/app_feature.png', "记得将致力于", "安全便捷的管理账号等重要信息"),
+    AppFeatureItemModel(Colors.blue, 'assets/imgs/app_feature.png', "嗨，您好！", "欢迎您使用钢铁匣APP"),
+    AppFeatureItemModel(Colors.deepPurpleAccent, 'assets/imgs/app_feature.png', "钢铁匣将致力于", "保护您最重要的的数字资产"),
     AppFeatureItemModel(APPColors.primaryColor, 'assets/imgs/app_feature.png', "欢迎留下您的宝贵建议", "它对我们非常重要！")
   ];
 

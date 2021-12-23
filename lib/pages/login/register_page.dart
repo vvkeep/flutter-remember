@@ -47,7 +47,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               children: [
                 SizedBox(height: Get.mediaQuery.padding.top + 45),
-                Text('欢迎使用记得', style: APPTextStyle.biggerTextWhiteBold),
+                Text('欢迎使用钢铁匣', style: APPTextStyle.biggerTextWhiteBold),
                 SizedBox(height: 35 + 45),
                 Stack(
                   clipBehavior: Clip.none,
@@ -135,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     final digest = EncryptUtil.encodeMd5(Uuid().v4());
                     userInfo.secretKey = digest.toString();
                     LoginManager.saveUserInfo(userInfo);
-                    Get.offAllNamed(APPRouter.homeCategoryPage);
+                    Get.offAllNamed(APPRouter.mianPage);
                   },
                 ),
               ],
