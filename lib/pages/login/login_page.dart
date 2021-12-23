@@ -127,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                     }
 
                     Fluttertoast.showToast(msg: '登录成功', gravity: ToastGravity.TOP);
-                    Get.offAllNamed(APPRouter.homeCategoryPage);
+                    Get.offAllNamed(APPRouter.mianPage);
                   },
                 ),
                 Visibility(
@@ -208,7 +208,7 @@ class _LoginPageState extends State<LoginPage> {
           localizedReason: '请进行身份验证以登录应用', useErrorDialogs: false, stickyAuth: true, biometricOnly: true);
       if (authenticated) {
         Fluttertoast.showToast(msg: '登录成功', gravity: ToastGravity.TOP);
-        Get.offAllNamed(APPRouter.homeCategoryPage);
+        Get.offAllNamed(APPRouter.mianPage);
       }
     } on PlatformException catch (e) {
       printInfo(info: "${e.message}");

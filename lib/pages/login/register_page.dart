@@ -135,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     final digest = EncryptUtil.encodeMd5(Uuid().v4());
                     userInfo.secretKey = digest.toString();
                     LoginManager.saveUserInfo(userInfo);
-                    Get.offAllNamed(APPRouter.homeCategoryPage);
+                    Get.offAllNamed(APPRouter.mianPage);
                   },
                 ),
               ],
