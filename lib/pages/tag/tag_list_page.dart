@@ -93,8 +93,15 @@ class _TagListPageState extends State<TagListPage> {
           );
         }).toList(),
         onReorder: (oldIndex, newIndex) async {
-          await DataManager.shared.swapTagSort(oldIndex, newIndex);
-          this.loadData();
+          setState(() {
+            if (oldIndex < newIndex) {
+              newIndex -= 1;
+            }
+
+            var item = tagList.removeAt(oldIndex);
+            tagList.insert(newIndex, item);
+          });
+          await DataManager.shared.reorderTagSort(tagList);
         },
       ),
     );

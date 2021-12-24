@@ -96,7 +96,15 @@ class _CategoryListPageState extends State<CategoryListPage> {
           );
         }).toList(),
         onReorder: (oldIndex, newIndex) async {
-          await DataManager.shared.swapCategorySort(oldIndex, newIndex);
+          setState(() {
+            if (oldIndex < newIndex) {
+              newIndex -= 1;
+            }
+
+            var item = categroyItems.removeAt(oldIndex);
+            categroyItems.insert(newIndex, item);
+          });
+          await DataManager.shared.reorderCategorySort(categroyItems);
           eventBus.fire(CategoryListEvent());
           this.loadData();
         },

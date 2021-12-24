@@ -43,14 +43,8 @@ extension DataManagerCategoryExtension on DataManager {
     accountCategoryList.removeWhere((category) => category.id == id);
   }
 
-  swapCategorySort(oldIndex, newIndex) async {
-    if (oldIndex < newIndex) {
-      newIndex -= 1;
-    }
-
-    var item = accountCategoryList.removeAt(oldIndex);
-    accountCategoryList.insert(newIndex, item);
-
+  reorderCategorySort(List<CategoryModel> categoryList) async {
+    accountCategoryList = categoryList;
     for (int i = 0; i < accountCategoryList.length; i++) {
       accountCategoryList[i].sort = i;
       await DatabaseHelper.shared.updateCategory(accountCategoryList[i]);
@@ -73,14 +67,8 @@ extension DataManagerTagExtension on DataManager {
     accountTagList.removeWhere((tag) => tag.id == id);
   }
 
-  swapTagSort(oldIndex, newIndex) async {
-    if (oldIndex < newIndex) {
-      newIndex -= 1;
-    }
-
-    var item = accountTagList.removeAt(oldIndex);
-    accountTagList.insert(newIndex, item);
-
+  reorderTagSort(List<TagModel> tagList) async {
+    accountTagList = tagList;
     for (int i = 0; i < accountTagList.length; i++) {
       accountTagList[i].sort = i;
       await DatabaseHelper.shared.updateTag(accountTagList[i]);
@@ -182,14 +170,8 @@ extension DataManagerFolderExtension on DataManager {
     albumList.removeWhere((e) => e.id == id);
   }
 
-  swapFolderSort(int oldIndex, int newIndex) async {
-    if (oldIndex < newIndex) {
-      newIndex -= 1;
-    }
-
-    var item = albumList.removeAt(oldIndex);
-    albumList.insert(newIndex, item);
-
+  reorderFolderSort(int type, List<FolderModel> folderList) async {
+    this.albumList = folderList;
     for (int i = 0; i < albumList.length; i++) {
       albumList[i].sort = i;
       await DatabaseHelper.shared.updateFolder(albumList[i]);
