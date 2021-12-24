@@ -94,9 +94,17 @@ class _AlbumListPageState extends State<AlbumListPage> {
           );
         }).toList(),
         onReorder: (oldIndex, newIndex) async {
-          await DataManager.shared.swapCategorySort(oldIndex, newIndex);
+          setState(() {
+            if (oldIndex < newIndex) {
+              newIndex -= 1;
+            }
+
+            var item = albumList.removeAt(oldIndex);
+            albumList.insert(newIndex, item);
+          });
+
+          await DataManager.shared.reorderFolderSort(0, albumList);
           eventBus.fire(AlbumListEvent());
-          this.loadData();
         },
       ),
     );
