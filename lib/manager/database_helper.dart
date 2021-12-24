@@ -171,8 +171,8 @@ extension DatabaseHelperFolderExtension on DatabaseHelper {
     return list;
   }
 
-  Future<int> insertFolder(String title, int type, String directory) async {
-    Map<String, dynamic> map = {'title': title, 'count': 0, 'sort': 0, 'type': type, 'directory': directory};
+  Future<int> insertFolder(String title, int type) async {
+    Map<String, dynamic> map = {'title': title, 'count': 0, 'sort': 0, 'type': type};
     return _db.insert(SQL.tableFolder, map);
   }
 
@@ -200,6 +200,13 @@ extension DatabaseHelperFolderItemExtension on DatabaseHelper {
   Future<List<FolderItemModel>> folderItemList(int folderId) async {
     List<Map<String, Object?>> maps = await _db.query(SQL.tableFolderItem,
         where: "folderId = ?", whereArgs: [folderId], orderBy: "sort ASC, id DESC");
+    List<FolderItemModel> list = maps.isNotEmpty ? maps.map((v) => FolderItemModel.fromJson(v)).toList() : [];
+    return list;
+  }
+
+  Future<List<FolderItemModel>> folderItemListByIds(List<int> idList) async {
+    String ids = idList.join(",");
+    List<Map<String, Object?>> maps = await _db.rawQuery('SELECT * FROM ${SQL.tableFolderItem} WHERE id in ($ids)');
     List<FolderItemModel> list = maps.isNotEmpty ? maps.map((v) => FolderItemModel.fromJson(v)).toList() : [];
     return list;
   }

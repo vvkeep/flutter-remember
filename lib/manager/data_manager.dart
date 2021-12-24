@@ -169,8 +169,7 @@ extension DataManagerItemExtension on DataManager {
 extension DataManagerFolderExtension on DataManager {
   /// type: 0 album
   addFolder(String name, int type) async {
-    final directory = EncryptUtil.encodeMd5(name).toString();
-    await DatabaseHelper.shared.insertFolder(name, type, directory);
+    await DatabaseHelper.shared.insertFolder(name, type);
     this.albumList = await DatabaseHelper.shared.folderList(0);
   }
 
@@ -224,10 +223,12 @@ extension DataManagerFolderItemExtension on DataManager {
   removeFolderItems(int folderId, List<FolderItemModel> items) async {
     await CacheUtils.deleteList(CacheType.PHTOT_IMGS, items.map((e) => e.name).toList());
     await DatabaseHelper.shared.deleteFolderItems(items.map((e) => e.id).toList().join(","));
+    albumList.firstWhere((e) => e.id == folderId).count -= items.length;
   }
 
   removeFolderItem(int folderId, FolderItemModel item) async {
     await CacheUtils.delete(CacheType.PHTOT_IMGS, item.name);
     await DatabaseHelper.shared.deleteFolderItem(item.id);
+    albumList.firstWhere((e) => e.id == folderId).count -= 1;
   }
 }

@@ -54,6 +54,10 @@ class _AlbumPhotoListPageState extends State<AlbumPhotoListPage> {
       return;
     }
 
+    setState(() {
+      this.itemList = [];
+    });
+
     List<File> tempList = [];
     for (var entity in entityList) {
       var file = await entity.file;
@@ -67,6 +71,21 @@ class _AlbumPhotoListPageState extends State<AlbumPhotoListPage> {
     setState(() {
       this.itemList = items;
     });
+  }
+
+  _itemTapAction(int index) async {
+    List<File> tempList = [];
+    for (var item in itemList) {
+      final file = await CacheUtils.fileWithType(CacheType.PHTOT_IMGS, item.name);
+      tempList.add(file);
+    }
+
+    final page = PhotoViewGalleryPage(
+      files: tempList, //传入图片list
+      index: index,
+      heroTag: tempList[index].path, //传入当前点击的图片的index
+    );
+    Navigator.of(context).push(FadeRoute(page: page));
   }
 
   @override
@@ -101,20 +120,7 @@ class _AlbumPhotoListPageState extends State<AlbumPhotoListPage> {
             FolderItemModel item = itemList[index];
             return HomePhotoItemWidget(
               item: item,
-              onTap: () async {
-                List<File> tempList = [];
-                for (var item in itemList) {
-                  final file = await CacheUtils.fileWithType(CacheType.PHTOT_IMGS, item.name);
-                  tempList.add(file);
-                }
-
-                final page = PhotoViewGalleryPage(
-                  files: tempList, //传入图片list
-                  index: index,
-                  heroTag: tempList[index].path, //传入当前点击的图片的index
-                );
-                Navigator.of(context).push(FadeRoute(page: page));
-              },
+              onTap: () => _itemTapAction(index),
             );
           },
         ),
