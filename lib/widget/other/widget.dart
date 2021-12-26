@@ -1,6 +1,9 @@
 import 'package:get/route_manager.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:iron_box/common/constant.dart';
+
+import 'alert_widget.dart';
 
 GetBar errorBar(String msg) {
   return GetBar(
@@ -47,4 +50,53 @@ class FadeRoute extends PageRouteBuilder {
             child: child,
           ),
         );
+}
+
+appShowDialog(BuildContext context, String message, VoidCallback? confirmCallback,
+    {String title = "温馨提示", String confirm = "确认"}) {
+  showGeneralDialog(
+    context: context,
+    pageBuilder: (context, anim1, anim2) {
+      return AlertWidget(
+        title: title,
+        message: message,
+        confirm: confirm,
+        confirmCallback: () {
+          if (confirmCallback != null) {
+            confirmCallback();
+          }
+        },
+      );
+    },
+    barrierColor: Colors.grey.withOpacity(.4),
+    barrierDismissible: true,
+    barrierLabel: "",
+    transitionDuration: Duration(milliseconds: 125),
+    transitionBuilder: (context, anim1, anim2, child) {
+      return Transform.scale(
+        scale: anim1.value,
+        child: Opacity(
+          opacity: anim1.value,
+          child: child,
+        ),
+      );
+    },
+  );
+}
+
+Widget buildPopupMenuItem(IconData iconData, String title) {
+  return Row(
+    children: <Widget>[
+      Icon(
+        iconData,
+        size: 22.0,
+        color: APPColors.lightTextColor,
+      ),
+      Container(width: 12.0),
+      Text(
+        title,
+        style: TextStyle(color: APPColors.lightTextColor),
+      ),
+    ],
+  );
 }

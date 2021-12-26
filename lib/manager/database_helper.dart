@@ -191,8 +191,8 @@ extension DatabaseHelperFolderExtension on DatabaseHelper {
   }
 
   Future<int> reduceFolderCount(int id, int count) async {
-    int count = await _db.rawUpdate("UPDATE ${SQL.tableFolder} SET count = count-1 WHERE id = $id");
-    return count;
+    int rows = await _db.rawUpdate("UPDATE ${SQL.tableFolder} SET count = count-$count WHERE id = $id");
+    return rows;
   }
 }
 
