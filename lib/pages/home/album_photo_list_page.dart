@@ -58,10 +58,6 @@ class _AlbumPhotoListPageState extends State<AlbumPhotoListPage> {
       return;
     }
 
-    setState(() {
-      this.itemList = [];
-    });
-
     List<File> tempList = [];
     for (var entity in entityList) {
       var file = await entity.file;
@@ -96,15 +92,9 @@ class _AlbumPhotoListPageState extends State<AlbumPhotoListPage> {
     final items = this.itemList.where((e) => e.isSelected).map((e) => e.itemModel).toList();
     await DataManager.shared.removeFolderItems(folderModel.id, items);
     eventBus.fire(AlbumListEvent());
-
     setState(() {
-      this.itemList = [];
-    });
-
-    final tempList = await DataManager.shared.folderItemList(folderModel.id);
-    setState(() {
-      _isEditMode = false;
-      this.itemList = tempList.map((e) => PhotoItemUIModel(itemModel: e)).toList();
+      this.itemList.removeWhere((e) => e.isSelected);
+      _updateEditMode(false);
     });
   }
 
@@ -128,10 +118,10 @@ class _AlbumPhotoListPageState extends State<AlbumPhotoListPage> {
     }
   }
 
-  _updateEditeMode() {
-    _isEditMode = !_isEditMode;
+  _updateEditMode(bool isEdit) {
+    _isEditMode = isEdit;
     itemList.forEach((e) {
-      e.isEditMode = _isEditMode;
+      e.isEditMode = isEdit;
       e.isSelected = false;
     });
   }
@@ -163,6 +153,7 @@ class _AlbumPhotoListPageState extends State<AlbumPhotoListPage> {
           itemBuilder: (context, index) {
             final item = itemList[index];
             return HomePhotoItemWidget(
+              key: Key('${item.itemModel.id}'),
               item: item,
               onTap: () {
                 if (item.isEditMode) {
@@ -175,7 +166,7 @@ class _AlbumPhotoListPageState extends State<AlbumPhotoListPage> {
               },
               onLongPress: () {
                 setState(() {
-                  _updateEditeMode();
+                  _updateEditMode(!_isEditMode);
                 });
               },
             );
