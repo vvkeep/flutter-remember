@@ -21,7 +21,7 @@ class TagListItemWidget extends StatelessWidget {
                 Spacer(),
                 Text('${this.tagModel.count}', style: APPTextStyle.normalTextDark),
                 SizedBox(width: 15),
-                Icon(APPIcons.drag, color: APPColors.divideColor.withOpacity(0.5))
+                Icon(APPIcons.drag, color: APPColors.divideColor)
               ],
             ),
           ),

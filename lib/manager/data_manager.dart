@@ -205,12 +205,14 @@ extension DataManagerFolderItemExtension on DataManager {
   removeFolderItems(int folderId, List<FolderItemModel> items) async {
     await CacheUtils.deleteList(CacheType.PHTOT_IMGS, items.map((e) => e.name).toList());
     await DatabaseHelper.shared.deleteFolderItems(items.map((e) => e.id).toList().join(","));
+    await DatabaseHelper.shared.reduceFolderCount(folderId, items.length);
     albumList.firstWhere((e) => e.id == folderId).count -= items.length;
   }
 
   removeFolderItem(int folderId, FolderItemModel item) async {
     await CacheUtils.delete(CacheType.PHTOT_IMGS, item.name);
     await DatabaseHelper.shared.deleteFolderItem(item.id);
+    await DatabaseHelper.shared.reduceFolderCount(folderId, 1);
     albumList.firstWhere((e) => e.id == folderId).count -= 1;
   }
 }

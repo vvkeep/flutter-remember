@@ -6,6 +6,7 @@ import 'package:iron_box/common/constant.dart';
 import 'package:iron_box/common/event_bus.dart';
 import 'package:iron_box/manager/data_manager.dart';
 import 'package:iron_box/model/account_model.dart';
+import 'package:iron_box/model/models.dart';
 import 'package:iron_box/pages/home/widget/home_photo_item_widget.dart';
 import 'package:iron_box/utils/cache_utils.dart';
 import 'package:iron_box/utils/permission_utils.dart';
@@ -20,10 +21,13 @@ class AlbumPhotoListPage extends StatefulWidget {
   _AlbumPhotoListPageState createState() => _AlbumPhotoListPageState();
 }
 
+enum PhotoListPopActionItems { ADD, EDIT }
+
 class _AlbumPhotoListPageState extends State<AlbumPhotoListPage> {
-  List<FolderItemModel> itemList = [];
+  List<PhotoItemUIModel> itemList = [];
   late FolderModel folderModel;
 
+  bool _isEditMode = false;
   @override
   void initState() {
     super.initState();
@@ -34,11 +38,11 @@ class _AlbumPhotoListPageState extends State<AlbumPhotoListPage> {
     folderModel = Get.arguments as FolderModel;
     final tempList = await DataManager.shared.folderItemList(folderModel.id);
     setState(() {
-      this.itemList = tempList;
+      this.itemList = tempList.map((e) => PhotoItemUIModel(itemModel: e)).toList();
     });
   }
 
-  pickPhotos() async {
+  _pickPhotos() async {
     bool granted = await PermissionUtils.checkPhotos() && await PermissionUtils.checkCamera();
     if (!granted) {
       return;
@@ -69,14 +73,14 @@ class _AlbumPhotoListPageState extends State<AlbumPhotoListPage> {
     eventBus.fire(AlbumListEvent());
 
     setState(() {
-      this.itemList = items;
+      this.itemList = items.map((e) => PhotoItemUIModel(itemModel: e)).toList();
     });
   }
 
-  _itemTapAction(int index) async {
+  _itemPreviewAction(int index) async {
     List<File> tempList = [];
     for (var item in itemList) {
-      final file = await CacheUtils.fileWithType(CacheType.PHTOT_IMGS, item.name);
+      final file = await CacheUtils.fileWithType(CacheType.PHTOT_IMGS, item.itemModel.name);
       tempList.add(file);
     }
 
@@ -86,6 +90,50 @@ class _AlbumPhotoListPageState extends State<AlbumPhotoListPage> {
       heroTag: tempList[index].path, //传入当前点击的图片的index
     );
     Navigator.of(context).push(FadeRoute(page: page));
+  }
+
+  _deleteItems() async {
+    final items = this.itemList.where((e) => e.isSelected).map((e) => e.itemModel).toList();
+    await DataManager.shared.removeFolderItems(folderModel.id, items);
+    eventBus.fire(AlbumListEvent());
+
+    setState(() {
+      this.itemList = [];
+    });
+
+    final tempList = await DataManager.shared.folderItemList(folderModel.id);
+    setState(() {
+      _isEditMode = false;
+      this.itemList = tempList.map((e) => PhotoItemUIModel(itemModel: e)).toList();
+    });
+  }
+
+  Widget _rightItemActionWidget() {
+    if (_isEditMode) {
+      return IconButton(
+        tooltip: '删除',
+        icon: Icon(Icons.delete),
+        onPressed: () {
+          appShowDialog(context, "删除照片后将无法恢复，确认该删除吗?", () {
+            _deleteItems();
+          });
+        },
+      );
+    } else {
+      return IconButton(
+        tooltip: '添加图片',
+        icon: Icon(Icons.add),
+        onPressed: () => _pickPhotos(),
+      );
+    }
+  }
+
+  _updateEditeMode() {
+    _isEditMode = !_isEditMode;
+    itemList.forEach((e) {
+      e.isEditMode = _isEditMode;
+      e.isSelected = false;
+    });
   }
 
   @override
@@ -98,11 +146,7 @@ class _AlbumPhotoListPageState extends State<AlbumPhotoListPage> {
         iconTheme: IconThemeData(color: Colors.white),
         elevation: 0,
         actions: [
-          IconButton(
-            tooltip: '添加图片',
-            icon: Icon(Icons.add),
-            onPressed: () => pickPhotos(),
-          )
+          _rightItemActionWidget(),
         ],
       ),
       body: Container(
@@ -117,10 +161,23 @@ class _AlbumPhotoListPageState extends State<AlbumPhotoListPage> {
           ),
           itemCount: itemList.length,
           itemBuilder: (context, index) {
-            FolderItemModel item = itemList[index];
+            final item = itemList[index];
             return HomePhotoItemWidget(
               item: item,
-              onTap: () => _itemTapAction(index),
+              onTap: () {
+                if (item.isEditMode) {
+                  setState(() {
+                    item.isSelected = !item.isSelected;
+                  });
+                } else {
+                  _itemPreviewAction(index);
+                }
+              },
+              onLongPress: () {
+                setState(() {
+                  _updateEditeMode();
+                });
+              },
             );
           },
         ),

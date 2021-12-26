@@ -187,6 +187,13 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
     }
   }
 
+  _deleteItem() async {
+    await DataManager.shared.removeItem(this.itemModel.id);
+    eventBus.fire(CategoryListEvent());
+    eventBus.fire(ItemEvent());
+    Get.back();
+  }
+
   Widget _buildInputField(String hitText, FocusNode focusNode, TextEditingController? controller) {
     return Container(
       height: 50,
@@ -228,6 +235,26 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
         ],
       ),
       child: Text(title, style: APPTextStyle.midTextWhite),
+    );
+  }
+
+  Widget _buildDeleteButton() {
+    return TextButton(
+      onPressed: () {
+        appShowDialog(context, "删除此账号后将无法恢复，确认该删除吗?", () {
+          _deleteItem();
+        });
+      },
+      child: Container(
+        alignment: Alignment.center,
+        width: double.infinity,
+        height: 50,
+        decoration: BoxDecoration(
+          color: APPColors.warningColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Text("删除", style: APPTextStyle.midTextWhite),
+      ),
     );
   }
 
@@ -488,6 +515,8 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
                     maxLines: 5,
                   ),
                 ),
+                // SizedBox(height: 10),
+                Visibility(visible: this.itemModel.id == -1 ? false : true, child: _buildDeleteButton()),
                 SizedBox(height: 10),
               ],
             ),

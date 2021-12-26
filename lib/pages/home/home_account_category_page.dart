@@ -9,6 +9,7 @@ import 'package:iron_box/pages/home/widget/home_accunt_category_item_widget.dart
 import 'package:iron_box/pages/home/widget/home_search_bar_widget.dart';
 import 'package:iron_box/router/routers.dart';
 import 'package:get/get.dart';
+import 'package:iron_box/widget/other/widget.dart';
 
 class HomeAccountCategoryPage extends StatefulWidget {
   @override
@@ -40,23 +41,6 @@ class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
     subscription.cancel();
   }
 
-  _buildPopupMenuItem(IconData iconData, String title) {
-    return Row(
-      children: <Widget>[
-        Icon(
-          iconData,
-          size: 22.0,
-          color: APPColors.lightTextColor,
-        ),
-        Container(width: 12.0),
-        Text(
-          title,
-          style: TextStyle(color: APPColors.lightTextColor),
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,11 +54,11 @@ class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
             itemBuilder: (BuildContext context) {
               return <PopupMenuItem<HomePopActionItems>>[
                 PopupMenuItem(
-                  child: _buildPopupMenuItem(APPIcons.add_, "添加账号"),
+                  child: buildPopupMenuItem(APPIcons.add, "添加账号"),
                   value: HomePopActionItems.ADD,
                 ),
                 PopupMenuItem(
-                  child: _buildPopupMenuItem(APPIcons.key, "生成密码"),
+                  child: buildPopupMenuItem(APPIcons.key, "生成密码"),
                   value: HomePopActionItems.GENERATE,
                 ),
               ];

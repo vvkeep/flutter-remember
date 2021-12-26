@@ -106,7 +106,6 @@ class _CategoryListPageState extends State<CategoryListPage> {
           });
           await DataManager.shared.reorderCategorySort(categroyItems);
           eventBus.fire(CategoryListEvent());
-          this.loadData();
         },
       ),
     );

@@ -11,6 +11,8 @@ class APPColors {
   static const Color mainBackgroundColor = Color(0xFFF4F6F8);
   static const Color divideColor = Color(0xFFEEEEEE);
   static const Color darkDivideColor = Color(0xFFBBBBBB);
+
+  static const Color warningColor = Color(0XFFF56C6C);
 }
 
 ///文本样式
@@ -136,12 +138,15 @@ class APPIcons {
   static const IconData irisId = const IconData(0xe60c, fontFamily: APPIcons.FONT_FAMILY);
 
   static const IconData addBorder = const IconData(0xe657, fontFamily: APPIcons.FONT_FAMILY);
-  static const IconData add_ = const IconData(0xe622, fontFamily: APPIcons.FONT_FAMILY);
+  static const IconData add = const IconData(0xe622, fontFamily: APPIcons.FONT_FAMILY);
   static const IconData key = const IconData(0xe627, fontFamily: APPIcons.FONT_FAMILY);
 
+  static const IconData choose = const IconData(0xe651, fontFamily: APPIcons.FONT_FAMILY);
+  static const IconData chooseSelected = const IconData(0xe640, fontFamily: APPIcons.FONT_FAMILY);
+
   static const IconData pushItemEdit = Icons.mode_edit;
-  static const IconData push_item_add = Icons.add_box;
-  static const IconData push_item_min = Icons.indeterminate_check_box;
+  static const IconData pushItemAdd = Icons.add_box;
+  static const IconData pushItemMin = Icons.indeterminate_check_box;
 }
 
 class RMConstant {

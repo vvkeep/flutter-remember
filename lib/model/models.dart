@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iron_box/model/account_model.dart';
 
 class AppFeatureItemModel {
   final Color color;
@@ -15,4 +16,12 @@ class NavigationIconView {
   NavigationIconView({required String title, required IconData icon, required IconData activeIcon})
       : item = new BottomNavigationBarItem(
             icon: Icon(icon), activeIcon: Icon(activeIcon), label: title, backgroundColor: Colors.white);
+}
+
+class PhotoItemUIModel {
+  FolderItemModel itemModel;
+  bool isSelected = false;
+  bool isEditMode = false;
+
+  PhotoItemUIModel({required this.itemModel});
 }
