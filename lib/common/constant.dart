@@ -157,3 +157,14 @@ class APPLayout {
   static const double itemMargin = 10.0;
   static const double photoMaxLength = 150.0;
 }
+
+class BmobConfig {
+  // SDK初始化必须用到此密钥
+  static const String appId = "4316777dd89f91e1e8d9a7b697db174a";
+
+  // 是SDK安全密钥，不可泄漏，在云函数测试云函数时需要用到
+  static const String secretKey = "4316777dd89f91e1e8d9a7b697db174a";
+
+  // 超级权限Key。应用开发或调试的时候可以使用该密钥进行各种权限的操作，此密钥不可泄漏
+  static const String masterKey = "2c7a62113efd8f880781268d0d876920";
+}

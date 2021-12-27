@@ -162,9 +162,9 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
     try {
       bool isSuccess = false;
       if (itemModel.id == -1) {
-        isSuccess = await DataManager.shared.addItem(itemModel);
+        isSuccess = await DataManager.shared.addAccount(itemModel);
       } else {
-        isSuccess = await DataManager.shared.updateItem(itemModel);
+        isSuccess = await DataManager.shared.updateAccount(itemModel);
       }
 
       final msg = "${itemModel.id == -1 ? '添加' : "编辑"}${isSuccess ? '成功' : '失败'}";
@@ -188,7 +188,7 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
   }
 
   _deleteItem() async {
-    await DataManager.shared.removeItem(this.itemModel.id);
+    await DataManager.shared.removeAccount(this.itemModel.id);
     eventBus.fire(CategoryListEvent());
     eventBus.fire(ItemEvent());
     Get.back();

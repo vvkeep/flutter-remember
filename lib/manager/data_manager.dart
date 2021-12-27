@@ -76,8 +76,8 @@ extension DataManagerTagExtension on DataManager {
   }
 }
 
-extension DataManagerItemExtension on DataManager {
-  Future<bool> addItem(AccountModel itemModel) async {
+extension DataManagerAccountExtension on DataManager {
+  Future<bool> addAccount(AccountModel itemModel) async {
     bool isSuccess = await DatabaseHelper.shared.insertAccount(itemModel);
     if (isSuccess) {
       // 标签加1
@@ -93,7 +93,7 @@ extension DataManagerItemExtension on DataManager {
     return isSuccess;
   }
 
-  Future<bool> updateItem(AccountModel newItem) async {
+  Future<bool> updateAccount(AccountModel newItem) async {
     AccountModel oldItem = await DatabaseHelper.shared.selectAccount(newItem.id);
     bool isSuccess = await DatabaseHelper.shared.updateAccount(newItem);
     if (isSuccess) {
@@ -129,7 +129,7 @@ extension DataManagerItemExtension on DataManager {
     return isSuccess;
   }
 
-  Future<bool> removeItem(int itemId) async {
+  Future<bool> removeAccount(int itemId) async {
     AccountModel oldItem = await DatabaseHelper.shared.selectAccount(itemId);
     bool isSuccess = await DatabaseHelper.shared.deleteAccount(itemId);
     if (isSuccess) {

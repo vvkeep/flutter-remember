@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: LoginManager.isRegisted() ? APPRouter.loginPage : APPRouter.appFeaturePage,
-      // initialRoute: APPRouter.mianPage,
+      // initialRoute: LoginManager.isRegisted() ? APPRouter.loginPage : APPRouter.appFeaturePage,
+      initialRoute: APPRouter.registerPage,
       theme: ThemeData(primaryColor: APPColors.primaryColor),
       defaultTransition: Transition.native,
       getPages: AppPages.pages,
