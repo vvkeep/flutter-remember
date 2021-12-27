@@ -19,8 +19,8 @@ class _AppMainPageState extends State<AppMainPage> {
 
   List<NavigationIconView> _navigationViews = [
     NavigationIconView(title: '首页', icon: Icons.home_outlined, activeIcon: Icons.home),
-    NavigationIconView(title: '相册', icon: Icons.photo_album_outlined, activeIcon: Icons.photo_album),
-    NavigationIconView(title: '我的', icon: Icons.settings_outlined, activeIcon: Icons.settings),
+    NavigationIconView(title: '相册', icon: APPIcons.phtoto, activeIcon: APPIcons.phtotoSelected),
+    NavigationIconView(title: '我的', icon: APPIcons.profile, activeIcon: APPIcons.profileSelected),
   ];
 
   @override
@@ -47,7 +47,6 @@ class _AppMainPageState extends State<AppMainPage> {
         setState(() {
           _currentIndex = index;
           _pageController.jumpToPage(_currentIndex);
-          // _pageController.animateToPage(_currentIndex, duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
         });
       },
     );
