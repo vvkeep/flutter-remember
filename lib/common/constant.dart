@@ -144,6 +144,11 @@ class APPIcons {
   static const IconData choose = const IconData(0xe651, fontFamily: APPIcons.FONT_FAMILY);
   static const IconData chooseSelected = const IconData(0xe640, fontFamily: APPIcons.FONT_FAMILY);
 
+  static const IconData profile = const IconData(0xe602, fontFamily: APPIcons.FONT_FAMILY);
+  static const IconData profileSelected = const IconData(0xe608, fontFamily: APPIcons.FONT_FAMILY);
+  static const IconData phtoto = const IconData(0xe9ee, fontFamily: APPIcons.FONT_FAMILY);
+  static const IconData phtotoSelected = const IconData(0xe9f4, fontFamily: APPIcons.FONT_FAMILY);
+
   static const IconData pushItemEdit = Icons.mode_edit;
   static const IconData pushItemAdd = Icons.add_box;
   static const IconData pushItemMin = Icons.indeterminate_check_box;
