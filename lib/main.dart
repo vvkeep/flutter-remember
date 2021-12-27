@@ -6,12 +6,23 @@ import 'package:iron_box/manager/login_manager.dart';
 import 'package:iron_box/common/constant.dart';
 import 'package:iron_box/manager/database_helper.dart';
 import 'package:iron_box/router/routers.dart';
+import 'package:leancloud_storage/leancloud.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LoginManager.getInstance();
   await DatabaseHelper.shared.init();
   await DataManager.shared.init();
+
+  LeanCloud.initialize(LeanCloudConfig.appId, LeanCloudConfig.appKey,
+      server: LeanCloudConfig.server, queryCache: new LCQueryCache());
+  // 在 LeanCloud.initialize 初始化之后执行
+  LCLogger.setLevel(LCLogger.DebugLevel);
+
+  LCObject object = LCObject('TestObject');
+  object['words'] = 'Hello world!';
+  await object.save();
+
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) => runApp(MyApp()));
 }

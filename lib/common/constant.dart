@@ -172,4 +172,6 @@ class LeanCloudConfig {
 
   // 超级权限Key。应用开发或调试的时候可以使用该密钥进行各种权限的操作，此密钥不可泄漏
   static const String masterKey = "JFHhdCdNC0R7zJPc3H1LuVQh";
+
+  static const String server = "https://test-box-yorisun-com-idvi25k.qiniudns.com";
 }

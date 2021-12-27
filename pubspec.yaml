@@ -47,6 +47,7 @@ dependencies:
   permission_handler: ^8.1.6
   file_picker: ^4.2.8
   wechat_assets_picker: 6.2.0
+  leancloud_storage: ^0.7.0
 
 dev_dependencies:
   flutter_test:
