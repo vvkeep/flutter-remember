@@ -19,9 +19,20 @@ void main() async {
   // 在 LeanCloud.initialize 初始化之后执行
   LCLogger.setLevel(LCLogger.DebugLevel);
 
-  LCObject object = LCObject('TestObject');
-  object['words'] = 'Hello world!';
-  await object.save();
+// 创建实例
+  LCUser user = LCUser();
+
+// 等同于 user['username'] = 'Tom';
+  user.username = 'Tom';
+  user.password = 'cat!@#123';
+
+// 可选
+  user.email = 'tom@leancloud.rocks';
+  user.mobile = '+8618200008888';
+
+// 设置其他属性的方法跟 LCObject 一样
+  user['gender'] = 'secret';
+  await user.signUp();
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) => runApp(MyApp()));

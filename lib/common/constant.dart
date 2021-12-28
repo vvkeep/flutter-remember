@@ -164,14 +164,8 @@ class APPLayout {
 }
 
 class LeanCloudConfig {
-  // SDK初始化必须用到此密钥
   static const String appId = "oyFcfneQKE9eUvWGd8DyL5vp-gzGzoHsz";
-
-  // 是SDK安全密钥，不可泄漏，在云函数测试云函数时需要用到
   static const String appKey = "3rEWO0zX0vQ9zbcvRNrzH7Xu";
-
-  // 超级权限Key。应用开发或调试的时候可以使用该密钥进行各种权限的操作，此密钥不可泄漏
   static const String masterKey = "JFHhdCdNC0R7zJPc3H1LuVQh";
-
-  static const String server = "https://test-box-yorisun-com-idvi25k.qiniudns.com";
+  static const String server = "https://test-box.yorisun.com";
 }
