@@ -160,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
                       hiddenLoading(context); //销毁 loading
                       if (ex.code == 201) {
                         showToastError('用户名密码不匹配，请重试');
-                      } else if (ex.code == 209) {
+                      } else if (ex.code == 219) {
                         showToastError('登录失败次数超过限制，请稍候再试');
                       } else {
                         showToastError('登录失败,请重试');
