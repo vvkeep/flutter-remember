@@ -20,6 +20,7 @@ class DataManager {
   }
 
   init() async {
+    await DatabaseHelper.shared.init();
     this.accountCategoryList = await DatabaseHelper.shared.categoryList(0);
     this.accountTagList = await DatabaseHelper.shared.tagList();
     this.accountList = await DatabaseHelper.shared.accountList();

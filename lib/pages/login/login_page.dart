@@ -1,12 +1,17 @@
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/instance_manager.dart';
 import 'package:iron_box/common/constant.dart';
 import 'package:get/get.dart';
-import 'package:iron_box/manager/login_manager.dart';
+import 'package:iron_box/manager/user_manager.dart';
 import 'package:iron_box/pages/login/widget/input_password_field.dart';
+import 'package:iron_box/pages/login/widget/input_username_field.dart';
 import 'package:iron_box/router/routers.dart';
+import 'package:iron_box/utils/net_utils.dart';
+import 'package:iron_box/widget/other/widget.dart';
+import 'package:leancloud_storage/leancloud.dart';
 import 'package:local_auth/local_auth.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,20 +22,30 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final FocusNode focusNode = FocusNode();
-  final passwordController = TextEditingController();
+  final FocusNode _usernameFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   /// 本地认证框架
-  final LocalAuthentication auth = LocalAuthentication();
-  BiometricType? authType;
+  final LocalAuthentication _auth = LocalAuthentication();
+  BiometricType? _authType;
 
   @override
   void initState() {
     super.initState();
-    if (LoginManager.isLocalAuth()) {
+    init();
+  }
+
+  init() async {
+    LCUser? user = await UserManager.currentUser();
+    final isLocalAuth = await UserManager.isLocalAuth();
+    if (isLocalAuth) {
       _getAuthType().then((type) {
         setState(() {
-          this.authType = type;
+          this._usernameController.text = user?.username ?? "";
+          this._authType = type;
         });
 
         _authenticateWithBiometrics();
@@ -43,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: GestureDetector(
         onTap: () {
-          focusNode.unfocus();
+          _passwordFocusNode.unfocus();
         },
         child: Container(
           width: double.infinity,
@@ -60,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 SizedBox(height: Get.mediaQuery.padding.top + 45),
-                Text('欢迎使用钢铁匣', style: APPTextStyle.biggerTextWhiteBold),
+                Text('钢铁匣', style: APPTextStyle.biggerTextWhiteBold),
                 SizedBox(height: 35 + 45),
                 Stack(
                   clipBehavior: Clip.none,
@@ -74,11 +89,17 @@ class _LoginPageState extends State<LoginPage> {
                       width: Get.width - 50,
                       child: Column(
                         children: [
-                          SizedBox(height: 45 + 20),
-                          Text("登录", style: APPTextStyle.midTextPrimaryW500),
+                          SizedBox(height: 45 + 10),
+                          Text("用户登录", style: APPTextStyle.midTextPrimaryW500),
+                          SizedBox(height: 50),
+                          InputUsernameField(
+                            controller: _usernameController,
+                            hintText: "输入邮箱",
+                            focusNode: _usernameFocusNode,
+                          ),
                           SizedBox(height: 50),
                           InputPasswordField(
-                              controller: passwordController, hintText: '登录密码', focusNode: this.focusNode),
+                              controller: _passwordController, hintText: '登录密码', focusNode: this._passwordFocusNode),
                           SizedBox(height: 50),
                         ],
                       ),
@@ -91,16 +112,16 @@ class _LoginPageState extends State<LoginPage> {
                         height: 90,
                         decoration: BoxDecoration(
                           color: APPColors.white,
+                          image: DecorationImage(image: AssetImage('assets/imgs/logo_icon.png'), fit: BoxFit.cover),
                           borderRadius: BorderRadius.circular(90 / 2),
                           boxShadow: [
                             BoxShadow(
                               color: APPColors.primaryColor.withOpacity(0.3),
                               offset: Offset(0.0, 0.0),
                               blurRadius: 3.0,
-                            )
+                            ),
                           ],
                         ),
-                        child: Image.asset('assets/imgs/logo_icon.png'),
                       ),
                     ),
                   ],
@@ -117,21 +138,38 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     child: Text("确定", style: APPTextStyle.midTextPrimaryW500),
                   ),
-                  onPressed: () {
-                    String password = passwordController.text;
-                    String password2 = LoginManager.getUserInfo().password;
-
-                    if (password != password2) {
-                      Fluttertoast.showToast(msg: '密码错误，请重试', gravity: ToastGravity.TOP);
+                  onPressed: () async {
+                    String username = _usernameController.text;
+                    String password = _passwordController.text;
+                    if (ObjectUtil.isEmpty(username)) {
+                      showToastError('用户名不能为空');
                       return;
                     }
 
-                    Fluttertoast.showToast(msg: '登录成功', gravity: ToastGravity.TOP);
-                    Get.offAllNamed(APPRouter.mianPage);
+                    if (ObjectUtil.isEmpty(password)) {
+                      showToastError('登录密码不能空');
+                      return;
+                    }
+
+                    try {
+                      showLoading(context);
+                      await NetUtils.login(username, password);
+                      hiddenLoading(context); //销毁 loading
+                      Get.offAllNamed(APPRouter.mianPage);
+                    } on LCException catch (ex) {
+                      hiddenLoading(context); //销毁 loading
+                      if (ex.code == 201) {
+                        showToastError('用户名密码不匹配，请重试');
+                      } else if (ex.code == 209) {
+                        showToastError('登录失败次数超过限制，请稍候再试');
+                      } else {
+                        showToastError('登录失败,请重试');
+                      }
+                    }
                   },
                 ),
                 Visibility(
-                  visible: authType == null ? false : true,
+                  visible: _authType == null ? false : true,
                   child: _biometricAuthWidget(),
                 )
               ],
@@ -146,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
     IconData iconData = APPIcons.faceId;
     String authText = '';
 
-    switch (authType) {
+    switch (_authType) {
       case BiometricType.face:
         iconData = APPIcons.faceId;
         authText = "点击进行面容识别";
@@ -190,7 +228,7 @@ class _LoginPageState extends State<LoginPage> {
 
   /// 获取生物识别技术列表
   Future<BiometricType?> _getAuthType() async {
-    List<BiometricType> availableBiometrics = await auth.getAvailableBiometrics();
+    List<BiometricType> availableBiometrics = await _auth.getAvailableBiometrics();
     if (availableBiometrics.contains(BiometricType.face)) {
       return BiometricType.face;
     } else if (availableBiometrics.contains(BiometricType.fingerprint)) {
@@ -204,7 +242,7 @@ class _LoginPageState extends State<LoginPage> {
 
   _authenticateWithBiometrics() async {
     try {
-      bool authenticated = await auth.authenticate(
+      bool authenticated = await _auth.authenticate(
           localizedReason: '请进行身份验证以登录应用', useErrorDialogs: false, stickyAuth: true, biometricOnly: true);
       if (authenticated) {
         Fluttertoast.showToast(msg: '登录成功', gravity: ToastGravity.TOP);

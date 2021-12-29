@@ -1,3 +1,4 @@
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -99,4 +100,47 @@ Widget buildPopupMenuItem(IconData iconData, String title) {
       ),
     ],
   );
+}
+
+showLoading(BuildContext context) {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return new Material(
+        color: Colors.transparent,
+        child: WillPopScope(
+          onWillPop: () => new Future.value(false),
+          child: Center(
+            child: new CircularProgressIndicator(),
+          ),
+        ),
+      );
+    },
+  );
+}
+
+hiddenLoading(BuildContext context) {
+  Navigator.pop(context); //销毁 loading
+}
+
+showToastError(String msg) {
+  Fluttertoast.showToast(
+      msg: msg,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      fontSize: 20.0);
+}
+
+showToastSuccess(String msg) {
+  Fluttertoast.showToast(
+      msg: msg,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.green,
+      textColor: Colors.white,
+      fontSize: 20.0);
 }

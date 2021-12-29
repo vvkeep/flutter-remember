@@ -1,4 +1,5 @@
 import 'package:iron_box/common/SQL.dart';
+import 'package:iron_box/manager/user_manager.dart';
 import 'package:iron_box/model/account_model.dart';
 import 'package:iron_box/utils/encrypt_utils.dart';
 import 'package:sqflite/sqflite.dart';
@@ -112,33 +113,41 @@ extension DatabaseHelperTagExtension on DatabaseHelper {
 extension DatabaseHelperAccountExtension on DatabaseHelper {
   Future<List<AccountModel>> accountList() async {
     List<Map<String, Object?>> maps = await _db.query(SQL.tableAccount);
-    List<AccountModel> list = maps.isNotEmpty
-        ? maps.map((v) {
-            final item = AccountModel.fromJson(v);
-            item.password = EncryptUtils.decrypt(item.password);
-            item.payPassword = EncryptUtils.decrypt(item.payPassword);
-            return item;
-          }).toList()
-        : [];
-    return list;
+    if (maps.isNotEmpty) {
+      final secretKey = await UserManager.secretKey();
+      List<AccountModel> list = maps.map((v) {
+        final item = AccountModel.fromJson(v);
+        item.password = EncryptUtils.decrypt(item.password, secretKey);
+        item.payPassword = EncryptUtils.decrypt(item.payPassword, secretKey);
+        return item;
+      }).toList();
+      return list;
+    } else {
+      return [];
+    }
   }
 
   Future<AccountModel> selectAccount(int itemId) async {
     List<Map<String, Object?>> maps = await _db.query(SQL.tableAccount, where: "id = ?", whereArgs: [itemId]);
-    List<AccountModel> list = maps.isNotEmpty
-        ? maps.map((v) {
-            final item = AccountModel.fromJson(v);
-            item.password = EncryptUtils.decrypt(item.password);
-            item.payPassword = EncryptUtils.decrypt(item.payPassword);
-            return item;
-          }).toList()
-        : [];
-    return list.first;
+    final secretKey = await UserManager.secretKey();
+    if (maps.isNotEmpty) {
+      List<AccountModel> list = maps.map((v) {
+        final item = AccountModel.fromJson(v);
+        item.password = EncryptUtils.decrypt(item.password, secretKey);
+        item.payPassword = EncryptUtils.decrypt(item.payPassword, secretKey);
+        return item;
+      }).toList();
+      return list.first;
+    } else {
+      List<AccountModel> list = [];
+      return list.first;
+    }
   }
 
   Future<bool> insertAccount(AccountModel itemModel) async {
-    final password = EncryptUtils.encrypt(itemModel.password);
-    final payPassword = EncryptUtils.encrypt(itemModel.payPassword);
+    final secretKey = await UserManager.secretKey();
+    final password = EncryptUtils.encrypt(itemModel.password, secretKey);
+    final payPassword = EncryptUtils.encrypt(itemModel.payPassword, secretKey);
     Map<String, dynamic> map = itemModel.toJson();
     map.remove("id");
     map['password'] = password;
@@ -148,8 +157,9 @@ extension DatabaseHelperAccountExtension on DatabaseHelper {
   }
 
   Future<bool> updateAccount(AccountModel itemModel) async {
-    final password = EncryptUtils.encrypt(itemModel.password);
-    final payPassword = EncryptUtils.encrypt(itemModel.payPassword);
+    final secretKey = await UserManager.secretKey();
+    final password = EncryptUtils.encrypt(itemModel.password, secretKey);
+    final payPassword = EncryptUtils.encrypt(itemModel.payPassword, secretKey);
     Map<String, dynamic> map = itemModel.toJson();
     map['password'] = password;
     map['payPassword'] = payPassword;

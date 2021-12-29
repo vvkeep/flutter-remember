@@ -1,14 +1,12 @@
 import 'package:encrypt/encrypt.dart';
 import 'package:flustars/flustars.dart';
-import 'package:iron_box/manager/login_manager.dart';
 
 class EncryptUtils {
-  static String encrypt(String? text) {
+  static String encrypt(String? text, String secretKey) {
     if (ObjectUtil.isEmpty(text)) {
       return '';
     }
 
-    final secretKey = LoginManager.getUserInfo().secretKey;
     final key = Key.fromUtf8(secretKey);
     final iv = IV.fromLength(16);
     final encrypter = Encrypter(AES(key, mode: AESMode.cbc));
@@ -16,12 +14,11 @@ class EncryptUtils {
     return encrypted;
   }
 
-  static String decrypt(String? text) {
+  static String decrypt(String? text, String secretKey) {
     if (ObjectUtil.isEmpty(text)) {
       return '';
     }
 
-    final secretKey = LoginManager.getUserInfo().secretKey;
     final key = Key.fromUtf8(secretKey);
     final iv = IV.fromLength(16);
     final encrypter = Encrypter(AES(key, mode: AESMode.cbc));

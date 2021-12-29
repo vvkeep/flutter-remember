@@ -4,11 +4,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/instance_manager.dart';
 import 'package:iron_box/common/constant.dart';
 import 'package:get/get.dart';
-import 'package:iron_box/manager/login_manager.dart';
-import 'package:iron_box/model/user_info.dart';
+import 'package:iron_box/manager/user_manager.dart';
 import 'package:iron_box/pages/login/widget/input_password_field.dart';
 import 'package:iron_box/pages/login/widget/input_username_field.dart';
 import 'package:iron_box/router/routers.dart';
+import 'package:iron_box/utils/net_utils.dart';
+import 'package:iron_box/widget/other/widget.dart';
+import 'package:leancloud_storage/leancloud.dart';
 import 'package:uuid/uuid.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -32,6 +34,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       body: GestureDetector(
         onTap: () {
+          _usernameFocusNode.unfocus();
           _passwordFocusNode.unfocus();
           _password2focusNode2.unfocus();
         },
@@ -120,43 +123,47 @@ class _RegisterPageState extends State<RegisterPage> {
                       color: APPColors.white,
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: Text("确定", style: APPTextStyle.midTextPrimaryW500),
+                    child: Text("注册", style: APPTextStyle.midTextPrimaryW500),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     String username = _usernameController.text;
                     String password = _passwordController.text;
                     String password2 = _password2Controller.text;
 
                     if (ObjectUtil.isEmpty(username)) {
-                      Fluttertoast.showToast(msg: '请输入登录账户', gravity: ToastGravity.TOP);
+                      showToastError('请输入登录账户');
                       return;
                     }
 
                     if (ObjectUtil.isEmpty(password)) {
-                      Fluttertoast.showToast(msg: '请输入登录密码', gravity: ToastGravity.TOP);
+                      showToastError('请输入登录密码');
                       return;
                     }
 
                     if (ObjectUtil.isEmpty(password2)) {
-                      Fluttertoast.showToast(msg: '请确认登录密码', gravity: ToastGravity.TOP);
+                      showToastError('请确认登录密码');
                       return;
                     }
 
                     if (password != password2) {
-                      Fluttertoast.showToast(msg: '密码不一致，请重新输入密码', gravity: ToastGravity.TOP);
+                      showToastError('密码不一致，请重新输入密码');
                       return;
                     }
 
-                    Fluttertoast.showToast(msg: '登录密码设置成功', gravity: ToastGravity.TOP);
-                    UserInfo userInfo = LoginManager.getUserInfo();
-                    userInfo.password = password;
-                    userInfo.isRegister = true;
-                    userInfo.isLocalAuth = true;
-
-                    final digest = EncryptUtil.encodeMd5(Uuid().v4());
-                    userInfo.secretKey = digest.toString();
-                    LoginManager.saveUserInfo(userInfo);
-                    Get.offAllNamed(APPRouter.mianPage);
+                    showLoading(context);
+                    final secretKey = EncryptUtil.encodeMd5(Uuid().v4()).toString();
+                    NetUtils.signUp(username, password, secretKey).then((value) {
+                      UserManager.udpateAppUserRegisted();
+                      NetUtils.login(username, password).then((value) {
+                        Get.offAllNamed(APPRouter.mianPage);
+                      }).catchError((error) {
+                        hiddenLoading(context);
+                        showToastError(error.message);
+                      });
+                    }).catchError((error) {
+                      hiddenLoading(context);
+                      showToastError(error.message);
+                    });
                   },
                 ),
               ],
