@@ -160,13 +160,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       Get.offAllNamed(APPRouter.mianPage);
                     } on LCException catch (ex) {
                       hiddenLoading(context); //销毁 loading
-                      if (ex.code == 201) {
-                        showToastError('用户名密码不匹配，请重试');
-                      } else if (ex.code == 209) {
-                        showToastError('登录失败次数超过限制，请稍候再试');
-                      } else {
-                        showToastError(ex.message ?? '注册失败，请重试');
-                      }
+                      showToastError(ex.message ?? '注册失败，请重试');
                     }
                   },
                 ),
