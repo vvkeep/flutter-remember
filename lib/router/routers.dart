@@ -8,7 +8,7 @@ import 'package:iron_box/pages/account/account_detail_page.dart';
 import 'package:iron_box/pages/account/account_category_list_page.dart';
 import 'package:iron_box/pages/account/account_search_page.dart';
 import 'package:iron_box/pages/login/login_page.dart';
-import 'package:iron_box/pages/login/register_page.dart';
+import 'package:iron_box/pages/login/signup_page.dart';
 import 'package:iron_box/pages/main/app_main_page.dart';
 import 'package:iron_box/pages/album/album_list_page.dart';
 import 'package:iron_box/pages/album/new_album_page.dart';
@@ -70,7 +70,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: APPRouter.registerPage,
-      page: () => RegisterPage(),
+      page: () => SignUpPage(),
       transition: Transition.fadeIn,
     ),
     GetPage(

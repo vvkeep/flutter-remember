@@ -51,7 +51,11 @@ class _InputPasswordFieldState extends State<InputPasswordField> {
             });
           },
           iconSize: 20,
-          icon: Icon(this.isVisible ? Icons.visibility : Icons.visibility_off),
+          icon: Icon(
+            this.isVisible ? Icons.visibility : Icons.visibility_off,
+            color: this.isVisible ? APPColors.primaryColor : APPColors.darkDivideColor,
+            size: 18,
+          ),
         ),
       ),
     );

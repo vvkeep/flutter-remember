@@ -7,7 +7,7 @@ class UserManager {
     return isRegisted ?? false;
   }
 
-  static udpateAppUserRegisted() {
+  static udpateAppRegisted() {
     SpUtil.putBool("app_registed_key", true);
   }
 
@@ -18,7 +18,7 @@ class UserManager {
 
   static Future<bool> isLocalAuth() async {
     final user = await currentUser();
-    bool isLocalAuth = user?['isLocalAuth'];
+    bool isLocalAuth = user?['isLocalAuth'] ?? false;
     return isLocalAuth;
   }
 

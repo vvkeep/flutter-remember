@@ -1,6 +1,5 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/instance_manager.dart';
 import 'package:iron_box/common/constant.dart';
 import 'package:get/get.dart';
@@ -13,14 +12,14 @@ import 'package:iron_box/widget/other/widget.dart';
 import 'package:leancloud_storage/leancloud.dart';
 import 'package:uuid/uuid.dart';
 
-class RegisterPage extends StatefulWidget {
-  RegisterPage({Key? key}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  SignUpPage({Key? key}) : super(key: key);
 
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _SignUpPageState extends State<SignUpPage> {
   final FocusNode _passwordFocusNode = FocusNode();
   final FocusNode _password2focusNode2 = FocusNode();
   final FocusNode _usernameFocusNode = FocusNode();
@@ -50,6 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ),
           child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
             child: Column(
               children: [
                 SizedBox(height: Get.mediaQuery.padding.top + 45),
@@ -69,19 +69,19 @@ class _RegisterPageState extends State<RegisterPage> {
                         children: [
                           SizedBox(height: 45 + 10),
                           Text("用户注册", style: APPTextStyle.midTextPrimaryW500),
-                          SizedBox(height: 50),
+                          SizedBox(height: 30),
                           InputUsernameField(
                             controller: _usernameController,
-                            hintText: "输入邮箱",
+                            hintText: "请输入邮箱",
                             focusNode: _usernameFocusNode,
                           ),
-                          SizedBox(height: 30),
+                          SizedBox(height: 20),
                           InputPasswordField(
                             controller: _passwordController,
                             hintText: '输入登录密码',
                             focusNode: this._passwordFocusNode,
                           ),
-                          SizedBox(height: 30),
+                          SizedBox(height: 20),
                           InputPasswordField(
                             controller: _password2Controller,
                             hintText: '确认登录密码',
@@ -154,7 +154,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       showLoading(context);
                       final secretKey = EncryptUtil.encodeMd5(Uuid().v4()).toString();
                       await NetUtils.signUp(username, password, secretKey);
-                      UserManager.udpateAppUserRegisted();
+                      UserManager.udpateAppRegisted();
                       await NetUtils.login(username, password);
                       hiddenLoading(context);
                       Get.offAllNamed(APPRouter.mianPage);
@@ -164,6 +164,22 @@ class _RegisterPageState extends State<RegisterPage> {
                     }
                   },
                 ),
+                SizedBox(height: 20),
+                TextButton(
+                  onPressed: () {
+                    Get.offAllNamed(APPRouter.loginPage);
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: Get.width - 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(color: APPColors.white, width: 1.0)),
+                    child: Text("已有账号，去登录", style: APPTextStyle.midTextWhite),
+                  ),
+                )
               ],
             ),
           ),
