@@ -150,20 +150,24 @@ class _RegisterPageState extends State<RegisterPage> {
                       return;
                     }
 
-                    showLoading(context);
-                    final secretKey = EncryptUtil.encodeMd5(Uuid().v4()).toString();
-                    NetUtils.signUp(username, password, secretKey).then((value) {
+                    try {
+                      showLoading(context);
+                      final secretKey = EncryptUtil.encodeMd5(Uuid().v4()).toString();
+                      await NetUtils.signUp(username, password, secretKey);
                       UserManager.udpateAppUserRegisted();
-                      NetUtils.login(username, password).then((value) {
-                        Get.offAllNamed(APPRouter.mianPage);
-                      }).catchError((error) {
-                        hiddenLoading(context);
-                        showToastError(error.message);
-                      });
-                    }).catchError((error) {
+                      await NetUtils.login(username, password);
                       hiddenLoading(context);
-                      showToastError(error.message);
-                    });
+                      Get.offAllNamed(APPRouter.mianPage);
+                    } on LCException catch (ex) {
+                      hiddenLoading(context); //销毁 loading
+                      if (ex.code == 201) {
+                        showToastError('用户名密码不匹配，请重试');
+                      } else if (ex.code == 209) {
+                        showToastError('登录失败次数超过限制，请稍候再试');
+                      } else {
+                        showToastError(ex.message ?? '注册失败，请重试');
+                      }
+                    }
                   },
                 ),
               ],
