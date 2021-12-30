@@ -89,7 +89,7 @@ class _AlbumListPageState extends State<AlbumListPage> {
             onDismissed: (direction) async {
               await DataManager.shared.removeCategory(album.id);
               eventBus.fire(AlbumListEvent());
-              Get.showSnackbar(successBar('删除成功'));
+              AppToast.showSuccess('删除成功');
             },
           );
         }).toList(),
@@ -112,7 +112,7 @@ class _AlbumListPageState extends State<AlbumListPage> {
 
   Future<bool> deleteAlbum(FolderModel folderModel) async {
     if (folderModel.count > 0) {
-      Get.showSnackbar(errorBar('该相簿下还有${folderModel.count}项，不允许删除'));
+      AppToast.showError('该相簿下还有${folderModel.count}项，不允许删除');
       return false;
     } else {
       return true;

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iron_box/common/constant.dart';
 import 'package:iron_box/manager/user_manager.dart';
-import 'package:leancloud_storage/leancloud.dart';
 
 class AppSettingPage extends StatefulWidget {
   AppSettingPage({Key? key}) : super(key: key);

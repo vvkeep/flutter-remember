@@ -131,36 +131,36 @@ class _SignUpPageState extends State<SignUpPage> {
                     String password2 = _password2Controller.text;
 
                     if (ObjectUtil.isEmpty(username)) {
-                      showToastError('请输入登录账户');
+                      AppToast.showError('请输入登录账户');
                       return;
                     }
 
                     if (ObjectUtil.isEmpty(password)) {
-                      showToastError('请输入登录密码');
+                      AppToast.showError('请输入登录密码');
                       return;
                     }
 
                     if (ObjectUtil.isEmpty(password2)) {
-                      showToastError('请确认登录密码');
+                      AppToast.showError('请确认登录密码');
                       return;
                     }
 
                     if (password != password2) {
-                      showToastError('密码不一致，请重新输入密码');
+                      AppToast.showError('密码不一致，请重新输入密码');
                       return;
                     }
 
                     try {
-                      showLoading(context);
+                      AppLoading.show(context);
                       final secretKey = EncryptUtil.encodeMd5(Uuid().v4()).toString();
                       await NetUtils.signUp(username, password, secretKey);
                       UserManager.udpateAppRegisted();
                       await NetUtils.login(username, password);
-                      hiddenLoading(context);
+                      AppLoading.hidden(context);
                       Get.offAllNamed(APPRouter.mianPage);
                     } on LCException catch (ex) {
-                      hiddenLoading(context); //销毁 loading
-                      showToastError(ex.message ?? '注册失败，请重试');
+                      AppLoading.hidden(context); //销毁 loading
+                      AppToast.showError(ex.message ?? '注册失败，请重试');
                     }
                   },
                 ),

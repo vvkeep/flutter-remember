@@ -241,7 +241,7 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
   Widget _buildDeleteButton() {
     return TextButton(
       onPressed: () {
-        appShowDialog(context, "删除此账号后将无法恢复，确认该删除吗?", () {
+        AppWidget.showDialog(context, "删除此账号后将无法恢复，确认该删除吗?", () {
           _deleteItem();
         });
       },

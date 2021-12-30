@@ -91,7 +91,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
             onDismissed: (direction) async {
               await DataManager.shared.removeCategory(category.id);
               eventBus.fire(CategoryListEvent());
-              Get.showSnackbar(successBar('删除成功'));
+              AppToast.showSuccess('删除成功');
             },
           );
         }).toList(),
@@ -113,7 +113,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
 
   Future<bool> deleteCategory(CategoryModel category) async {
     if (category.count > 0) {
-      Get.showSnackbar(errorBar('该分类下还有${category.count}项，不允许删除'));
+      AppToast.showError('该分类下还有${category.count}项，不允许删除');
       return false;
     } else {
       return true;

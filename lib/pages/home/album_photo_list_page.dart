@@ -104,7 +104,7 @@ class _AlbumPhotoListPageState extends State<AlbumPhotoListPage> {
         tooltip: '删除',
         icon: Icon(Icons.delete),
         onPressed: () {
-          appShowDialog(context, "删除照片后将无法恢复，确认该删除吗?", () {
+          AppWidget.showDialog(context, "删除照片后将无法恢复，确认该删除吗?", () {
             _deleteItems();
           });
         },

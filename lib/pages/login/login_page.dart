@@ -142,28 +142,28 @@ class _LoginPageState extends State<LoginPage> {
                     String username = _usernameController.text;
                     String password = _passwordController.text;
                     if (ObjectUtil.isEmpty(username)) {
-                      showToastError('用户名不能为空');
+                      AppToast.showError('用户名不能为空');
                       return;
                     }
 
                     if (ObjectUtil.isEmpty(password)) {
-                      showToastError('登录密码不能空');
+                      AppToast.showError('登录密码不能空');
                       return;
                     }
 
                     try {
-                      showLoading(context);
+                      AppLoading.show(context);
                       await NetUtils.login(username, password);
-                      hiddenLoading(context); //销毁 loading
+                      AppLoading.hidden(context); //销毁 loading
                       Get.offAllNamed(APPRouter.mianPage);
                     } on LCException catch (ex) {
-                      hiddenLoading(context); //销毁 loading
+                      AppLoading.hidden(context); //销毁 loading
                       if (ex.code == 201) {
-                        showToastError('用户名密码不匹配，请重试');
+                        AppToast.showError('用户名密码不匹配，请重试');
                       } else if (ex.code == 219) {
-                        showToastError('登录失败次数超过限制，请稍候再试');
+                        AppToast.showError('登录失败次数超过限制，请稍候再试');
                       } else {
-                        showToastError('登录失败,请重试');
+                        AppToast.showError('登录失败,请重试');
                       }
                     }
                   },

@@ -88,7 +88,7 @@ class _TagListPageState extends State<TagListPage> {
             },
             onDismissed: (direction) async {
               await DataManager.shared.removeTag(tag.id);
-              Get.showSnackbar(successBar('删除成功'));
+              AppToast.showSuccess('删除成功');
             },
           );
         }).toList(),
@@ -109,7 +109,7 @@ class _TagListPageState extends State<TagListPage> {
 
   Future<bool> deleteTag(TagModel tag) async {
     if (tag.count > 0) {
-      Get.showSnackbar(errorBar('改标签下还有${tag.count}项，不允许删除'));
+      AppToast.showError('改标签下还有${tag.count}项，不允许删除');
       return false;
     } else {
       return true;

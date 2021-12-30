@@ -1,4 +1,4 @@
-class SQL {
+class SQLScript {
   static final String tableAccount = "account";
   static final String tableCategory = "category";
   static final String tableTag = "tag";

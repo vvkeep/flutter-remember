@@ -54,11 +54,11 @@ class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
             itemBuilder: (BuildContext context) {
               return <PopupMenuItem<HomePopActionItems>>[
                 PopupMenuItem(
-                  child: buildPopupMenuItem(APPIcons.add, "添加账号"),
+                  child: AppWidget.buildPopupMenuItem(APPIcons.add, "添加账号"),
                   value: HomePopActionItems.ADD,
                 ),
                 PopupMenuItem(
-                  child: buildPopupMenuItem(APPIcons.key, "生成密码"),
+                  child: AppWidget.buildPopupMenuItem(APPIcons.key, "生成密码"),
                   value: HomePopActionItems.GENERATE,
                 ),
               ];
