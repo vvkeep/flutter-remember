@@ -9,7 +9,7 @@ import 'package:iron_box/pages/home/widget/home_accunt_category_item_widget.dart
 import 'package:iron_box/pages/home/widget/home_search_bar_widget.dart';
 import 'package:iron_box/router/routers.dart';
 import 'package:get/get.dart';
-import 'package:iron_box/widget/other/widget.dart';
+import 'package:iron_box/widget/other/widgets.dart';
 
 class HomeAccountCategoryPage extends StatefulWidget {
   @override

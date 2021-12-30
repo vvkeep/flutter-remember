@@ -10,7 +10,7 @@ import 'package:iron_box/pages/login/widget/input_password_field.dart';
 import 'package:iron_box/pages/login/widget/input_username_field.dart';
 import 'package:iron_box/router/routers.dart';
 import 'package:iron_box/utils/net_utils.dart';
-import 'package:iron_box/widget/other/widget.dart';
+import 'package:iron_box/widget/other/widgets.dart';
 import 'package:leancloud_storage/leancloud.dart';
 import 'package:local_auth/local_auth.dart';
 
@@ -72,6 +72,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
             child: Column(
               children: [
                 SizedBox(height: Get.mediaQuery.padding.top + 45),
@@ -91,16 +92,16 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           SizedBox(height: 45 + 10),
                           Text("用户登录", style: APPTextStyle.midTextPrimaryW500),
-                          SizedBox(height: 50),
+                          SizedBox(height: 30),
                           InputUsernameField(
                             controller: _usernameController,
-                            hintText: "输入邮箱",
+                            hintText: "用户名(邮箱)",
                             focusNode: _usernameFocusNode,
                           ),
-                          SizedBox(height: 50),
+                          SizedBox(height: 20),
                           InputPasswordField(
-                              controller: _passwordController, hintText: '登录密码', focusNode: this._passwordFocusNode),
-                          SizedBox(height: 50),
+                              controller: _passwordController, hintText: '账号密码', focusNode: this._passwordFocusNode),
+                          SizedBox(height: 30),
                         ],
                       ),
                     ),
@@ -136,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                       color: APPColors.white,
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: Text("确定", style: APPTextStyle.midTextPrimaryW500),
+                    child: Text("登陆", style: APPTextStyle.midTextPrimaryW500),
                   ),
                   onPressed: () async {
                     String username = _usernameController.text;
@@ -168,6 +169,23 @@ class _LoginPageState extends State<LoginPage> {
                     }
                   },
                 ),
+                SizedBox(height: 20),
+                TextButton(
+                  onPressed: () {
+                    Get.offAllNamed(APPRouter.registerPage);
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: Get.width - 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(color: APPColors.white, width: 1.0)),
+                    child: Text("还没账号，去注册", style: APPTextStyle.midTextWhite),
+                  ),
+                ),
+                SizedBox(height: 20),
                 Visibility(
                   visible: _authType == null ? false : true,
                   child: _biometricAuthWidget(),

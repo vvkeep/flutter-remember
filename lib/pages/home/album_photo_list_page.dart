@@ -11,7 +11,7 @@ import 'package:iron_box/pages/home/widget/home_photo_item_widget.dart';
 import 'package:iron_box/utils/cache_utils.dart';
 import 'package:iron_box/utils/permission_utils.dart';
 import 'package:iron_box/widget/image_preview/photo_view_gallery_page.dart';
-import 'package:iron_box/widget/other/widget.dart';
+import 'package:iron_box/widget/other/widgets.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 class AlbumPhotoListPage extends StatefulWidget {

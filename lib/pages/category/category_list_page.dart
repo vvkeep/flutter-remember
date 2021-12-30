@@ -4,7 +4,7 @@ import 'package:get/instance_manager.dart';
 import 'package:iron_box/common/constant.dart';
 import 'package:iron_box/manager/data_manager.dart';
 import 'package:iron_box/common/event_bus.dart';
-import 'package:iron_box/widget/other/widget.dart';
+import 'package:iron_box/widget/other/widgets.dart';
 import 'package:iron_box/model/account_model.dart';
 import 'package:iron_box/pages/category/widget/category_list_item_widget.dart';
 import 'package:get/get.dart';

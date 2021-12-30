@@ -8,7 +8,7 @@ import 'package:iron_box/pages/login/widget/input_password_field.dart';
 import 'package:iron_box/pages/login/widget/input_username_field.dart';
 import 'package:iron_box/router/routers.dart';
 import 'package:iron_box/utils/net_utils.dart';
-import 'package:iron_box/widget/other/widget.dart';
+import 'package:iron_box/widget/other/widgets.dart';
 import 'package:leancloud_storage/leancloud.dart';
 import 'package:uuid/uuid.dart';
 
@@ -72,7 +72,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           SizedBox(height: 30),
                           InputUsernameField(
                             controller: _usernameController,
-                            hintText: "请输入邮箱",
+                            hintText: "请输入账户(邮箱)",
                             focusNode: _usernameFocusNode,
                           ),
                           SizedBox(height: 20),
@@ -177,7 +177,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         color: Colors.transparent,
                         borderRadius: BorderRadius.circular(5),
                         border: Border.all(color: APPColors.white, width: 1.0)),
-                    child: Text("已有账号，去登录", style: APPTextStyle.midTextWhite),
+                    child: Text("已有账号，去登陆", style: APPTextStyle.midTextWhite),
                   ),
                 )
               ],

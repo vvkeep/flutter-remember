@@ -64,10 +64,7 @@ abstract class AppPages {
       name: APPRouter.itemDetailPage,
       page: () => AccountDetailPage(),
     ),
-    GetPage(
-      name: APPRouter.loginPage,
-      page: () => LoginPage(),
-    ),
+    GetPage(name: APPRouter.loginPage, page: () => LoginPage(), transition: Transition.fadeIn),
     GetPage(
       name: APPRouter.registerPage,
       page: () => SignUpPage(),

@@ -15,7 +15,7 @@ import 'package:iron_box/pages/account/widget/account_detail_tag_widget.dart';
 import 'package:iron_box/utils/cache_utils.dart';
 import 'package:iron_box/utils/permission_utils.dart';
 import 'package:iron_box/widget/image_preview/photo_view_gallery_page.dart';
-import 'package:iron_box/widget/other/widget.dart';
+import 'package:iron_box/widget/other/widgets.dart';
 import 'package:sqflite/sqflite.dart';
 
 class AccountDetailPage extends StatefulWidget {
