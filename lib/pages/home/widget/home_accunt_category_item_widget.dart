@@ -10,23 +10,38 @@ class HomeAccountCategoryItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 65,
-      width: double.infinity,
-      decoration: BoxDecoration(
-          color: APPColors.white, border: Border(bottom: BorderSide(color: APPColors.divideColor, width: 1))),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(width: 15),
-          Text(categoryModel.title, style: APPTextStyle.normalTextDarkW500),
-          Expanded(child: SizedBox()),
-          Text('${categoryModel.count}', style: APPTextStyle.normalTextDarkW500),
-          SizedBox(width: 10),
-          Icon(APPIcons.arrow, size: 15),
-          SizedBox(width: 10)
-        ],
-      ),
-    );
+        height: 60,
+        width: double.infinity,
+        child: Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(width: 15),
+                  Text(categoryModel.title, style: APPTextStyle.normalTextDark),
+                  Expanded(child: SizedBox()),
+                  Text('${categoryModel.count}', style: APPTextStyle.normalTextDark),
+                  SizedBox(width: 10),
+                  Icon(APPIcons.arrow, size: 15, color: APPColors.lightTextColor),
+                  SizedBox(width: 10)
+                ],
+              ),
+            ),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Divider(
+                height: 0.0,
+                indent: 15,
+                endIndent: 10,
+              ),
+            )
+          ],
+        ));
   }
 }

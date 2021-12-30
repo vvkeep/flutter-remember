@@ -12,11 +12,12 @@ class HomeSearchBarWidget extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            height: MediaQuery.of(context).size.height,
-            child: Container(color: APPColors.primaryColor)),
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: MediaQuery.of(context).size.height,
+          child: Container(color: APPColors.primaryColor),
+        ),
         InkWell(
           onTap: this.onPressed,
           child: Container(
