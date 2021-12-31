@@ -96,6 +96,7 @@ class _HomeAccountCategoryPageState extends State<HomeAccountCategoryPage> {
                 itemBuilder: (context, index) {
                   CategoryModel category = categoryList[index];
                   return GestureDetector(
+                    behavior: HitTestBehavior.opaque,
                     child: HomeAccountCategoryItemWidget(categoryModel: category),
                     onTap: () {
                       Get.toNamed(APPRouter.itemListPage, arguments: category);
