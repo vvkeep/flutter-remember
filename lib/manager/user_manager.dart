@@ -2,13 +2,13 @@ import 'package:leancloud_storage/leancloud.dart';
 import 'package:sp_util/sp_util.dart';
 
 class UserManager {
-  static bool isRegisted() {
-    bool? isRegisted = SpUtil.getBool('app_registed_key');
+  static bool isLogged() {
+    bool? isRegisted = SpUtil.getBool('app_logged_key');
     return isRegisted ?? false;
   }
 
-  static udpateAppRegisted() {
-    SpUtil.putBool("app_registed_key", true);
+  static udpateUserLogged() {
+    SpUtil.putBool("app_logged_key", true);
   }
 
   static Future<LCUser?> currentUser() async {

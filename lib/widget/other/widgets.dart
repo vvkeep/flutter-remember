@@ -65,12 +65,12 @@ class AppWidget {
         Icon(
           iconData,
           size: 22.0,
-          color: APPColors.lightTextColor,
+          color: APPColors.darkTextColor,
         ),
         Container(width: 12.0),
         Text(
           title,
-          style: TextStyle(color: APPColors.lightTextColor),
+          style: TextStyle(color: APPColors.darkTextColor),
         ),
       ],
     );

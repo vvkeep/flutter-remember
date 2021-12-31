@@ -19,7 +19,7 @@ void main() async {
   LeanCloud.initialize(LeanCloudConfig.appId, LeanCloudConfig.appKey,
       server: LeanCloudConfig.server, queryCache: new LCQueryCache());
   // 在 LeanCloud.initialize 初始化之后执行
-  // LCLogger.setLevel(LCLogger.DebugLevel);
+  LCLogger.setLevel(LCLogger.DebugLevel);
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) => runApp(MyApp()));
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: UserManager.isRegisted() ? APPRouter.loginPage : APPRouter.appFeaturePage,
+      initialRoute: UserManager.isLogged() ? APPRouter.loginPage : APPRouter.appFeaturePage,
       // initialRoute: APPRouter.registerPage,
       theme: ThemeData(primaryColor: APPColors.primaryColor),
       defaultTransition: Transition.native,

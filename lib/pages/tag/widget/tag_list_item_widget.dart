@@ -17,7 +17,7 @@ class TagListItemWidget extends StatelessWidget {
             height: 55,
             child: Row(
               children: [
-                Text('${this.tagModel.title}', style: APPTextStyle.normalTextDarkW500),
+                Text('${this.tagModel.title}', style: APPTextStyle.normalTextDark),
                 Spacer(),
                 Text('${this.tagModel.count}', style: APPTextStyle.normalTextDark),
                 SizedBox(width: 15),

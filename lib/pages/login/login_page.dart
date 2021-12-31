@@ -155,6 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                     try {
                       AppLoading.show(context);
                       await NetUtils.login(username, password);
+                      UserManager.udpateUserLogged();
                       AppLoading.hidden(context); //销毁 loading
                       Get.offAllNamed(APPRouter.mianPage);
                     } on LCException catch (ex) {

@@ -17,7 +17,7 @@ class AlbumListItemWidget extends StatelessWidget {
             height: 55,
             child: Row(
               children: [
-                Text('${this.folderModel.title}', style: APPTextStyle.normalTextDarkW500),
+                Text('${this.folderModel.title}', style: APPTextStyle.normalTextDark),
                 Spacer(),
                 Text('${this.folderModel.count}', style: APPTextStyle.normalTextDark),
                 SizedBox(width: 15),

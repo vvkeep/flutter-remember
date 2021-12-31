@@ -17,7 +17,7 @@ class CategoryListItemWidget extends StatelessWidget {
             height: 55,
             child: Row(
               children: [
-                Text('${this.categoryModel.title}', style: APPTextStyle.normalTextDarkW500),
+                Text('${this.categoryModel.title}', style: APPTextStyle.normalTextDark),
                 Spacer(),
                 Text('${this.categoryModel.count}', style: APPTextStyle.normalTextDark),
                 SizedBox(width: 15),

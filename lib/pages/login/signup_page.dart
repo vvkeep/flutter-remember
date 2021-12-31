@@ -154,8 +154,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       AppLoading.show(context);
                       final secretKey = EncryptUtil.encodeMd5(Uuid().v4()).toString();
                       await NetUtils.signUp(username, password, secretKey);
-                      UserManager.udpateAppRegisted();
                       await NetUtils.login(username, password);
+                      UserManager.udpateUserLogged();
                       AppLoading.hidden(context);
                       Get.offAllNamed(APPRouter.mianPage);
                     } on LCException catch (ex) {
