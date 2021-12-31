@@ -68,7 +68,10 @@ class _AccountDetailChooseImageWidgetState extends State<AccountDetailChooseImag
 
   Widget _buildItemWidget(RMPickImageItem item) {
     if (item.type == PickImageMediaType.add) {
-      return Image.asset(item.path!, fit: BoxFit.cover);
+      return Container(
+        child: Icon(Icons.add_a_photo_rounded, color: APPColors.primaryColor),
+      );
+      // return Image.asset(item.path!, fit: BoxFit.cover);
     } else {
       return Stack(
         fit: StackFit.expand,

@@ -167,23 +167,22 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
         isSuccess = await DataManager.shared.updateAccount(itemModel);
       }
 
-      final msg = "${itemModel.id == -1 ? '添加' : "编辑"}${isSuccess ? '成功' : '失败'}";
-      Fluttertoast.showToast(msg: msg, gravity: ToastGravity.TOP);
+      AppToast.showSuccess('${itemModel.id == -1 ? '添加' : "编辑"}成功');
       if (isSuccess) {
         eventBus.fire(ItemEvent());
         eventBus.fire(CategoryListEvent());
         Get.back();
       }
     } on DatabaseException catch (e) {
-      if (e.isUniqueConstraintError('item.title')) {
-        Fluttertoast.showToast(msg: '此账号标题已存在，请修改标题', gravity: ToastGravity.TOP);
+      if (e.isUniqueConstraintError('account.title')) {
+        AppToast.showError('此账号标题已存在，请修改标题');
       } else {
         print(e.toString());
-        Fluttertoast.showToast(msg: '数据库操作失败，请重试', gravity: ToastGravity.TOP);
+        AppToast.showError('数据库操作失败，请重试');
       }
     } catch (e) {
       print(e.toString());
-      Fluttertoast.showToast(msg: '操作失败，请重试', gravity: ToastGravity.TOP);
+      AppToast.showError('操作失败，请重试');
     }
   }
 
