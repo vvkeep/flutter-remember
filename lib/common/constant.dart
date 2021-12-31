@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/instance_manager.dart';
 
 ///颜色
 class APPColors {
@@ -161,6 +162,7 @@ class RMConstant {
 class APPLayout {
   static const double itemMargin = 10.0;
   static const double photoMaxLength = 150.0;
+  static const double albumMaxLength = 200.0;
 }
 
 class LeanCloudConfig {

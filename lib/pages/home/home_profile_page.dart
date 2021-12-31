@@ -45,7 +45,7 @@ class _HomeProfilePageState extends State<HomeProfilePage> {
                       color: APPColors.primaryColor,
                       width: double.infinity,
                       height: double.infinity,
-                      child: WaveAnimaitonWidget(),
+                      // child: WaveAnimaitonWidget(),
                     ),
                   ],
                 ),
@@ -57,6 +57,10 @@ class _HomeProfilePageState extends State<HomeProfilePage> {
               Divider(height: 0),
               _buildLeftSideItem("标签管理", () {
                 Get.toNamed(APPRouter.tagListPage);
+              }),
+              Divider(height: 0),
+              _buildLeftSideItem("密码生成", () {
+                Get.toNamed(APPRouter.generatePasswordPage);
               }),
               Divider(height: 0),
               _buildLeftSideItem("相簿管理", () {

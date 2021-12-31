@@ -50,11 +50,11 @@ class _HomeAlbumListPageState extends State<HomeAlbumListPage> {
         padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: GridView.builder(
           shrinkWrap: true,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
+          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            crossAxisSpacing: APPLayout.itemMargin,
+            mainAxisSpacing: APPLayout.itemMargin,
             childAspectRatio: 1,
+            maxCrossAxisExtent: APPLayout.albumMaxLength,
           ),
           itemCount: photoFolderList.length,
           itemBuilder: (context, index) {

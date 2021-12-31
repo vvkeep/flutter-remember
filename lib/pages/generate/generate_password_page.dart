@@ -64,20 +64,17 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(Size(1, 1)),
                   padding: MaterialStateProperty.all(EdgeInsets.zero),
-                  backgroundColor: MaterialStateProperty.all(APPColors.lightTextColor),
                 ),
                 onPressed: () => _generateBtnAction(),
                 child: Container(
                   alignment: Alignment.center,
-                  height: 50,
                   width: double.infinity,
+                  height: 50,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6),
+                    color: APPColors.primaryColor,
+                    borderRadius: BorderRadius.circular(5),
                   ),
-                  child: Text(
-                    "重新生成",
-                    style: APPTextStyle.bigTextWhiteW500,
-                  ),
+                  child: Text("重新生成", style: APPTextStyle.midTextWhite),
                 ),
               ),
               SizedBox(height: 15),
@@ -85,20 +82,17 @@ class _GeneratePasswordPageState extends State<GeneratePasswordPage> {
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(Size(1, 1)),
                   padding: MaterialStateProperty.all(EdgeInsets.zero),
-                  backgroundColor: MaterialStateProperty.all(APPColors.lightTextColor),
                 ),
                 onPressed: () => _copyBtnAction(),
                 child: Container(
                   alignment: Alignment.center,
-                  height: 50,
                   width: double.infinity,
+                  height: 50,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Text(
-                    "复制密码",
-                    style: APPTextStyle.bigTextWhiteW500,
-                  ),
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: APPColors.primaryColor, width: 1.0)),
+                  child: Text("复制密码", style: APPTextStyle.midTextPrimaryW500),
                 ),
               ),
               SizedBox(height: 15),
