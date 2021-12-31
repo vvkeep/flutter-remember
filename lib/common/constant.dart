@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/instance_manager.dart';
 
 ///颜色
 class APPColors {

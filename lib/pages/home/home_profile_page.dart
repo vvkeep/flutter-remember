@@ -45,7 +45,7 @@ class _HomeProfilePageState extends State<HomeProfilePage> {
                       color: APPColors.primaryColor,
                       width: double.infinity,
                       height: double.infinity,
-                      // child: WaveAnimaitonWidget(),
+                      child: WaveAnimaitonWidget(),
                     ),
                   ],
                 ),
