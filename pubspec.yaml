@@ -73,6 +73,10 @@ flutter:
     - assets/imgs/add_img.png
     - assets/imgs/logo_icon.png 
     - assets/imgs/app_feature.png 
+    - assets/imgs/jz_scfwq_icon.png 
+    - assets/imgs/jz_dcsb_icon.png 
+    - assets/imgs/jz_drsb_icon.png 
+    - assets/imgs/jz_bcdbj_icon.png 
 
   fonts:
   - family: appIconFont

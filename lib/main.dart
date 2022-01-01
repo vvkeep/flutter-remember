@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: UserManager.isLogged() ? APPRouter.loginPage : APPRouter.appFeaturePage,
-      // initialRoute: APPRouter.registerPage,
+      // initialRoute: APPRouter.accountSyncPage,
       theme: ThemeData(primaryColor: APPColors.primaryColor),
       defaultTransition: Transition.native,
       getPages: AppPages.pages,

@@ -14,6 +14,7 @@ import 'package:iron_box/pages/album/album_list_page.dart';
 import 'package:iron_box/pages/album/new_album_page.dart';
 import 'package:iron_box/pages/home/album_photo_list_page.dart';
 import 'package:iron_box/pages/setting/app_setting_page.dart';
+import 'package:iron_box/pages/sync/account_sync_page.dart';
 import 'package:iron_box/pages/tag/new_tag_page.dart';
 import 'package:iron_box/pages/tag/tag_list_page.dart';
 
@@ -35,6 +36,7 @@ abstract class APPRouter {
   static String photoListPage = "/photo_list_page";
   static String albumListPage = "/album_list_page";
   static String newAlbumPage = "/new_album_page";
+  static String accountSyncPage = "/account_sync_page";
 }
 
 abstract class AppPages {
@@ -106,5 +108,9 @@ abstract class AppPages {
       name: APPRouter.newAlbumPage,
       page: () => NewAlbumPage(),
     ),
+    GetPage(
+      name: APPRouter.accountSyncPage,
+      page: () => AccountSyncPage(),
+    )
   ];
 }

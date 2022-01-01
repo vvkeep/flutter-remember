@@ -25,3 +25,13 @@ class PhotoItemUIModel {
 
   PhotoItemUIModel({required this.itemModel});
 }
+
+enum AccontSyncType { localExport, localImport, cloudUpload, cloudDownload }
+
+class AccountSyncItemUIModel {
+  final String image;
+  final String title;
+  final AccontSyncType type;
+
+  AccountSyncItemUIModel(this.image, this.title, this.type);
+}
