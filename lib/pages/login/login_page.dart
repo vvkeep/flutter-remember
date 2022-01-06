@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -95,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(height: 30),
                           InputUsernameField(
                             controller: _usernameController,
-                            hintText: "用户名(邮箱)",
+                            hintText: "账户(邮箱)",
                             focusNode: _usernameFocusNode,
                           ),
                           SizedBox(height: 20),
@@ -144,6 +145,11 @@ class _LoginPageState extends State<LoginPage> {
                     String password = _passwordController.text;
                     if (ObjectUtil.isEmpty(username)) {
                       AppToast.showError('用户名不能为空');
+                      return;
+                    }
+
+                    if (EmailValidator.validate(username)) {
+                      AppToast.showError('账户邮箱不合法，请更换');
                       return;
                     }
 

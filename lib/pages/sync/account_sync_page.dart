@@ -59,6 +59,7 @@ class _AccountSyncPageState extends State<AccountSyncPage> {
             final model = _dataList[index];
             return GestureDetector(
               onTap: () {
+                AppToast.showError('待实现');
                 switch (model.type) {
                   case AccontSyncType.localExport:
                     this._exportLocalAccount();

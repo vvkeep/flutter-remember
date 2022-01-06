@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
@@ -72,7 +73,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           SizedBox(height: 30),
                           InputUsernameField(
                             controller: _usernameController,
-                            hintText: "请输入账户(邮箱)",
+                            hintText: "账户(邮箱)",
                             focusNode: _usernameFocusNode,
                           ),
                           SizedBox(height: 20),
@@ -132,6 +133,11 @@ class _SignUpPageState extends State<SignUpPage> {
 
                     if (ObjectUtil.isEmpty(username)) {
                       AppToast.showError('请输入登录账户');
+                      return;
+                    }
+
+                    if (EmailValidator.validate(username)) {
+                      AppToast.showError('账户邮箱不合法，请更换');
                       return;
                     }
 

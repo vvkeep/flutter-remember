@@ -48,7 +48,8 @@ dependencies:
   file_picker: ^4.2.8
   wechat_assets_picker: 6.2.0
   leancloud_storage: ^0.7.7
-
+  email_validator: ^2.0.1
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
