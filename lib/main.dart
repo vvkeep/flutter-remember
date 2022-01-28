@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iron_box/manager/data_manager.dart';
 import 'package:iron_box/common/constant.dart';
-import 'package:iron_box/manager/user_manager.dart';
 import 'package:iron_box/router/routers.dart';
 import 'package:leancloud_storage/leancloud.dart';
 import 'package:sp_util/sp_util.dart';
@@ -31,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: UserManager.isLogged() ? APPRouter.loginPage : APPRouter.appFeaturePage,
+      initialRoute: APPRouter.loginPage,
       // initialRoute: APPRouter.accountSyncPage,
       theme: ThemeData(primaryColor: APPColors.primaryColor),
       defaultTransition: Transition.native,
