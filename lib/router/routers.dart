@@ -1,19 +1,26 @@
 import 'package:get/get.dart';
-import 'package:remember/pages/category/category_list_page.dart';
-import 'package:remember/pages/category/new_category_page.dart';
-import 'package:remember/pages/feature/app_feature_page.dart';
-import 'package:remember/pages/home/home_category_page.dart';
-import 'package:remember/pages/item/item_detail_page.dart';
-import 'package:remember/pages/item/category_item_list_page.dart';
-import 'package:remember/pages/item/item_search_page.dart';
-import 'package:remember/pages/login/login_page.dart';
-import 'package:remember/pages/login/register_page.dart';
-import 'package:remember/pages/setting/app_setting_page.dart';
-import 'package:remember/pages/tag/new_tag_page.dart';
-import 'package:remember/pages/tag/tag_list_page.dart';
+import 'package:iron_box/pages/category/category_list_page.dart';
+import 'package:iron_box/pages/category/new_category_page.dart';
+import 'package:iron_box/pages/feature/app_feature_page.dart';
+import 'package:iron_box/pages/generate/generate_password_page.dart';
+import 'package:iron_box/pages/home/home_account_category_page.dart';
+import 'package:iron_box/pages/account/account_detail_page.dart';
+import 'package:iron_box/pages/account/account_category_list_page.dart';
+import 'package:iron_box/pages/account/account_search_page.dart';
+import 'package:iron_box/pages/login/login_page.dart';
+import 'package:iron_box/pages/login/signup_page.dart';
+import 'package:iron_box/pages/main/app_main_page.dart';
+import 'package:iron_box/pages/album/album_list_page.dart';
+import 'package:iron_box/pages/album/new_album_page.dart';
+import 'package:iron_box/pages/home/album_photo_list_page.dart';
+import 'package:iron_box/pages/setting/app_setting_page.dart';
+import 'package:iron_box/pages/sync/account_sync_page.dart';
+import 'package:iron_box/pages/tag/new_tag_page.dart';
+import 'package:iron_box/pages/tag/tag_list_page.dart';
 
-abstract class RMRouter {
-  static String homePage = "/";
+abstract class APPRouter {
+  static String mianPage = "/";
+  static String homeCategoryPage = "/home_category_page";
   static String appFeaturePage = "/app_feature_apge";
   static String itemListPage = "/item_list_page";
   static String searchPage = "/search_page";
@@ -25,60 +32,89 @@ abstract class RMRouter {
   static String tagListPage = "/tag_list_page";
   static String newTagPage = "/new_tag_page";
   static String appSettingPage = '/app_setting_page';
+  static String generatePasswordPage = "/generate_password_page";
+  static String photoListPage = "/photo_list_page";
+  static String albumListPage = "/album_list_page";
+  static String newAlbumPage = "/new_album_page";
+  static String accountSyncPage = "/account_sync_page";
 }
 
 abstract class AppPages {
   static final pages = [
     GetPage(
-      name: RMRouter.homePage,
-      page: () => HomeCategoryListPage(),
-      transition: Transition.fade,
+      name: APPRouter.mianPage,
+      page: () => AppMainPage(),
     ),
     GetPage(
-      name: RMRouter.appFeaturePage,
+      name: APPRouter.homeCategoryPage,
+      page: () => HomeAccountCategoryPage(),
+    ),
+    GetPage(
+      name: APPRouter.appFeaturePage,
       page: () => AppFeaturePage(),
     ),
     GetPage(
-      name: RMRouter.itemListPage,
-      page: () => CategoryItemListPage(),
+      name: APPRouter.itemListPage,
+      page: () => AccountCategoryListPage(),
     ),
     GetPage(
-      name: RMRouter.searchPage,
-      page: () => ItemSearchPagePage(),
+      name: APPRouter.searchPage,
+      page: () => AccountSearchPagePage(),
       transition: Transition.fade,
     ),
     GetPage(
-      name: RMRouter.itemDetailPage,
-      page: () => ItemDetailPage(),
+      name: APPRouter.itemDetailPage,
+      page: () => AccountDetailPage(),
     ),
     GetPage(
-      name: RMRouter.loginPage,
+      name: APPRouter.loginPage,
       page: () => LoginPage(),
-    ),
-    GetPage(
-      name: RMRouter.registerPage,
-      page: () => RegisterPage(),
       transition: Transition.fadeIn,
     ),
     GetPage(
-      name: RMRouter.categoryListPage,
+      name: APPRouter.registerPage,
+      page: () => SignUpPage(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: APPRouter.categoryListPage,
       page: () => CategoryListPage(),
     ),
     GetPage(
-      name: RMRouter.newCategoryPage,
+      name: APPRouter.newCategoryPage,
       page: () => NewCategoryPage(),
     ),
     GetPage(
-      name: RMRouter.tagListPage,
+      name: APPRouter.tagListPage,
       page: () => TagListPage(),
     ),
     GetPage(
-      name: RMRouter.newTagPage,
+      name: APPRouter.newTagPage,
       page: () => NewTagPage(),
     ),
     GetPage(
-      name: RMRouter.appSettingPage,
+      name: APPRouter.appSettingPage,
       page: () => AppSettingPage(),
+    ),
+    GetPage(
+      name: APPRouter.generatePasswordPage,
+      page: () => GeneratePasswordPage(),
+    ),
+    GetPage(
+      name: APPRouter.photoListPage,
+      page: () => AlbumPhotoListPage(),
+    ),
+    GetPage(
+      name: APPRouter.albumListPage,
+      page: () => AlbumListPage(),
+    ),
+    GetPage(
+      name: APPRouter.newAlbumPage,
+      page: () => NewAlbumPage(),
+    ),
+    GetPage(
+      name: APPRouter.accountSyncPage,
+      page: () => AccountSyncPage(),
     )
   ];
 }

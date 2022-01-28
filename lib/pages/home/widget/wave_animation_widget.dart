@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:remember/common/constant.dart';
+import 'package:iron_box/common/constant.dart';
 
 class WaveAnimaitonWidget extends StatefulWidget {
   WaveAnimaitonWidget({Key? key}) : super(key: key);
@@ -69,7 +69,7 @@ class BezierPainter extends CustomPainter {
       ..strokeWidth = 1;
 
     _whitePaint = Paint()
-      ..color = RMColors.primaryColor
+      ..color = APPColors.primaryColor
       ..style = PaintingStyle.fill
       ..isAntiAlias = true
       ..strokeWidth = 1;

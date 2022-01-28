@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/manager/data_manager.dart';
-import 'package:remember/model/item_model.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/manager/data_manager.dart';
+import 'package:iron_box/model/account_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class NewTagPage extends StatefulWidget {
@@ -27,9 +27,12 @@ class _NewTagPageState extends State<NewTagPage> {
     nameController.text = tagModel?.title ?? "";
 
     return Scaffold(
-      // backgroundColor: RMColors.white,
+      // backgroundColor: APPColors.white,
       appBar: AppBar(
-        title: Text('添加标签'),
+        title: Text('添加标签', style: TextStyle(color: Colors.white)),
+        brightness: Brightness.dark,
+        iconTheme: IconThemeData(color: Colors.white),
+        elevation: 0, // 去掉Appbar底部阴影
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -58,7 +61,7 @@ class _NewTagPageState extends State<NewTagPage> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       borderSide: BorderSide(
-                        color: RMColors.primaryColor,
+                        color: APPColors.primaryColor,
                         width: 2.0,
                       ),
                     ),
@@ -72,10 +75,10 @@ class _NewTagPageState extends State<NewTagPage> {
                   width: Get.width - 50,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: RMColors.primaryColor,
+                    color: APPColors.primaryColor,
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: Text("保存", style: RMTextStyle.midTextWhite),
+                  child: Text("保存", style: APPTextStyle.midTextWhite),
                 ),
                 onPressed: () async {
                   String name = nameController.text;

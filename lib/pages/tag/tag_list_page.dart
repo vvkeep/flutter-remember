@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/manager/data_manager.dart';
-import 'package:remember/router/routers.dart';
-import 'package:remember/widget/other/widget.dart';
-import 'package:remember/model/item_model.dart';
-import 'package:remember/pages/tag/widget/tag_list_item_widget.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/manager/data_manager.dart';
+import 'package:iron_box/router/routers.dart';
+import 'package:iron_box/widget/other/widgets.dart';
+import 'package:iron_box/model/account_model.dart';
+import 'package:iron_box/pages/tag/widget/tag_list_item_widget.dart';
 import 'package:get/get.dart';
 
 class TagListPage extends StatefulWidget {
@@ -16,7 +16,7 @@ class TagListPage extends StatefulWidget {
 }
 
 class _TagListPageState extends State<TagListPage> {
-  List<TagModel> tagList = DataManager.shared.tagList;
+  List<TagModel> tagList = DataManager.shared.accountTagList;
 
   @override
   void initState() {
@@ -26,16 +26,19 @@ class _TagListPageState extends State<TagListPage> {
 
   loadData() async {
     setState(() {
-      this.tagList = DataManager.shared.tagList;
+      this.tagList = DataManager.shared.accountTagList;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: RMColors.white,
+      backgroundColor: APPColors.white,
       appBar: AppBar(
-        title: Text("标签管理"),
+        title: Text('标签管理', style: TextStyle(color: Colors.white)),
+        brightness: Brightness.dark,
+        iconTheme: IconThemeData(color: Colors.white),
+        elevation: 0, // 去掉Appbar底部阴影
         actions: [
           IconButton(
             tooltip: '添加标签',
@@ -47,7 +50,7 @@ class _TagListPageState extends State<TagListPage> {
                 },
               };
 
-              Get.toNamed(RMRouter.newTagPage, arguments: args);
+              Get.toNamed(APPRouter.newTagPage, arguments: args);
             },
           )
         ],
@@ -76,7 +79,7 @@ class _TagListPageState extends State<TagListPage> {
                   },
                   "tag": tag
                 };
-                Get.toNamed(RMRouter.newTagPage, arguments: args);
+                Get.toNamed(APPRouter.newTagPage, arguments: args);
               },
               child: TagListItemWidget(tagModel: tag),
             ),
@@ -85,13 +88,20 @@ class _TagListPageState extends State<TagListPage> {
             },
             onDismissed: (direction) async {
               await DataManager.shared.removeTag(tag.id);
-              Get.showSnackbar(successBar('删除成功'));
+              AppToast.showSuccess('删除成功');
             },
           );
         }).toList(),
         onReorder: (oldIndex, newIndex) async {
-          await DataManager.shared.swapTagSort(oldIndex, newIndex);
-          this.loadData();
+          setState(() {
+            if (oldIndex < newIndex) {
+              newIndex -= 1;
+            }
+
+            var item = tagList.removeAt(oldIndex);
+            tagList.insert(newIndex, item);
+          });
+          await DataManager.shared.reorderTagSort(tagList);
         },
       ),
     );
@@ -99,7 +109,7 @@ class _TagListPageState extends State<TagListPage> {
 
   Future<bool> deleteTag(TagModel tag) async {
     if (tag.count > 0) {
-      Get.showSnackbar(errorBar('改标签下还有${tag.count}项，不允许删除'));
+      AppToast.showError('改标签下还有${tag.count}项，不允许删除');
       return false;
     } else {
       return true;

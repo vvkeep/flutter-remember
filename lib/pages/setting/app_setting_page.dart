@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/manager/login_manager.dart';
-import 'package:remember/model/user_info.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/manager/user_manager.dart';
 
 class AppSettingPage extends StatefulWidget {
   AppSettingPage({Key? key}) : super(key: key);
@@ -12,33 +11,50 @@ class AppSettingPage extends StatefulWidget {
 }
 
 class _AppSettingPageState extends State<AppSettingPage> {
-  UserInfo userInfo = LoginManager.getUserInfo();
+  bool _isLocalAuth = true;
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  init() async {
+    var auth = await UserManager.isLocalAuth();
+    setState(() {
+      _isLocalAuth = auth;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: RMColors.mainBackgroundColor,
+      backgroundColor: APPColors.mainBackgroundColor,
       appBar: AppBar(
-        title: Text("安全设置"),
+        title: Text('安全设置', style: TextStyle(color: Colors.white)),
+        brightness: Brightness.dark,
+        iconTheme: IconThemeData(color: Colors.white),
+        elevation: 0, // 去掉Appbar底部阴影
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            color: RMColors.white,
+            color: APPColors.white,
             height: 60,
             child: Row(
               children: [
                 SizedBox(width: 15),
-                Text('生物特征识别', style: RMTextStyle.normalTextDarkW500),
+                Text('生物特征识别', style: APPTextStyle.normalTextDarkW500),
                 Expanded(child: SizedBox()),
                 CupertinoSwitch(
-                  activeColor: RMColors.primaryColor,
-                  value: userInfo.isLocalAuth,
+                  activeColor: APPColors.primaryColor,
+                  value: _isLocalAuth,
                   onChanged: (bool value) {
                     setState(() {
-                      userInfo.isLocalAuth = value;
+                      _isLocalAuth = value;
                     });
-                    LoginManager.saveUserInfo(userInfo);
+                    UserManager.updateLocalAuth(value);
                   },
                 ),
               ],
@@ -49,7 +65,7 @@ class _AppSettingPageState extends State<AppSettingPage> {
             padding: EdgeInsets.symmetric(horizontal: 15),
             child: Text(
               '开启后可以使用生物特征识别验证快速完成登录，设置仅对本机有效，如需修改生物识别特征，请在系统设置里操作。',
-              style: RMTextStyle.minTextDark,
+              style: APPTextStyle.minTextDark,
             ),
           )
         ],

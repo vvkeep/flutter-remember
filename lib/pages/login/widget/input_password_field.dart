@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:remember/common/constant.dart';
+import 'package:iron_box/common/constant.dart';
 import 'package:flutter/services.dart';
 
 class InputPasswordField extends StatefulWidget {
@@ -36,9 +36,9 @@ class _InputPasswordFieldState extends State<InputPasswordField> {
       decoration: InputDecoration(
         border: InputBorder.none,
         filled: true,
-        fillColor: RMColors.mainBackgroundColor,
+        fillColor: APPColors.mainBackgroundColor,
         hintText: this.widget.hintText,
-        hintStyle: RMTextStyle.normalTextLight,
+        hintStyle: APPTextStyle.normalTextLight,
         suffixIcon: IconButton(
           onPressed: () {
             this.widget.focusNode?.unfocus();
@@ -51,7 +51,11 @@ class _InputPasswordFieldState extends State<InputPasswordField> {
             });
           },
           iconSize: 20,
-          icon: Icon(this.isVisible ? Icons.visibility : Icons.visibility_off),
+          icon: Icon(
+            this.isVisible ? Icons.visibility : Icons.visibility_off,
+            color: this.isVisible ? APPColors.primaryColor : APPColors.darkDivideColor,
+            size: 18,
+          ),
         ),
       ),
     );

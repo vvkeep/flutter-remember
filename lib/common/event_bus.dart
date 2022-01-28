@@ -1,9 +1,11 @@
 import 'package:event_bus/event_bus.dart';
-import 'package:remember/model/item_model.dart';
+import 'package:iron_box/model/account_model.dart';
 
 EventBus eventBus = EventBus();
 
 class CategoryListEvent {}
+
+class AlbumListEvent {}
 
 class CategoryEvent {
   CategoryModel category;

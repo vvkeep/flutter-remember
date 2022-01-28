@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:remember/common/constant.dart';
-import 'package:remember/model/item_model.dart';
+import 'package:iron_box/common/constant.dart';
+import 'package:iron_box/model/account_model.dart';
 
 class TagListItemWidget extends StatelessWidget {
   final TagModel tagModel;
@@ -17,15 +17,15 @@ class TagListItemWidget extends StatelessWidget {
             height: 55,
             child: Row(
               children: [
-                Text('${this.tagModel.title}', style: RMTextStyle.normalTextDarkW500),
+                Text('${this.tagModel.title}', style: APPTextStyle.normalTextDark),
                 Spacer(),
-                Text('${this.tagModel.count}', style: RMTextStyle.normalTextDark),
+                Text('${this.tagModel.count}', style: APPTextStyle.normalTextDark),
                 SizedBox(width: 15),
-                Icon(RMIcons.drag, color: RMColors.divideColor.withOpacity(0.5))
+                Icon(APPIcons.drag, color: APPColors.divideColor)
               ],
             ),
           ),
-          Divider(height: 0, color: RMColors.darkDivideColor),
+          Divider(height: 0, color: APPColors.darkDivideColor),
         ],
       ),
     );
