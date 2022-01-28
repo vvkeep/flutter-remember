@@ -72,7 +72,7 @@ class PermissionUtils {
   static void _showDialog(String permissionName) {
     Get.defaultDialog(
       title: "温馨提示",
-      middleText: "获取$permissionName权限失败，请前往系统设置允许钢铁匣使用$permissionName",
+      middleText: "获取$permissionName权限失败，请前往系统设置允许记得使用$permissionName",
       textCancel: "取消",
       textConfirm: "去设置",
       onCancel: () {},
