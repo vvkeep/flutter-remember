@@ -166,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                       Get.offAllNamed(APPRouter.mianPage);
                     } on LCException catch (ex) {
                       AppLoading.hidden(context); //销毁 loading
-                      if (ex.code == 201) {
+                      if (ex.code == 210) {
                         AppToast.showError('用户名密码不匹配，请重试');
                       } else if (ex.code == 219) {
                         AppToast.showError('登录失败次数超过限制，请稍候再试');

@@ -62,10 +62,10 @@ class _HomeProfilePageState extends State<HomeProfilePage> {
               _buildLeftSideItem("密码生成", () {
                 Get.toNamed(APPRouter.generatePasswordPage);
               }),
-              Divider(height: 0),
-              _buildLeftSideItem("同步管理", () {
-                Get.toNamed(APPRouter.accountSyncPage);
-              }),
+              // Divider(height: 0),
+              // _buildLeftSideItem("同步管理", () {
+              //   Get.toNamed(APPRouter.accountSyncPage);
+              // }),
               Divider(height: 0),
               _buildLeftSideItem("相簿管理", () {
                 Get.toNamed(APPRouter.albumListPage);
