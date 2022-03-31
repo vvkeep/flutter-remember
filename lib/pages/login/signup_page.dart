@@ -136,7 +136,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       return;
                     }
 
-                    if (EmailValidator.validate(username)) {
+                    if (!EmailValidator.validate(username)) {
                       AppToast.showError('账户邮箱不合法，请更换');
                       return;
                     }
