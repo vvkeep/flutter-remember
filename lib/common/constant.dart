@@ -168,6 +168,5 @@ class LeanCloudConfig {
   static const String appId = "oyFcfneQKE9eUvWGd8DyL5vp-gzGzoHsz";
   static const String appKey = "3rEWO0zX0vQ9zbcvRNrzH7Xu";
   static const String masterKey = "JFHhdCdNC0R7zJPc3H1LuVQh";
-  static const String server = "https://test-box-api.yorisun.com";
-  static const String fileServer = "https://test-box.yorisun.com";
+  static const String server = "https://oyfcfneq.lc-cn-n1-shared.com";
 }
